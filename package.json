@@ -1,7 +1,7 @@
 {
-  "name": "servisofts_erp_app",
+  "name": "app_kolping",
   "version": "1.0.9",
-  "description": "darmotos",
+  "description": "app_kolping",
   "scripts": {
     "start": "react-native start",
     "build-old": "react-scripts build",
@@ -69,7 +69,6 @@
     "servisofts-model": "^1.0.7",
     "servisofts-page": "^1.0.12",
     "servisofts-rn-chat": "1.0.12",
-    "servisofts-rn-contabilidad": "1.0.8",
     "servisofts-rn-geolocation": "^1.0.4",
     "servisofts-rn-roles_permisos": "1.0.6-b",
     "servisofts-rn-spdf": "^1.0.5",
@@ -79,7 +78,10 @@
     "supercluster": "^6.0.2",
     "uninstall": "^0.0.0",
     "xlsx": "^0.18.5",
-    "xlsx-color": "^0.14.30"
+    "xlsx-color": "^0.14.30",
+    "react-facebook-login": "^4.1.1",
+    "react-google-login": "^5.2.2",
+    "react-native-camera": "^4.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",

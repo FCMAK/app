@@ -1,0 +1,12 @@
+{
+    "url": "https://kolping.servisofts.com/domicilio/request/",
+    "optica": {
+        "phone": "591 75548132"
+    },
+    "laboratorio": {
+        "phone": "591 69209170"
+    },
+    "farmacia": {
+        "phone": "591 69272108"
+    }
+}
