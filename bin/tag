@@ -1,5 +1,0 @@
-#!/bin/bash
-
-version=$(./bin/version)
-git tag v$version
-git push origin v$version
