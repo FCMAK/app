@@ -11,13 +11,11 @@ import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk';
 // import SSocket from './SSocket';
 //------------------------
-import SConfig from './SConfig';
 import SSocket, { setProps } from 'servisofts-socket'
 import BackgroundImage from './Components/BackgroundImage';
-import SSRolesPermisos from './SSRolesPermisos';
-import BarraSuperior from './Components/BarraSuperior';
 import NavBar from './Components/NavBar';
-setProps(SConfig.SocketProps);
+import Socket from './Socket';
+import Config from './Config';
 
 const store = createStore(
     Reducer,
@@ -33,21 +31,16 @@ const App = (props) => {
                 socket={SSocket}
                 assets={Assets}
                 background={<BackgroundImage />}
-                theme={{ initialTheme: "default", themes: SConfig.SThemeProps }}>
-                <SNavigation props={{
-                    prefixes: ["https://component.servisofts.com", "component.servisofts://"],
-                    pages: Pages,
-                    // navBar: BarraSuperior
-                }} />
-                <SSocket identificarse={(props) => {
-                    var usuario = props.state.usuarioReducer.usuarioLog;
-                    return {
-                        data: usuario ? usuario : {},
-                        deviceKey: "as-asa-as",
-                    }
-                }} />
+                theme={{ initialTheme: "default", themes: Config.theme }}>
+                <SNavigation props={{ title: 'SERP', pages: Pages }}
+                    linking={{
+                        prefixes: ["https://component.servisofts.com", "component.servisofts://"],
+                        getInitialURL: () => {
+
+                        }
+                    }} />
+                <Socket store={store} />
                 <NavBar />
-                {/* <SSRolesPermisos /> */}
             </SComponentContainer>
         </Provider>
     )
