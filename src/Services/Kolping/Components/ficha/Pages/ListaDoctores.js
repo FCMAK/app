@@ -12,13 +12,14 @@ class ListaDoctores extends Component {
         super(props);
         this.state = {
         };
-        this.key_e = SNavigation.getParam("key"); //key por navegador
-        this.key_sucursal = SNavigation.getParam("keysuc"); //key por navegador
+        this.codesp = SNavigation.getParam("codesp"); //key por navegador
+        this.nrosuc = SNavigation.getParam("nrosuc"); //key por navegador
     }
     getCardDoctores({ img, url, nombre, especialidad, centro, key, keysuc }) {
         return <SView col={"xs-12"} row height={100} style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }} onPress={() => {
             //alert(title + '\n' + texto + '\n' + numero);
-            this.props.navigation.navigate(url, { key: key , keysuc: keysuc});
+            // console.log( { codmed: key, nrosuc: this.nrosuc, codesp: this.codesp })
+            this.props.navigation.navigate(url, { codmed: key, nrosuc: this.nrosuc, codesp: this.codesp });
         }}>
             <SView col={"xs-3"} center height >
                 <SView width={60} height={60} style={{ borderRadius: 20 }}>
@@ -49,22 +50,23 @@ class ListaDoctores extends Component {
         </SView>
     }
     getDoctores() {
-        var data = Parent.Actions.getAll(this.props);
-        var dataEspecial = Especialidad_.Actions.getAll(this.props);
-        if (!dataEspecial) return <SLoad />;
+        var data = Parent.Actions.getAll(this.props, { codesp: this.codesp, nrosuc: this.nrosuc });
+        // var dataEspecial = Especialidad_.Actions.getAll(this.props,);
+        // if (!dataEspecial) return <SLoad />;
         if (!data) return <SLoad />;
         //alert(this.key_e)
         var sucursales = sucursal.Actions.getAll(this.props);
         if (!sucursales) return <SLoad />
         return Object.keys(data).map((key) => {
             var keyEspecialidad = data[key].smmed_cesp
-            var especialidad = dataEspecial[keyEspecialidad];
+            var CodMed = data[key].CodMed;
+            // var especialidad = dataEspecial[keyEspecialidad];
             if (this.key_e) {
                 if (this.key_e != keyEspecialidad) return null
             }
             var obj = data[key];
-            obj["especialidad"] = especialidad;
-            obj["sucursal"] = sucursales[this.key_sucursal].nombre;
+            // obj["especialidad"] = especialidad;
+            obj["sucursal"] = sucursales[this.nrosuc].NomSuc;
             if (!SBuscador.validate(obj, this.state.find)) {
                 return null;
             }
@@ -75,10 +77,10 @@ class ListaDoctores extends Component {
                         //img: require('../../../../../Assets/img/doctor.jpg'),
                         img: (SSocket.api.root + Parent.component + "/" + key),
                         url: "ficha/horarios",
-                        nombre: data[key].smmed_dmed,
-                        especialidad: especialidad?.smtur_desp, //? si no existe especialidad retorna null
+                        nombre: data[key].NomMed,
+                        // especialidad: especialidad?.smtur_desp, //? si no existe especialidad retorna null
                         centro: obj.sucursal,
-                        key: key,
+                        key: CodMed,
                         keysuc: this.key_sucursal
                     })}
                     <SHr height={10} />
@@ -89,15 +91,17 @@ class ListaDoctores extends Component {
 
     render() {
         return (
-            <SPage title={'Lista de Médicos'} center>
-                <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row>
-                    <Kolping.KBuscador onChangeText={(text) => {
-                        this.setState({
-                            find: text
-                        })
-                    }} />
-                    {this.getDoctores()}
-                    <SHr height={40} />
+            <SPage title={'Lista de Médicos'} >
+                <SView col={"xs-12"} center>
+                    <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row>
+                        <Kolping.KBuscador onChangeText={(text) => {
+                            this.setState({
+                                find: text
+                            })
+                        }} />
+                        {this.getDoctores()}
+                        <SHr height={40} />
+                    </SView>
                 </SView>
             </SPage>
         );

@@ -12,7 +12,7 @@ class ListaCentros extends Component {
         this.state = {
         };
     }
-   
+
     getSucursales() {
         var sucursales = sucursal.Actions.getAll(this.props);
         if (!sucursales) return <SLoad />
@@ -28,22 +28,24 @@ class ListaCentros extends Component {
 
     render() {
         return (
-            <SPage title={'Selecciona un Centro Médico'} center>
-                <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row>
+            <SPage title={'Selecciona un Centro Médico'} >
+                <SView col={"xs-12"} center>
+                    <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row>
 
-                    <Kolping.KBuscador onChangeText={(text) => {
-                        this.setState({
-                            find: text
-                        })
-                    }} />
-                    <SHr height={10} />
-                    <SView col={"xs-12"} >
-                        <SText font={"LondonBetween"} fontSize={20}>Elija el centro médico de su preferencia:</SText>
-                    </SView>
-                    <SView col={"xs-12"} center >
-                        <SHr height={20} />
-                        {this.getSucursales()}
-                        <SHr height={35} />
+                        <Kolping.KBuscador onChangeText={(text) => {
+                            this.setState({
+                                find: text
+                            })
+                        }} />
+                        <SHr height={10} />
+                        <SView col={"xs-12"} >
+                            <SText font={"LondonBetween"} fontSize={20}>Elija el centro médico de su preferencia:</SText>
+                        </SView>
+                        <SView col={"xs-12"} center >
+                            <SHr height={20} />
+                            {this.getSucursales()}
+                            <SHr height={35} />
+                        </SView>
                     </SView>
                 </SView>
             </SPage>

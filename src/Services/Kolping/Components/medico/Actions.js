@@ -6,7 +6,7 @@ export default class Actions {
     static _getReducer = (props) => {
         return props.state[Parent.component + "Reducer"];
     }
-    static getAll = (props) => {
+    static getAll = (props, { nrosuc , codesp}) => {
         var reducer = Actions._getReducer(props);
         var data = reducer.data;
         if (!data) {
@@ -18,6 +18,8 @@ export default class Actions {
                 type: "getAll",
                 estado: "cargando",
                 key_usuario: props.state.usuarioReducer.usuarioLog.key,
+                nrosuc: nrosuc,
+                codesp:codesp,
                 filtros: {
                     // smmed_cesp: "1",
                     // smmed_cmed: "22"
