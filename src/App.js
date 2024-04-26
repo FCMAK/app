@@ -4,28 +4,16 @@ import { SComponentContainer, SIcon, SNavigation, SView } from 'servisofts-compo
 import Pages from './Pages';
 import Assets from './Assets';
 
-//---------REDUX----------
-import Reducer from './Reducer';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import reduxThunk from 'redux-thunk';
-// import SSocket from './SSocket';
-//------------------------
 import SSocket, { setProps } from 'servisofts-socket'
 import BackgroundImage from './Components/BackgroundImage';
 import NavBar from './Components/NavBar';
 import Socket from './Socket';
 import Config from './Config';
-
-const store = createStore(
-    Reducer,
-    {},
-    applyMiddleware(reduxThunk),
-);
+import Redux, { store } from './Redux';
 
 const App = (props) => {
     return (
-        <Provider store={store}>
+        <Redux>
             <SComponentContainer
                 debug
                 socket={SSocket}
@@ -42,7 +30,7 @@ const App = (props) => {
                 <Socket store={store} />
                 <NavBar />
             </SComponentContainer>
-        </Provider>
+        </Redux>
     )
 }
 export default App;

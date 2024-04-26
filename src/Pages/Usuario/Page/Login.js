@@ -4,6 +4,7 @@ import { SButtom, SForm, SHr, SIcon, SNavigation, SPage, SPopup, SText, STheme, 
 import Usuario from '..';
 import Kolping from '../../../Components/Kolping';
 import LogoAnimado from '../../CargaPage/LogoAnimado';
+import Model from '../../../Model';
 
 class Login extends Component {
     constructor(props) {
@@ -42,7 +43,8 @@ class Login extends Component {
             }}
             onSubmit={(data) => {
                 if (data) {
-                    Usuario.Actions.login(data);
+                    // Usuario.Actions.login(data);
+                    Model.usuario.Action.login(data)
                 }
             }}
         />
