@@ -1,7 +1,7 @@
 //  COMPONENT CONFIG
 const component = "medico"; // COMPONENT NAME 
 const version = "1.0";
-const PKey = "smmed_cmed";
+const PKey = "CodMed";
 // ---------------------------------------
 import Actions from "./Actions";
 import Reducer from "./Reducer";

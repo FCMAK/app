@@ -13,7 +13,7 @@ class Inicio extends Component {
 
     render() {
         return (
-            <SPage title={'Comprar Ficha'} center disableScroll>
+            <SPage title={'Comprar Ficha'}  disableScroll>
                 <SView col={"xs-12"} style={{
                     right: "-20%",
                     top: "13%",
@@ -47,12 +47,12 @@ class Inicio extends Component {
                             <SView col={"xs-2.2"} style={{ textAlign: "right" }} ><SIcon name={"flecha1"} width={33} fill={"#018992"} /></SView>
                         </SView>
                         <SHr height={20} />
-                        <SView onPress={() => {
+                        {/* <SView onPress={() => {
                             SNavigation.navigate("ficha/listaDoctores", { keysuc: this.key_sucursal ? this.key_sucursal : null })
                         }} col={"xs-11"} row backgroundColor={STheme.color.card} style={{ borderRadius: 8, borderLeftWidth: 10, borderColor: STheme.color.info }} height={80} center>
                             <SView col={"xs-9.8"} ><SText center font={"LondonTwo"} fontSize={17}>MÉDICOS</SText></SView>
                             <SView col={"xs-2.2"} style={{ textAlign: "right" }} ><SIcon name={"flecha1"} width={33} fill={"#018992"} /></SView>
-                        </SView>
+                        </SView> */}
                     </SView>
                 </SView>
             </SPage>

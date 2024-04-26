@@ -12,8 +12,9 @@ class HorarioDoctor extends Component {
         this.state = {
             fecha: new SDate(),
         };
-        this.key_doctor = SNavigation.getParam("key"); //key por navegador
-        this.key_sucursal = SNavigation.getParam("keysuc"); //key por navegador
+        this.codesp = SNavigation.getParam("codesp"); //key por navegador
+        this.nrosuc = SNavigation.getParam("nrosuc"); //key por navegador
+        this.codmed = SNavigation.getParam("codmed"); //key por navegador
     }
     getDia(dia, diastr) {
         return <SView width={80} height={90} center style={{ backgroundColor: (this.state.dia == dia ? STheme.color.primary : STheme.color.card), borderRadius: 8, borderColor: STheme.color.lightGray, borderWidth: 1 }}
@@ -41,12 +42,14 @@ class HorarioDoctor extends Component {
         </SView>
     }
     render() {
-        var data = Parent.Actions.getAll(this.props);
+        var data = Parent.Actions.getAll(this.props, { codesp: this.codesp, nrosuc: this.nrosuc });
         if (!data) return <SLoad />;
-        var dataDoctor = data[this.key_doctor];
-        var data2 = Especialidad_.Actions.getAll(this.props);
+        // var dataDoctor = data.find(a => a.CodMed == this.codmed);
+        var dataDoctor = data[this.codmed]
+        var data2 = Especialidad_.Actions.getAll(this.props, { nrosuc: this.nrosuc });
         if (!data2) return <SLoad />;
-        var dataEspecialidad = data2[dataDoctor.smmed_cesp];
+        // var dataEspecialidad = data2[dataDoctor.smmed_cesp];
+        var dataEspecialidad = {}
         return (
             <SPage title={'Seleccione su horario'} center >
                 <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row>
@@ -62,7 +65,8 @@ class HorarioDoctor extends Component {
                         </SView>
                         <SView col={"xs-9"} height >
                             <SHr height={5} />
-                            <SText font={"LondonTwo"} color={STheme.color.black} fontSize={24}>{dataDoctor?.smmed_dmed}</SText>
+                            {/* <SText font={"LondonTwo"} color={STheme.color.black} fontSize={24}>{dataDoctor?.smmed_dmed}</SText> */}
+                            <SText font={"LondonTwo"} color={STheme.color.black} fontSize={24}>{dataDoctor?.NomMed}</SText>
                             <SView col={"xs-12"} row >
                                 <SView col={"xs-12"} >
                                     <SText font={"LondonBetween"} color={STheme.color.info} fontSize={18}>{dataEspecialidad?.smtur_desp}</SText>
