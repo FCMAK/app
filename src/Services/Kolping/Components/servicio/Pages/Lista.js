@@ -70,51 +70,51 @@ class Lista extends Component {
                 <SView col={"xs-12"} height={5} style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }}></SView>
                 <SHr height={20} />
             </SView>
-            <SView center col={"xs-12"} height={50} row backgroundColor={STheme.color.card} style={{ borderBottomWidth: 1,borderTopWidth: 1,borderRightWidth: 1, borderColor: STheme.color.lightGray,borderTopRightRadius:8,borderBottomRightRadius:8}}
-            onPress={() => {
-                SNavigation.navigate("servicio/detalle");
-            }}>
+            <SView center col={"xs-12"} height={50} row backgroundColor={STheme.color.card} style={{ borderBottomWidth: 1, borderTopWidth: 1, borderRightWidth: 1, borderColor: STheme.color.lightGray, borderTopRightRadius: 8, borderBottomRightRadius: 8 }}
+                onPress={() => {
+                    SNavigation.navigate("servicio/detalle");
+                }}>
                 <SView col={"xs-1"} center height backgroundColor={STheme.color.primary}>
-                    <SIcon name={"IconServicio"} height={20}/>
+                    <SIcon name={"IconServicio"} height={20} />
                 </SView>
-                <SView col={"xs-1"}   style={{ alignItems: "flex-start" }}>
-                    <SIcon name={"FlechaServicio"} height={15}  />
+                <SView col={"xs-1"} style={{ alignItems: "flex-start" }}>
+                    <SIcon name={"FlechaServicio"} height={15} />
                 </SView>
                 <SView col={"xs-10"} style={{ alignItems: "flex-start" }} >
                     <SText font={"LondonTwo"} fontSize={20} color={STheme.color.text} >Ecografía</SText>
                 </SView>
             </SView>
             <SHr height={10} />
-            <SView center col={"xs-12"} height={50} row backgroundColor={STheme.color.card} style={{ borderBottomWidth: 1,borderTopWidth: 1,borderRightWidth: 1, borderColor: STheme.color.lightGray,borderTopRightRadius:8,borderBottomRightRadius:8}}>
-                <SView col={"xs-1"} center  height backgroundColor={STheme.color.primary}>
-                    <SIcon name={"IconServicio"} height={20}/>
+            <SView center col={"xs-12"} height={50} row backgroundColor={STheme.color.card} style={{ borderBottomWidth: 1, borderTopWidth: 1, borderRightWidth: 1, borderColor: STheme.color.lightGray, borderTopRightRadius: 8, borderBottomRightRadius: 8 }}>
+                <SView col={"xs-1"} center height backgroundColor={STheme.color.primary}>
+                    <SIcon name={"IconServicio"} height={20} />
                 </SView>
-                <SView col={"xs-1"}   style={{ alignItems: "flex-start" }}>
-                    <SIcon name={"FlechaServicio"} height={15}  />
+                <SView col={"xs-1"} style={{ alignItems: "flex-start" }}>
+                    <SIcon name={"FlechaServicio"} height={15} />
                 </SView>
                 <SView col={"xs-10"} style={{ alignItems: "flex-start" }} >
                     <SText font={"LondonTwo"} fontSize={20} color={STheme.color.text} >Mamografía</SText>
                 </SView>
             </SView>
             <SHr height={10} />
-            <SView center col={"xs-12"} height={50} row backgroundColor={STheme.color.card} style={{ borderBottomWidth: 1,borderTopWidth: 1,borderRightWidth: 1, borderColor: STheme.color.lightGray,borderTopRightRadius:8,borderBottomRightRadius:8}}>
-                <SView col={"xs-1"} center  height backgroundColor={STheme.color.primary}>
-                    <SIcon name={"IconServicio"} height={20}/>
+            <SView center col={"xs-12"} height={50} row backgroundColor={STheme.color.card} style={{ borderBottomWidth: 1, borderTopWidth: 1, borderRightWidth: 1, borderColor: STheme.color.lightGray, borderTopRightRadius: 8, borderBottomRightRadius: 8 }}>
+                <SView col={"xs-1"} center height backgroundColor={STheme.color.primary}>
+                    <SIcon name={"IconServicio"} height={20} />
                 </SView>
-                <SView col={"xs-1"}   style={{ alignItems: "flex-start" }}>
-                    <SIcon name={"FlechaServicio"} height={15}  />
+                <SView col={"xs-1"} style={{ alignItems: "flex-start" }}>
+                    <SIcon name={"FlechaServicio"} height={15} />
                 </SView>
                 <SView col={"xs-10"} style={{ alignItems: "flex-start" }} >
                     <SText font={"LondonTwo"} fontSize={20} color={STheme.color.text}>Rayos X</SText>
                 </SView>
             </SView>
             <SHr height={10} />
-            <SView center col={"xs-12"} height={50} row backgroundColor={STheme.color.card} style={{ borderBottomWidth: 1,borderTopWidth: 1,borderRightWidth: 1, borderColor: STheme.color.lightGray,borderTopRightRadius:8,borderBottomRightRadius:8}}>
-                <SView col={"xs-1"} center  height backgroundColor={STheme.color.primary}>
-                    <SIcon name={"IconServicio"} height={20}/>
+            <SView center col={"xs-12"} height={50} row backgroundColor={STheme.color.card} style={{ borderBottomWidth: 1, borderTopWidth: 1, borderRightWidth: 1, borderColor: STheme.color.lightGray, borderTopRightRadius: 8, borderBottomRightRadius: 8 }}>
+                <SView col={"xs-1"} center height backgroundColor={STheme.color.primary}>
+                    <SIcon name={"IconServicio"} height={20} />
                 </SView>
-                <SView col={"xs-1"}   style={{ alignItems: "flex-start" }}>
-                    <SIcon name={"FlechaServicio"} height={15}  />
+                <SView col={"xs-1"} style={{ alignItems: "flex-start" }}>
+                    <SIcon name={"FlechaServicio"} height={15} />
                 </SView>
                 <SView col={"xs-10"} style={{ alignItems: "flex-start" }} >
                     <SText font={"LondonTwo"} fontSize={20} color={STheme.color.text} >Tomografía</SText>
@@ -126,17 +126,17 @@ class Lista extends Component {
 
     render() {
         return (
-            <SPage title={'Lista de servicios'} center>
-                <SHr />
-                <SHr />
-                <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"}>
-                    <KBuscador />
-                    {this.getContent()}
+            <SPage title={'Lista de servicios'} >
+                <SView col={"xs-12"} center>
+                    <SHr />
+                    <SHr />
+                    <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} >
+                        <KBuscador />
+                        {this.getContent()}
+                    </SView>
+                    <SHr />
+                    <SHr />
                 </SView>
-                <SHr />
-                <SHr />
-
-
             </SPage>
         );
     }

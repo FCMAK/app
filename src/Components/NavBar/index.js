@@ -3,6 +3,7 @@ import { Animated } from 'react-native';
 import { SButtom, SView, SImage, SDate, SNavigation, STheme, SIcon, SText, SScrollView2, SHr } from 'servisofts-component';
 import { connect } from 'react-redux';
 import SSocket from 'servisofts-socket';
+import Model from '../../Model';
 // import CerrarSession from '../../Pages/Usuario/Page/Perfil/CerrarSession';
 
 
@@ -218,8 +219,10 @@ class NavBar extends Component {
                         <SView col={"xs-12"} height={30}></SView>
                     </SView>
                     <SView col={"xs-11"} row onPress={() => {
-                        this.props.dispatch({ type: "USUARIO_LOGOUT" });
-                        SNavigation.replace("login");
+                        // this.props.dispatch({ type: "USUARIO_LOGOUT" });
+                        // SNavigation.replace("login");
+                        Model.usuario.Action.unlogin();
+                        SNavigation.reset("login");
                         this.fadeOut();
                     }}  >
                         <SView row col={"xs-10"}>

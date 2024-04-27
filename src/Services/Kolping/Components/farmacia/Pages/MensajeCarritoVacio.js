@@ -23,7 +23,7 @@ class MensajeCarritoVacio extends Component {
                         <SText center fontSize={18} color={'#666666'}>Añada artículos a su carrito:</SText>
                         <SText center fontSize={18} color={'#666666'}>¡El Centro Médico está siempre a mano!</SText>
                     </SView>
-                    <SHr height={70} />
+                    <SHr height={50} />
                     <SView col={"xs-12"} center height={300}>
                         <SIcon name={"IconCarritoVacio"} />
                     </SView>
