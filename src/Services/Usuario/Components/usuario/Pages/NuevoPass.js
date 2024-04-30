@@ -9,12 +9,31 @@ import Usuario from '..';
 // import LogoAnimado from '../../CargaPage/LogoAnimado';
 // import RolDeUsuario from './RolDeUsuario';
 import Kolping from '../../../../../Components/Kolping';
+import Model from '../../../../../Model';
+import CryptoJS from 'crypto-js';
+
 
 class NuevoPass extends Component {
     constructor(props) {
         super(props);
         this.state = {
         };
+        this.user_to_rec = SNavigation.getAllParams();
+
+    }
+
+    alertErrorPassword() {
+        return <SView col={"xs-11 md-8 xl-6"} row center style={{ height: 250, borderRadius: 8, }} backgroundColor={STheme.color.background} >
+            <SView col={"xs-11"} height={40} />
+            <SView col={"xs-11"}  >
+                <SIcon name={"InputPassword"} height={100} fill={STheme.color.secondary} />
+            </SView>
+            <SView col={"xs-11"} height={15} />
+            <SView col={"xs-12"} center  >
+                <SText center color={STheme.color.darkGray} style={{ fontSize: 18, fontWeight: "bold" }}>Las contraseñas no coinciden</SText>
+            </SView>
+            <SView col={"xs-11"} height={30} />
+        </SView>
     }
     
     getForm() {
@@ -40,8 +59,25 @@ class NuevoPass extends Component {
                 //         ...values
                 //     }, this.props);
                 // } else {
-                Usuario.Actions.cambiarPassByCodigo(values,  this.props);
+                // Usuario.Actions.cambiarPassByCodigo(values,  this.props);
                 // }
+
+                if (values["Password"] != values["RepPassword"]) {
+                    SPopup.open({ content: this.alertErrorPassword() });
+                    return null;
+                }
+                values["Password"] = CryptoJS.MD5(values["Password"]).toString();
+                delete values["RepPassword"]
+                
+                Model.usuario.Action.cambiarPassByCodigo({ password: values.Password, usuario_recuperado: this.user_to_rec }).then(resp => {
+                    console.log(resp);
+                    SNavigation.reset("login")
+                    // var usr_rec = resp.data;
+                    // SNavigation.navigate("/login/recuperar_pass", usr_rec);
+                }).catch(e => {
+                    console.error(e);
+                })
+
             }}
         />
     }
@@ -52,15 +88,15 @@ class NuevoPass extends Component {
         // if (error) {
         //     SPopup.alert("¡Código incorrecto!");
         // }
-        if(!this.props.state.usuarioReducer.usuarioRecuperado){
-            SNavigation.goBack();
-        }
-        if (this.props.state.usuarioReducer.estado == "exito" && this.props.state.usuarioReducer.type == "cambiarPassByCodigo") {
-            this.props.state.usuarioReducer.estado = "";
-            // var dataRecuperar = Usuar
-           SNavigation.navigate("login");
+        // if(!this.props.state.usuarioReducer.usuarioRecuperado){
+        //     SNavigation.goBack();
+        // }
+        // if (this.props.state.usuarioReducer.estado == "exito" && this.props.state.usuarioReducer.type == "cambiarPassByCodigo") {
+        //     this.props.state.usuarioReducer.estado = "";
+        //     // var dataRecuperar = Usuar
+        //    SNavigation.navigate("login");
           
-        }
+        // }
         return (
             <SPage title={"Registrar nueva contraseña"}>
                 <SView center>

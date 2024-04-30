@@ -6,6 +6,7 @@ import Usuario from '..';
 import Kolping from '../../../../../Components/Kolping';
 import LoginGoogle from '../../../../../LoginApis/LoginGoogle';
 import LoginFacebook from '../../../../../LoginApis/LoginFacebook';
+import Model from '../../../../../Model';
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -45,7 +46,13 @@ class Login extends Component {
             }}
             onSubmit={(data) => {
                 if (data) {
-                    Parent.Actions.login(data, this.props);
+                    // Parent.Actions.login(data, this.props);
+                    Model.usuario.Action.login(data).then((resp) => {
+                        console.log("exito");
+                        SNavigation.goBack();
+                    }).catch(e => {
+                        SPopup.alert("Usuario no encontrado, verifique sus datos.")
+                    })
                 }
             }}
         />
@@ -63,30 +70,37 @@ class Login extends Component {
         </SView>
     }
     render() {
-        var error = Parent.Actions.getError("login", this.props);
-        if (error) {
-            SPopup.alert("Usuario no encontrado, Verifique sus datos.");
-        }
-        var reducer = this.props.state.usuarioReducer;
-        if (reducer.type == "loginGmail") {
-            if (reducer.estado == "error") {
-                reducer.estado = "";
-                SNavigation.navigate("usuario/registro", { type: "gmail" })
-            }
-        }
-        if (reducer.type == "loginFacebook") {
-            if (reducer.estado == "error") {
-                reducer.estado = "";
-                SNavigation.navigate("usuario/registro", { type: "facebook" })
-            }
-        }
-        if (Parent.Actions.validateSession(this.props, true)) {
-            SNavigation.replace('/');
+        if (Model.usuario.Action.getUsuarioLog()) {
+            SNavigation.goBack();
             return null;
         }
-        if (reducer.type == "login") {
-            this.props.state.usuarioReducer.type = "";
-        }
+
+        // var error = Parent.Actions.getError("login", this.props);
+        // if (error) {
+        //     SPopup.alert("Usuario no encontrado, Verifique sus datos.");
+        // }
+        // var reducer = this.props.state.usuarioReducer;
+        // if (reducer.type == "loginGmail") {
+        //     if (reducer.estado == "error") {
+        //         reducer.estado = "";
+        //         SNavigation.navigate("usuario/registro", { type: "gmail" })
+        //     }
+        // }
+        // if (reducer.type == "loginFacebook") {
+        //     if (reducer.estado == "error") {
+        //         reducer.estado = "";
+        //         SNavigation.navigate("usuario/registro", { type: "facebook" })
+        //     }
+        // }
+        // if (Parent.Actions.validateSession(this.props, true)) {
+        //     SNavigation.replace('/');
+        //     return null;
+        // }
+        // if (reducer.type == "login") {
+        //     this.props.state.usuarioReducer.type = "";
+        // }
+
+
         // if (Parent.Actions.validateSession(this.props, true)) {
         //     SNavigation.replace('/');
         //     return null;
@@ -96,7 +110,7 @@ class Login extends Component {
             <>
                 <SPage title={'Login ' + Parent.component} center hidden>
                     <SView center col={"xs-12"}>
-                        <SHr height={30} />	
+                        <SHr height={30} />
                         <SView col={"xs-11 md-6 xl-4"} center  >
                             <SView col={"xs-11"} height={140}>
                                 <SIcon name={"Logo"} />

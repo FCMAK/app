@@ -9,6 +9,7 @@ import Usuario from '..';
 // import LogoAnimado from '../../CargaPage/LogoAnimado';
 // import RolDeUsuario from './RolDeUsuario';
 import Kolping from '../../../../../Components/Kolping';
+import Model from '../../../../../Model';
 
 class RecuperarPass extends Component {
     constructor(props) {
@@ -35,6 +36,7 @@ class RecuperarPass extends Component {
             inputs={{
                 Correo: { label: "Ingrese su correo electrónico", type: "email", isRequired: true, icon: <SIcon name={"InputEmail"} width={40} height={30} /> },
             }}
+            error={this.state.error}
             onSubmit={(values) => {
                 // if (this.key) {
                 //     Usuario.Actions.recuperarPass({
@@ -42,21 +44,33 @@ class RecuperarPass extends Component {
                 //         ...values
                 //     }, this.props);
                 // } else {
-                Usuario.Actions.recuperarPass(values, this.key_rol, this.props);
+                // Usuario.Actions.recuperarPass(values, this.key_rol, this.props);
                 // }
+
+                console.log("values", values);
+                Model.usuario.Action.recuperarPass({ correo: (values.Correo + "").toLowerCase() }).then(resp => {
+                    SNavigation.navigate("usuario/codigoRecuperarContrasena");
+                }).catch(e => {
+                    console.error(e);
+                    if (e?.error == "error_datos") {
+                        this.setState({ loading: false, error: "El correo electrónico no existe, verifique nuevamente." })
+                    } else {
+                        this.setState({ loading: false, error: "Ha ocurrido un error al introducir el correo electrónico." })
+                    }
+                })
             }}
         />
     }
 
     render() {
-        var error = Usuario.Actions.getError("recuperarPass", this.props);
-        if (error) {
-            SPopup.alert("Usuario no encontrado, Verifique sus datos.");
-        }
-        if (this.props.state.usuarioReducer.estado == "exito" && this.props.state.usuarioReducer.type == "recuperarPass") {
-            this.props.state.usuarioReducer.estado = "";
-            SNavigation.navigate(Usuario.component + "/codigoRecuperarContrasena");
-        }
+        // var error = Usuario.Actions.getError("recuperarPass", this.props);
+        // if (error) {
+        //     SPopup.alert("Usuario no encontrado, Verifique sus datos.");
+        // }
+        // if (this.props.state.usuarioReducer.estado == "exito" && this.props.state.usuarioReducer.type == "recuperarPass") {
+        //     this.props.state.usuarioReducer.estado = "";
+        //     SNavigation.navigate(Usuario.component + "/codigoRecuperarContrasena");
+        // }
         return (
             <SPage title={"Recuperar Contraseña"}>
                 <SView center>

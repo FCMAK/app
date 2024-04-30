@@ -4,6 +4,9 @@ import { SButtom, SForm, SHr, SPage, SText, SNavigation, SLoad, SView, SIcon, SP
 import SSocket from 'servisofts-socket';
 import Parent from '../index'
 import Kolping from '../../../../../Components/Kolping';
+import Model from '../../../../../Model';
+import CryptoJS from 'crypto-js';
+
 class Registro extends Component {
     constructor(props) {
         super(props);
@@ -101,39 +104,62 @@ class Registro extends Component {
                         SPopup.alert("Las contraseñas no coinciden.")
                         return;
                     }
-                    data["Password"] = CryptoJS.MD5(data["Password"]).toString();
-                    Parent.model.Action.registro({
-                        data: data,
-                        key_rol: this._params.key_rol,
-                        key_usuario: ""
+                    // data["Password"] = CryptoJS.MD5(data["Password"]).toString();
+
+                    // Parent.model.Action.registro({
+                    //     data: data,
+                    //     key_rol: this._params.key_rol,
+                    //     key_usuario: ""
+                    // }).then((resp) => {
+                    //     this.$submitFile(resp.data.key);
+                    //     if (this._params.key_rol) {
+                    //         Model.usuarioRol.Action.registro({
+                    //             data: {
+                    //                 key_rol: this.$params.key_rol,
+                    //                 key_usuario: resp.data.key,
+                    //             },
+                    //             key_usuario: Model.usuario.Action.getKey()
+                    //         }).then((tesp) => {
+                    //             if (this._params.onSelect) {
+                    //                 this._params.onSelect(resp.data);
+                    //                 SNavigation.goBack();
+                    //             } else {
+                    //                 SNavigation.replace("/usuario/profile", { pk: resp.data.key })
+                    //             }
+                    //         }).catch((e) => {
+                    //             this.reject("Error desconocido al asignar roles al usuario.");
+                    //         })
+                    //     } else {
+                    //         if (this._params.onSelect) {
+                    //             this._params.onSelect(resp.data);
+                    //             SNavigation.goBack();
+                    //         }
+                    //     }
+                    //     SNavigation.replace("/usuario/profile", { pk: resp.data.key });
+                    // }).catch(e => {
+                    //     SPopup.alert("Ya existe un usuario con el dato, " + e.error_dato)
+                    //     console.error(e);
+                    // })
+                    var password = CryptoJS.MD5(data["Password"]).toString();
+                    delete values["RepPassword"]
+
+                    Model.usuario.Action.registro({
+                        data: { ...data, Password: password }
                     }).then((resp) => {
-                        this.$submitFile(resp.data.key);
-                        if (this._params.key_rol) {
-                            Model.usuarioRol.Action.registro({
-                                data: {
-                                    key_rol: this.$params.key_rol,
-                                    key_usuario: resp.data.key,
-                                },
-                                key_usuario: Model.usuario.Action.getKey()
-                            }).then((tesp) => {
-                                if (this._params.onSelect) {
-                                    this._params.onSelect(resp.data);
-                                    SNavigation.goBack();
-                                    // return;
-                                } else {
-                                    SNavigation.replace("/usuario/profile", { pk: resp.data.key })
-                                }
-                            }).catch((e) => {
-                                this.reject("Error desconocido al asignar roles al usuario.");
-                            })
-                        } else {
-                            if (this._params.onSelect) {
-                                this._params.onSelect(resp.data);
-                                SNavigation.goBack();
-                                // return;
-                            }
-                        }
-                        SNavigation.replace("/usuario/profile", { pk: resp.data.key });
+
+                        console.log("respuesta registro", resp);
+                        console.log(data["Correo"]);
+                        console.log(password);
+                        Model.usuario.Action.loginByKey({
+                            usuario: data["Correo"],
+                            password: password
+
+                        }).then(resp => {
+                            SNavigation.reset("/");
+                        }).catch(e => {
+                            SPopup.alert("Error al iniciar con el nuevo usuario");
+                            SNavigation.reset("/");
+                        })
                     }).catch(e => {
                         SPopup.alert("Ya existe un usuario con el dato, " + e.error_dato)
                         console.error(e);

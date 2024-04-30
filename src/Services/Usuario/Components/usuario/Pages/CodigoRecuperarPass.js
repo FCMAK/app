@@ -9,6 +9,7 @@ import Usuario from '..';
 // import LogoAnimado from '../../CargaPage/LogoAnimado';
 // import RolDeUsuario from './RolDeUsuario';
 import Kolping from '../../../../../Components/Kolping';
+import Model from '../../../../../Model';
 
 class CodigoRecuperarPass extends Component {
     constructor(props) {
@@ -30,6 +31,7 @@ class CodigoRecuperarPass extends Component {
             inputs={{
                 Codigo: { label: "Ingrese el código recibido", type: "text", isRequired: true, icon: <SIcon name={"InputPassword"} width={40} height={30} /> },
             }}
+            error={this.state.error}
             onSubmit={(values) => {
                 // if (this.key) {
                 //     Usuario.Actions.recuperarPass({
@@ -37,22 +39,32 @@ class CodigoRecuperarPass extends Component {
                 //         ...values
                 //     }, this.props);
                 // } else {
-                Usuario.Actions.verificarCodigoPass(values, this.key_rol, this.props);
+                // Usuario.Actions.verificarCodigoPass(values, this.key_rol, this.props);
                 // }
+                Model.usuario.Action.verificarCodigoPass({ codigo: values.Codigo }).then(resp => {
+                    var usr_rec = resp.data;
+                    SNavigation.navigate("usuario/nuevaContrasena", usr_rec);
+                }).catch(e => {
+                    console.error(e);
+                    if (e?.error == "error_datos") {
+                        this.setState({ loading: false, error: "Código erróneo, verifique nuevamente." })
+                    } else {
+                        this.setState({ loading: false, error: "Ha ocurrido un error al introducir el código." })
+                    }
+                })
             }}
         />
     }
 
     render() {
-        var error = Usuario.Actions.getError("verificarCodigoPass", this.props);
-        if (error) {
-            SPopup.alert("¡Código incorrecto!");
-        }
-        if (this.props.state.usuarioReducer.estado == "exito" && this.props.state.usuarioReducer.type == "verificarCodigoPass") {
-            this.props.state.usuarioReducer.estado = "";
-            SNavigation.navigate(Usuario.component + "/nuevaContrasena");
-            //alert("¡Código correcto!");
-        }
+        // var error = Usuario.Actions.getError("verificarCodigoPass", this.props);
+        // if (error) {
+        //     SPopup.alert("¡Código incorrecto!");
+        // }
+        // if (this.props.state.usuarioReducer.estado == "exito" && this.props.state.usuarioReducer.type == "verificarCodigoPass") {
+        //     this.props.state.usuarioReducer.estado = "";
+        //     SNavigation.navigate(Usuario.component + "/nuevaContrasena");
+        // }
         return (
             <SPage title={"Código de Recuperación"}>
                 <SView center>
