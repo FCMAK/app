@@ -19,10 +19,10 @@ export default class Actions {
                 estado: "cargando",
                 nrosuc: nrosuc,
                 key_usuario: props.state.usuarioReducer.usuarioLog.key,
-                filtros: {
-                    // smmed_cesp: "1",
-                    // smmed_cmed: "22"
-                }
+                // filtros: {
+                //     // smmed_cesp: "1",
+                //     // smmed_cmed: "22"
+                // }
             })
             return null;
         }

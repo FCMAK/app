@@ -68,6 +68,9 @@ class NuevoPass extends Component {
                 }
                 values["Password"] = CryptoJS.MD5(values["Password"]).toString();
                 delete values["RepPassword"]
+
+                console.log(values.Password)
+                console.log(this.user_to_rec)
                 
                 Model.usuario.Action.cambiarPassByCodigo({ password: values.Password, usuario_recuperado: this.user_to_rec }).then(resp => {
                     console.log(resp);

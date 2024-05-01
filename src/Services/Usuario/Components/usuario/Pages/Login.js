@@ -7,6 +7,8 @@ import Kolping from '../../../../../Components/Kolping';
 import LoginGoogle from '../../../../../LoginApis/LoginGoogle';
 import LoginFacebook from '../../../../../LoginApis/LoginFacebook';
 import Model from '../../../../../Model';
+import CryptoJS from 'crypto-js';
+
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -46,6 +48,7 @@ class Login extends Component {
             }}
             onSubmit={(data) => {
                 if (data) {
+                    data["password"] = CryptoJS.MD5(data["password"]).toString();
                     // Parent.Actions.login(data, this.props);
                     Model.usuario.Action.login(data).then((resp) => {
                         console.log("exito");
