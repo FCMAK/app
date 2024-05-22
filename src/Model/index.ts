@@ -4,9 +4,12 @@ import Roles_permisos from "servisofts-rn-roles_permisos";
 
 import { STheme } from "servisofts-component";
 
+import kolping from "./kolping";
+
 const Model = {
     ...Usuario.Model,
     ...Roles_permisos.Model,
+    ...kolping,
 
 }
 

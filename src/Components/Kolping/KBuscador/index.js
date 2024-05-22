@@ -17,7 +17,7 @@ export default class KBuscador extends Component {
                         </SView>
                         <SView col={"xs-9"} center>
                             <SInput col={"xs-12"}
-                                placeholder={this.props.placeholder ?? "Busqueda personalizada..."} style={{
+                                placeholder={this.props.placeholder ?? "Búsqueda personalizada..."} style={{
                                     borderWidth: 0,
                                     height: "100%",
                                 }} color={STheme.color.text} placeholderTextColor={STheme.color.gray}  onChangeText={(txt) => {

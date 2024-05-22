@@ -4,6 +4,7 @@ import { SHr, SIcon, SPage, SText, STheme, SView, SNavigation, SLoad, SBuscador 
 import Kolping from '../../../../../Components/Kolping';
 import Parent from '../../especialidad/index'
 import Medicos from '../../medico/index'
+import SSocket from 'servisofts-socket';
 
 class ListaEspecialidad extends Component {
     constructor(props) {
@@ -12,15 +13,39 @@ class ListaEspecialidad extends Component {
         };
         this.key_sucursal = SNavigation.getParam("keysuc"); //key por navegador
     }
+
+
+    componentDidMount() {
+        SSocket.sendPromise({
+            component: "especialidad",
+            type: "getAll",
+            version: Parent.version,
+            estado: "cargando",
+            nrosuc: this.key_sucursal,
+            //nrosuc: "999",
+            // key_usuario: props.state.usuarioReducer.usuarioLog.key,
+        }).then(e => {
+            if (!e.data) return;
+            this.setState({data: e.data})
+        }).catch(e => {
+            console.error(e)
+        })
+    }
+
     getEspecialidades() {
-        var data = Parent.Actions.getAll(this.props, { nrosuc: this.key_sucursal });
+        // var data = Parent.Actions.getAll(this.props, { nrosuc: this.key_sucursal });
+        if (!this.state.data) return <SLoad />;
+        var data = this.state.data;
+
         // var dataMedicos = Medicos.Actions.getAll(this.props);
         var dataMedicos = {}
         // var dataMedicos = Medicos.Actions.getAll(this.props);
-        if (!data) return <SLoad />;
-        if (!dataMedicos) return <SLoad />;
+       
+
+        // if (!dataMedicos) return <SLoad />;
 
         return Object.keys(data).map((key) => {
+
 
             if (!SBuscador.validate(data[key], this.state.find)) {
                 return null;
@@ -37,10 +62,10 @@ class ListaEspecialidad extends Component {
                 <SView disabled={!isActive} onPress={() => {
                     // SNavigation.navigate("ficha/horarios", { key: dataMedicos[key]?.smmed_cmed, keysuc: this.key_sucursal, codesp: data[key]?.CodEsp });
                     SNavigation.navigate("ficha/listaDoctores", { nrosuc: this.key_sucursal, codesp: data[key]?.CodEsp });
-                    
+
                 }} col={"xs-12"} row backgroundColor={STheme.color.card} height={52} center style={{ borderRadius: 8 }}>
                     <SView col={"xs-1"}  ><SIcon name={isActive ? "logoLista" : "logoListaGray"} width={26} fill={"#018992"} /></SView>
-                    <SView col={"xs-10"} ><SText font={"LondonTwo"} color={isActive ? STheme.color.text : STheme.color.gray} fontSize={17} style={{ paddingLeft: 10 }} style={{ textTransform: "uppercase", }}>{data[key]?.NomEsp}</SText></SView>
+                    <SView col={"xs-10"} ><SText font={"LondonTwo"} color={isActive ? STheme.color.text : STheme.color.gray} fontSize={17} style={{ paddingLeft: 10, textTransform: "uppercase", }}>{data[key]?.NomEsp}</SText></SView>
                     <SView col={"xs-1"} style={{ textAlign: "right" }} ><SIcon name={"flecha1"} width={33} fill={isActive ? STheme.color.info : STheme.color.gray} style={{ right: 10 }} /></SView>
                 </SView>
                 <SHr height={15} />

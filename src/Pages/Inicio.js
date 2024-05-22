@@ -161,7 +161,10 @@ class Inicio extends Component {
 
     render() {
         if (!Model.usuario.Action.getKey()) {
-            return <SLoad />
+            console.log("aquiiii")
+            // return <SLoad />
+            return SNavigation.replace("login")
+            // SNavigation.reset("login");
         }
         // var UsuaioPage = Pages["usuarioPage/lista"];
         return (
