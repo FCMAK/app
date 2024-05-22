@@ -62,7 +62,7 @@ class Item extends Component<_props> {
                             <SIcon name={"whatsApp"} width={14} height={14} fill={STheme.color.info} />
                         </SView>
                         <SView col={"xs-11 sm-5 md-5 lg-5 xl-5"} style={{ paddingTop: 2 }}  >
-                            <SText font={"LondonBetween"} fontSize={14} color={STheme.color.primary}>{this.props.obj?.telefono_wp}</SText>
+                            <SText font={"LondonBetween"} fontSize={14} color={STheme.color.primary}>{this.props.obj?.MsgSuc}</SText>
                         </SView>
                     </SView>
 
