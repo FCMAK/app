@@ -141,7 +141,7 @@ class Registro extends Component {
                     //     console.error(e);
                     // })
                     var password = CryptoJS.MD5(data["Password"]).toString();
-                    delete values["RepPassword"]
+                    delete data["RepPassword"]
 
                     Model.usuario.Action.registro({
                         data: { ...data, Password: password }
