@@ -12,15 +12,21 @@ class Carga extends Component {
         };
     }
 
-    redirect() {
-        if (!Model.usuario.Action.getKey()) {
-            SNavigation.replace("login");
-        } else {
-            SNavigation.replace("/");
-        }
+    componentDidMount() {
+        this.hilo();
     }
+    
+    redirect() {
+       
+        if (SNavigation?.lastRoute?.route?.name != "/") {
+            return;
+        }
+
+        SNavigation.replace('inicio');
+    }
+
     hilo() {
-        new SThread(this.state.delay, "cargaHilo", true).start(() => {
+        new SThread(this.state.delay, 'cargaHilo', true).start(() => {
             this.redirect();
         });
     }

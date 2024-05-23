@@ -12,6 +12,10 @@ import TerminosCondiciones from '../Pages/TerminosCondiciones';
 import inDevelop from './inDevelop';
 import CameraComponent from '../Components/CameraComponent';
 
+import login from './login';
+import registro from './registro';
+// import perfil from './perfil';
+
  
 const Pages: SPageListProps = {
     "/": Inicio,
@@ -26,6 +30,10 @@ const Pages: SPageListProps = {
     "inDevelop": inDevelop,
     "camara": CameraComponent,
     ...Services.Pages,
+
+    ...login,
+    ...registro,
+    // ...perfil
 
 }
 

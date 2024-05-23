@@ -43,7 +43,10 @@ class CodigoRecuperarPass extends Component {
                 // }
                 Model.usuario.Action.verificarCodigoPass({ codigo: values.Codigo }).then(resp => {
                     var usr_rec = resp.data;
-                    SNavigation.navigate("usuario/nuevaContrasena", usr_rec);
+                    console.log("usr_rec", resp)
+                    if (resp.estado == "exito") {
+                        SNavigation.navigate("usuario/nuevaContrasena", usr_rec);
+                    }
                 }).catch(e => {
                     console.error(e);
                     if (e?.error == "error_datos") {

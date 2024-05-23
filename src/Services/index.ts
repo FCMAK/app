@@ -11,7 +11,7 @@ const Pages = {
 
 const Reducers = {
     ...Kolping.Reducers,
-    ...Usuario.Reducers,
+    // ...Usuario.Reducers,
     ...Roles_permisos.Reducers,
 }
 

@@ -1,6 +1,7 @@
 import SSocket from 'servisofts-socket';
 import Parent from './index';
 import Service from '../../index';
+import Model from '../../../../Model';
 
 export default class Actions {
     static _getReducer = (props) => {
@@ -17,7 +18,8 @@ export default class Actions {
                 version: Parent.version,
                 type: "getAll",
                 estado: "cargando",
-                key_usuario: props.state.usuarioReducer.usuarioLog.key,
+                // key_usuario: props.state.usuarioReducer.usuarioLog.key,
+                key_usuario: Model.usuario.Action.getKey(),
             })
             return null;
         }

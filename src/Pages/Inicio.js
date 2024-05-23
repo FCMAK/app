@@ -161,10 +161,8 @@ class Inicio extends Component {
 
     render() {
         if (!Model.usuario.Action.getKey()) {
-            console.log("aquiiii")
-            // return <SLoad />
+            console.log("aquiiii INICIOOOO no hay user")
             return SNavigation.replace("login")
-            // SNavigation.reset("login");
         }
         // var UsuaioPage = Pages["usuarioPage/lista"];
         return (

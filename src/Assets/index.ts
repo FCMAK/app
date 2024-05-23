@@ -86,6 +86,8 @@ import lapiz, { ReactComponent as lapizW } from './svg/lapiz.svg';
 import IconFaceb, { ReactComponent as IconFacebW } from './svg/iconFaceb.svg';
 import IconGoogle, { ReactComponent as IconGoogleW } from './svg/iconGoogle.svg';
 import IconChecked, { ReactComponent as IconCheckedw } from './svg/iconChecked.svg';
+import IconCheckedOk, { ReactComponent as IconCheckedOkw } from './svg/iconCheckedOk.svg';
+
 import IconLogo, { ReactComponent as IconLogow } from './svg/iconlogo.svg';
 
 
@@ -192,6 +194,8 @@ const Assets: SAssets = {
         "IconFaceb": { Native: IconFaceb, Web: IconFacebW },
         "IconGoogle": { Native: IconGoogle, Web: IconGoogleW },
         "IconChecked": { Native: IconChecked, Web: IconCheckedw },
+        "IconCheckedOk": { Native: IconCheckedOk, Web: IconCheckedOkw },
+
         "IconLogo": { Native: IconLogo, Web: IconLogow },
 
         "IconCartFalse": { Native: IconCartFalse, Web: IconCartFalseW },
