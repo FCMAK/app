@@ -34,7 +34,7 @@ class recuperar_codigo extends Component {
                     )
                 },
             }}
-            error={this.state.error}
+            error={this.state.error} 
 
             onSubmit={(values) => {
                 Model.usuario.Action.verificarCodigoPass({ codigo: values.Codigo }).then(resp => {

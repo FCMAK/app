@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SLoad, SMapView, SMarker, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
+import { SIcon, SLoad, SMapView, SMarker, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import sucursal from '..';
 import Item from '../Components/Item';
 
@@ -31,13 +31,16 @@ class Mapa extends Component {
             <SPage title={'¿Cómo llegar?'} disableScroll center>
                 <SMapView initialRegion={
                     {
-                        latitude: data.lat,
-                        longitude: data.lng,
+                        latitude: data.LatSuc,
+                        longitude: data.LonSuc,
                         latitudeDelta: 0.0922,
                         longitudeDelta: 0.0421,
                     }}
                     preventCenter>
-                        <SMarker lat={data.lat} lng={data.lng}/>
+                    <SMapView.SMarker latitude={data.LatSuc} longitude={data.LonSuc} fill={STheme.color.primary}>
+                        <SIcon name={"mapa"} width={70} height={60} fill={STheme.color.primary} />
+                    </SMapView.SMarker>
+                    {/* <SMarker lat={data.LatSuc} lng={data.LonSuc} /> */}
                 </SMapView>
                 {this.getCard()}
             </SPage>

@@ -17,6 +17,9 @@ class ListaCentros extends Component {
         var sucursales = sucursal.Actions.getAll(this.props);
         if (!sucursales) return <SLoad />
         return Object.keys(sucursales).map((key) => {
+            if (!SBuscador.validate(sucursales[key], this.state.find)) {
+                return null;
+            }
             return <>
                 <sucursal.Item obj={sucursales[key]} onPress={() => {
                     SNavigation.navigate("ficha/opciones", { keysuc: key })
@@ -30,7 +33,7 @@ class ListaCentros extends Component {
         return (
             <SPage title={'Selecciona un Centro Médico'} >
                 <SView col={"xs-12"} center>
-                    <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row>
+                    <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row> 
 
                         <Kolping.KBuscador onChangeText={(text) => {
                             this.setState({

@@ -48,12 +48,18 @@ class recuperar extends Component {
                     )
                 },
             }}
+            error={this.state.error}
 
             onSubmit={(values) => {
                 Model.usuario.Action.recuperarPass({ correo: (values.correo + "").toLowerCase() }).then(resp => {
                     SNavigation.navigate("login/recuperar_codigo");
                 }).catch(e => {
                     console.error(e);
+                    if (e?.error == "error_datos") {
+                        this.setState({ loading: false, error: "El correo electrónico no existe, verifique nuevamente." })
+                    } else {
+                        this.setState({ loading: false, error: "Ha ocurrido un error al introducir el correo electrónico." })
+                    }
                 })
             }}
         />

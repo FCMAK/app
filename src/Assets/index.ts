@@ -68,6 +68,7 @@ import ArrowRight, { ReactComponent as ArrowRightW } from './svg/sucursales/arro
 import Chacos, { ReactComponent as ChacosW } from './svg/sucursales/chacos.svg';
 import Paraiso, { ReactComponent as ParaisoW } from './svg/sucursales/paraiso.svg';
 import Map, { ReactComponent as MapW } from './svg/sucursales/map.svg';
+import Mapa, { ReactComponent as MapaW } from './svg/sucursales/mapa.svg';
 import Cellphone, { ReactComponent as CellphoneW } from './svg/sucursales/cellphone.svg';
 
 import Logo, { ReactComponent as LogoW } from './svg/logo.svg';
@@ -255,6 +256,7 @@ const Assets: SAssets = {
         "chacos": { Native: Chacos, Web: ChacosW },
         "paraiso": { Native: Paraiso, Web: ParaisoW },
         "map": { Native: Map, Web: MapW },
+        "mapa": { Native: Mapa, Web: MapaW },
         "cellphone": { Native: Cellphone, Web: CellphoneW },
         "tuvidaesmejor": { Native: LogoTuVidaEsMejor, Web: LogoTuVidaEsMejorW },
         "logowhite": { Native: LogoWhite, Web: LogoWhiteW },

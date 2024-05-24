@@ -5,6 +5,7 @@ import Kolping from '../../../../../Components/Kolping';
 import Parent from '../../medico/index';
 import Especialidad_ from '../../especialidad/index';
 import SSocket from 'servisofts-socket'
+import Container from '../../../../../Components/Container';
 
 class HorarioDoctor extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class HorarioDoctor extends Component {
         this.nrosuc = SNavigation.getParam("nrosuc"); //key por navegador
         this.codmed = SNavigation.getParam("codmed"); //key por navegador
     }
-    getDia(dia, diastr) {
+    getDia_(dia, diastr) {
         return <SView width={80} height={90} center style={{ backgroundColor: (this.state.dia == dia ? STheme.color.primary : STheme.color.card), borderRadius: 8, borderColor: STheme.color.lightGray, borderWidth: 1 }}
             onPress={() => {
                 this.setState({
@@ -26,6 +27,20 @@ class HorarioDoctor extends Component {
             <SText font={"LondonTwo"} fontSize={24} color={(this.state.dia == dia ? STheme.color.secondary : STheme.color.text)} >{dia}</SText>
             <SHr height={10} />
             <SText font={"LondonBetween"} fontSize={14} color={(this.state.dia == dia ? STheme.color.secondary : STheme.color.text)}>{diastr}</SText>
+        </SView>
+    }
+    getDia(dia, diastr) {
+        return <SView style={{padding:5}}>
+            <SView width={80} height={90} center style={{ backgroundColor: (this.state.dia == dia ? STheme.color.primary : STheme.color.card), borderRadius: 8, borderColor: STheme.color.lightGray, borderWidth: 1 }}
+                onPress={() => {
+                    this.setState({
+                        dia: dia
+                    })
+                }}>
+                <SText font={"LondonTwo"} fontSize={24} color={(this.state.dia == dia ? STheme.color.secondary : STheme.color.text)} >{dia}</SText>
+                <SHr height={10} />
+                <SText font={"LondonBetween"} fontSize={14} color={(this.state.dia == dia ? STheme.color.secondary : STheme.color.text)}>{diastr}</SText>
+            </SView>
         </SView>
     }
     getHora(hora) {
@@ -41,6 +56,53 @@ class HorarioDoctor extends Component {
             </SView>
         </SView>
     }
+    getWeekDates(date) {
+        // Convertir a objeto Date si se proporciona una cadena
+        if (typeof date === 'string') {
+            date = new Date(date);
+        }
+
+        // Obtener el día de la semana (0 es domingo, 1 es lunes, etc.)
+        const day = date.getDay();
+
+        // Calcular cuántos días retroceder para llegar al lunes
+        const diffToMonday = (day === 0 ? -6 : 1) - day;
+
+        // Crear una nueva fecha para el lunes
+        const monday = new Date(date);
+        monday.setDate(date.getDate() + diffToMonday);
+
+        // Lista para almacenar las fechas de la semana
+        const weekDates = [];
+
+        // Agregar los 7 días de la semana a la lista
+        for (let i = 0; i < 7; i++) {
+            const dayDate = new Date(monday);
+            dayDate.setDate(monday.getDate() + i);
+            weekDates.push(dayDate);
+        }
+
+        return weekDates;
+    }
+
+    getTurnosDias(TurMed) {
+        if (!TurMed) return <SLoad />;
+        var dias = ["DO", "LU", "MA", "MI", "JU", "VI", "SA"]
+        console.log("TurMed", TurMed)
+        return TurMed.map((dia) => {
+            // console.log("dia", dia)
+            var diastr = dias[dia.NroDia]
+            var now = new Date()
+            var nroDia = dia.NroDia - 1
+            // var day = this.getWeekDates(now).find(a => a.getDay() == dia)
+            var day = this.getWeekDates(now)
+            var dayOk = day[nroDia]
+            console.log("dayOk", dayOk)
+            console.log("diastr", diastr)
+
+            return this.getDia(dayOk.getDate(), diastr)
+        })
+    }
     render() {
         var data = Parent.Actions.getAll(this.props, { codesp: this.codesp, nrosuc: this.nrosuc });
         if (!data) return <SLoad />;
@@ -51,12 +113,12 @@ class HorarioDoctor extends Component {
         // var dataEspecialidad = data2[dataDoctor.smmed_cesp];
         var dataEspecialidad = {}
         return (
-            <SPage title={'Seleccione su horario'} center >
-                <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row>
-                    <SView col={"xs-12"} row>
+            <SPage title={'Seleccione su horario'}  >
+                <Container >
+                    <SView col={"xs-12"} row >
                         <SHr height={10} />
-                        <SView col={"xs-3"} center height >
-                            <SView width={60} height={60} style={{ borderRadius: 20 }}>
+                        <SView col={"xs-3"} height >
+                            <SView width={60} height={60} style={{ borderRadius: 50, borderWidth: 1, borderColor: STheme.color.primary }} center>
                                 <SImage src={SSocket.api.root + Parent.component + "/" + this.key_doctor} style={{
                                     borderRadius: 30,
                                     resizeMode: "cover"
@@ -66,7 +128,7 @@ class HorarioDoctor extends Component {
                         <SView col={"xs-9"} height >
                             <SHr height={5} />
                             {/* <SText font={"LondonTwo"} color={STheme.color.black} fontSize={24}>{dataDoctor?.smmed_dmed}</SText> */}
-                            <SText font={"LondonTwo"} color={STheme.color.black} fontSize={24}>{dataDoctor?.NomMed}</SText>
+                            <SText font={"LondonTwo"} color={STheme.color.black} fontSize={24}>{dataDoctor?.TitMed} {dataDoctor?.NomMed}</SText>
                             <SView col={"xs-12"} row >
                                 <SView col={"xs-12"} >
                                     <SText font={"LondonBetween"} color={STheme.color.info} fontSize={18}>{dataEspecialidad?.smtur_desp}</SText>
@@ -77,7 +139,7 @@ class HorarioDoctor extends Component {
                     </SView>
                     <SHr height={30} />
                     <SView col={"xs-12"} center style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }}>
-                        <SText font={"LondonBetween"} fontSize={20} >Fecha disponible</SText>
+                        <SText font={"LondonBetween"} fontSize={20} >Fechas disponibles</SText>
                         <SHr height={10} />
                     </SView>
                     <SHr height={25} />
@@ -87,24 +149,15 @@ class HorarioDoctor extends Component {
                         <SView col={"xs-12"} height={110}>
                             <SScrollView2>
                                 <SView center row>
+                                    {this.getTurnosDias(dataDoctor?.TurMed)}
 
-                                    {/* {this.getDia(17, "LU")}
-                                    <SView width={10} /> */}
-                                    {this.getDia(18, "MA")}
+                                    {/* {this.getDia_(18, "MA")}
                                     <SView width={10} />
-                                    {this.getDia(19, "MI")}
+                                    {this.getDia_(19, "MI")}
                                     <SView width={10} />
-                                    {this.getDia(20, "JU")}
+                                    {this.getDia_(20, "JU")}
                                     <SView width={10} />
-                                    {this.getDia(21, "VI")}
-                                    {/* <SView width={10} />
-                                    {this.getDia(22, "SA")}
-                                    <SView width={10} />
-                                    {this.getDia(23, "DO")}
-                                    <SView width={10} />
-                                    {this.getDia(24, "LU")}
-                                    <SView width={10} /> */}
-
+                                    {this.getDia_(21, "VI")} */}
 
                                 </SView>
                             </SScrollView2>
@@ -145,8 +198,7 @@ class HorarioDoctor extends Component {
                         }}  >COMPRAR TICKETS</Kolping.KButtom>
                         <SHr height={30} />
                     </SView>
-
-                </SView>
+                </Container >
             </SPage>
         );
     }
