@@ -17,6 +17,25 @@ class HorarioDoctor extends Component {
         this.nrosuc = SNavigation.getParam("nrosuc"); //key por navegador
         this.codmed = SNavigation.getParam("codmed"); //key por navegador
     }
+
+    componentDidMount() {
+        SSocket.sendPromise({
+            component: "medico",
+            type: "getAll",
+            codesp: this.codesp,
+            nrosuc: this.nrosuc
+            //   key_usuario: Model.usuario.Action.getUsuarioLog()?.key,
+            //   key_empresa: Model.empresa.Action.getSelect()?.key,
+        }).then(a => {
+            console.log(a?.data)
+            this.setState({ dataDoctor: a.data })
+        }).catch(e => {
+            console.log(e)
+        })
+
+
+    }
+
     getDia_(dia, diastr) {
         return <SView width={80} height={90} center style={{ backgroundColor: (this.state.dia == dia ? STheme.color.primary : STheme.color.card), borderRadius: 8, borderColor: STheme.color.lightGray, borderWidth: 1 }}
             onPress={() => {
@@ -29,12 +48,18 @@ class HorarioDoctor extends Component {
             <SText font={"LondonBetween"} fontSize={14} color={(this.state.dia == dia ? STheme.color.secondary : STheme.color.text)}>{diastr}</SText>
         </SView>
     }
-    getDia(dia, diastr) {
-        return <SView style={{padding:5}}>
+    getDia(dia, diastr, nroDia) {
+        return <SView style={{ padding: 5 }}>
             <SView width={80} height={90} center style={{ backgroundColor: (this.state.dia == dia ? STheme.color.primary : STheme.color.card), borderRadius: 8, borderColor: STheme.color.lightGray, borderWidth: 1 }}
                 onPress={() => {
                     this.setState({
                         dia: dia
+                    })
+                    this.setState({
+                        horas: dia
+                    })
+                    this.setState({
+                        nroDia: nroDia
                     })
                 }}>
                 <SText font={"LondonTwo"} fontSize={24} color={(this.state.dia == dia ? STheme.color.secondary : STheme.color.text)} >{dia}</SText>
@@ -43,7 +68,7 @@ class HorarioDoctor extends Component {
             </SView>
         </SView>
     }
-    getHora(hora) {
+    getHora_(hora) {
         var isSelect = false;
         return <SView col={"xs-4"} center style={{ padding: 5 }}
             onPress={() => {
@@ -53,6 +78,21 @@ class HorarioDoctor extends Component {
             }}>
             <SView col={"xs-12"} center height={40} style={{ backgroundColor: (this.state.hora != hora ? STheme.color.card : STheme.color.primary), borderRadius: 8, borderColor: STheme.color.lightGray, borderWidth: 1 }}>
                 <SText font={"LondonTwo"} fontSize={14} color={(this.state.hora != hora ? STheme.color.text : STheme.color.secondary)} >{hora}</SText>
+            </SView>
+        </SView>
+    }
+    getHora(horaIni, horaFin, dia, desTur) {
+        var isSelect = false;
+        return <SView col={"xs-11 sm-8 md-8 lg-8 xl-8 xxl-8"} center style={{ padding: 10 }}
+            onPress={() => {
+                this.setState({
+                    // horaIni: horaIni
+                })
+            }}>
+            <SView col={"xs-12"} center height={70} style={{ backgroundColor: (this.state.horaIni != horaIni ? STheme.color.card : STheme.color.primary), borderRadius: 8, borderColor: STheme.color.lightGray, borderWidth: 1 }}>
+                {desTur != "" ? <SText font={"LondonBetween"} fontSize={16} >{desTur}</SText> : <SText font={"LondonBetween"} fontSize={16} >Atención por orden de llegada</SText>}
+                <SHr height={4} />
+                <SText font={"LondonTwo"} fontSize={18} color={(this.state.horaIni != horaIni ? STheme.color.text : STheme.color.secondary)} >{horaIni} - {horaFin}</SText>
             </SView>
         </SView>
     }
@@ -86,7 +126,7 @@ class HorarioDoctor extends Component {
     }
 
     getTurnosDias(TurMed) {
-        if (!TurMed) return <SLoad />;
+        if (!TurMed) return null;
         var dias = ["DO", "LU", "MA", "MI", "JU", "VI", "SA"]
         console.log("TurMed", TurMed)
         return TurMed.map((dia) => {
@@ -100,17 +140,46 @@ class HorarioDoctor extends Component {
             console.log("dayOk", dayOk)
             console.log("diastr", diastr)
 
-            return this.getDia(dayOk.getDate(), diastr)
+            return this.getDia(dayOk.getDate(), diastr, dia.NroDia)
+        })
+    }
+    getHoras(TurMed) {
+        if (!TurMed) return null;
+        var TurMed_ = TurMed.filter(a => a.NroDia == this.state.nroDia)
+        return TurMed_.map((dia) => {
+            // return this.getDia(dayOk.getDate(), diastr)
+            return <SView col={"xs-12"} >
+                {/* <SView col={"xs-12"} >
+                    {dia.DesTur != "" ? <SText font={"LondonBetween"} fontSize={14} >Descripción de Turno: {dia.DesTur}</SText> : <SText font={"LondonBetween"} fontSize={14} >Descripción de Turno: Por favor, tenga en cuenta que la atención en nuestra clínica se ofrece por orden de llegada.</SText>}
+                    <SHr height={20} />
+                </SView> */}
+                <SView col={"xs-12"} center>
+                    {this.getHora(dia.TurIni, dia.TurFin, dia.NroDia, dia.DesTur)}
+                </SView>
+            </SView>
+
         })
     }
     render() {
-        var data = Parent.Actions.getAll(this.props, { codesp: this.codesp, nrosuc: this.nrosuc });
-        if (!data) return <SLoad />;
-        // var dataDoctor = data.find(a => a.CodMed == this.codmed);
-        var dataDoctor = data[this.codmed]
-        var data2 = Especialidad_.Actions.getAll(this.props, { nrosuc: this.nrosuc });
-        if (!data2) return <SLoad />;
-        // var dataEspecialidad = data2[dataDoctor.smmed_cesp];
+        let dataDoctor = []
+        if (!this.state.dataDoctor) return <SLoad />;
+        console.log("dataaaa", this.state.dataDoctor)
+
+        // var data = Parent.Actions.getAll(this.props, { codesp: this.codesp, nrosuc: this.nrosuc });
+        // if (!data) return <SLoad />;
+        // // var dataDoctor = data.find(a => a.CodMed == this.codmed);
+
+        var data = this.state.dataDoctor;
+        // var dataDoctor = data[this.codmed]
+        dataDoctor = data.find(a => a.CodMed == this.codmed);
+
+        var b = 0;
+
+        dataDoctor.TurMed.length === 0 ? b = 1 : null
+
+        // var data2 = Especialidad_.Actions.getAll(this.props, { nrosuc: this.nrosuc });
+        // if (!data2) return <SLoad />;
+        // // var dataEspecialidad = data2[dataDoctor.smmed_cesp];
         var dataEspecialidad = {}
         return (
             <SPage title={'Seleccione su horario'}  >
@@ -137,7 +206,8 @@ class HorarioDoctor extends Component {
                             <SHr height={5} />
                         </SView>
                     </SView>
-                    <SHr height={30} />
+
+                    <SHr height={20} />
                     <SView col={"xs-12"} center style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }}>
                         <SText font={"LondonBetween"} fontSize={20} >Fechas disponibles</SText>
                         <SHr height={10} />
@@ -149,6 +219,7 @@ class HorarioDoctor extends Component {
                         <SView col={"xs-12"} height={110}>
                             <SScrollView2>
                                 <SView center row>
+                                    {b === 1 ? <SText font={"LondonBetween"} fontSize={16} color={STheme.color.text} >No hay fechas disponibles</SText> : null}
                                     {this.getTurnosDias(dataDoctor?.TurMed)}
 
                                     {/* {this.getDia_(18, "MA")}
@@ -169,9 +240,13 @@ class HorarioDoctor extends Component {
                     <SHr height={25} />
                     <SView col={"xs-12"} style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }}>
                         <SText font={"LondonBetween"} fontSize={20} >Hora disponible</SText>
-                        <SHr height={25} />
+                        <SHr height={15} />
                         <SView col={"xs-12"} row center>
-                            {this.getHora("09:00 AM")}
+                            {b === 1 ? <SText font={"LondonBetween"} fontSize={16} color={STheme.color.text} >No hay horarios disponibles</SText> : null}
+                            {/* {!this.state.dia ? <SText font={"LondonBetween"} fontSize={16} color={STheme.color.text} >Seleccione una fecha</SText> : null} */}
+                            {(this.state.horas) ? this.getHoras(dataDoctor?.TurMed) : null}
+
+                            {/* {this.getHora("09:00 AM")}
                             {this.getHora("09:30 AM")}
                             {this.getHora("10:00 AM")}
                             {this.getHora("10:30 AM")}
@@ -179,7 +254,9 @@ class HorarioDoctor extends Component {
                             {this.getHora("11:30 AM")}
                             {this.getHora("02:00 PM")}
                             {this.getHora("02:30 PM")}
-                            {this.getHora("03:00 PM")}
+                            {this.getHora("03:00 PM")} */}
+
+
                             {/* {this.getHora("03:30 PM")}
                             {this.getHora("04:00 PM")}
                             {this.getHora("04:30 PM")} */}
