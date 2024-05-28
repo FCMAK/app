@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SPage, SText, STheme, SView, SNavigation, SImage, SLoad, SScrollView2, SPopup, SDate } from 'servisofts-component';
+import { SHr, SIcon, SPage, SText, STheme, SView, SNavigation, SImage, SLoad, SScrollView2, SPopup, SDate, SMath } from 'servisofts-component';
 import Kolping from '../../../../../Components/Kolping';
 import Parent from '../../medico/index';
 import Especialidad_ from '../../especialidad/index';
@@ -12,6 +12,7 @@ class HorarioDoctor extends Component {
         super(props);
         this.state = {
             fecha: new SDate(),
+            fechaCercana: null,
         };
         this.codesp = SNavigation.getParam("codesp"); //key por navegador
         this.nrosuc = SNavigation.getParam("nrosuc"); //key por navegador
@@ -48,13 +49,18 @@ class HorarioDoctor extends Component {
             <SText font={"LondonBetween"} fontSize={14} color={(this.state.dia == dia ? STheme.color.secondary : STheme.color.text)}>{diastr}</SText>
         </SView>
     }
-    getDia(dia, diastr, nroDia) {
+    getDia(dia, diastr, nroDia, fechaCercana) {
+        fechaCercana ? this.state.fechaCercana = fechaCercana : null
+        // fechaCercana ? this.state.nroDia = nroDia : null
+        this.state.dia ? fechaCercana = null : this.state.nroDia = nroDia
         return <SView style={{ padding: 5 }}>
-            <SView width={80} height={90} center style={{ backgroundColor: (this.state.dia == dia ? STheme.color.primary : STheme.color.card), borderRadius: 8, borderColor: STheme.color.lightGray, borderWidth: 1 }}
+            <SView width={80} height={90} center style={{ backgroundColor: (this.state.dia == dia ? STheme.color.primary : fechaCercana ? STheme.color.primary : STheme.color.card), borderRadius: 8, borderColor: STheme.color.lightGray, borderWidth: 1 }}
+                // {/* <SView width={80} height={90} center style={{ backgroundColor: (fechaCercana ? STheme.color.primary : STheme.color.card), borderRadius: 8, borderColor: STheme.color.lightGray, borderWidth: 1 }} */}
                 onPress={() => {
                     this.setState({
                         dia: dia
                     })
+                    // fechaCercana = null;
                     this.setState({
                         horas: dia
                     })
@@ -62,9 +68,11 @@ class HorarioDoctor extends Component {
                         nroDia: nroDia
                     })
                 }}>
-                <SText font={"LondonTwo"} fontSize={24} color={(this.state.dia == dia ? STheme.color.secondary : STheme.color.text)} >{dia}</SText>
+                <SText font={"LondonTwo"} fontSize={24} color={(this.state.dia == dia ? STheme.color.secondary : fechaCercana ? STheme.color.secondary : STheme.color.text)} >{dia}</SText>
+                {/* <SText font={"LondonTwo"} fontSize={24} color={(fechaCercana ? STheme.color.secondary : STheme.color.text)} >{dia}</SText> */}
                 <SHr height={10} />
-                <SText font={"LondonBetween"} fontSize={14} color={(this.state.dia == dia ? STheme.color.secondary : STheme.color.text)}>{diastr}</SText>
+                <SText font={"LondonBetween"} fontSize={14} color={(this.state.dia == dia ? STheme.color.secondary : fechaCercana ? STheme.color.secondary : STheme.color.text)}>{diastr}</SText>
+                {/* <SText font={"LondonBetween"} fontSize={14} color={(fechaCercana ? STheme.color.secondary : STheme.color.text)}>{diastr}</SText> */}
             </SView>
         </SView>
     }
@@ -125,11 +133,14 @@ class HorarioDoctor extends Component {
         return weekDates;
     }
 
+
     getTurnosDias(TurMed) {
         if (!TurMed) return null;
         var dias = ["DO", "LU", "MA", "MI", "JU", "VI", "SA"]
         console.log("TurMed", TurMed)
-        return TurMed.map((dia) => {
+        let minDiff = new Date();
+        let fechaCercana;
+        return TurMed.map((dia, index) => {
             // console.log("dia", dia)
             var diastr = dias[dia.NroDia]
             var now = new Date()
@@ -137,14 +148,33 @@ class HorarioDoctor extends Component {
             // var day = this.getWeekDates(now).find(a => a.getDay() == dia)
             var day = this.getWeekDates(now)
             var dayOk = day[nroDia]
-            console.log("dayOk", dayOk)
-            console.log("diastr", diastr)
+            // console.log("dayOk", dayOk)
+            // console.log("diastr", diastr)
 
-            return this.getDia(dayOk.getDate(), diastr, dia.NroDia)
+
+            var currentDate = now;
+            var currentDiff = Math.abs(dayOk - currentDate);
+            // var currentDiff = (currentDate - dayOk);
+            
+
+            if (dayOk >= currentDate) {
+                if (currentDiff < minDiff) {
+                    minDiff = currentDiff;
+                    fechaCercana = new Date(dayOk);
+                    
+                } else {
+                    fechaCercana = null;
+                }
+            }
+
+
+            return this.getDia(dayOk.getDate(), diastr, dia.NroDia, fechaCercana)
         })
     }
     getHoras(TurMed) {
         if (!TurMed) return null;
+        console.log("this.state.nroDia")
+        console.log(this.state.nroDia)
         var TurMed_ = TurMed.filter(a => a.NroDia == this.state.nroDia)
         return TurMed_.map((dia) => {
             // return this.getDia(dayOk.getDate(), diastr)
@@ -181,17 +211,20 @@ class HorarioDoctor extends Component {
         // if (!data2) return <SLoad />;
         // // var dataEspecialidad = data2[dataDoctor.smmed_cesp];
         var dataEspecialidad = {}
+
+        console.log("this.state.fechaCercana")
+        console.log(this.state.fechaCercana)
         return (
             <SPage title={'Seleccione su horario'}  >
                 <Container >
                     <SView col={"xs-12"} row >
                         <SHr height={10} />
                         <SView col={"xs-3"} height >
-                            <SView width={60} height={60} style={{ borderRadius: 50, borderWidth: 1, borderColor: STheme.color.primary }} center>
+                            <SView width={60} height={60} style={{ borderRadius: 50, borderWidth: 1, borderColor: STheme.color.primary, backgroundColor: STheme.color.card }} center>
                                 <SImage src={SSocket.api.root + Parent.component + "/" + this.key_doctor} style={{
                                     borderRadius: 30,
                                     resizeMode: "cover"
-                                }} />
+                                }} enablePreview />
                             </SView>
                         </SView>
                         <SView col={"xs-9"} height >
@@ -244,22 +277,11 @@ class HorarioDoctor extends Component {
                         <SView col={"xs-12"} row center>
                             {b === 1 ? <SText font={"LondonBetween"} fontSize={16} color={STheme.color.text} >No hay horarios disponibles</SText> : null}
                             {/* {!this.state.dia ? <SText font={"LondonBetween"} fontSize={16} color={STheme.color.text} >Seleccione una fecha</SText> : null} */}
-                            {(this.state.horas) ? this.getHoras(dataDoctor?.TurMed) : null}
+                            
+                            {/* {(this.state.horas) ? this.getHoras(dataDoctor?.TurMed) : null} */}
+                            {this.getHoras(dataDoctor?.TurMed) }
 
-                            {/* {this.getHora("09:00 AM")}
-                            {this.getHora("09:30 AM")}
-                            {this.getHora("10:00 AM")}
-                            {this.getHora("10:30 AM")}
-                            {this.getHora("11:00 AM")}
-                            {this.getHora("11:30 AM")}
-                            {this.getHora("02:00 PM")}
-                            {this.getHora("02:30 PM")}
-                            {this.getHora("03:00 PM")} */}
-
-
-                            {/* {this.getHora("03:30 PM")}
-                            {this.getHora("04:00 PM")}
-                            {this.getHora("04:30 PM")} */}
+                            
                         </SView>
                         <SHr height={20} />
                     </SView>
