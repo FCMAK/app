@@ -255,7 +255,7 @@ class NavBar extends Component {
                 width: "100%",
                 height: "100%",
                 //backgroundColor: "#66000066",
-                backgroundColor: STheme.color.card,
+                backgroundColor: STheme.color.card+"76",
             }}
                 activeOpacity={1}
                 onPress={() => {
