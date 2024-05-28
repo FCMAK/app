@@ -19,10 +19,42 @@ class Mapa extends Component {
             position: "absolute",
             bottom: 16,
             borderRadius: 32,
-        }} backgroundColor={STheme.color.background}>
+        }} backgroundColor={STheme.color.background}
+        >
             <Item obj={data} />
         </SView>
     }
+
+    getOpciones = () => {
+        return <SView col={"xs-12"} style={{
+            position: "absolute",
+            top: 20,
+            // borderRadius: 32,
+            alignItems: "flex-end"
+        }} center>
+            <SView width={130} height={45} backgroundColor={STheme.color.background}
+                style={{
+                    borderTopLeftRadius: 50,
+                    borderBottomLeftRadius: 50,
+                    padding: 5,
+                }} row
+                onPress={() => {
+                    SNavigation.navigate("ficha/opciones", { keysuc: this.key })
+                }}
+            >
+                <SView width={35} height={35} center style={{
+                    borderRadius: 100,
+                    backgroundColor: STheme.color.primary
+                }}>
+                    <SIcon name={"services"} width={20} height={20} fill={STheme.color.secondary} />
+                </SView>
+                <SView width={10} />
+                <SText fontSize={16} center font='LondonMM'>Servicios</SText>
+            </SView>
+
+        </SView>
+    }
+
     render() {
         var data = sucursal.Actions.getByKey(this.key, this.props);
         if (!data) return <SLoad />
@@ -42,6 +74,7 @@ class Mapa extends Component {
                     </SMapView.SMarker>
                     {/* <SMarker lat={data.LatSuc} lng={data.LonSuc} /> */}
                 </SMapView>
+                {this.getOpciones()}
                 {this.getCard()}
             </SPage>
         );
