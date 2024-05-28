@@ -15,7 +15,7 @@ import CameraComponent from '../Components/CameraComponent';
 import login from './login';
 import registro from './registro';
 // import perfil from './perfil';
-
+import test2 from './test2';
  
 const Pages: SPageListProps = {
     "/": Inicio,
@@ -29,6 +29,7 @@ const Pages: SPageListProps = {
     "terminos": TerminosCondiciones,
     "inDevelop": inDevelop,
     "camara": CameraComponent,
+    test2,
     ...Services.Pages,
 
     ...login,
