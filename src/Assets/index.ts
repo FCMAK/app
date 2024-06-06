@@ -163,6 +163,7 @@ import BtnShooter, { ReactComponent as BtnShooterW } from './svg/btnShooter.svg'
 import BtnGaleria, { ReactComponent as BtnGaleriaW } from './svg/btnGaleria.svg';
 import BtnLinterna, { ReactComponent as BtnLinternaW } from './svg/btnLinterna.svg';
 import services, { ReactComponent as servicesW } from './svg/servicios/services.svg';
+import chek, { ReactComponent as chekW } from './svg/servicios/chek.svg';
 
 const Assets: SAssets = {
     svg: {
@@ -305,6 +306,7 @@ const Assets: SAssets = {
         "BtnGaleria": { Native: BtnGaleria, Web: BtnGaleriaW },
         "BtnLinterna": { Native: BtnLinterna, Web: BtnLinternaW },
         "services": { Native: services, Web: servicesW },
+        "chek": { Native: chek, Web: chekW },
     }
 }
 

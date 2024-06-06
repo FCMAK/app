@@ -60,6 +60,7 @@ class ListaDoctores extends Component {
         return <SView col={"xs-12"} row height={100} style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }} onPress={() => {
             //alert(title + '\n' + texto + '\n' + numero);
             // console.log( { codmed: key, nrosuc: this.nrosuc, codesp: this.codesp })
+
             this.props.navigation.navigate(url, { codmed: key, nrosuc: this.nrosuc, codesp: this.codesp });
         }}>
             <SView col={"xs-3"} center height >
@@ -129,7 +130,8 @@ class ListaDoctores extends Component {
                         // img: require('../Assets/img/ts1.jpg'),
                         //img: require('../../../../../Assets/img/doctor.jpg'),
                         img: (SSocket.api.root + Parent.component + "/" + key),
-                        url: "ficha/horarios",
+                        // url: "ficha/horarios",
+                        url: "servicio/lista",
                         nombre: (data[key].TitMed != "") ? data[key].TitMed + " " + data[key].NomMed : data[key].NomMed,
                         // especialidad: especialidad?.smtur_desp, //? si no existe especialidad retorna null
                         especialidad: objEspecialidad?.NomEsp,

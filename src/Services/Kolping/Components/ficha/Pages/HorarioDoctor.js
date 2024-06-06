@@ -17,6 +17,7 @@ class HorarioDoctor extends Component {
         this.codesp = SNavigation.getParam("codesp"); //key por navegador
         this.nrosuc = SNavigation.getParam("nrosuc"); //key por navegador
         this.codmed = SNavigation.getParam("codmed"); //key por navegador
+        this.dataSelect = SNavigation.getParam("dataSelect"); //key por navegador
     }
 
     componentDidMount() {
@@ -244,6 +245,7 @@ class HorarioDoctor extends Component {
                     <SView col={"xs-12"} center style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }}>
                         <SText font={"LondonBetween"} fontSize={20} >Fechas disponibles</SText>
                         <SHr height={10} />
+                        
                     </SView>
                     <SHr height={25} />
                     <SView col={"xs-12"} style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }}>
@@ -254,15 +256,6 @@ class HorarioDoctor extends Component {
                                 <SView center row>
                                     {b === 1 ? <SText font={"LondonBetween"} fontSize={16} color={STheme.color.text} >No hay fechas disponibles</SText> : null}
                                     {this.getTurnosDias(dataDoctor?.TurMed)}
-
-                                    {/* {this.getDia_(18, "MA")}
-                                    <SView width={10} />
-                                    {this.getDia_(19, "MI")}
-                                    <SView width={10} />
-                                    {this.getDia_(20, "JU")}
-                                    <SView width={10} />
-                                    {this.getDia_(21, "VI")} */}
-
                                 </SView>
                             </SScrollView2>
                         </SView>
@@ -288,6 +281,7 @@ class HorarioDoctor extends Component {
 
                     <SView col={"xs-12"} center>
                         <SHr height={45} />
+                        <SText>{JSON.stringify(this.dataSelect, "\n", "\t")}</SText>
                         <Kolping.KButtom secondary onPress={() => {
                             if (!this.state.dia || !this.state.hora) {
                                 SPopup.alert("Debe seleccionar el día y la hora para su consulta!")
