@@ -112,34 +112,38 @@ class Lista extends Component {
                                 <SView col={"xs-8"} center height backgroundColor={STheme.color.primary} padding={5}>
                                     <SText font={"LondonTwo"} fontSize={14} color={STheme.color.white} >Bs. {obj.PreV01}</SText>
                                 </SView>
-                                <SView col={"xs-4"} center height style={{
-                                    borderWidth: 1,
+                                <SView col={"xs-4"} center height >
+                                    {/* <SHr height={2}/> */}
+                                    <SView col={"xs-12"} center height={42} style={{
+                                    borderWidth: 2,
+                                    borderLeftWidth: 0,
                                     borderColor: STheme.color.primary,
                                     borderTopRightRadius: 8,
                                     borderBottomRightRadius: 8,
                                     backgroundColor: STheme.color.white
                                 }}  >
-
-                                    {/* {this.state.check ? <SIcon name={"chek"} height={20} /> : null} */}
-                                    <SInput
-                                        col={""}
-                                        type={"checkBox"}
-                                        defaultValue={!!this.state.check}
-                                        // disabled={!allowEdit || !!this.props.disabled}
-                                        onChangeText={(e) => {
-                                            if (e) {
-                                                dataSelect.push(obj)
-                                                console.log("check")
-                                                this.setState({ dataSelect: dataSelect})
-                                                console.log(dataSelect)
-                                            } else {
-                                                dataSelect = dataSelect.filter((item) => item.NomPro !== obj.NomPro)
-                                                console.log("NO check")
-                                                this.setState({ dataSelect: dataSelect})
-                                                console.log(dataSelect)
-                                            }
-                                        }}
-                                    />
+                                        {/* {this.state.check ? <SIcon name={"chek"} height={20} /> : null} */}
+                                        <SInput
+                                            col={""}
+                                            type={"checkBox"}
+                                            defaultValue={!!this.state.check}
+                                            // disabled={!allowEdit || !!this.props.disabled}
+                                            onChangeText={(e) => {
+                                                if (e) {
+                                                    dataSelect.push(obj)
+                                                    console.log("check")
+                                                    this.setState({ dataSelect: dataSelect })
+                                                    console.log(dataSelect)
+                                                } else {
+                                                    dataSelect = dataSelect.filter((item) => item.NomPro !== obj.NomPro)
+                                                    console.log("NO check")
+                                                    this.setState({ dataSelect: dataSelect })
+                                                    console.log(dataSelect)
+                                                }
+                                            }}
+                                        />
+                                    </SView>
+                                    {/* <SHr height={2}/> */}
                                 </SView>
                             </SView>
                         </SView>
@@ -159,8 +163,8 @@ class Lista extends Component {
                         SPopup.alert("Debe seleccionar al menos un servicio")
                         return;
                     }
-                    SNavigation.navigate("ficha/horarios", { dataSelect: this.state.dataSelect, codesp: this.codesp, codmed: this.codmed, nrosuc: this.nrosuc});
-                }}>Solicitar</KButtom><SHr /></SView>}
+                    SNavigation.navigate("ficha/horarios", { dataSelect: this.state.dataSelect, codesp: this.codesp, codmed: this.codmed, nrosuc: this.nrosuc });
+                }}>SOLICITAR</KButtom><SHr /></SView>}
             >
                 <SView col={"xs-12"} center>
                     <SHr />
