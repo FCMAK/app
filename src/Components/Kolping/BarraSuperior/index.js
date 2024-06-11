@@ -62,6 +62,7 @@ class BarraSuperior extends Component {
                 width: "100%",
                 height: 45,
                 flexDirection: "row",
+                zIndex: 100,
                 // backgroundColor: "#fff",
                 transform: [
                     {

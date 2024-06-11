@@ -29,6 +29,7 @@ const inputs = () => {
 
                 paddingStart: 8,
                 color: STheme.color.text,
+                backgroundColor: STheme.color.white,
                 // backgroundColor: "#E0E0E0" + "55",
                 // height: 55,
                 // borderRadius: 16,
@@ -38,6 +39,9 @@ const inputs = () => {
                 // borderRadius: 16,
                 borderWidth: 1,
                 borderColor: "#FA8081"
+            },
+            "placeholder": {
+                color: STheme.color.text,
             }
         }
     }
