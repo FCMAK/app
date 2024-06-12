@@ -173,6 +173,7 @@ import fondo1, { ReactComponent as fondo1W } from './svg/fondo1.svg';
 import iconp1, { ReactComponent as iconp1W } from './svg/iconp1.svg';
 import iconp2, { ReactComponent as iconp2W } from './svg/iconp2.svg';
 import bnext, { ReactComponent as bnextW } from './svg/bnext.svg';
+import marcadorMapa, { ReactComponent as marcadorMapaW } from './svg/marcadorMapa.svg';
 
 const Assets: SAssets = {
     svg: {
@@ -327,6 +328,7 @@ const Assets: SAssets = {
         "iconp1": { Native: iconp1, Web: iconp1W },
         "iconp2": { Native: iconp2, Web: iconp2W },
         "bnext": { Native: bnext, Web: bnextW },
+        "marcadorMapa": { Native: marcadorMapa, Web: marcadorMapaW }
     }
 }
 

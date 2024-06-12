@@ -18,6 +18,7 @@ class PacienteNoEncontrado extends Component {
         this.nrosuc = SNavigation.getParam("nrosuc"); //key por navegador
         this.codesp = SNavigation.getParam("codesp"); //key por navegador
         this.ci = SNavigation.getParam("ci"); //key por navegador
+        this.datosNav = SNavigation.getAllParams();
 
         this.dia = SNavigation.getParam("dia");
         this.hora = SNavigation.getParam("hora");
@@ -57,7 +58,7 @@ class PacienteNoEncontrado extends Component {
         //     return <SView />
         // }
 
-        return <SView col={"xs-11"} center style={{
+        return <SView col={"xs-12"} center style={{
             borderRadius: 10,
             borderWidth: 1,
             borderColor: STheme.color.gray,
@@ -75,25 +76,24 @@ class PacienteNoEncontrado extends Component {
 
 
         return (
-            <SPage title={'Datos Paciente'}
-                header={<Header
+            <SPage title={'Datos Paciente'}  >
+                {/* <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} row center> */}
+                <Header
                     // titulo={"POR FAVOR, INTRODUCE TU NÚMERO DE CARNET"}
                     icon={"iconp2"}
                     descripcion="Por favor, verifica que hayas introducido tu información correctamente o registra un nuevo paciente."
-                />}
-            >
-                {/* <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} row center> */}
+                />
                 <Container>
-                    <SHr height={20} />
+                    {/* <SHr height={20} /> */}
                     {this.getContent()}
-                    <SView col={"xs-11"} center>
+                    <SView col={"xs-12"} center>
                         <SHr height={45} />
                         <Kolping.KButtom secondary onPress={() => {
                             SNavigation.navigate("ficha/paciente/buscar")
                         }}  >VOLVER A INTENTAR</Kolping.KButtom>
                         <SHr height={15} />
                         <Kolping.KButtom primary onPress={() => {
-                            SNavigation.navigate("ficha/paciente/registro", { ci: this.ci })
+                            SNavigation.navigate("ficha/paciente/registro", { ...this.datosNav})
                         }}  >REGISTRAR NUEVO PACIENTE</Kolping.KButtom>
                         <SHr height={30} />
                     </SView>

@@ -18,6 +18,8 @@ class PacienteGenero extends Component {
         this.codmed = SNavigation.getParam("codmed"); //key por navegador
         this.nrosuc = SNavigation.getParam("nrosuc"); //key por navegador
         this.codesp = SNavigation.getParam("codesp"); //key por navegador
+        this.datosNav = SNavigation.getAllParams();
+
 
         this.dia = SNavigation.getParam("dia");
         this.hora = SNavigation.getParam("hora");
@@ -71,7 +73,7 @@ class PacienteGenero extends Component {
             <SView width={140} height={140} center backgroundColor={STheme.color.primary} style={{
                 borderRadius: 70,
             }} onPress={() => {
-                SNavigation.navigate("ficha/paciente/direccion")
+                SNavigation.navigate("ficha/paciente/direccion", {...this.datosNav, genero: "Hombre"})
             }}>
                 <SIcon name={"ghombre"} width={48} height={48} />
                 <SHr height={10} />
@@ -81,7 +83,7 @@ class PacienteGenero extends Component {
             <SView width={140} height={140} center backgroundColor={STheme.color.info} style={{
                 borderRadius: 70,
             }} onPress={() => {
-                SNavigation.navigate("ficha/paciente/direccion")
+                SNavigation.navigate("ficha/paciente/direccion",{...this.datosNav, genero: "Mujer"})
             }}>
                 <SIcon name={"gmujer"} width={48} height={48} />
                 <SHr height={10} />
@@ -93,12 +95,12 @@ class PacienteGenero extends Component {
 
 
         return (
-            <SPage title={'Género'}>
+            <SPage title={'Género'} hidden>
                 <Header2
                     titulo={"¿QUÉ GÉNERO TIENES?"}
                 />
                 <Container>
-                    <SHr height={40} />
+                    <SHr height={60} />
                     {this.getContent()}
                     <SHr height={40} />
                     {/* <SView col={"xs-12"} row>

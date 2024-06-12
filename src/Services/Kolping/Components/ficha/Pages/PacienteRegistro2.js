@@ -18,6 +18,8 @@ class PacienteRegistro2 extends Component {
         this.codmed = SNavigation.getParam("codmed"); //key por navegador
         this.nrosuc = SNavigation.getParam("nrosuc"); //key por navegador
         this.codesp = SNavigation.getParam("codesp"); //key por navegador
+        this.datosNav = SNavigation.getAllParams();
+
 
         this.dia = SNavigation.getParam("dia");
         this.hora = SNavigation.getParam("hora");
@@ -117,7 +119,7 @@ class PacienteRegistro2 extends Component {
 
 
         return (
-            <SPage title={'Registro'}>
+            <SPage title={'Registro'} hidden>
                 {/* <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} row center> */}
                 <Header2
                     titulo={"DATOS DE PACIENTE"}
@@ -141,7 +143,7 @@ class PacienteRegistro2 extends Component {
                         </SView>
                         <SView col={"xs-6"} style={{alignItems:"flex-end"}} >
                             <SView width={60} height={60} onPress={() => {
-                                SNavigation.navigate("ficha/paciente/genero")
+                                SNavigation.navigate("ficha/paciente/genero", { ...this.datosNav })
                             }}>
                                 <SIcon name={"bnext"} width={60} height={60} fill={STheme.color.primary} />
                             </SView>

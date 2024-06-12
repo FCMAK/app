@@ -17,6 +17,7 @@ class PacienteBuscar extends Component {
         this.codmed = SNavigation.getParam("codmed"); //key por navegador
         this.nrosuc = SNavigation.getParam("nrosuc"); //key por navegador
         this.codesp = SNavigation.getParam("codesp"); //key por navegador
+        this.datosNav = SNavigation.getAllParams();
 
         this.dia = SNavigation.getParam("dia");
         this.hora = SNavigation.getParam("hora");
@@ -59,7 +60,7 @@ class PacienteBuscar extends Component {
         return <SForm
             center
             ref={(form) => { this.form = form; }}
-            col={"xs-11"}
+            col={"xs-12"}
             inputProps={{
                 customStyle: "kolping"
             }}
@@ -69,34 +70,32 @@ class PacienteBuscar extends Component {
             }}
 
 
-        // onSubmitName={"Guardar"}
-        onSubmit={(values) => {
-            SNavigation.navigate("ficha/paciente/noEncontrado", {ci: values.ci})
+            // onSubmitName={"Guardar"}
+            onSubmit={(values) => {
+                SNavigation.navigate("ficha/paciente/noEncontrado", { ci: values.ci, nav: 2, ...this.datosNav })
 
-            // if (this.key) {
-            //     Parent.Actions.editar({ ...this.data, ...values }, this.props);
-            // } else {
-            //     Parent.Actions.registro(values, this.props);
-            // }
-        }}
+                // if (this.key) {
+                //     Parent.Actions.editar({ ...this.data, ...values }, this.props);
+                // } else {
+                //     Parent.Actions.registro(values, this.props);
+                // }
+            }}
         />
     }
     render() {
 
 
         return (
-            <SPage title={'Datos Paciente'}
-                header={<Header
+            <SPage title={'Datos Paciente'} disableScroll>
+                {/* <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} row center> */}
+                <Header
                     titulo={"POR FAVOR, INTRODUCE TU NÚMERO DE CARNET"}
                     icon={"iconp1"}
-                    // descripcion="dedede"
-                />}
-            >
-                {/* <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} row center> */}
+                />
                 <Container>
                     <SHr height={20} />
                     {this.getContentForm()}
-                    <SView col={"xs-11"} center>
+                    <SView col={"xs-12"} center>
                         <SHr height={45} />
                         <Kolping.KButtom primary onPress={() => {
                             this.form.submit();

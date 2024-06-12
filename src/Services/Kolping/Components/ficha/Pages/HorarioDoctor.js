@@ -284,10 +284,10 @@ class HorarioDoctor extends Component {
 
                     <SView col={"xs-12"} center>
                         <SHr height={45} />
-                        <SText>{JSON.stringify(this.dataSelect, "\n", "\t")}</SText>
+                        {/* <SText>{JSON.stringify(this.dataSelect, "\n", "\t")}</SText> */}
                         {this.state.nroDia ? <Kolping.KButtom secondary onPress={() => {
                             // SNavigation.navigate("ficha/paciente", { codmed: this.codmed, fecha: this.state.date, nrosuc: this.nrosuc, codesp: this.codesp })
-                            SNavigation.navigate("ficha/paciente/buscar",  { codmed: this.codmed, fecha: this.state.date, nrosuc: this.nrosuc, codesp: this.codesp })
+                            SNavigation.navigate("ficha/paciente/buscar", { codmed: this.codmed, fecha: this.state.date, nrosuc: this.nrosuc, codesp: this.codesp, nav: 2 })
                         }}  >COMPRAR TICKETS</Kolping.KButtom> : null}
 
                         <SHr height={30} />

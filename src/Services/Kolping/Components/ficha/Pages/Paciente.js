@@ -15,6 +15,8 @@ class Paciente extends Component {
         this.codmed = SNavigation.getParam("codmed"); //key por navegador
         this.nrosuc = SNavigation.getParam("nrosuc"); //key por navegador
         this.codesp = SNavigation.getParam("codesp"); //key por navegador
+        this.datosNav = SNavigation.getAllParams();
+
 
         this.dia = SNavigation.getParam("dia");
         this.hora = SNavigation.getParam("hora");
@@ -160,7 +162,7 @@ class Paciente extends Component {
                         <SHr height={45} />
                         <Kolping.KButtom secondary onPress={() => {
 
-                            SNavigation.navigate("ficha/confirmacion", { codmed: this.codmed, fecha: this.fecha.toString("yyyy-MM"), dia: this.dia, hora: this.hora,nrosuc : this.nrosuc })
+                            SNavigation.navigate("ficha/confirmacion", { ...this.datosNav})
                         }}  >CONTINUAR</Kolping.KButtom>
                         <SHr height={30} />
                     </SView>

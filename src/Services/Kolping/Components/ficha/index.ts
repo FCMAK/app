@@ -17,6 +17,7 @@ import PacienteRegistro from "./Pages/PacienteRegistro";
 import PacienteRegistro2 from "./Pages/PacienteRegistro2";
 import PacienteGenero from "./Pages/PacienteGenero";
 import PacienteDireccion from "./Pages/PacienteDireccion";
+import PacienteFacturacion from "./Pages/PacienteFacturacion";
 
 import AgendaFichas from "./Pages/AgendaFichas";
 import AgendaPacientes from "./Pages/AgendaPacientes";
@@ -54,6 +55,7 @@ export default {
         [component + "/paciente/registro2"]: PacienteRegistro2,
         [component + "/paciente/genero"]: PacienteGenero,
         [component + "/paciente/direccion"]: PacienteDireccion,
+        [component + "/paciente/facturacion"]: PacienteFacturacion,
 
         [component + "/agenda"]: AgendaFichas,
         [component + "/agendaPacientes"]: AgendaPacientes,

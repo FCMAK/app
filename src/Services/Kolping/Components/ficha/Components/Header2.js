@@ -19,7 +19,7 @@ class Header2 extends Component<_props> {
             <>
                 <Container>
                     <SView col={"xs-12"} style={{ alignItems: "flex-end" }}>
-                        <SHr height={30} />
+                        <SHr height={40} />
                         <SIcon name={"Logo"} height={56} width={240} fill={STheme.color.white} />
                         <SHr height={30} />
 

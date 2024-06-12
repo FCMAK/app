@@ -9,7 +9,7 @@ import Container from '../../../../../Components/Container';
 import Header from '../Components/Header';
 import Header2 from '../Components/Header2';
 
-class PacienteRegistro extends Component {
+class PacienteFacturacion extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,7 +20,6 @@ class PacienteRegistro extends Component {
         this.codesp = SNavigation.getParam("codesp"); //key por navegador
         this.ci = SNavigation.getParam("ci"); //key por navegador
         this.datosNav = SNavigation.getAllParams();
-
 
         this.dia = SNavigation.getParam("dia");
         this.hora = SNavigation.getParam("hora");
@@ -84,22 +83,25 @@ class PacienteRegistro extends Component {
             inputProps={{
                 customStyle: "kolping",
                 // separation: 2
+                // marginHorizontal: 5,
+                // marginVertical: 5
                 margin: 5
             }}
             inputs={{
                 // nombre: { label: "Nombre Completo", defaultValue: usuario.Nombres + " " + usuario.Apellidos, isRequired: true, icon: <SIcon name={"InputUser"} width={40} height={30} /> },
-                tipo: { placeholder: "Tipo de persona", label: "Tipo de persona", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} />, type: "select", options: this.getTipoPersona(), style: { padding: 5 } },
-                tipoDoc: { placeholder: "Tipo de documento", label: "Tipo de documento", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} />, type: "select", options: this.getTipoDocumento(), style: { padding: 5 } },
                 ci: { placeholder: "Número de carnet", label: "Número de carnet", defaultValue: this.ci, col: "xs-12 sm-8", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} /> },
-
                 comp: { placeholder: "Comp.", label: "Comp.", col: "xs-12 sm-4", icon: <SIcon name={"carnet"} width={40} height={30} />, style: {} },
+                tipoDoc: { placeholder: "Tipo de documento", label: "Tipo de documento", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} />, type: "select", options: this.getTipoDocumento(), style: { padding: 5 } },
+                Nombres: { placeholder: "Nombres", label: "Nombre completo", isRequired: true, icon: <SIcon name={"InputUser"} width={40} height={30} /> },
+                Telefono: { placeholder: "Teléfono", label: "Teléfono", isRequired: false, type: "phone" },
+
             }}
 
 
             // onSubmitName={"Guardar"}
             onSubmit={(values) => {
-                SNavigation.navigate("ficha/paciente/registro2", {...this.datosNav, nav:1})
-
+                SNavigation.navigate("ficha/paciente", { ...this.datosNav})
+ 
                 // if (this.key) {
                 //     Parent.Actions.editar({ ...this.data, ...values }, this.props);
                 // } else {
@@ -112,35 +114,19 @@ class PacienteRegistro extends Component {
 
 
         return (
-            <SPage title={'Registro'} hidden>
+            <SPage title={'Facturación'}>
                 {/* <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} row center> */}
                 <Header2
-                    titulo={"REGISTRO DE PACIENTE"}
+                    titulo={"DATOS DE FACTURACIÓN"}
                 />
                 <Container>
                     <SHr height={40} />
                     {this.getContentForm()}
                     <SHr height={40} />
-                    <SView col={"xs-12"} row>
-                        <SView col={"xs-6"}  >
-                            <SView width={80} height={60}
-                                style={{
-                                    backgroundColor: STheme.color.primary,
-                                    borderRadius: 8,
-                                }}
-                                onPress={() => {
-                                    SNavigation.goBack()
-                                }} center>
-                                <SText bold color={STheme.color.white}>ATRÁS</SText>
-                            </SView>
-                        </SView>
-                        <SView col={"xs-6"} style={{ alignItems: "flex-end" }} >
-                            <SView width={60} height={60} flex onPress={() => {
-                                this.form.submit();
-                            }}>
-                                <SIcon name={"bnext"} width={60} height={60} fill={STheme.color.primary} />
-                            </SView>
-                        </SView>
+                    <SView col={"xs-12"} center >
+                        <Kolping.KButtom primary onPress={() => {
+                            this.form.submit();
+                        }}  >CONTINUAR</Kolping.KButtom>
                         <SHr height={30} />
                     </SView>
                 </Container>
@@ -152,4 +138,4 @@ class PacienteRegistro extends Component {
 const initStates = (state) => {
     return { state }
 };
-export default connect(initStates)(PacienteRegistro);
+export default connect(initStates)(PacienteFacturacion);

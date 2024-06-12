@@ -14,6 +14,7 @@ class BarraSuperior extends Component {
         this.state = {
             anim: new Animated.Value(0),
         };
+        this.nav = SNavigation.getParam("nav")
 
     }
 
@@ -47,7 +48,7 @@ class BarraSuperior extends Component {
         //     return <View />
         // }
         return <SView col={"xs-12"} height center >
-            <SView  onPress={() => {
+            <SView onPress={() => {
                 SNavigation.goBack();
             }} col={"xs-12"} style={{
                 paddingBottom: 4,
@@ -73,7 +74,12 @@ class BarraSuperior extends Component {
                     }
                 ]
             }}>
-                <View style={{
+                <View style={(this.nav == 2) ? {
+                    flex: 1,
+                    flexDirection: "row",
+                    backgroundColor: STheme.color.barColor,
+                    borderColor: "#000",
+                } : {
                     flex: 1,
                     flexDirection: "row",
                     backgroundColor: STheme.color.barColor,

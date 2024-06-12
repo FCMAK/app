@@ -35,7 +35,7 @@ class Header extends Component<_props> {
                         <SHr height={50} />
                         <SText col={"xs-12"} center font='LondonTwo' color={STheme.color.white} fontSize={20}>{this.props?.titulo}</SText>
                         <SHr height={20} />
-                        <SView width={150} height={150} style={{
+                        <SView width={120} height={120} style={{
                             backgroundColor: STheme.color.info,
                             borderRadius: 8,
                         }} center>
