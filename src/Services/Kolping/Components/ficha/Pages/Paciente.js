@@ -57,6 +57,12 @@ class Paciente extends Component {
             return <SView />
         }
 
+        let nombreCompleto = usuario.Nombres + " " + usuario.Apellidos;
+        if(this.datosNav.Nombres){
+             nombreCompleto = this.datosNav.Nombres + " " + this.datosNav.ApellidoP + " " + this.datosNav.ApellidoM;
+        }
+       
+
         return <SForm
             center
             ref={(form) => { this.form = form; }}
@@ -65,7 +71,7 @@ class Paciente extends Component {
                 customStyle: "kolping"
             }}
             inputs={{
-                nombre: { label: "Nombre Completo", defaultValue: usuario.Nombres + " " + usuario.Apellidos, isRequired: true, icon: <SIcon name={"InputUser"} width={40} height={30} /> },
+                nombre: { label: "Nombre Completo", defaultValue: nombreCompleto, isRequired: true, icon: <SIcon name={"InputUser"} width={40} height={30} /> },
             }}
 
 

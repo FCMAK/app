@@ -93,10 +93,10 @@ class PacienteRegistro2 extends Component {
                 separation: 12
             }}
             inputs={{
-                Nombres: { placeholder: "Nombres", isRequired: true, icon: this.icon("InputUser") },
-                ApellidoP: { placeholder: "Apellido Paterno", isRequired: true, icon: this.icon("InputUser") },
-                ApellidoM: { placeholder: "Apellido Materno", isRequired: true, icon: this.icon("InputUser") },
-                Correo: { placeholder: "Correo", type: "email", isRequired: true, icon: this.icon("InputEmail") },
+                Nombres: { placeholder: "Nombres",defaultValue:"Paciente prueba", isRequired: true, icon: this.icon("InputUser") },
+                ApellidoP: { placeholder: "Apellido Paterno",defaultValue:"Vaca", isRequired: true, icon: this.icon("InputUser") },
+                ApellidoM: { placeholder: "Apellido Materno",defaultValue:"Soliz", isRequired: true, icon: this.icon("InputUser") },
+                Correo: { placeholder: "Correo", type: "email",defaultValue:"paciente@gmail.com", isRequired: true, icon: this.icon("InputEmail") },
                 // FechaNacimiento: { placeholder: "Fecha de Nacimiento", isRequired: false, type: "date", },
                 //telefono: { placeholder: "Celular", isRequired: true, type: "telefono", isRequired:true},
                 Telefono: { placeholder: "Celular", isRequired: false, type: "phone" },
@@ -105,7 +105,13 @@ class PacienteRegistro2 extends Component {
 
             // onSubmitName={"Guardar"}
             onSubmit={(values) => {
-                SNavigation.navigate("ficha/paciente/noEncontrado", { ci: values.ci })
+                //SNavigation.navigate("ficha/paciente/noEncontrado", { ci: values.ci })
+                console.log("dataForm")
+                console.log(this.datosNav)
+                let dataForm = this.datosNav.dataForm;
+                console.log(dataForm)
+                dataForm = { ...dataForm, ...values }
+                SNavigation.navigate("ficha/paciente/genero", { ...this.datosNav, ...values})
 
                 // if (this.key) {
                 //     Parent.Actions.editar({ ...this.data, ...values }, this.props);
@@ -143,7 +149,7 @@ class PacienteRegistro2 extends Component {
                         </SView>
                         <SView col={"xs-6"} style={{alignItems:"flex-end"}} >
                             <SView width={60} height={60} onPress={() => {
-                                SNavigation.navigate("ficha/paciente/genero", { ...this.datosNav })
+                               this.form.submit();
                             }}>
                                 <SIcon name={"bnext"} width={60} height={60} fill={STheme.color.primary} />
                             </SView>

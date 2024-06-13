@@ -74,6 +74,7 @@ class PacienteFacturacion extends Component {
         //     SNavigation.navigate('login');
         //     return <SView />
         // }
+        let nombreCompleto= this.datosNav.Nombres + " " + this.datosNav.ApellidoP + " " + this.datosNav.ApellidoM;
 
         return <SForm
             row
@@ -90,10 +91,10 @@ class PacienteFacturacion extends Component {
             inputs={{
                 // nombre: { label: "Nombre Completo", defaultValue: usuario.Nombres + " " + usuario.Apellidos, isRequired: true, icon: <SIcon name={"InputUser"} width={40} height={30} /> },
                 ci: { placeholder: "Número de carnet", label: "Número de carnet", defaultValue: this.ci, col: "xs-12 sm-8", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} /> },
-                comp: { placeholder: "Comp.", label: "Comp.", col: "xs-12 sm-4", icon: <SIcon name={"carnet"} width={40} height={30} />, style: {} },
-                tipoDoc: { placeholder: "Tipo de documento", label: "Tipo de documento", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} />, type: "select", options: this.getTipoDocumento(), style: { padding: 5 } },
-                Nombres: { placeholder: "Nombres", label: "Nombre completo", isRequired: true, icon: <SIcon name={"InputUser"} width={40} height={30} /> },
-                Telefono: { placeholder: "Teléfono", label: "Teléfono", isRequired: false, type: "phone" },
+                comp: { placeholder: "Comp.", label: "Comp.", col: "xs-12 sm-4", defaultValue: this.datosNav.comp, icon: <SIcon name={"carnet"} width={40} height={30} />, style: {} },
+                tipoDoc: { placeholder: "Tipo de documento", label: "Tipo de documento", defaultValue: this.datosNav.tipoDoc, isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} />, type: "select", options: this.getTipoDocumento(), style: { padding: 5 } },
+                Nombres: { placeholder: "Nombres", label: "Nombre completo", defaultValue: nombreCompleto, isRequired: true, icon: <SIcon name={"InputUser"} width={40} height={30} /> },
+                Telefono: { placeholder: "Teléfono", label: "Teléfono", defaultValue: this.datosNav.Telefono, isRequired: false, type: "phone" },
 
             }}
 
@@ -112,7 +113,7 @@ class PacienteFacturacion extends Component {
     }
     render() {
 
-
+        console.log(this.datosNav)
         return (
             <SPage title={'Facturación'}>
                 {/* <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} row center> */}

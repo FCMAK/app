@@ -86,7 +86,7 @@ class PacienteBuscar extends Component {
 
 
         return (
-            <SPage title={'Datos Paciente'} disableScroll>
+            <SPage title={'Datos Paciente'} >
                 {/* <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} row center> */}
                 <Header
                     titulo={"POR FAVOR, INTRODUCE TU NÚMERO DE CARNET"}

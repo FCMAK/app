@@ -24,7 +24,7 @@ class Confirmacion extends Component {
         this.fecha_final = new SDate(this.fecha + "-" + this.dia, "yyyy-MM-dd");
     }
 
-    componentDidMount() { 
+    componentDidMount() {
         SSocket.sendPromise({
             component: "medico",
             type: "getAll",
@@ -67,7 +67,7 @@ class Confirmacion extends Component {
                         <SView col={"xs-6"} padding={5} row center style={{ backgroundColor: STheme.color.white, borderRadius: 15, }}>
                             <SView col={"xs-12"} center >
                                 <SHr height={10} />
-                                <SView width={60} height={60} style={{  borderRadius: 100, backgroundColor: STheme.color.card, borderWidth:1, borderColor: STheme.color.primary }}>
+                                <SView width={60} height={60} style={{ borderRadius: 100, backgroundColor: STheme.color.card, borderWidth: 1, borderColor: STheme.color.primary }}>
                                     <SImage src={SSocket.api.root + Parent.component + "/" + this.key_doctor} style={{
                                         borderRadius: 30,
                                         resizeMode: "cover"
@@ -98,7 +98,10 @@ class Confirmacion extends Component {
                                 <SIcon name={"fhora"} width={25} fill={STheme.color.white} />
                             </SView>
                             <SView col={"xs-9"}>
-                                <SText font={"Roboto"} fontSize={20} color={STheme.color.white}>{this.hora}</SText>
+                                {/* <SText font={"Roboto"} fontSize={20} color={STheme.color.white}>{this.hora}</SText> */}
+                                {this.datosNav.turno.DesTur != "" ? <SText font={"LondonBetween"} fontSize={16} color={STheme.color.white} >{this.datosNav.turno.DesTur}</SText> : <SText font={"LondonBetween"} fontSize={16} color={STheme.color.white} >Atención por orden de llegada</SText>}
+                                <SHr height={4} />
+                                <SText font={"LondonBetween"} fontSize={18} color={STheme.color.white} >{this.datosNav.turno.TurIni} - {this.datosNav.turno.TurFin}</SText>
                             </SView>
                             <SHr height={20} />
                             <SView col={"xs-3"} height={55} >
@@ -128,9 +131,9 @@ class Confirmacion extends Component {
                         </SView>
                         <SHr height={30} />
 
-                        <SView col={"xs-11"} center padding={10} backgroundColor={"#FFF9C5"} style={{borderRadius:8}}>
-                                    <SText fontSize={12} center >NOTA: Es necesario presentarse 15 minutos antes de su cita programada para  asegurarnos de que reciba la mejor atención.</SText>
-                         </SView>   
+                        <SView col={"xs-11"} center padding={10} backgroundColor={"#FFF9C5"} style={{ borderRadius: 8 }}>
+                            <SText fontSize={12} center >NOTA: Es necesario presentarse 15 minutos antes de su cita programada para  asegurarnos de que reciba la mejor atención.</SText>
+                        </SView>
 
                         <SView col={"xs-12"} center>
                             <SHr height={30} />
