@@ -180,10 +180,10 @@ class Inicio extends Component {
                                 </SView>
                                 {this.getContent1()}
                                 <SView col={"xs-12"} height={20}></SView>
-                                <SView col={"xs-11"}>
+                                {/* <SView col={"xs-11"}>
                                     <SText font={"LondonMM"} fontSize={18}>{'Nuestros servicios:'}</SText>
                                 </SView>
-                                {this.getContent2()}
+                                {this.getContent2()} */}
                                 <SHr height={30} />
                                 <SView col={"xs-11"} center>
                                     {this.getSucursales()}
