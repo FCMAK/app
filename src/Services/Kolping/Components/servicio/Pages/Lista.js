@@ -1,20 +1,46 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SIcon, SImage, SLoad, SNavigation, SPage, SPopup, STable2, SText, SView, SList, SHr, SDate } from 'servisofts-component';
+import { SIcon, SImage, SLoad, SNavigation, SPage, SPopup, STable2, SText, SView, SList, SHr, SDate, SInput } from 'servisofts-component';
 import Parent from '../index'
 import STheme from 'servisofts-component/Component/STheme';
 import KButtom from '../../../../../Components/Kolping/KButtom';
 import KBuscador from '../../../../../Components/Kolping/KBuscador';
+import SSocket from 'servisofts-socket';
+import { check } from 'react-native-permissions';
+import index from 'servisofts-rn-roles_permisos/Components/MenuPages';
 
 class Lista extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filter: "Pendiente" // Pendiente, Historial
+            filter: "Pendiente", // Pendiente, Historial
+            check: false,
+            dataSelect: [],
         };
         this.tipo_servicio = SNavigation.getParam("servicio");
+        this.codesp = SNavigation.getParam("codesp").toString();
+        this.codmed = SNavigation.getParam("codmed").toString();
+        this.nrosuc = SNavigation.getParam("nrosuc").toString();
 
     }
+
+    componentDidMount() {
+        SSocket.sendPromise({
+            component: "servicio_kolping",
+            type: "getAll",
+            // nrosuc: "0",
+            // CodEsp: "999",
+            // CodMed: "999",
+            nrosuc: this.nrosuc,
+            CodEsp: this.codesp,
+            CodMed: this.codmed
+        }).then(e => {
+            this.setState({ loading: false, data: e.data })
+        }).catch(e => {
+            this.setState({ loading: false })
+        })
+    }
+
     getFilter() {
         return <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} height={50} row>
             <SView col={"xs-6"} height card>
@@ -55,83 +81,95 @@ class Lista extends Component {
         }
     }
     getContent() {
-        // var data = Parent.Actions.getAll(this.props);
-        // var usuarios = usuario.Actions.getAll(this.props);
-        // if (!data) return <SLoad />;
-        // if (!usuarios) return <SLoad />;
+        let dataSelect = []
         return <>
             <SHr height={15} />
-            <SView col={"xs-12"} row>
-                <SView col={"xs-10"} row>
-                    <SIcon name={"logoLista"} width={14} />
-                    <SView width={10} row></SView>
-                    <SText font={"LondonTwo"} fontSize={20} color={STheme.color.info} style={{ textTransform: "uppercase" }}>IMAGENOLOGÍA</SText>
-                </SView>
-                <SView col={"xs-12"} height={5} style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }}></SView>
-                <SHr height={20} />
-            </SView>
-            <SView center col={"xs-12"} height={50} row backgroundColor={STheme.color.card} style={{ borderBottomWidth: 1, borderTopWidth: 1, borderRightWidth: 1, borderColor: STheme.color.lightGray, borderTopRightRadius: 8, borderBottomRightRadius: 8 }}
-                onPress={() => {
-                    SNavigation.navigate("servicio/detalle");
-                }}>
-                <SView col={"xs-1"} center height backgroundColor={STheme.color.primary}>
-                    <SIcon name={"IconServicio"} height={20} />
-                </SView>
-                <SView col={"xs-1"} style={{ alignItems: "flex-start" }}>
-                    <SIcon name={"FlechaServicio"} height={15} />
-                </SView>
-                <SView col={"xs-10"} style={{ alignItems: "flex-start" }} >
-                    <SText font={"LondonTwo"} fontSize={20} color={STheme.color.text} >Ecografía</SText>
-                </SView>
-            </SView>
-            <SHr height={10} />
-            <SView center col={"xs-12"} height={50} row backgroundColor={STheme.color.card} style={{ borderBottomWidth: 1, borderTopWidth: 1, borderRightWidth: 1, borderColor: STheme.color.lightGray, borderTopRightRadius: 8, borderBottomRightRadius: 8 }}>
-                <SView col={"xs-1"} center height backgroundColor={STheme.color.primary}>
-                    <SIcon name={"IconServicio"} height={20} />
-                </SView>
-                <SView col={"xs-1"} style={{ alignItems: "flex-start" }}>
-                    <SIcon name={"FlechaServicio"} height={15} />
-                </SView>
-                <SView col={"xs-10"} style={{ alignItems: "flex-start" }} >
-                    <SText font={"LondonTwo"} fontSize={20} color={STheme.color.text} >Mamografía</SText>
-                </SView>
-            </SView>
-            <SHr height={10} />
-            <SView center col={"xs-12"} height={50} row backgroundColor={STheme.color.card} style={{ borderBottomWidth: 1, borderTopWidth: 1, borderRightWidth: 1, borderColor: STheme.color.lightGray, borderTopRightRadius: 8, borderBottomRightRadius: 8 }}>
-                <SView col={"xs-1"} center height backgroundColor={STheme.color.primary}>
-                    <SIcon name={"IconServicio"} height={20} />
-                </SView>
-                <SView col={"xs-1"} style={{ alignItems: "flex-start" }}>
-                    <SIcon name={"FlechaServicio"} height={15} />
-                </SView>
-                <SView col={"xs-10"} style={{ alignItems: "flex-start" }} >
-                    <SText font={"LondonTwo"} fontSize={20} color={STheme.color.text}>Rayos X</SText>
-                </SView>
-            </SView>
-            <SHr height={10} />
-            <SView center col={"xs-12"} height={50} row backgroundColor={STheme.color.card} style={{ borderBottomWidth: 1, borderTopWidth: 1, borderRightWidth: 1, borderColor: STheme.color.lightGray, borderTopRightRadius: 8, borderBottomRightRadius: 8 }}>
-                <SView col={"xs-1"} center height backgroundColor={STheme.color.primary}>
-                    <SIcon name={"IconServicio"} height={20} />
-                </SView>
-                <SView col={"xs-1"} style={{ alignItems: "flex-start" }}>
-                    <SIcon name={"FlechaServicio"} height={15} />
-                </SView>
-                <SView col={"xs-10"} style={{ alignItems: "flex-start" }} >
-                    <SText font={"LondonTwo"} fontSize={20} color={STheme.color.text} >Tomografía</SText>
-                </SView>
-            </SView>
+            <SList
+                initSpace={10}
+                flex
+                buscador
+                limit={8}
+                data={this.state.data}
+                order={[{ key: "prdnom", order: "asc" }]}
+                render={(obj) => {
+                    return <>
+                        <SView center col={"xs-12"} row style={{
+                            borderLeftWidth: 3,
+                            borderLeftColor: STheme.color.info,
+                        }}
+                        // onPress={() => {
+                        //     this.setState({ check: !this.state.check })
+                        // }}
+                        >
+                            <SView col={"xs-9"} style={{
+                                alignItems: "flex-start",
+                                padding: 15,
+                                backgroundColor: STheme.color.card,
+                            }} >
+                                <SText font={"LondonTwo"} fontSize={15} color={STheme.color.text} >{obj.NomPro}</SText>
+                            </SView>
+                            <SView col={"xs-3"} row height>
+                                <SView col={"xs-8"} center height backgroundColor={STheme.color.primary} padding={5}>
+                                    <SText font={"LondonTwo"} fontSize={14} color={STheme.color.white} >Bs. {obj.PreV01}</SText>
+                                </SView>
+                                <SView col={"xs-4"} center height >
+                                    {/* <SHr height={2}/> */}
+                                    <SView col={"xs-12"} center height={42} style={{
+                                    borderWidth: 2,
+                                    borderLeftWidth: 0,
+                                    borderColor: STheme.color.primary,
+                                    borderTopRightRadius: 8,
+                                    borderBottomRightRadius: 8,
+                                    backgroundColor: STheme.color.white
+                                }}  >
+                                        {/* {this.state.check ? <SIcon name={"chek"} height={20} /> : null} */}
+                                        <SInput
+                                            col={""}
+                                            type={"checkBox"}
+                                            defaultValue={!!this.state.check}
+                                            // disabled={!allowEdit || !!this.props.disabled}
+                                            onChangeText={(e) => {
+                                                if (e) {
+                                                    dataSelect.push(obj)
+                                                    console.log("check")
+                                                    this.setState({ dataSelect: dataSelect })
+                                                    console.log(dataSelect)
+                                                } else {
+                                                    dataSelect = dataSelect.filter((item) => item.NomPro !== obj.NomPro)
+                                                    console.log("NO check")
+                                                    this.setState({ dataSelect: dataSelect })
+                                                    console.log(dataSelect)
+                                                }
+                                            }}
+                                        />
+                                    </SView>
+                                    {/* <SHr height={2}/> */}
+                                </SView>
+                            </SView>
+                        </SView>
+                    </>
+                }}
+            />
         </>
     }
 
 
     render() {
+        if (!this.state.data) return <SLoad />
         return (
-            <SPage title={'Lista de servicios'} >
+            <SPage title={'Lista de servicios'}
+                footer={<SView col={"xs-12"} center><KButtom secondary onPress={() => {
+                    if (this.state?.dataSelect.length == 0) {
+                        SPopup.alert("Debe seleccionar al menos un servicio")
+                        return;
+                    }
+                    SNavigation.navigate("ficha/horarios", { dataSelect: this.state.dataSelect, codesp: this.codesp, codmed: this.codmed, nrosuc: this.nrosuc });
+                }}>SOLICITAR</KButtom><SHr /></SView>}
+            >
                 <SView col={"xs-12"} center>
                     <SHr />
                     <SHr />
                     <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} >
-                        <KBuscador />
                         {this.getContent()}
                     </SView>
                     <SHr />

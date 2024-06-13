@@ -142,6 +142,11 @@ import RepPassword, { ReactComponent as RepPasswordW } from './svg/imputs/repPas
 import Message, { ReactComponent as MessageW } from './svg/message.svg';
 import Calendar, { ReactComponent as CalendarW } from './svg/imputs/calendar.svg';
 import Obs, { ReactComponent as ObsW } from './svg/imputs/obs.svg';
+import carnet, { ReactComponent as carnetW } from './svg/imputs/carnet.svg';
+import ghombre, { ReactComponent as ghombreW } from './svg/imputs/ghombre.svg';
+import gmujer, { ReactComponent as gmujerW } from './svg/imputs/gmujer.svg';
+import mapk, { ReactComponent as mapkW } from './svg/imputs/mapk.svg';
+import miUbi, { ReactComponent as miUbiW } from './svg/imputs/miUbi.svg';
 
 import IconCartFalse, { ReactComponent as IconCartFalseW } from './svg/iconCartFalse.svg';
 import IconCartTrue, { ReactComponent as IconCartTrueW } from './svg/iconCartTrue.svg';
@@ -163,6 +168,12 @@ import BtnShooter, { ReactComponent as BtnShooterW } from './svg/btnShooter.svg'
 import BtnGaleria, { ReactComponent as BtnGaleriaW } from './svg/btnGaleria.svg';
 import BtnLinterna, { ReactComponent as BtnLinternaW } from './svg/btnLinterna.svg';
 import services, { ReactComponent as servicesW } from './svg/servicios/services.svg';
+import chek, { ReactComponent as chekW } from './svg/servicios/chek.svg';
+import fondo1, { ReactComponent as fondo1W } from './svg/fondo1.svg';
+import iconp1, { ReactComponent as iconp1W } from './svg/iconp1.svg';
+import iconp2, { ReactComponent as iconp2W } from './svg/iconp2.svg';
+import bnext, { ReactComponent as bnextW } from './svg/bnext.svg';
+import marcadorMapa, { ReactComponent as marcadorMapaW } from './svg/marcadorMapa.svg';
 
 const Assets: SAssets = {
     svg: {
@@ -298,6 +309,13 @@ const Assets: SAssets = {
         "Horario": { Native: Horario, Web: HorarioW },
         "Costo": { Native: Costo, Web: CostoW },
         "Sucursal": { Native: Sucursal, Web: SucursalW },
+        "carnet": { Native: carnet, Web: carnetW },
+        "ghombre": { Native: ghombre, Web: ghombreW },
+        "gmujer": { Native: gmujer, Web: gmujerW },
+        "mapk": { Native: mapk, Web: mapkW },
+        "miUbi": { Native: miUbi, Web: miUbiW },
+
+
 
         "BtnAccept": { Native: BtnAccept, Web: BtnAcceptW },
         "BtnCancel": { Native: BtnCancel, Web: BtnCancelW },
@@ -305,6 +323,12 @@ const Assets: SAssets = {
         "BtnGaleria": { Native: BtnGaleria, Web: BtnGaleriaW },
         "BtnLinterna": { Native: BtnLinterna, Web: BtnLinternaW },
         "services": { Native: services, Web: servicesW },
+        "chek": { Native: chek, Web: chekW },
+        "fondo1": { Native: fondo1, Web: fondo1W },
+        "iconp1": { Native: iconp1, Web: iconp1W },
+        "iconp2": { Native: iconp2, Web: iconp2W },
+        "bnext": { Native: bnext, Web: bnextW },
+        "marcadorMapa": { Native: marcadorMapa, Web: marcadorMapaW }
     }
 }
 

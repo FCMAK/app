@@ -17,6 +17,7 @@ class HorarioDoctor extends Component {
         this.codesp = SNavigation.getParam("codesp"); //key por navegador
         this.nrosuc = SNavigation.getParam("nrosuc"); //key por navegador
         this.codmed = SNavigation.getParam("codmed"); //key por navegador
+        this.dataSelect = SNavigation.getParam("dataSelect"); //key por navegador
     }
 
     componentDidMount() {
@@ -33,8 +34,6 @@ class HorarioDoctor extends Component {
         }).catch(e => {
             console.log(e)
         })
-
-
     }
 
     getDia_(dia, diastr) {
@@ -49,8 +48,9 @@ class HorarioDoctor extends Component {
             <SText font={"LondonBetween"} fontSize={14} color={(this.state.dia == dia ? STheme.color.secondary : STheme.color.text)}>{diastr}</SText>
         </SView>
     }
-    getDia(dia, diastr, nroDia, fechaCercana) {
+    getDia(dia, diastr, nroDia, fechaCercana, date) {
         fechaCercana ? this.state.fechaCercana = fechaCercana : null
+        fechaCercana ? this.state.date = fechaCercana : null
         // fechaCercana ? this.state.nroDia = nroDia : null
         this.state.dia ? fechaCercana = null : this.state.nroDia = nroDia
         return <SView style={{ padding: 5 }}>
@@ -66,6 +66,9 @@ class HorarioDoctor extends Component {
                     })
                     this.setState({
                         nroDia: nroDia
+                    })
+                    this.setState({
+                        date: date
                     })
                 }}>
                 <SText font={"LondonTwo"} fontSize={24} color={(this.state.dia == dia ? STheme.color.secondary : fechaCercana ? STheme.color.secondary : STheme.color.text)} >{dia}</SText>
@@ -155,20 +158,20 @@ class HorarioDoctor extends Component {
             var currentDate = now;
             var currentDiff = Math.abs(dayOk - currentDate);
             // var currentDiff = (currentDate - dayOk);
-            
+
 
             if (dayOk >= currentDate) {
                 if (currentDiff < minDiff) {
                     minDiff = currentDiff;
                     fechaCercana = new Date(dayOk);
-                    
+
                 } else {
                     fechaCercana = null;
                 }
             }
 
 
-            return this.getDia(dayOk.getDate(), diastr, dia.NroDia, fechaCercana)
+            return this.getDia(dayOk.getDate(), diastr, dia.NroDia, fechaCercana, dayOk)
         })
     }
     getHoras(TurMed) {
@@ -194,6 +197,7 @@ class HorarioDoctor extends Component {
         let dataDoctor = []
         if (!this.state.dataDoctor) return <SLoad />;
         console.log("dataaaa", this.state.dataDoctor)
+        console.log("dateee", this.state.date)
 
         // var data = Parent.Actions.getAll(this.props, { codesp: this.codesp, nrosuc: this.nrosuc });
         // if (!data) return <SLoad />;
@@ -244,6 +248,7 @@ class HorarioDoctor extends Component {
                     <SView col={"xs-12"} center style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }}>
                         <SText font={"LondonBetween"} fontSize={20} >Fechas disponibles</SText>
                         <SHr height={10} />
+
                     </SView>
                     <SHr height={25} />
                     <SView col={"xs-12"} style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }}>
@@ -254,15 +259,6 @@ class HorarioDoctor extends Component {
                                 <SView center row>
                                     {b === 1 ? <SText font={"LondonBetween"} fontSize={16} color={STheme.color.text} >No hay fechas disponibles</SText> : null}
                                     {this.getTurnosDias(dataDoctor?.TurMed)}
-
-                                    {/* {this.getDia_(18, "MA")}
-                                    <SView width={10} />
-                                    {this.getDia_(19, "MI")}
-                                    <SView width={10} />
-                                    {this.getDia_(20, "JU")}
-                                    <SView width={10} />
-                                    {this.getDia_(21, "VI")} */}
-
                                 </SView>
                             </SScrollView2>
                         </SView>
@@ -277,24 +273,23 @@ class HorarioDoctor extends Component {
                         <SView col={"xs-12"} row center>
                             {b === 1 ? <SText font={"LondonBetween"} fontSize={16} color={STheme.color.text} >No hay horarios disponibles</SText> : null}
                             {/* {!this.state.dia ? <SText font={"LondonBetween"} fontSize={16} color={STheme.color.text} >Seleccione una fecha</SText> : null} */}
-                            
-                            {/* {(this.state.horas) ? this.getHoras(dataDoctor?.TurMed) : null} */}
-                            {this.getHoras(dataDoctor?.TurMed) }
 
-                            
+                            {/* {(this.state.horas) ? this.getHoras(dataDoctor?.TurMed) : null} */}
+                            {this.getHoras(dataDoctor?.TurMed)}
+
+
                         </SView>
                         <SHr height={20} />
                     </SView>
 
                     <SView col={"xs-12"} center>
                         <SHr height={45} />
-                        <Kolping.KButtom secondary onPress={() => {
-                            if (!this.state.dia || !this.state.hora) {
-                                SPopup.alert("Debe seleccionar el día y la hora para su consulta!")
-                                return;
-                            }
-                            SNavigation.navigate("ficha/paciente", { key: this.key_doctor, fecha: this.state.fecha.toString("yyyy-MM"), dia: this.state.dia, hora: this.state.hora, keysuc: this.key_sucursal })
-                        }}  >COMPRAR TICKETS</Kolping.KButtom>
+                        {/* <SText>{JSON.stringify(this.dataSelect, "\n", "\t")}</SText> */}
+                        {this.state.nroDia ? <Kolping.KButtom secondary onPress={() => {
+                            // SNavigation.navigate("ficha/paciente", { codmed: this.codmed, fecha: this.state.date, nrosuc: this.nrosuc, codesp: this.codesp })
+                            SNavigation.navigate("ficha/paciente/buscar", { codmed: this.codmed, fecha: this.state.date, nrosuc: this.nrosuc, codesp: this.codesp, nav: 2 })
+                        }}  >COMPRAR TICKETS</Kolping.KButtom> : null}
+
                         <SHr height={30} />
                     </SView>
                 </Container >

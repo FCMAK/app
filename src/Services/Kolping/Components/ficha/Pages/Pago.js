@@ -44,8 +44,9 @@ class Pago extends Component {
         return (
             <SPage title={'Pago de Ficha'} center>
                 <SHr height={30} />
-                <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row>
-                    <SView col={"xs-7"} >
+                <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row center>
+                    <SText center fontSize={60} bold>POR DEFINIR</SText>
+                    {/* <SView col={"xs-7"} >
                         <SText fontSize={18} font={"Roboto"} color={STheme.color.lightGray}>1 producto en el carrito</SText>
                     </SView>
                     <SView col={"xs-5"} center>
@@ -58,7 +59,6 @@ class Pago extends Component {
                             <SText fontSize={18} font={"LondonTwo"} color={STheme.color.darkGray}>Tipo de Pago</SText>
                         </SView>
                         <SView col={"xs-5"} center onPress={() => {
-                            //SNavigation.navigate("ficha/pago")
                         }}>
                             <SText fontSize={18} font={"LondonBetween"} color={STheme.color.info}>+ Añadir</SText>
                         </SView>
@@ -165,13 +165,14 @@ class Pago extends Component {
                         </SView>
 
                     </SView>
-                    <SView col={"xs-12"} center>
-                        <SHr height={65} />
-                        <Kolping.KButtom primary onPress={() => {
-                            SNavigation.navigate("ficha/mensaje")
-                        }} >PAGAR </Kolping.KButtom>
-                        <SHr height={30} />
-                    </SView>
+                    */}
+                </SView>
+                <SView col={"xs-12"} center>
+                    <SHr height={65} />
+                    <Kolping.KButtom primary onPress={() => {
+                        SNavigation.navigate("ficha/mensaje")
+                    }} >PAGAR </Kolping.KButtom>
+                    <SHr height={30} />
                 </SView>
             </SPage>
         );
