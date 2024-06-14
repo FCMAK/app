@@ -94,7 +94,7 @@ class PacienteDireccion extends Component {
                             // }).catch((e) => {
                             //     this.setState({ loading: false })
                             // })
-                            SNavigation.navigate("ficha/paciente/facturacion", { data: data, ...this.datosNav })
+                            SNavigation.navigate("ficha/paciente/facturacion", { direccion: data, ...this.datosNav })
                         }
 
                     }}>ELEGIR ESTA UBICACIÓN</KButtom>

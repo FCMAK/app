@@ -92,7 +92,7 @@ class PacienteGenero extends Component {
         </SView>
     }
     render() {
-
+console.log(this.datosNav)
 
         return (
             <SPage title={'Género'} hidden>
@@ -103,7 +103,7 @@ class PacienteGenero extends Component {
                     <SHr height={60} />
                     {this.getContent()}
                     <SHr height={40} />
-                    {/* <SView col={"xs-12"} row>
+                    <SView col={"xs-12"} row>
                         <SView col={"xs-6"}  >
                             <SView width={80} height={60}
                                 style={{
@@ -116,16 +116,16 @@ class PacienteGenero extends Component {
                                 <SText bold color={STheme.color.white}>ATRÁS</SText>
                             </SView>
                         </SView>
-                        <SView col={"xs-6"} style={{ alignItems: "flex-end" }} >
+                        {/* <SView col={"xs-6"} style={{ alignItems: "flex-end" }} >
                             <SView width={60} height={60} onPress={() => {
                                 SNavigation.navigate("ficha/paciente/direccion")
                             }}>
                                 <SIcon name={"bnext"} width={60} height={60} fill={STheme.color.primary} />
                             </SView>
 
-                        </SView>
+                        </SView> */}
                     </SView>
-                    <SHr height={30} /> */}
+                    <SHr height={30} />
                 </Container>
             </SPage>
         );

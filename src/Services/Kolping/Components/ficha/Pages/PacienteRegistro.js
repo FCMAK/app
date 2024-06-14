@@ -8,6 +8,7 @@ import SSocket from 'servisofts-socket'
 import Container from '../../../../../Components/Container';
 import Header from '../Components/Header';
 import Header2 from '../Components/Header2';
+import select from 'servisofts-component/Component/SInput2/types/select';
 
 class PacienteRegistro extends Component {
     constructor(props) {
@@ -47,7 +48,7 @@ class PacienteRegistro extends Component {
     getTipoPersona() {
         return [
             { key: "", content: "Tipo de persona", disabled: true },
-            { key: "1", content: "PERSONA" },
+            { key: "1", content: "PERSONA", },
             { key: "2", content: "JURÍDICA" },
         ]
     }
@@ -88,8 +89,8 @@ class PacienteRegistro extends Component {
             }}
             inputs={{
                 // nombre: { label: "Nombre Completo", defaultValue: usuario.Nombres + " " + usuario.Apellidos, isRequired: true, icon: <SIcon name={"InputUser"} width={40} height={30} /> },
-                tipo: { placeholder: "Tipo de persona", label: "Tipo de persona", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} />, type: "select", options: this.getTipoPersona(), style: { padding: 5 } },
-                tipoDoc: { placeholder: "Tipo de documento", label: "Tipo de documento", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} />, type: "select", options: this.getTipoDocumento(), style: { padding: 5 } },
+                tipo: { placeholder: "Tipo de persona", label: "Tipo de persona", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} />, defaultValue:"PERSONA" , type: "select", options: this.getTipoPersona(), style: { padding: 5 } },
+                tipoDoc: { placeholder: "Tipo de documento", label: "Tipo de documento", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} />, defaultValue:"CI : CEDULA DE ID", type: "select", options: this.getTipoDocumento(), style: { padding: 5 } },
                 ci: { placeholder: "Número de carnet", label: "Número de carnet", defaultValue: this.ci, col: "xs-12 sm-8", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} /> },
 
                 comp: { placeholder: "Comp.", label: "Comp.", col: "xs-12 sm-4", icon: <SIcon name={"carnet"} width={40} height={30} />, style: {} },
@@ -98,7 +99,8 @@ class PacienteRegistro extends Component {
 
             // onSubmitName={"Guardar"}
             onSubmit={(values) => {
-                SNavigation.navigate("ficha/paciente/registro2", {...this.datosNav, nav:1})
+                let dataForm = values;
+                SNavigation.navigate("ficha/paciente/registro2", {...this.datosNav,  nav:1, ...dataForm})
 
                 // if (this.key) {
                 //     Parent.Actions.editar({ ...this.data, ...values }, this.props);
