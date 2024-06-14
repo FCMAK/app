@@ -1,6 +1,6 @@
 import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Button, ImageEditor } from "react-native";
 import React from "react";
-import { RNCamera } from "react-native-camera";
+// import { RNCamera } from "react-native-camera";
 import { SIcon, SImage, SNavigation, SPopup, STheme, SView } from "servisofts-component";
 import SSocket from 'servisofts-socket';
 import ImageResizer from 'react-native-image-resizer';
@@ -17,13 +17,14 @@ class CameraComponent extends React.Component {
   }
 
   showCamara() {
-    return <RNCamera
-      ref={(ref) => { this.camera = ref; }}
-      style={{ flex: 1, }}
-      type={this.state.camaraTipo ? RNCamera.Constants.Type.front : RNCamera.Constants.Type.back}
-      flashMode={this.state.flash ? RNCamera.Constants.FlashMode.on : RNCamera.Constants.FlashMode.off}
-      captureAudio={false}
-    />
+    return null;
+    // return <RNCamera
+    //   ref={(ref) => { this.camera = ref; }}
+    //   style={{ flex: 1, }}
+    //   type={this.state.camaraTipo ? RNCamera.Constants.Type.front : RNCamera.Constants.Type.back}
+    //   flashMode={this.state.flash ? RNCamera.Constants.FlashMode.on : RNCamera.Constants.FlashMode.off}
+    //   captureAudio={false}
+    // />
   }
 
   // ChangeCamara() {

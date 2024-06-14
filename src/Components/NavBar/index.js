@@ -142,7 +142,7 @@ class NavBar extends Component {
                     </SView>
                     <SView col={"xs-12"} height={30}></SView>
                 </SView> */}
-                    <SView col={"xs-11"} row onPress={() => {
+                    {/* <SView col={"xs-11"} row onPress={() => {
                         SNavigation.navigate("notificaciones")
                         this.fadeOut();
                     }}  >
@@ -154,7 +154,7 @@ class NavBar extends Component {
                             <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
                         </SView>
                         <SView col={"xs-12"} height={30}></SView>
-                    </SView>
+                    </SView> */}
 
 
 

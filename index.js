@@ -6,12 +6,13 @@ import { name as appName } from "./package.json";
 
 import messaging from '@react-native-firebase/messaging';
 import notifee, { EventType, AndroidStyle, AndroidGroupAlertBehavior } from '@notifee/react-native';
+import Firebase from "./src/Firebase";
 
 
 const BuildNotification = async (notification) => {
 
     const displayedNotifications = await notifee.getDisplayedNotifications();
-    const groupId = notification?.data?.key_empresa;
+    const groupId = "kolping";
     const isSummaryAlreadyDisplayed = displayedNotifications.some(notif =>
         notif.android?.groupId === groupId && notif.android?.groupSummary
     );
@@ -22,7 +23,7 @@ const BuildNotification = async (notification) => {
         await notifee.displayNotification({
             id: groupId,
             // title: notification?.data?.razon_social,
-            subtitle: notification?.data?.razon_social,
+            subtitle: "FCMAK",
             android: {
                 channelId: "default_channel_id",
                 smallIcon: 'notification_round', // optional, defaults to 'i
@@ -37,7 +38,7 @@ const BuildNotification = async (notification) => {
     // return;
     let notify = {
         title: notification?.data?.title,
-        subtitle: notification?.data?.razon_social,
+        subtitle: "FCMAK",
         // title: notification?.data?.title,
         body: notification?.data?.body,
         data: notification?.data,

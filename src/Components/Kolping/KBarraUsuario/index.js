@@ -12,11 +12,13 @@ class KBarraUsuario extends Component {
     }
 
     render() {
-        var usuario = this.props.state.usuarioReducer.usuarioLog
-        if (!usuario) {
-            // SNavigation.navigate("login");
-            return <SView />
+        var usuario = this.props.state.usuarioReducer.usuarioLog??{
+            Nombres:"SIN USUARIO"
         }
+        // if (!usuario) {
+        //     // SNavigation.navigate("login");
+        //     return <SView />
+        // }
 
         return (
             <SView col={"xs-12"} height={100} backgroundColor={STheme.color.primary} style={{
@@ -52,11 +54,11 @@ class KBarraUsuario extends Component {
                         </SView>
                     </SView>
                     <SView height={50} row>
-                        <SView height width={40} center onPress={() => {
+                        {/* <SView height width={40} center onPress={() => {
                             SNavigation.navigate("notificaciones");
                         }}>
                             <SIcon name={"KNotify"} width={18} fill="#fff" />
-                        </SView>
+                        </SView> */}
                         <SView height width={40} center onPress={() => {
                             NavBar.open();
                         }}>

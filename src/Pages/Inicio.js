@@ -5,6 +5,7 @@ import Pages from '.';
 import Kolping from '../Components/Kolping';
 import sucursal from '../Services/Kolping/Components/sucursal';
 import Model from '../Model';
+import { ScrollView } from 'react-native';
 
 class Inicio extends Component {
     constructor(props) {
@@ -160,17 +161,17 @@ class Inicio extends Component {
     }
 
     render() {
-        if (!Model.usuario.Action.getKey()) {
-            console.log("aquiiii INICIOOOO no hay user")
-            return SNavigation.replace("login")
-        }
+        // if (!Model.usuario.Action.getKey()) {
+        //     console.log("aquiiii INICIOOOO no hay user")
+        //     return SNavigation.replace("login")
+        // }
         // var UsuaioPage = Pages["usuarioPage/lista"];
         return (
             <SPage title={'Inicio'} hidden disableScroll>
                 <SView col={"xs-12"} flex>
-                    <SScrollView2 disableHorizontal>
+                    <ScrollView  showsVerticalScrollIndicator={false}>
                         <SView col={"xs-12"} center>
-                            <SHr height={280} />
+                            <SHr height={240} />
                             <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} center>
 
                                 {/* <BloqueTiempo /> */}
@@ -181,18 +182,20 @@ class Inicio extends Component {
                                 {this.getContent1()}
                                 <SView col={"xs-12"} height={20}></SView>
                                 <SView col={"xs-11"}>
-                                    <SText font={"LondonMM"} fontSize={18}>{'Nuestros servicios:'}</SText>
+                                    <SText font={"LondonMM"} fontSize={18}>{'Nuestras sucursales:'}</SText>
                                 </SView>
-                                {this.getContent2()}
-                                <SHr height={30} />
-                                <SView col={"xs-11"} center>
+                                {/* {this.getContent2()} */}
+                                <SHr height={8} />
+                                <SView col={"xs-11"} center style={{
+                                    minHeight: 400
+                                }}>
                                     {this.getSucursales()}
                                 </SView>
                                 <SHr height={20} />
                             </SView>
                             <Kolping.KFooter />
                         </SView>
-                    </SScrollView2>
+                    </ScrollView>
                 </SView>
                 <SView height={250} col={"xs-12"} style={{
                     position: "absolute",

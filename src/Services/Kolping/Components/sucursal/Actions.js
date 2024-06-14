@@ -19,7 +19,7 @@ export default class Actions {
                 type: "getAll",
                 estado: "cargando",
                 // key_usuario: props.state.usuarioReducer.usuarioLog.key,
-                key_usuario: Model.usuario.Action.getKey(),
+                // key_usuario: Model.usuario.Action.getKey(),
             })
             return null;
         }
