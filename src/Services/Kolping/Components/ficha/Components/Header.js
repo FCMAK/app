@@ -24,12 +24,13 @@ class Header extends Component<_props> {
                     overflow: "hidden",
                     zIndex: 9
                 }} >
-                    <SView col={"xs-12"} center style={{
+                    <SView col={"xs-12"} center flex style={{
                         position: "absolute",
                         top: 15,
                         overflow: "hidden"
                     }}>
-                        <SIcon name='fondo1' height={"100%"} width={"100%"} style={{}} />
+                        <SIcon name='fondo1' height={"100%"} width={"100%"}/>
+                        {/* <SIcon name='fondo1' height={100} width={100}/> */}
                     </SView>
                     <Container>
                         <SHr height={50} />

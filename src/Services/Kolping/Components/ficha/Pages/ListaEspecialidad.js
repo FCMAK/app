@@ -35,7 +35,7 @@ class ListaEspecialidad extends Component {
     getEspecialidades() {
         // var data = Parent.Actions.getAll(this.props, { nrosuc: this.key_sucursal });
         if (!this.state.data) return <SLoad />;
-        var data = this.state.data;
+        var datas = this.state.data;
 
         // var dataMedicos = Medicos.Actions.getAll(this.props);
         var dataMedicos = {}
@@ -43,6 +43,7 @@ class ListaEspecialidad extends Component {
        
 
         // if (!dataMedicos) return <SLoad />;
+        var data = datas.sort((a, b) => Number(a.CodEsp) - Number(b.CodEsp));
 
         return Object.keys(data).map((key) => {
 

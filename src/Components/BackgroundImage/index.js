@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Platform } from 'react-native';
-import { SGradient, SIcon, SImage } from 'servisofts-component';
+import { SGradient, SIcon, SImage, SView } from 'servisofts-component';
 type type = {
     source: Object,
     contraste: String
@@ -17,14 +17,16 @@ export default class BackgroundImage extends Component<type> {
         if (!source) {
             source = require("./background.png");
         }
-        return <View style={{
+        return <View  style={{
+            position: "absolute",
             width: "100%",
             bottom: 0,
-            left: 0,
-            position: "absolute",
+            right: 0,
+            justifyContent: 'flex-end',
             ...this.props.style,
         }}>
             <SIcon name={"Bg1"} />
+            {/* <SIcon name={"Bg1"} height={118}  /> */}
         </View>
     }
     render() {

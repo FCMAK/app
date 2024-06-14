@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SIcon, SLoad, SMapView, SMarker, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
+import { SHr, SIcon, SLoad, SMapView, SMarker, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import sucursal from '..';
 import Item from '../Components/Item';
 
@@ -32,26 +32,25 @@ class Mapa extends Component {
             // borderRadius: 32,
             alignItems: "flex-end"
         }} center>
-            <SView width={130} height={45} backgroundColor={STheme.color.background}
+            <SView width={125} height={45} backgroundColor={STheme.color.background}
                 style={{
                     borderTopLeftRadius: 50,
                     borderBottomLeftRadius: 50,
                     padding: 5,
-                }} row
+                }} row center
                 onPress={() => {
                     SNavigation.navigate("ficha/opciones", { keysuc: this.key })
                 }}
             >
-                <SView width={35} height={35} center style={{
+                <SView flex width={35} height={35} center style={{
                     borderRadius: 100,
                     backgroundColor: STheme.color.primary
                 }}>
                     <SIcon name={"services"} width={20} height={20} fill={STheme.color.secondary} />
                 </SView>
-                <SView width={10} />
                 <SText fontSize={16} center font='LondonMM'>Servicios</SText>
+                <SView width={12} />
             </SView>
-
         </SView>
     }
 
@@ -69,8 +68,8 @@ class Mapa extends Component {
                         longitudeDelta: 0.0421,
                     }}
                     preventCenter>
-                    <SMapView.SMarker latitude={data.LatSuc} longitude={data.LonSuc} fill={STheme.color.primary}>
-                        <SIcon name={"mapa"} width={70} height={60} fill={STheme.color.primary} />
+                    <SMapView.SMarker width={45} height={64} latitude={data.LatSuc} longitude={data.LonSuc} fill={STheme.color.primary}>
+                        <SIcon name={"mapa"} width={45} height={64} fill={STheme.color.primary} />
                     </SMapView.SMarker>
                     {/* <SMarker lat={data.LatSuc} lng={data.LonSuc} /> */}
                 </SMapView>

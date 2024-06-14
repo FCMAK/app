@@ -8,6 +8,8 @@ import KBuscador from '../../../../../Components/Kolping/KBuscador';
 import SSocket from 'servisofts-socket';
 import { check } from 'react-native-permissions';
 import index from 'servisofts-rn-roles_permisos/Components/MenuPages';
+import Container from '../../../../../Components/Container';
+import carrito from '../../carrito';
 
 class Lista extends Component {
     constructor(props) {
@@ -91,7 +93,9 @@ class Lista extends Component {
                 limit={8}
                 data={this.state.data}
                 order={[{ key: "prdnom", order: "asc" }]}
-                render={(obj) => {
+                render={(obj, index) => {
+                    console.log("index")
+                    console.log(index)
                     return <>
                         <SView center col={"xs-12"} row style={{
                             borderLeftWidth: 3,
@@ -115,13 +119,13 @@ class Lista extends Component {
                                 <SView col={"xs-4"} center height >
                                     {/* <SHr height={2}/> */}
                                     <SView col={"xs-12"} center height={42} style={{
-                                    borderWidth: 2,
-                                    borderLeftWidth: 0,
-                                    borderColor: STheme.color.primary,
-                                    borderTopRightRadius: 8,
-                                    borderBottomRightRadius: 8,
-                                    backgroundColor: STheme.color.white
-                                }}  >
+                                        borderWidth: 2,
+                                        borderLeftWidth: 0,
+                                        borderColor: STheme.color.primary,
+                                        borderTopRightRadius: 8,
+                                        borderBottomRightRadius: 8,
+                                        backgroundColor: STheme.color.white
+                                    }}  >
                                         {/* {this.state.check ? <SIcon name={"chek"} height={20} /> : null} */}
                                         <SInput
                                             col={""}
@@ -134,6 +138,11 @@ class Lista extends Component {
                                                     console.log("check")
                                                     this.setState({ dataSelect: dataSelect })
                                                     console.log(dataSelect)
+
+                                                    carrito.Actions.addToCard({
+                                                       ...obj
+                                                    }, this.props)
+
                                                 } else {
                                                     dataSelect = dataSelect.filter((item) => item.NomPro !== obj.NomPro)
                                                     console.log("NO check")
@@ -153,18 +162,69 @@ class Lista extends Component {
         </>
     }
 
+    getBtnFooter() {
+        if (this.state.dataSelect.length == 0) return null;
+        let total = 0;
+        let cantidad = 0;
+        this.state.dataSelect.map((obj) => {
+            total += parseFloat(obj.PreV01);
+            cantidad += 1;
+        });
+
+        return <SView col={"xs-12"} center backgroundColor={STheme.color.primary}
+            style={{
+                height: 70,
+            }}>
+            <Container>
+                <SView col={'xs-12'} row center>
+                    <SView flex height={40} border={this.bgborder}>
+                        <SText
+                            color={STheme.color.secondary}
+                            font={'Roboto'}
+                            fontSize={15}>{`${cantidad} items`}</SText>
+                        <SText
+                            color={STheme.color.secondary}
+                            font={'Roboto'}
+                            fontSize={22}>{`Bs. ${total.toFixed(2)}`}</SText>
+                    </SView>
+                    <SView flex padding={10} style={{
+                        backgroundColor: STheme.color.info,
+                        borderRadius: 8,
+                        borderWidth: 1,
+                        borderColor: '#eeeeee',
+                    }} onPress={() => {
+                        if (this.state?.dataSelect.length == 0) {
+                            SPopup.alert("Debe seleccionar al menos un servicio")
+                            return;
+                        }
+                        SNavigation.navigate("ficha/horarios", { dataSelect: this.state.dataSelect, codesp: this.codesp, codmed: this.codmed, nrosuc: this.nrosuc });
+                    }}>
+                        <SText
+                            center
+                            color={STheme.color.white}
+                            font={'Roboto'}
+                            fontSize={18}>
+                            SOLICITAR
+                        </SText>
+                    </SView>
+                </SView>
+            </Container >
+            {/* <KButtom secondary onPress={() => {
+                if (this.state?.dataSelect.length == 0) {
+                    SPopup.alert("Debe seleccionar al menos un servicio")
+                    return;
+                }
+                SNavigation.navigate("ficha/horarios", { dataSelect: this.state.dataSelect, codesp: this.codesp, codmed: this.codmed, nrosuc: this.nrosuc });
+            }}>SOLICITAR</KButtom><SHr /> */}
+        </SView >
+    }
+
 
     render() {
         if (!this.state.data) return <SLoad />
         return (
             <SPage title={'Lista de servicios'}
-                footer={<SView col={"xs-12"} center><KButtom secondary onPress={() => {
-                    if (this.state?.dataSelect.length == 0) {
-                        SPopup.alert("Debe seleccionar al menos un servicio")
-                        return;
-                    }
-                    SNavigation.navigate("ficha/horarios", { dataSelect: this.state.dataSelect, codesp: this.codesp, codmed: this.codmed, nrosuc: this.nrosuc });
-                }}>SOLICITAR</KButtom><SHr /></SView>}
+                footer={this.getBtnFooter()}
             >
                 <SView col={"xs-12"} center>
                     <SHr />

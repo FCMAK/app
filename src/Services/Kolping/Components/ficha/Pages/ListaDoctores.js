@@ -13,8 +13,8 @@ class ListaDoctores extends Component {
         super(props);
         this.state = {
         };
-        this.codesp = SNavigation.getParam("codesp"); //key por navegador
-        this.nrosuc = SNavigation.getParam("nrosuc"); //key por navegador
+        this.codesp = SNavigation.getParam("codesp") //key por navegador
+        this.nrosuc = SNavigation.getParam("nrosuc").toString(); //key por navegador
     }
 
     componentDidMount() {

@@ -42,16 +42,23 @@ class Inicio extends Component {
                         </SView>
                         <SHr height={20} /> */}
                             <SView onPress={() => {
+                                SNavigation.navigate("ficha/listaDoctores", { codesp: "1", nrosuc: this.key_sucursal ? this.key_sucursal : null })
+                            }} col={"xs-11"} row backgroundColor={STheme.color.card} style={{ borderRadius: 8, borderLeftWidth: 10, borderColor: STheme.color.info }} height={80} center>
+                                <SView col={"xs-9.8"} row><SView width={5} /><SText font={"LondonTwo"} fontSize={15}>MEDICINA GENERAL</SText></SView>
+                                <SView col={"xs-2.2"} style={{ textAlign: "right" }} ><SIcon name={"flecha1"} width={33} fill={"#018992"} /></SView>
+                            </SView>
+                            <SHr height={20} />
+                            <SView onPress={() => {
                                 SNavigation.navigate("ficha/listaEspecialidad", { keysuc: this.key_sucursal ? this.key_sucursal : null })
                             }} col={"xs-11"} row backgroundColor={STheme.color.card} style={{ borderRadius: 8, borderLeftWidth: 10, borderColor: STheme.color.info }} height={80} center>
-                                <SView col={"xs-9.8"} ><SText center font={"LondonTwo"} fontSize={17}>ESPECIALIDADES</SText></SView>
+                                <SView col={"xs-9.8"} row ><SView width={5} /><SText font={"LondonTwo"} fontSize={15}>ESPECIALIDADES</SText></SView>
                                 <SView col={"xs-2.2"} style={{ textAlign: "right" }} ><SIcon name={"flecha1"} width={33} fill={"#018992"} /></SView>
                             </SView>
                             <SHr height={20} />
                             <SView onPress={() => {
                                 SNavigation.navigate("ficha/listaDoctores", { nrosuc: this.key_sucursal ? this.key_sucursal : null })
                             }} col={"xs-11"} row backgroundColor={STheme.color.card} style={{ borderRadius: 8, borderLeftWidth: 10, borderColor: STheme.color.info }} height={80} center>
-                                <SView col={"xs-9.8"} ><SText center font={"LondonTwo"} fontSize={17}>MÉDICOS</SText></SView>
+                                <SView col={"xs-9.8"} row ><SView width={5} /><SText font={"LondonTwo"} fontSize={15}>MÉDICOS</SText></SView>
                                 <SView col={"xs-2.2"} style={{ textAlign: "right" }} ><SIcon name={"flecha1"} width={33} fill={"#018992"} /></SView>
                             </SView>
                         </SView>

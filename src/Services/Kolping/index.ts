@@ -12,6 +12,7 @@ import turno from './Components/turno';
 import farmacia_categoria_farmacia from './Components/farmacia_categoria_farmacia';
 import servicio_domicilio from './Components/servicio_domicilio';
 import cotizacion_farmacia from './Components/cotizacion_farmacia';
+import carrito from './Components/carrito';
 
 import servicio from './Components/servicio';
 const ServiceName = "kolping";
@@ -29,7 +30,8 @@ const Pages: SPageListProps = {
     ...turno.Pages,
     ...servicio_domicilio.Pages,
     ...cotizacion_farmacia.Pages,
-    ...servicio.Pages
+    ...servicio.Pages,
+    ...carrito.Pages
 }
 
 const Reducers = {
@@ -45,6 +47,7 @@ const Reducers = {
     ...servicio_domicilio.Reducers,
     ...cotizacion_farmacia.Reducers,
     ...servicio.Reducers,
+    ...carrito.Reducers
 }
 
 export default {
