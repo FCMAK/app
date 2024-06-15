@@ -147,6 +147,7 @@ import ghombre, { ReactComponent as ghombreW } from './svg/imputs/ghombre.svg';
 import gmujer, { ReactComponent as gmujerW } from './svg/imputs/gmujer.svg';
 import mapk, { ReactComponent as mapkW } from './svg/imputs/mapk.svg';
 import miUbi, { ReactComponent as miUbiW } from './svg/imputs/miUbi.svg';
+import nouser, { ReactComponent as nouserW } from './svg/imputs/nouser.svg';
 
 import IconCartFalse, { ReactComponent as IconCartFalseW } from './svg/iconCartFalse.svg';
 import IconCartTrue, { ReactComponent as IconCartTrueW } from './svg/iconCartTrue.svg';
@@ -314,6 +315,7 @@ const Assets: SAssets = {
         "gmujer": { Native: gmujer, Web: gmujerW },
         "mapk": { Native: mapk, Web: mapkW },
         "miUbi": { Native: miUbi, Web: miUbiW },
+        "nouser": { Native: nouser, Web: nouserW },
 
 
 

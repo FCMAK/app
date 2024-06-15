@@ -12,9 +12,13 @@ class KBarraUsuario extends Component {
     }
 
     render() {
-        var usuario = this.props.state.usuarioReducer.usuarioLog??{
-            Nombres:"SIN USUARIO"
-        }
+        // var usuario = this.props.state.usuarioReducer.usuarioLog ?? {
+        //     Nombres: "SIN USUARIO"
+        // }
+
+        var usuario = this.props.state.usuarioReducer.usuarioLog;
+
+
         // if (!usuario) {
         //     // SNavigation.navigate("login");
         //     return <SView />
@@ -32,29 +36,56 @@ class KBarraUsuario extends Component {
                 <SView col={"xs-12"} height={50} row flex style={{
                     paddingLeft: 16,
                 }}>
-                    <SView height={50} width={50} style={{
-                        borderRadius: 50,
-                        overflow: 'hidden',
-                        backgroundColor: STheme.color.card,
-                    }}>
-                        <SImage src={SSocket.api.root + "usuario/" + usuario.key + "?date=" + new Date().getTime()} />
-                    </SView>
-                    <SView height={50} flex style={{
-                        justifyContent: 'center',
-                    }}>
-                        <SText font={"Roboto-Bold"} fontSize={20} flex color={"#fff"}> {usuario.Nombres}</SText>
-                        <SView height={22} onPress={() => {
-                            SNavigation.navigate('perfil')
-                        }} style={{
-                            paddingLeft: 6,
-                            alignItems: 'center',
-                        }} row>
-                            <SText fontSize={12} color={"#eee"} font='LondonTwo' style={{
-                                // textDecorationLine: 'underline',
-                            }}>Ver perfil </SText>
-                            <SIcon name="Ver" width={9} color="#fff" />
-                        </SView>
-                    </SView>
+                    {(!usuario) ?
+                        <>
+                            <SView height={50} width={50} style={{
+                                borderRadius: 50,
+                                overflow: 'hidden',
+                                backgroundColor: STheme.color.card,
+                            }} center>
+                                <SIcon name="nouser" width={35} fill={STheme.color.lightGray} />
+                            </SView>
+                            <SView height={50} flex style={{
+                                justifyContent: 'center',
+                            }}>
+                                <SText font={"Roboto-Bold"} fontSize={15} flex color={"#fff"}>Iniciar sesion</SText>
+                                <SView height={22} onPress={() => {
+                                    SNavigation.navigate('perfil')
+                                }} style={{
+                                    paddingLeft: 6,
+                                    alignItems: 'center',
+                                }} row>
+                                    <SText fontSize={12} color={"#eee"} font='LondonTwo' style={{
+                                    }}>Clic aquí </SText>
+                                    <SIcon name="Ver" width={9} color="#fff" />
+                                </SView>
+                            </SView>
+                        </> :
+                        <>
+                            <SView height={50} width={50} style={{
+                                borderRadius: 50,
+                                overflow: 'hidden',
+                                backgroundColor: STheme.color.card,
+                            }}>
+                                <SImage src={SSocket.api.root + "usuario/" + usuario.key + "?date=" + new Date().getTime()} />
+                            </SView>
+                            <SView height={50} flex style={{
+                                justifyContent: 'center',
+                            }}>
+                                <SText font={"Roboto-Bold"} fontSize={20} flex color={"#fff"}> {usuario.Nombres}</SText>
+                                <SView height={22} onPress={() => {
+                                    SNavigation.navigate('perfil')
+                                }} style={{
+                                    paddingLeft: 6,
+                                    alignItems: 'center',
+                                }} row>
+                                    <SText fontSize={12} color={"#eee"} font='LondonTwo' style={{
+                                    }}>Ver perfil </SText>
+                                    <SIcon name="Ver" width={9} color="#fff" />
+                                </SView>
+                            </SView>
+                        </>
+                    }
                     <SView height={50} row>
                         {/* <SView height width={40} center onPress={() => {
                             SNavigation.navigate("notificaciones");
