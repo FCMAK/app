@@ -43,21 +43,21 @@ class KBarraUsuario extends Component {
                                 overflow: 'hidden',
                                 backgroundColor: STheme.color.card,
                             }} center>
-                                <SIcon name="nouser" width={35} fill={STheme.color.lightGray} />
+                                <SIcon name="nouser" height={35} width={35} fill={STheme.color.lightGray} />
                             </SView>
-                            <SView height={50} flex style={{
+                            <SView height={50} flex padding={5} style={{
                                 justifyContent: 'center',
                             }}>
-                                <SText font={"Roboto-Bold"} fontSize={15} flex color={"#fff"}>Iniciar sesion</SText>
+                                <SText font={"Roboto-Bold"} fontSize={17} flex color={"#fff"}>Sin usuario</SText>
                                 <SView height={22} onPress={() => {
-                                    SNavigation.navigate('perfil')
+                                    SNavigation.navigate('login')
                                 }} style={{
-                                    paddingLeft: 6,
                                     alignItems: 'center',
                                 }} row>
+                                    <SHr height={2} />
                                     <SText fontSize={12} color={"#eee"} font='LondonTwo' style={{
-                                    }}>Clic aquí </SText>
-                                    <SIcon name="Ver" width={9} color="#fff" />
+                                    }}>Iniciar sesión </SText>
+                                    <SIcon name="logueo" width={10} color="#fff" fill={STheme.color.white} />
                                 </SView>
                             </SView>
                         </> :

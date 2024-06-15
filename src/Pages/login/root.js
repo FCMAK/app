@@ -189,7 +189,7 @@ class Login extends Component {
 
         if (!this.state.ready) return this.renderHeader();
         return (
-            <SPage title={'Login'} hidden  >
+            <SPage title={'Login'}   >
                 <Container >
                     <SView col={"xs-12"} center>
                         {this.renderHeader()}
