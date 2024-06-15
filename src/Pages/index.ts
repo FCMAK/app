@@ -1,4 +1,4 @@
-import { SPageListProps } from 'servisofts-component'
+import { SPage, SPageListProps } from 'servisofts-component'
 import Services from '../Services';
 import Home from './Home';
 import Carga from './Carga';
@@ -11,13 +11,19 @@ import LA from './LA';
 import TerminosCondiciones from '../Pages/TerminosCondiciones';
 import inDevelop from './inDevelop';
 import CameraComponent from '../Components/CameraComponent';
+import notification from './notification';
 
 import login from './login';
 import registro from './registro';
 // import perfil from './perfil';
 import test2 from './test2';
- 
+
+// const NewPages = SPage.combinePages("/", {
+//     ...notification,
+// })
+
 const Pages: SPageListProps = {
+    // ...NewPages,
     "/": Inicio,
     "carga": Carga,
     "home": Home,
@@ -32,6 +38,7 @@ const Pages: SPageListProps = {
     test2,
     ...Services.Pages,
 
+    ...notification,
     ...login,
     ...registro,
     // ...perfil
