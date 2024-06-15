@@ -45,26 +45,22 @@ export default class Actions {
     };
   }
 
-  static addToCard({ key, precio, tipo, cantidad, key_evento, mesas }, props) {
+  static addToCard({ key, CodEsp, CodMed,CodPro, NomEsp, NomMed, NomPro, PreV01}, props) {
     var data = props.state.carritoReducer.data;
     var item = data[key];
-    if (cantidad <= 0) {
-      if (item) {
-        delete props.state.carritoReducer.data[item.key];
-        props.dispatch({
-          component: 'carrito',
-          type: 'setState'
-        });
-        return;
-      }
-    }
+    // if (cantidad <= 0) {
+      // if (item) {
+      //   delete props.state.carritoReducer.data[item.key];
+      //   props.dispatch({
+      //     component: 'carrito',
+      //     type: 'setState'
+      //   });
+      //   return;
+      // }
+    // }
+
     item = {
-      key,
-      precio,
-      tipo,
-      cantidad: cantidad,
-      key_evento,
-      mesas
+      key, CodEsp, CodMed,CodPro, NomEsp, NomMed, NomPro, PreV01
     };
 
     props.state.carritoReducer.data[item.key] = item;
