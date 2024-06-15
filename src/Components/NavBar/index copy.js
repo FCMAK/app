@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Animated } from 'react-native';
-import { SButtom, SView, SImage, SDate, SNavigation, STheme, SIcon, SText, SScrollView2, SHr, SThread } from 'servisofts-component';
+import { SButtom, SView, SImage, SDate, SNavigation, STheme, SIcon, SText, SScrollView2, SHr } from 'servisofts-component';
 import { connect } from 'react-redux';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
 // import CerrarSession from '../../Pages/Usuario/Page/Perfil/CerrarSession';
 
 
-class NavBar extends React.Component {
-    static INSTACE;
+class NavBar extends Component {
+    static INSTACE = null;
     static open() {
         NavBar.INSTACE.fadeIn();
     }
@@ -21,36 +21,27 @@ class NavBar extends React.Component {
         this.state = {
             timeAnim: 350,
             isOpen: false,
-            width: 0,
         };
         NavBar.INSTACE = this;
-        // this.animSize = new Animated.Value(0);
-        this.animSize = new Animated.Value(!this.state.isOpen ? 0 : 1);
-
+        this.animSize = new Animated.Value(0);
     }
 
-    componentDidMount() {
-        NavBar.INSTACE = this;
-    }
 
     fadeIn() {
         this.setState({ isOpen: true });
-        new SThread(100, "fadein NavNar", true).start(() => {
-            Animated.timing(this.animSize, {
-                toValue: 1,
-                duration: this.state.timeAnim,
-                useNativeDriver: true
-            }).start();
-        })
+        Animated.timing(this.animSize, {
+            toValue: 1,
+            duration: this.state.timeAnim,
+            // useNativeDriver: true
+        }).start();
     }
 
     fadeOut() {
 
         Animated.timing(this.animSize, {
             toValue: 0,
-            // duration: this.state.timeAnim,
-            duration: 0,
-            useNativeDriver: true
+            duration: this.state.timeAnim,
+            // useNativeDriver: true
         }).start(() => {
             this.setState({ isOpen: false });
         });
@@ -72,19 +63,13 @@ class NavBar extends React.Component {
         var usuario = Model.usuario.Action.getUsuarioLog();
 
         var destacado = require("../../Assets/svg/perfil.jpg");
-        return <SView col={"xs-9 md-6 xl-4"} height animated backgroundColor={STheme.color.background}
+        return <SView col={"xs-9 md-6 xl-4"} height backgroundColor={STheme.color.background}
             style={{
                 position: "absolute",
-                // left: this.animSize.interpolate({
-                //     inputRange: [0, 1],
-                //     outputRange: ["-70%", "0%"],
-                // }),
-                transform: [{
-                    translateX: this.animSize.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [this.state.width * -1, 0],
-                    })
-                }],
+                left: this.animSize.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: ["-70%", "0%"],
+                }),
             }}
         >
             <SView backgroundColor={STheme.color.primary} width="100%" height={105} center
@@ -94,14 +79,9 @@ class NavBar extends React.Component {
                         <SView col={"xs-3"} center style={{ textAlign: "right" }} height>
                             <SView style={{
                                 width: 50,
-                                height: 50, 
-                                borderRadius: 30, 
-                                overflow: "hidden", 
-                                borderWidth: 1, 
-                                borderColor: "#fff",
-                                backgroundColor: STheme.color.card,
-                            }} center>
-                                    <SIcon name="nouser" height={35}  width={35} fill={STheme.color.lightGray} />
+                                height: 50, borderRadius: 30, overflow: "hidden", borderWidth: 1, borderColor: "#fff"
+                            }}>
+                                <SIcon name="nouser" width={35} fill={STheme.color.lightGray} />
                             </SView>
                         </SView>
                         <SView col={"xs-9"} onPress={() => {
@@ -111,10 +91,11 @@ class NavBar extends React.Component {
                             <SText font={"Roboto-Bold"}
                                 style={{
                                     color: "#fff",
-                                    fontSize: 17,
+                                    fontSize: 20,
                                 }}>Sin usuario</SText>
                             <SView height={22}
                                 style={{
+                                    paddingLeft: 6,
                                     alignItems: 'center',
                                 }} row>
                                 <SText fontSize={12} color={"#eee"} font='LondonTwo' style={{
@@ -127,14 +108,13 @@ class NavBar extends React.Component {
                         <SView col={"xs-3"} center style={{ textAlign: "right" }} height>
                             <SView style={{
                                 width: 50,
-                                height: 50, borderRadius: 30, overflow: "hidden", borderWidth: 1, borderColor: "#fff",
-                                backgroundColor: STheme.color.card,
+                                height: 50, borderRadius: 30, overflow: "hidden", borderWidth: 1, borderColor: "#fff"
                             }}>
-                                <SImage src={SSocket.api.root + "usuario/" + usuario?.key + "?date=" + new Date().getTime()} style={{
+                                {/* <SImage src={SSocket.api.root + "usuario/" + usuario?.key + "?date=" + new Date().getTime()} style={{
                                     width: "100%",
                                     height: "100%",
                                     resizeMode: "cover"
-                                }} />
+                                }} /> */}
                             </SView>
                         </SView>
                         <SView col={"xs-9"} onPress={() => {
@@ -160,7 +140,7 @@ class NavBar extends React.Component {
                 }
             </SView>
 
-            <SScrollView2 disableHorizontal >
+            {/* <SScrollView2 disableHorizontal >
                 <SView col={"xs-12"} center>
                     <SView height={20}></SView>
                     <SView col={"xs-11"} row onPress={() => {
@@ -267,7 +247,7 @@ class NavBar extends React.Component {
                         <SHr height={15} />
                     </SView>
                 </SView>
-            </SScrollView2>
+            </SScrollView2> */}
         </SView>
     }
     render() {
@@ -281,7 +261,6 @@ class NavBar extends React.Component {
                 //backgroundColor: "#66000066",
                 backgroundColor: STheme.color.card + "76",
             }}
-                onLayout={(event) => { this.state.width = event.nativeEvent.layout.width }}
                 activeOpacity={1}
                 onPress={() => {
                     if (this.state.isOpen) {
