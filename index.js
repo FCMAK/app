@@ -1,4 +1,4 @@
-import { AppRegistry, LogBox } from "react-native";
+import { AppRegistry, LogBox, Platform } from "react-native";
 import App from "./src/App";
 import { name as appName } from "./package.json";
 
@@ -19,7 +19,7 @@ const BuildNotification = async (notification) => {
     Firebase.setBadgeCount(displayedNotifications.length + 1);
     // console.log("ENTRO NCACCAK SCKA CKS ")
     // console.log(displayed)
-    if (!isSummaryAlreadyDisplayed) {
+    if (!isSummaryAlreadyDisplayed && Platform.OS == "android") {
         await notifee.displayNotification({
             id: groupId,
             // title: notification?.data?.razon_social,
@@ -38,7 +38,6 @@ const BuildNotification = async (notification) => {
     // return;
     let notify = {
         title: notification?.data?.title,
-        subtitle: "FCMAK",
         // title: notification?.data?.title,
         body: notification?.data?.body,
         data: notification?.data,
@@ -61,6 +60,9 @@ const BuildNotification = async (notification) => {
                 id: 'default'
             }
         },
+    }
+    if (Platform.OS == "android") {
+        notify.subtitle = "FCMAK"
     }
     if (notification?.data?.image) {
         notify.android.largeIcon = notification?.data?.image;

@@ -169,7 +169,7 @@ class Inicio extends Component {
         return (
             <SPage title={'Inicio'} hidden disableScroll>
                 <SView col={"xs-12"} flex>
-                    <ScrollView  showsVerticalScrollIndicator={false}>
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         <SView col={"xs-12"} center>
                             <SHr height={240} />
                             <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} center>
@@ -187,7 +187,9 @@ class Inicio extends Component {
                                     <SText font={"LondonMM"} fontSize={18}>{'Centros médicos:'}</SText>
                                     <SHr height={20} />
                                 </SView>
-                                <SView col={"xs-11"} center>
+                                <SView col={"xs-11"} center style={{
+                                    minHeight: 300
+                                }}>
                                     {this.getSucursales()}
                                 </SView>
                                 <SHr height={20} />
