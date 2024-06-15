@@ -50,11 +50,15 @@ class NavBar extends Component {
 
 
     getNav() {
-        var usuario = this.props.state.usuarioReducer.usuarioLog;
-        if (!usuario) {
-            SNavigation.navigate('login');
-            return <SView />
+        // var usuario = this.props.state.usuarioReducer.usuarioLog;
+        // if (!usuario) {
+        //     SNavigation.navigate('login');
+        //     return <SView />
+        // }
+        var usuario = this.props.state.usuarioReducer.usuarioLog??{
+            Nombres:"SIN USUARIO"
         }
+
         var destacado = require("../../Assets/svg/perfil.jpg");
         return <SView col={"xs-9 md-6 xl-4"} height backgroundColor={STheme.color.background}
             style={{
@@ -142,8 +146,8 @@ class NavBar extends Component {
                     </SView>
                     <SView col={"xs-12"} height={30}></SView>
                 </SView> */}
-                    {/* <SView col={"xs-11"} row onPress={() => {
-                        SNavigation.navigate("notificaciones")
+                    <SView col={"xs-11"} row onPress={() => {
+                        SNavigation.navigate("notification")
                         this.fadeOut();
                     }}  >
                         <SView row col={"xs-10"}>
@@ -154,7 +158,7 @@ class NavBar extends Component {
                             <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
                         </SView>
                         <SView col={"xs-12"} height={30}></SView>
-                    </SView> */}
+                    </SView>
 
 
 
