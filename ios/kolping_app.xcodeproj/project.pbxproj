@@ -431,8 +431,8 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Base/Frameworks",
 				);
 				INFOPLIST_FILE = kolping_app/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Casa Grande";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_CFBundleDisplayName = Kolping;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.3.8;
 				OTHER_LDFLAGS = (
@@ -440,7 +440,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.servisofts.casagrande;
+				PRODUCT_BUNDLE_IDENTIFIER = org.servisofts.kolping;
 				PRODUCT_NAME = kolping_app;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "kolping_app-Bridging-Header.h";
@@ -469,8 +469,8 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Base/Frameworks",
 				);
 				INFOPLIST_FILE = kolping_app/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Casa Grande";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_CFBundleDisplayName = Kolping;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.3.8;
 				OTHER_LDFLAGS = (
@@ -478,7 +478,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.servisofts.casagrande;
+				PRODUCT_BUNDLE_IDENTIFIER = org.servisofts.kolping;
 				PRODUCT_NAME = kolping_app;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "kolping_app-Bridging-Header.h";
