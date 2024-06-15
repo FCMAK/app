@@ -20,12 +20,12 @@ const theme: SThemeThemes = {
         primary: "#018992",
         secondary: "#ffffff",
         info: "#DE5738",
-        background: "#222222",
+        background: "#ffffff",
         card: "#eeeeee",
-        text: '#ffffff',
+        text: '#000000',
+        // card: '#00000010',
         font: "Roboto",
-        // card: '#ffffff10'
-        accent: "#3A3A3A"
+        accent: "#B5B5B7",
     }
 }
 export default theme;
