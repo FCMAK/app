@@ -50,11 +50,15 @@ class NavBar extends Component {
 
 
     getNav() {
-        var usuario = this.props.state.usuarioReducer.usuarioLog;
-        if (!usuario) {
-            SNavigation.navigate('login');
-            return <SView />
+        // var usuario = this.props.state.usuarioReducer.usuarioLog;
+        // if (!usuario) {
+        //     SNavigation.navigate('login');
+        //     return <SView />
+        // }
+        var usuario = this.props.state.usuarioReducer.usuarioLog ?? {
+            Nombres: "SIN USUARIO"
         }
+
         var destacado = require("../../Assets/svg/perfil.jpg");
         return <SView col={"xs-9 md-6 xl-4"} height backgroundColor={STheme.color.background}
             style={{
@@ -72,7 +76,7 @@ class NavBar extends Component {
                         width: 50,
                         height: 50, borderRadius: 30, overflow: "hidden", borderWidth: 1, borderColor: "#fff"
                     }}>
-                        <SImage src={SSocket.api.root + "usuario/" + usuario.key + "?date=" + new Date().getTime()} style={{
+                        <SImage src={SSocket.api.root + "usuario/" + usuario?.key + "?date=" + new Date().getTime()} style={{
                             width: "100%",
                             height: "100%",
                             resizeMode: "cover"
@@ -96,7 +100,6 @@ class NavBar extends Component {
                         alignItems: 'center',
                     }} row>
                         <SText fontSize={12} color={"#eee"} font='LondonTwo' style={{
-                            // textDecorationLine: 'underline',
                         }}>Ver perfil </SText>
                         <SIcon name="Ver" width={9} color="#fff" />
                     </SView>
@@ -107,8 +110,6 @@ class NavBar extends Component {
                 <SView col={"xs-12"} center>
                     <SView height={20}></SView>
                     <SView col={"xs-11"} row onPress={() => {
-                        // SNavigation.navigate("inicio");
-                        // this.fadeOut();
                     }}  >
                         <SView row col={"xs-10"} >
                             <SIcon fill="#666666" name={"Inicio"} height={20} width={20} />
@@ -142,8 +143,8 @@ class NavBar extends Component {
                     </SView>
                     <SView col={"xs-12"} height={30}></SView>
                 </SView> */}
-                    {/* <SView col={"xs-11"} row onPress={() => {
-                        SNavigation.navigate("notificaciones")
+                    <SView col={"xs-11"} row onPress={() => {
+                        SNavigation.navigate("notification")
                         this.fadeOut();
                     }}  >
                         <SView row col={"xs-10"}>
@@ -154,7 +155,7 @@ class NavBar extends Component {
                             <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
                         </SView>
                         <SView col={"xs-12"} height={30}></SView>
-                    </SView> */}
+                    </SView>
 
 
 
@@ -179,10 +180,6 @@ class NavBar extends Component {
                         </SView>
                         <SView col={"xs-12"} height={30}></SView>
                     </SView>
-
-
-
-                    {/* <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("cotizacion_farmacia/vacia"); this.fadeOut(); }}  > */}
 
                     <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("cotizacion_farmacia/listaCotizada"); this.fadeOut(); }}  >
                         <SView row col={"xs-10"}>
@@ -219,8 +216,6 @@ class NavBar extends Component {
                         <SView col={"xs-12"} height={30}></SView>
                     </SView>
                     <SView col={"xs-11"} row onPress={() => {
-                        // this.props.dispatch({ type: "USUARIO_LOGOUT" });
-                        // SNavigation.replace("login");
                         Model.usuario.Action.unlogin();
                         SNavigation.reset("login");
                         this.fadeOut();
@@ -243,7 +238,6 @@ class NavBar extends Component {
                     </SView>
                 </SView>
             </SScrollView2>
-            {/* <CerrarSession /> */}
         </SView>
     }
     render() {
@@ -255,7 +249,7 @@ class NavBar extends Component {
                 width: "100%",
                 height: "100%",
                 //backgroundColor: "#66000066",
-                backgroundColor: STheme.color.card+"76",
+                backgroundColor: STheme.color.card + "76",
             }}
                 activeOpacity={1}
                 onPress={() => {
