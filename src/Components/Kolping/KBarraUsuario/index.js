@@ -44,7 +44,7 @@ class KBarraUsuario extends Component {
                     }}>
                         <SText font={"Roboto-Bold"} fontSize={20} flex color={"#fff"}> {usuario.Nombres}</SText>
                         <SView height={22} onPress={() => {
-                            // SNavigation.navigate('perfil')
+                            SNavigation.navigate('perfil')
                         }} style={{
                             paddingLeft: 6,
                             alignItems: 'center',
