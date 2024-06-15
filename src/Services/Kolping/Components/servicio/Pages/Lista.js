@@ -93,9 +93,7 @@ class Lista extends Component {
                 limit={8}
                 data={this.state.data}
                 order={[{ key: "prdnom", order: "asc" }]}
-                render={(obj, index) => {
-                    console.log("index")
-                    console.log(index)
+                render={(obj, key) => {
                     return <>
                         <SView center col={"xs-12"} row style={{
                             borderLeftWidth: 3,
@@ -133,6 +131,7 @@ class Lista extends Component {
                                             defaultValue={!!this.state.check}
                                             // disabled={!allowEdit || !!this.props.disabled}
                                             onChangeText={(e) => {
+                                                console.log(obj)
                                                 if (e) {
                                                     dataSelect.push(obj)
                                                     console.log("check")
@@ -140,7 +139,8 @@ class Lista extends Component {
                                                     console.log(dataSelect)
 
                                                     carrito.Actions.addToCard({
-                                                       ...obj
+                                                        key: key,
+                                                        ...obj
                                                     }, this.props)
 
                                                 } else {
@@ -148,6 +148,7 @@ class Lista extends Component {
                                                     console.log("NO check")
                                                     this.setState({ dataSelect: dataSelect })
                                                     console.log(dataSelect)
+                                                    carrito.Actions.removeItem(key, this.props);
                                                 }
                                             }}
                                         />
@@ -173,11 +174,12 @@ class Lista extends Component {
 
         return <SView col={"xs-12"} center backgroundColor={STheme.color.primary}
             style={{
-                height: 70,
+                // height: 70,
             }}>
             <Container>
+                <SHr height={10} />
                 <SView col={'xs-12'} row center>
-                    <SView flex height={40} border={this.bgborder}>
+                    <SView flex height={47}>
                         <SText
                             color={STheme.color.secondary}
                             font={'Roboto'}
@@ -187,7 +189,7 @@ class Lista extends Component {
                             font={'Roboto'}
                             fontSize={22}>{`Bs. ${total.toFixed(2)}`}</SText>
                     </SView>
-                    <SView flex padding={10} style={{
+                    <SView flex height={40} style={{
                         backgroundColor: STheme.color.info,
                         borderRadius: 8,
                         borderWidth: 1,
@@ -198,16 +200,17 @@ class Lista extends Component {
                             return;
                         }
                         SNavigation.navigate("ficha/horarios", { dataSelect: this.state.dataSelect, codesp: this.codesp, codmed: this.codmed, nrosuc: this.nrosuc });
-                    }}>
+                    }} center>
                         <SText
                             center
                             color={STheme.color.white}
                             font={'Roboto'}
-                            fontSize={18}>
+                            fontSize={17}>
                             SOLICITAR
                         </SText>
                     </SView>
                 </SView>
+                <SHr height={10} />
             </Container >
             {/* <KButtom secondary onPress={() => {
                 if (this.state?.dataSelect.length == 0) {
