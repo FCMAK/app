@@ -15,7 +15,7 @@ class AgendaPacientes extends Component {
             onPress={() => {
                 //alert(title + '\n' + texto + '\n' + numero);
                 this.props.navigation.navigate(url);
-            }} row>
+            }} >
             <SView col={"xs-4"} center height >
                 <SView style={{}}>
                     <SText font={"LondonTwo"} color={STheme.color.text} fontSize={15}>{nombre}</SText>
@@ -43,7 +43,7 @@ class AgendaPacientes extends Component {
             onPress={() => {
                 //alert(title + '\n' + texto + '\n' + numero);
                 this.props.navigation.navigate(url);
-            }} row>
+            }} >
             <SView col={"xs-4"} center height>
                 <SView center col >
                     <SText color={STheme.color.text} font={"LondonBetween"} fontSize={18}> # {ficha} </SText>
@@ -78,7 +78,7 @@ class AgendaPacientes extends Component {
             onPress={() => {
                 //alert(title + '\n' + texto + '\n' + numero);
                 //this.props.navigation.navigate(url);
-            }} row>
+            }} >
             <SView col={"xs-4"} center height>
                 <SView center col >
                     <SText color={STheme.color.text} font={"LondonBetween"} fontSize={18}> # 3 </SText>
