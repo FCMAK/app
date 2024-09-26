@@ -179,7 +179,7 @@
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 36S3T8GU7Y;
+						DevelopmentTeam = 6P3T399V58;
 						LastSwiftMigration = 1310;
 						ProvisioningStyle = Automatic;
 					};
@@ -422,7 +422,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 10009;
-				DEVELOPMENT_TEAM = 36S3T8GU7Y;
+				DEVELOPMENT_TEAM = 6P3T399V58;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -440,7 +440,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.servisofts.kolping;
+				PRODUCT_BUNDLE_IDENTIFIER = org.servisofts.kolping2;
 				PRODUCT_NAME = kolping_app;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "kolping_app-Bridging-Header.h";
@@ -461,7 +461,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 10009;
-				DEVELOPMENT_TEAM = 36S3T8GU7Y;
+				DEVELOPMENT_TEAM = 6P3T399V58;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/GooglePlaces/Frameworks",
@@ -478,7 +478,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.servisofts.kolping;
+				PRODUCT_BUNDLE_IDENTIFIER = org.servisofts.kolping2;
 				PRODUCT_NAME = kolping_app;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "kolping_app-Bridging-Header.h";
