@@ -19,7 +19,7 @@ class HorarioDoctor extends Component {
         this.codesp = SNavigation.getParam("codesp"); //key por navegador
         this.nrosuc = SNavigation.getParam("nrosuc"); //key por navegador
         this.codmed = SNavigation.getParam("codmed"); //key por navegador
-        this.dataSelect = SNavigation.getParam("dataSelect"); //key por navegador
+        // this.dataSelect = SNavigation.getParam("dataSelect"); //key por navegador
     }
 
     componentDidMount() {
@@ -33,6 +33,30 @@ class HorarioDoctor extends Component {
         }).then(a => {
             console.log(a?.data)
             this.setState({ dataDoctor: a.data })
+
+
+
+            SSocket.sendPromise({
+                component: "turno",
+                type: "getAll",
+                // codesp: this.codesp,
+                // codesp: this.codesp,
+                nrosuc: this.nrosuc,
+                // nrosuc: "0",
+                codmed: this.codmed,
+                // codmed: "3",
+                // fectur: new SDate().toString("yyyy-MM-ddT04:00:00.000Z")
+                fectur: "2024-09-26T07:00:00.000Z"
+                //   key_usuario: Model.usuario.Action.getUsuarioLog()?.key,
+                //   key_empresa: Model.empresa.Action.getSelect()?.key,
+            }).then(a => {
+                // console.log(a?.data)
+                // this.setState({ dataDoctor: a.data })
+            }).catch(e => {
+                console.log(e)
+            })
+
+
         }).catch(e => {
             console.log(e)
         })
@@ -270,7 +294,7 @@ class HorarioDoctor extends Component {
                     <SView col={"xs-12"} style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }} >
                         <SText font={"LondonBetween"} fontSize={20} >{this.state.fecha.toString("MONTH, yyyy")}</SText>
                         <SHr height={25} />
-                        <SView col={"xs-12"} height={110} center style={{alignItems:"center", alignContent:"center"}}>
+                        <SView col={"xs-12"} height={110} center style={{ alignItems: "center", alignContent: "center" }}>
                             {b === 1 ? <SText font={"LondonBetween"} fontSize={16} color={STheme.color.text} >No hay fechas disponibles</SText> : null}
                             {this.getTurnosDias(dataDoctor?.TurMed)}
                         </SView>

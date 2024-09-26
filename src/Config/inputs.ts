@@ -28,7 +28,7 @@ const inputs = () => {
                 // fontSize: 16,
 
                 paddingStart: 8,
-                color: STheme.color.text,
+                color: "#000000",
                 backgroundColor: STheme.color.white,
                 // backgroundColor: "#E0E0E0" + "55",
                 // height: 55,
