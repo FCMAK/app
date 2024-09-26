@@ -11,6 +11,10 @@ class MensajeProceso extends Component {
     }
 
     render() {
+        let tipo_servicio = this.props.obj?.tipo;
+        if(tipo_servicio == "optica"){
+            tipo_servicio = "óptica";
+        }
         return (
             <SPage title={'Solicitud en Proceso'} center>
                 <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row>
@@ -21,7 +25,7 @@ class MensajeProceso extends Component {
                             <SHr height={20} />
                             <SText font={"LondonTwo"} center fontSize={24} color={STheme.color.black}>SOLICITUD A DOMICILIO EN PROCESO </SText>
                             <SHr height={30} />
-                            <SText center fontSize={16}>Ha solicitado un servicio de {this.props.obj?.tipo} a domicilio la cuál será atendida a la brevedad posible.</SText>
+                            <SText center fontSize={16}>Ha solicitado un servicio de {tipo_servicio.toUpperCase()} a domicilio la cuál será atendida a la brevedad posible.</SText>
                         </SView>
                         <SHr height={35} />
                         <SView col={"xs-12"} center>
