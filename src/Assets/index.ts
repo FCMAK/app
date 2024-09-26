@@ -177,6 +177,9 @@ import iconp2, { ReactComponent as iconp2W } from './svg/iconp2.svg';
 import bnext, { ReactComponent as bnextW } from './svg/bnext.svg';
 import marcadorMapa, { ReactComponent as marcadorMapaW } from './svg/marcadorMapa.svg';
 
+import paciente, { ReactComponent as pacienteW } from './svg/paciente.svg';
+import salir, { ReactComponent as salirW } from './svg/salir.svg';
+
 const Assets: SAssets = {
     svg: {
         "Enfermera1": { Native: Enfermera1, Web: Enfermera1W },
@@ -332,7 +335,10 @@ const Assets: SAssets = {
         "iconp1": { Native: iconp1, Web: iconp1W },
         "iconp2": { Native: iconp2, Web: iconp2W },
         "bnext": { Native: bnext, Web: bnextW },
-        "marcadorMapa": { Native: marcadorMapa, Web: marcadorMapaW }
+        "marcadorMapa": { Native: marcadorMapa, Web: marcadorMapaW },
+
+        "paciente": { Native: paciente, Web: pacienteW },
+        "salir": { Native: salir, Web: salirW }
     }
 }
 
