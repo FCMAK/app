@@ -37,6 +37,12 @@ class Lista extends Component {
             CodEsp: this.codesp,
             CodMed: this.codmed
         }).then(e => {
+            e.data.sort((a, b) => {
+                const isConsultaA = a.NomPro.includes("CONSULTA") || a.NomPro.includes("RE-CONSULTA");
+                const isConsultaB = b.NomPro.includes("CONSULTA") || b.NomPro.includes("RE-CONSULTA");
+            
+                return isConsultaB - isConsultaA;
+            });
             this.setState({ loading: false, data: e.data })
         }).catch(e => {
             this.setState({ loading: false })
@@ -92,7 +98,7 @@ class Lista extends Component {
                 buscador
                 limit={8}
                 data={this.state.data}
-                order={[{ key: "prdnom", order: "asc" }]}
+                // order={[{ key: "prdnom", order: "asc" }]}
                 render={(obj, key) => {
                     return <>
                         <SView center col={"xs-12"} row style={{
