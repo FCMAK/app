@@ -166,7 +166,7 @@ class NavBar extends React.Component {
                     <SView col={"xs-11"} row onPress={() => {
                     }}  >
                         <SView row col={"xs-10"} >
-                            <SIcon fill="#666666" name={"Inicio"} height={20} width={20} />
+                            <SIcon fill="#666666" name={"Inicio"} height={20} width={20} style={{paddingTop:3}}  />
                             <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Inicio</SText>
                         </SView>
                         <SView style={{ right: 0, position: "absolute", top: 2 }} row >
@@ -176,9 +176,20 @@ class NavBar extends React.Component {
                     </SView>
 
                     <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("kolping"); this.fadeOut(); }}  >
-                        <SView row col={"xs-10"}>
-                            <SIcon fill="#666666" name={"Kolping"} height={20} width={20} />
+                        <SView row col={"xs-10"} >
+                            <SIcon fill="#666666" name={"Kolping"} height={20} width={20} style={{paddingTop:3}} />
                             <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Sobre Kolping</SText>
+                        </SView>
+                        <SView style={{ right: 0, position: "absolute", top: 2 }} row >
+                            <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
+                        </SView>
+                        <SView col={"xs-12"} height={30}></SView>
+                    </SView>
+
+                    <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("/paciente"); this.fadeOut(); }}  >
+                        <SView row col={"xs-10"} >
+                            <SIcon fill="#666666" name={"paciente"} height={20} width={20} style={{paddingTop:3}} />
+                            <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Mis Pacientes</SText>
                         </SView>
                         <SView style={{ right: 0, position: "absolute", top: 2 }} row >
                             <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
@@ -191,7 +202,7 @@ class NavBar extends React.Component {
                         this.fadeOut();
                     }}  >
                         <SView row col={"xs-10"}>
-                            <SIcon fill="#666666" name={"KNotify"} height={20} width={20} />
+                            <SIcon fill="#666666" name={"KNotify"} height={20} width={20} style={{paddingTop:3}}  />
                             <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Mis Notificaciones</SText>
                         </SView>
                         <SView style={{ right: 0, position: "absolute", top: 2 }} row >
@@ -202,7 +213,7 @@ class NavBar extends React.Component {
 
                     <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("farmacia/mensajeCarritoVacio"); this.fadeOut(); }}  >
                         <SView row col={"xs-10"}>
-                            <SIcon fill="#666666" name={"Compras"} height={20} width={20} />
+                            <SIcon fill="#666666" name={"Compras"} height={20} width={20} style={{paddingTop:3}}  />
                             <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Mis Compras</SText>
                         </SView>
                         <SView style={{ right: 0, position: "absolute", top: 2 }} row >
@@ -213,7 +224,7 @@ class NavBar extends React.Component {
 
                     <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("cotizacion_farmacia/listaCotizada"); this.fadeOut(); }}  >
                         <SView row col={"xs-10"}>
-                            <SIcon fill="#666666" name={"cotizacion"} height={22} width={20} />
+                            <SIcon fill="#666666" name={"cotizacion"} height={22} width={20} style={{paddingTop:3}}  />
                             <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Mis Cotizaciones</SText>
                         </SView>
                         <SView style={{ right: 0, position: "absolute", top: 2 }} row >
@@ -227,7 +238,7 @@ class NavBar extends React.Component {
                         this.fadeOut();
                     }}>
                         <SView row col={"xs-10"}>
-                            <SIcon fill="#666666" name={"Configuracion"} height={20} width={20} />
+                            <SIcon fill="#666666" name={"Configuracion"} height={20} width={20} style={{paddingTop:3}}  />
                             <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Configuración</SText>
                         </SView>
                         <SView style={{ right: 0, position: "absolute", top: 2 }} row >
@@ -237,7 +248,7 @@ class NavBar extends React.Component {
                     </SView>
                     <SView col={"xs-11"} row onPress={() => { }}  >
                         <SView row col={"xs-10"}>
-                            <SIcon fill="#666666" name={"Ayuda"} height={20} width={20} />
+                            <SIcon fill="#666666" name={"Ayuda"} height={20} width={20} style={{paddingTop:3}}  />
                             <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Ayuda</SText>
                         </SView>
                         <SView style={{ right: 0, position: "absolute", top: 2 }} row >
@@ -251,7 +262,7 @@ class NavBar extends React.Component {
                         this.fadeOut();
                     }}>
                         <SView row col={"xs-10"}>
-                            <SIcon fill="#666666" name={"Ayuda"} height={20} width={20} />
+                            <SIcon fill="#666666" name={"salir"} height={20} width={20} style={{paddingTop:3}}  />
                             <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Salir</SText>
                         </SView>
                         <SView style={{ right: 0, position: "absolute", top: 2 }} row >

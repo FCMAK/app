@@ -5,7 +5,8 @@ import Pages from '.';
 import Kolping from '../Components/Kolping';
 import sucursal from '../Services/Kolping/Components/sucursal';
 import Model from '../Model';
-import { ScrollView } from 'react-native';
+import { FlatList, ScrollView } from 'react-native';
+import SSocket from 'servisofts-socket';
 
 class Inicio extends Component {
     constructor(props) {
@@ -15,6 +16,17 @@ class Inicio extends Component {
     }
 
     componentDidMount() {
+        SSocket.sendPromise({
+            component: "paciente_usuario",
+            type: "getAll",
+            key_usuario: Model.usuario.Action.getKey()
+            // ci: "6392496"
+        }).then(e => {
+            console.log(e);
+            this.setState({ data: e.data })
+        }).catch(e => {
+            console.log(e);
+        })
         // if (!usuario.Actions.validateSession(this.props)) {
         //     return <SLoad />
         // }
@@ -57,6 +69,43 @@ class Inicio extends Component {
             </>
         })
     }
+
+    renderItemPaciente({ index, item }) {
+        console.log(item);
+        return <SView width={160} height={180} padding={10} >
+            <SView width={150} height padding={5} style={{
+                borderRadius: 15,
+                // borderWidth: 1,
+                // borderColor: STheme.color.darkGray,
+                backgroundColor: STheme.color.card
+            }} row center>
+                <SView width={80} height={80} style={{ borderRadius: 50, overflow: "hidden" }}>
+                    <SImage src={require("../Assets/img/noimage.jpg")} />
+                </SView>
+                <SView center col={'xs-12'}>
+                    <SText fontSize={14} center font='LondonBetween'>{item?.alias}</SText>
+                    <SHr />
+                    <SText font='LondonBetween' color={STheme.color.gray}>{item?.ci}</SText>
+                </SView>
+            </SView>
+        </SView>
+    }
+
+    getPacientes() {
+        // var pacientes = sucursal.Actions.getAll(this.props);
+        // var sucursales = null;
+        if (!this.state.data) return <SLoad />
+        let data = Object.values(this.state.data)
+        return <FlatList
+            style={{ width: "100%" }}
+            horizontal
+            showsHorizontalScrollIndicator={true}
+            data={data}
+            keyExtractor={item => item.key}
+            renderItem={this.renderItemPaciente.bind(this)}
+        />
+    }
+
     getContactanos() {
         return <SView col={"xs-12"} center >
             <SView col={"xs-11"} center>
@@ -178,6 +227,11 @@ class Inicio extends Component {
                                     <SText font={"LondonMM"} fontSize={18}>{'Servicios a domicilio:'}</SText>
                                 </SView>
                                 {this.getContent1()}
+                                <SView col={"xs-12"} height={20}></SView>
+                                <SView col={"xs-11"}>
+                                    <SText font={"LondonMM"} fontSize={18}>{'Mis pacientes:'}</SText>
+                                </SView>
+                                {this.getPacientes()}
                                 <SView col={"xs-12"} height={20}></SView>
                                 {/* <SView col={"xs-11"}>
                                     <SText font={"LondonMM"} fontSize={18}>{'Nuestros servicios:'}</SText>

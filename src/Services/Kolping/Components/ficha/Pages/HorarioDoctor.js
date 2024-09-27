@@ -33,8 +33,8 @@ class HorarioDoctor extends Component {
         }).then(a => {
             console.log(a?.data)
             this.setState({ dataDoctor: a.data })
-
-
+            let today = new SDate().toString("yyyy-MM-ddThh:mm:ss");
+            // today.setDate(today.getDate() - 1);
 
             SSocket.sendPromise({
                 component: "turno",
@@ -46,12 +46,17 @@ class HorarioDoctor extends Component {
                 codmed: this.codmed,
                 // codmed: "3",
                 // fectur: new SDate().toString("yyyy-MM-ddT04:00:00.000Z")
-                fectur: "2024-09-26T07:00:00.000Z"
+                // fectur: new SDate().toString("yyyy-MM-ddTHH:mm:ss")
+                // fectur: today.toISOString()
+                //2024-09-27T12:06:00
+                fectur: today
+                
+                // fectur: "2024-09-27T07:00:00.000Z"
                 //   key_usuario: Model.usuario.Action.getUsuarioLog()?.key,
                 //   key_empresa: Model.empresa.Action.getSelect()?.key,
             }).then(a => {
                 // console.log(a?.data)
-                // this.setState({ dataDoctor: a.data })
+                this.setState({ dataDoctorTurno: a.data })
             }).catch(e => {
                 console.log(e)
             })
@@ -225,11 +230,13 @@ class HorarioDoctor extends Component {
         //     return this.getDia(dayOk.getDate(), diastr, dia.NroDia, fechaCercana, dayOk)
         // })
     }
-    getHoras(TurMed) {
+    getHoras(TurMed, TurMedCorrecto) {
         console.log("TURMED", TurMed)
+        console.log("TURMEDCORRECTO", TurMedCorrecto)
         if (!TurMed) return <SLoad />;
         console.log("this.state.nroDiaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
         console.log(this.state.nroDia)
+        
         var TurMed_ = TurMed.filter(a => a.NroDia == this.state.nroDia)
         return TurMed_.map((dia) => {
             this.state.turno = dia
@@ -257,6 +264,9 @@ class HorarioDoctor extends Component {
         dataDoctor.TurMed.length === 0 ? b = 1 : null
 
         var dataEspecialidad = {}
+        console.log("dataDoctorTurno")
+        console.log(this.state.dataDoctorTurno)
+       
 
         return (
             <SPage title={'Seleccione su horario'}  >
@@ -311,7 +321,7 @@ class HorarioDoctor extends Component {
                             {/* {!this.state.dia ? <SText font={"LondonBetween"} fontSize={16} color={STheme.color.text} >Seleccione una fecha</SText> : null} */}
 
                             {/* {(this.state.horas) ? this.getHoras(dataDoctor?.TurMed) : null} */}
-                            {this.getHoras(dataDoctor?.TurMed)}
+                            {this.getHoras(dataDoctor?.TurMed, this.state.dataDoctorTurno)}
 
 
                         </SView>

@@ -58,6 +58,7 @@ class Item extends Component<_props> {
                             </SText>
                         </SView>
                         <SHr height={3} />
+                        {/* {} */}
                         <SView col={"xs-1 sm-1 md-1 lg-1 xl-1"}  >
                             <SIcon name={"whatsApp"} width={14} height={14} fill={STheme.color.info} />
                         </SView>
