@@ -100,12 +100,20 @@ class Inicio extends Component {
             style={{ width: "100%" }}
             horizontal
             ListHeaderComponent={() => {
-                return <SView width={160} height={180} padding={10} >
-                    <SView width={150} height padding={5} style={{
+                return <SView width={100} height={180} padding={10} center onPress={() => {
+                    SNavigation.navigate("/paciente/buscar")
+                }}>
+                    <SView width={100} height padding={5} style={{
                         borderRadius: 15,
                         backgroundColor: STheme.color.card
                     }} row center>
-                        <SText>AGREGAR</SText>
+                        <SHr width={10} />
+                        <SIcon name={"addUser"} fill={STheme.color.primary} width={50} height={50} />
+                        <SView height={30} >
+                            <SText>AGREGAR</SText>
+                            <SText>PACIENTE</SText>
+                        </SView>
+                        <SHr width={10} />
                     </SView>
                 </SView>
             }}
