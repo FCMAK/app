@@ -18,13 +18,15 @@ import registro from './registro';
 // import perfil from './perfil';
 import test2 from './test2';
 import paciente from './paciente';
+import novedades from './novedades';
 // const NewPages = SPage.combinePages("/", {
 //     ...notification,
 // })
 
 const newPages = SPage.combinePages("/", {
     // "": root,
-    ...paciente
+    ...paciente,
+    ...novedades
 });
 
 const Pages: SPageListProps = {
