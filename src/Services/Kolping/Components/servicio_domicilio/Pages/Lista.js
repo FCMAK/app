@@ -62,6 +62,7 @@ class Lista extends Component {
         if (!usuarios) return <SLoad />;
         return <SList
             data={data}
+            col={"xs-12"}
             center
             space={16}
             render={(obj) => {
@@ -71,7 +72,7 @@ class Lista extends Component {
                 if (this.state.filter == "Historial" && estado == "Pendiente") return null;
 
                 var usuario = usuarios[obj.key_usuario];
-                return <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} card height={70} center style={{
+                return <SView col={"xs-12"} card height={70} center row  style={{
                     borderWidth: 1,
                     borderRadius: 8,
                     borderColor: this.getEstadoColor(estado),
@@ -79,20 +80,20 @@ class Lista extends Component {
                     SNavigation.navigate(Parent.component + "/perfil", { key: obj.key })
                 }}>
                     <SView col={"xs-12"} height row center>
-                        <SView flex height center style={{
+                        <SView row height center style={{
                             padding: 8,
-                        }} >
+                        }} col={"xs-6"}>
                             <SText font='LondonBetween' color={STheme.color.lightGray} fontSize={10}>{new SDate(obj.fecha_on).toString("MONTH, dd - hh:mm")}</SText>
                             <SHr />
                             <SText font='LondonTwo' fontSize={12} center>{usuario?.Nombres + " " + usuario?.Apellidos}</SText>
                             <SHr />
                         </SView>
                         <SView width={2} height={"70%"} backgroundColor={STheme.color.lightGray} />
-                        <SView flex height center >
+                        <SView col={"xs-2.5"} row height center >
                             <SText font='LondonBetween' fontSize={20}>{`#${obj.numero}`}</SText>
                         </SView>
                         <SView width={2} height={"70%"} backgroundColor={STheme.color.lightGray} />
-                        <SView flex height center>
+                        <SView row col={"xs-3"} height center>
                             {this.getEstadoText(estado)}
                         </SView>
                     </SView>
@@ -114,7 +115,9 @@ class Lista extends Component {
                 </SView>
                 <SHr />
                 <SHr />
-                {this.getContent()}
+                <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"}>
+                    {this.getContent()}
+                </SView>
             </SPage>
         );
     }

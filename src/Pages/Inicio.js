@@ -30,6 +30,18 @@ class Inicio extends Component {
         // if (!usuario.Actions.validateSession(this.props)) {
         //     return <SLoad />
         // }
+
+        SSocket.sendPromise({
+            component: "novedades",
+            type: "getAll",
+            key_usuario: Model.usuario.Action.getKey()
+            // ci: "6392496"
+        }).then(e => {
+            console.log(e);
+            this.setState({ dataBanner: e.data })
+        }).catch(e => {
+            console.log(e);
+        })
     }
     getCard() {
         return <SView col={"xs-12"} center style={{
@@ -91,6 +103,37 @@ class Inicio extends Component {
         </SView>
     }
 
+    renderItemServicios({ index, item }) {
+        console.log(item);
+        return <SView width={225} height={180} padding={10} >
+            <SView width={220} height padding={5} style={{
+                borderRadius: 15,
+                // borderWidth: 1,
+                // borderColor: STheme.color.darkGray,
+                backgroundColor: STheme.color.card
+            }} row center>
+                <SView width={214} height style={{ borderRadius: 16, overflow: "hidden" }} center>
+                    {/* <SImage src={require("../Assets/img/noimage.jpg")} /> */}
+                    <SImage src={SSocket.api.root + "novedades/" + item.key} style={{
+                                borderTopLeftRadius: 8,
+                                borderTopRightRadius: 8,
+                                maxWidth: "100%", minWidth: "100%", overflow: "hidden",
+                                resizeMode: "contain",
+                                height: 165
+                            }} />
+                </SView>
+                <SView center col={'xs-12'} height={25} style={{
+                    backgroundColor: STheme.color.primary+"90",
+                    position: "absolute",
+                    top: 65,
+                    overflow:"hidden"
+                }}>
+                    <SText fontSize={18} font='LondonTwo' color={STheme.color.white}>Nombre servicio</SText>
+                </SView>
+            </SView>
+        </SView>
+    }
+
     getPacientes() {
         // var pacientes = sucursal.Actions.getAll(this.props);
         // var sucursales = null;
@@ -100,12 +143,20 @@ class Inicio extends Component {
             style={{ width: "100%" }}
             horizontal
             ListHeaderComponent={() => {
-                return <SView width={160} height={180} padding={10} >
-                    <SView width={150} height padding={5} style={{
+                return <SView width={100} height={180} padding={10} center onPress={() => {
+                    SNavigation.navigate("/paciente/buscar")
+                }}>
+                    <SView width={100} height padding={5} style={{
                         borderRadius: 15,
                         backgroundColor: STheme.color.card
                     }} row center>
-                        <SText>AGREGAR</SText>
+                        <SHr width={10} />
+                        <SIcon name={"addUser"} fill={STheme.color.primary} width={50} height={50} />
+                        <SView height={30} >
+                            <SText>AGREGAR</SText>
+                            <SText>PACIENTE</SText>
+                        </SView>
+                        <SHr width={10} />
                     </SView>
                 </SView>
             }}
@@ -219,6 +270,47 @@ class Inicio extends Component {
         </SView>
     }
 
+    getServicios() {
+        if (!this.state.dataBanner) return <SLoad />
+        let data = Object.values(this.state.dataBanner)
+        return <FlatList
+            style={{ width: "100%" }}
+            horizontal
+            // ListHeaderComponent={() => {
+            //     return <SView width={100} height={180} padding={10} center onPress={() => {
+            //         SNavigation.navigate("/servicio/buscar")
+            //     }}>
+            //         <SView width={100} height padding={5} style={{
+            //             borderRadius: 15,
+            //             backgroundColor: STheme.color.card
+            //         }} row center>
+            //             <SHr width={10} />
+            //             <SIcon name={"addUser"} fill={STheme.color.primary} width={50} height={50} />
+            //             <SView height={30} >
+            //                 <SText>AGREGAR</SText>
+            //                 <SText>SERVICIO</SText>
+            //             </SView>
+            //             <SHr width={10} />
+            //         </SView>
+            //     </SView>
+            // }}
+            showsHorizontalScrollIndicator={true}
+            data={data}
+            keyExtractor={item => item.key}
+            renderItem={this.renderItemServicios.bind(this)}
+        />
+        return <SView col={"xs-12"} row center>
+            <SHr height={10} />
+            {/* {this.getButtom({ label: 'Farmacia', url: 'farmacia', icon: 'sfarmacia' })}
+            {this.getButtom({ label: 'Óptica', url: 'inDevelop', icon: 'soptica' })}
+            {this.getButtom({ label: 'Laboratorio', url: 'inDevelop', icon: 'slaboratorio' })}
+            {this.getButtom({ label: 'Enfermería', url: 'inDevelop', icon: 'senfermeria' })}
+            {this.getButtom({ label: 'Imagenología', url: 'servicio/lista', icon: 'simagenologia' })}
+            {this.getAdministracion()} */}
+        </SView>
+    }
+
+
     render() {
         // if (!Model.usuario.Action.getKey()) {
         //     console.log("aquiiii INICIOOOO no hay user")
@@ -239,10 +331,19 @@ class Inicio extends Component {
                                 {this.getContent1()}
                                 <SView col={"xs-12"} height={20}></SView>
                                 <SView col={"xs-11"}>
+                                    <SText font={"LondonMM"} fontSize={18}>{'Nuestros servicios:'}</SText>
+                                </SView>
+                                {this.getServicios()}
+                                <SView col={"xs-12"} height={20}></SView>
+                                
+
+                                <SView col={"xs-11"}>
                                     <SText font={"LondonMM"} fontSize={18}>{'Mis pacientes:'}</SText>
                                 </SView>
                                 {this.getPacientes()}
                                 <SView col={"xs-12"} height={20}></SView>
+
+                               
                                 {/* <SView col={"xs-11"}>
                                     <SText font={"LondonMM"} fontSize={18}>{'Nuestros servicios:'}</SText>
                                 </SView>

@@ -179,6 +179,7 @@ import marcadorMapa, { ReactComponent as marcadorMapaW } from './svg/marcadorMap
 
 import paciente, { ReactComponent as pacienteW } from './svg/paciente.svg';
 import salir, { ReactComponent as salirW } from './svg/salir.svg';
+import addUser, { ReactComponent as addUserW } from './svg/addUser.svg';
 
 const Assets: SAssets = {
     svg: {
@@ -338,7 +339,8 @@ const Assets: SAssets = {
         "marcadorMapa": { Native: marcadorMapa, Web: marcadorMapaW },
 
         "paciente": { Native: paciente, Web: pacienteW },
-        "salir": { Native: salir, Web: salirW }
+        "salir": { Native: salir, Web: salirW },
+        "addUser": { Native: addUser, Web: addUserW },
     }
 }
 

@@ -27,7 +27,7 @@ class Item extends Component<_props> {
                                 resizeMode: 'cover',
                             }}
                         /> */}
-                        <SImage enablePreview src={require('../../../../../Assets/img/noimage.jpg')}  width={"100%"} height={"100%"}
+                        <SImage enablePreview src={require('../../../../../Assets/img/noimage.jpg')} width={"100%"} height={"100%"}
                             style={{
                                 resizeMode: 'cover',
                             }}
@@ -58,13 +58,16 @@ class Item extends Component<_props> {
                             </SText>
                         </SView>
                         <SHr height={3} />
-                        {/* {} */}
-                        <SView col={"xs-1 sm-1 md-1 lg-1 xl-1"}  >
-                            <SIcon name={"whatsApp"} width={14} height={14} fill={STheme.color.info} />
-                        </SView>
-                        <SView col={"xs-11"} style={{ paddingTop: 2 }}  >
-                            <SText font={"LondonBetween"} fontSize={14} color={STheme.color.primary}>{this.props.obj?.MsgSuc}</SText>
-                        </SView>
+                        {(this.props.obj?.MsgSuc == "") ? <SView /> : <SView col={"xs-12"} row>
+                             <SHr height={3} />
+                            <SView col={"xs-1 sm-1 md-1 lg-1 xl-1"}  >
+                                <SIcon name={"whatsApp"} width={14} height={14} fill={STheme.color.info} />
+                            </SView>
+                            <SView col={"xs-11"} style={{ paddingTop: 2 }}  >
+                                <SText font={"LondonBetween"} fontSize={14} color={STheme.color.primary}>{this.props.obj?.MsgSuc}</SText>
+                            </SView>
+                        </SView>}
+
                     </SView>
 
 

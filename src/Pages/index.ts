@@ -19,6 +19,7 @@ import registro from './registro';
 import test2 from './test2';
 import paciente from './paciente';
 import ficha from './ficha';
+import novedades from './novedades';
 // const NewPages = SPage.combinePages("/", {
 //     ...notification,
 // })
@@ -26,7 +27,8 @@ import ficha from './ficha';
 const newPages = SPage.combinePages("/", {
     // "": root,
     ...ficha,
-    ...paciente
+    ...paciente,
+    ...novedades
 });
 
 const Pages: SPageListProps = {
