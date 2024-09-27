@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SHr, SIcon, SPage, SText, STheme, SView, SNavigation, SLoad, SImage, SBuscador } from 'servisofts-component';
-import Kolping from '../../../../../Components/Kolping';
-import sucursal from '../../../../../Services/Kolping/Components/sucursal';
+import Kolping from '../../Components/Kolping';
+import sucursal from '../../Services/Kolping/Components/sucursal';
 
 
 
@@ -22,7 +22,8 @@ class ListaCentros extends Component {
             }
             return <>
                 <sucursal.Item obj={sucursales[key]} onPress={() => {
-                    SNavigation.navigate("ficha/opciones", { keysuc: key })
+                    // SNavigation.navigate("ficha/opciones", { keysuc: key })
+                    SNavigation.navigate("/ficha/medicos", { nrosuc: key })
                 }} />
                 <SHr height={16} />
             </>

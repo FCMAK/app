@@ -44,7 +44,7 @@ class Inicio extends Component {
                 <SHr height={16} />
                 <SView col={"xs-12"} center>
                     <Kolping.KButtom secondary small onPress={() => {
-                        SNavigation.navigate("ficha")
+                        SNavigation.navigate("/ficha")
                     }} width={130} height={35}>Comprar ficha</Kolping.KButtom>
                 </SView>
                 <SView style={{

@@ -33,7 +33,8 @@ class HorarioDoctor extends Component {
         }).then(a => {
             console.log(a?.data)
             this.setState({ dataDoctor: a.data })
-            let today = new SDate().toString("yyyy-MM-ddThh:mm:ss");
+            let today = this.state.fecha.toString("yyyy-MM-ddThh:mm:ss");
+            console.log(today)
             // today.setDate(today.getDate() - 1);
 
             SSocket.sendPromise({
@@ -50,7 +51,7 @@ class HorarioDoctor extends Component {
                 // fectur: today.toISOString()
                 //2024-09-27T12:06:00
                 fectur: today
-                
+
                 // fectur: "2024-09-27T07:00:00.000Z"
                 //   key_usuario: Model.usuario.Action.getUsuarioLog()?.key,
                 //   key_empresa: Model.empresa.Action.getSelect()?.key,
@@ -79,7 +80,7 @@ class HorarioDoctor extends Component {
             <SText font={"LondonBetween"} fontSize={14} color={(this.state.dia == dia ? STheme.color.secondary : STheme.color.text)}>{diastr}</SText>
         </SView>
     }
-    getDia(dia, diastr, nroDia, fechaCercana, date) {
+    getDia({ dia, diastr, nroDia, fechaCercana, date }) {
         fechaCercana ? this.state.nroDia = nroDia : null
         fechaCercana ? this.state.fechaCercana = fechaCercana : null
 
@@ -90,19 +91,16 @@ class HorarioDoctor extends Component {
             <SView width={80} height={90} center style={{ backgroundColor: (this.state.dia == dia ? STheme.color.primary : fechaCercana ? STheme.color.primary : STheme.color.card), borderRadius: 8, borderColor: STheme.color.lightGray, borderWidth: 1 }}
                 // {/* <SView width={80} height={90} center style={{ backgroundColor: (fechaCercana ? STheme.color.primary : STheme.color.card), borderRadius: 8, borderColor: STheme.color.lightGray, borderWidth: 1 }} */}
                 onPress={() => {
+                    console.log(date)
+
+                    this.state.dia = dia;
+                    this.state.horas = dia;
+                    this.state.nroDia = nroDia;
+                    this.state.fecha = new SDate(fechaCercana);
                     this.setState({
-                        dia: dia
+                        ...this.state
                     })
-                    // fechaCercana = null;
-                    this.setState({
-                        horas: dia
-                    })
-                    this.setState({
-                        nroDia: nroDia
-                    })
-                    this.setState({
-                        date: date
-                    })
+                    this.componentDidMount();
                 }}>
                 <SText font={"LondonTwo"} fontSize={24} color={(this.state.dia == dia ? STheme.color.secondary : fechaCercana ? STheme.color.secondary : STheme.color.text)} >{dia}</SText>
                 {/* <SText font={"LondonTwo"} fontSize={24} color={(fechaCercana ? STheme.color.secondary : STheme.color.text)} >{dia}</SText> */}
@@ -173,7 +171,7 @@ class HorarioDoctor extends Component {
     getTurnosDias(TurMed) {
         if (!TurMed) return null;
         var dias = ["DO", "LU", "MA", "MI", "JU", "VI", "SA"]
-        console.log("TurMed", TurMed)
+        // console.log("TurMed", TurMed)
         var minDiff = new Date();
         var fechaCercana;
         return <SList
@@ -203,9 +201,17 @@ class HorarioDoctor extends Component {
                         fechaCercana = null;
                     }
                 }
-                console.log(this.state.date)
 
-                return this.getDia(dayOk.getDate(), diastr, dia.NroDia, fechaCercana, dayOk)
+
+                // return this.getDia(dayOk.getDate(), diastr, dia.NroDia, fechaCercana, dayOk)
+                return this.getDia({
+                    dia: dayOk.getDate(),
+                    diastr: diastr,
+                    nroDia: dia.NroDia,
+                    fechaCercana: fechaCercana,
+                    date: dayOk
+
+                })
             }}
         />
         // return TurMed.map((dia, index) => {
@@ -231,12 +237,12 @@ class HorarioDoctor extends Component {
         // })
     }
     getHoras(TurMed, TurMedCorrecto) {
-        console.log("TURMED", TurMed)
-        console.log("TURMEDCORRECTO", TurMedCorrecto)
+        // console.log("TURMED", TurMed)
+        // console.log("TURMEDCORRECTO", TurMedCorrecto)
         if (!TurMed) return <SLoad />;
-        console.log("this.state.nroDiaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-        console.log(this.state.nroDia)
-        
+        // console.log("this.state.nroDiaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        // console.log(this.state.nroDia)
+
         var TurMed_ = TurMed.filter(a => a.NroDia == this.state.nroDia)
         return TurMed_.map((dia) => {
             this.state.turno = dia
@@ -264,9 +270,9 @@ class HorarioDoctor extends Component {
         dataDoctor.TurMed.length === 0 ? b = 1 : null
 
         var dataEspecialidad = {}
-        console.log("dataDoctorTurno")
-        console.log(this.state.dataDoctorTurno)
-       
+        // console.log("dataDoctorTurno")
+        // console.log(this.state.dataDoctorTurno)
+
 
         return (
             <SPage title={'Seleccione su horario'}  >

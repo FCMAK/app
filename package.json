@@ -7,7 +7,7 @@
     "build-old": "react-scripts build",
     "web-old": "react-scripts start",
     "build": "webpack --config webpack.prod.js",
-    "web": "webpack serve --config webpack.dev.js",
+    "web": "NODE_OPTIONS=--max-old-space-size=4096 webpack serve --config webpack.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "SERVISOFTS S.R.L.",
@@ -34,6 +34,8 @@
     "react": "18.2.0",
     "react-apple-login": "1.1.6",
     "react-dom": "18.2.0",
+    "react-facebook-login": "^4.1.1",
+    "react-google-login": "^5.2.2",
     "react-native": "0.71.4",
     "react-native-blob-util": "^0.19.1",
     "react-native-compressor": "1.6.1",
@@ -63,7 +65,7 @@
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
     "servisofts-charts": "^1.0.1",
-    "servisofts-component": "3.0.27",
+    "servisofts-component": "3.0.41",
     "servisofts-db": "^1.0.7",
     "servisofts-model": "^1.0.7",
     "servisofts-page": "^1.0.12",
@@ -77,9 +79,7 @@
     "supercluster": "^6.0.2",
     "uninstall": "^0.0.0",
     "xlsx": "^0.18.5",
-    "xlsx-color": "^0.14.30",
-    "react-facebook-login": "^4.1.1",
-    "react-google-login": "^5.2.2"
+    "xlsx-color": "^0.14.30"
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",
@@ -98,16 +98,17 @@
     "css-loader": "^7.1.1",
     "metro-react-native-babel-preset": "0.73.8",
     "mini-svg-data-uri": "^1.4.4",
+    "react-refresh": "^0.14.2",
     "react-scripts": "^5.0.1",
     "svg-inline-loader": "^0.8.2",
     "svg-url-loader": "^8.0.0",
+    "thread-loader": "^4.0.4",
     "ts-loader": "^9.5.1",
     "typescript": "4.8.4",
     "url-loader": "^4.1.1",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4",
-    "react-refresh": "^0.14.2",
     "webpack-merge": "^5.10.0"
   },
   "browserslist": {

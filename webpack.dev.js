@@ -6,10 +6,20 @@ const webpack = require('webpack');
 module.exports = merge(common, {
     mode: 'development',
     devtool: 'source-map',
+    cache: {
+        type: 'filesystem', // Activa la caché en disco
+    },
     devServer: {
         port: 3001,
         hot: true,
         historyApiFallback: true,
+        liveReload: false,
+        watchFiles: {
+            paths: ['src/**/*'],  // Observa sólo archivos en `src`
+            options: {
+                ignored: /node_modules/, // Ignorar cambios en node_modules
+            },
+        },
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
@@ -20,12 +30,20 @@ module.exports = merge(common, {
             {
                 test: /\.(js|jsx|tsx|ts)$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        plugins: [require.resolve('react-refresh/babel')],
+                use: [
+                    {
+                        loader: 'thread-loader',
+                        options: {
+                            workers: 4, // Número de hilos a utilizar
+                        },
                     },
-                },
+                    {
+
+                        loader: 'babel-loader',
+                        options: {
+                            plugins: [require.resolve('react-refresh/babel')],
+                        },
+                    }],
             },
         ],
     },

@@ -205,7 +205,7 @@ class Lista extends Component {
                             SPopup.alert("Debe seleccionar al menos un servicio")
                             return;
                         }
-                        SNavigation.navigate("ficha/horarios", { codesp: this.codesp, codmed: this.codmed, nrosuc: this.nrosuc });
+                        SNavigation.navigate("/ficha/horarios", { codesp: this.codesp, codmed: this.codmed, nrosuc: this.nrosuc });
                     }} center>
                         <SText
                             center

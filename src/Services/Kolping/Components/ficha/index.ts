@@ -3,7 +3,6 @@ const component = "ficha"; // COMPONENT NAME
 const version = "1.0";
 // ---------------------------------------
 import Inicio from "./Pages/Inicio";
-import Centros from "./Pages/ListaCentros";
 import ListaEspecialidad from "./Pages/ListaEspecialidad";
 import ListaDoctores from "./Pages/ListaDoctores";
 import HorarioDoctor from "./Pages/HorarioDoctor";
@@ -39,11 +38,11 @@ export default {
     Pages: {
         //el component cuando paso un dato
         // [component]: Lista,
-        [component]: Centros,
+        // [component]: Centros,
         [component + "/opciones"]: Inicio,
         [component + "/listaEspecialidad"]: ListaEspecialidad,
         [component + "/listaDoctores"]: ListaDoctores,
-        [component + "/horarios"]: HorarioDoctor,
+        // [component + "/horarios"]: HorarioDoctor,
         [component + "/confirmacion"]: Confirmacion,
         [component + "/pago"]: Pago,
         [component + "/mensaje"]: MensajePago,
