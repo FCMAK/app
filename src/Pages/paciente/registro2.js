@@ -4,6 +4,7 @@ import { SHr, SIcon, SPage, SText, STheme, SView, SNavigation, SImage, SLoad, SS
 import Container from '../../Components/Container';
 import Header2 from '../../Services/Kolping/Components/ficha/Components/Header2';
 import SSocket from 'servisofts-socket';
+import Model from '../../Model';
 
 class PacienteRegistro2 extends Component {
     constructor(props) {
@@ -58,20 +59,48 @@ class PacienteRegistro2 extends Component {
                 Nombres: { placeholder: "Nombres", isRequired: true, icon: this.icon("InputUser") },
                 ApellidoP: { placeholder: "Apellido Paterno", isRequired: true, icon: this.icon("InputUser") },
                 ApellidoM: { placeholder: "Apellido Materno", isRequired: true, icon: this.icon("InputUser") },
-                FechaNacimiento: { placeholder: "Fecha de Nacimiento", isRequired: true, type: "date", },
+                Fecha: { placeholder: "Fecha de Nacimiento", isRequired: true, type: "date", },
                 Telefono: { placeholder: "Celular", isRequired: true, type: "phone" },
                 Correo: { placeholder: "Correo", type: "email", isRequired: false, icon: this.icon("InputEmail") },
 
             }}
 
-            onSubmit={(values) => {
-                dataForm = { ... this.datosNav, ...values }
+            onSubmit={(v) => {
+                // dataForm = { ... this.datosNav, ...values }
+                const format = {
+                    "TipDoc": "1",
+                    "NroDoc": this.datosNav.ci,
+                    "ComDoc": "",
+                    "NomPer": v.Nombres,
+                    "PriApe": v.ApellidoP,
+                    "SegApe": v.ApellidoM,
+                    "GenPer": "F",
+                    "FecNac": `${v.Fecha}T00:00:00Z`,
+                    "TdoFac": "1",
+                    "NdoFac": "9752424",
+                    "DcoFac": "",
+                    "NomFac": "CARLOS GONZALES PEREZ",
+                    "MedCon": [
+                        {
+                            "TipMed": "1",
+                            "ValMed": v.Correo
+                        },
+                        {
+                            "TipMed": "2",
+                            "ValMed": v.Telefono
+                        },
+                        {
+                            "TipMed": "3",
+                            "ValMed": "av/ san roque 3312",
+                            "DatMed": ""
+                        }
+                    ]
+                }
                 SSocket.sendPromise({
                     component: "paciente_usuario",
                     type: "registro",
-                    data: {
-                        
-                    }
+                    data: format,
+                    key_usuario: Model.usuario.Action.getKey()
                 })
             }}
         />

@@ -26,6 +26,7 @@ const newPages = SPage.combinePages("/", {
     // "": root,
     ...paciente
 });
+
 const Pages: SPageListProps = {
     // ...NewPages,
     "/": Inicio,

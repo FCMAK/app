@@ -10,9 +10,7 @@ export default class root extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [
-                { test: "asdas" }
-            ]
+            data: []
         };
     }
 
@@ -20,9 +18,10 @@ export default class root extends Component {
         SSocket.sendPromise({
             component: "paciente_usuario",
             type: "getAll",
-            key_usuario:Model.usuario.Action.getKey()
+            key_usuario: Model.usuario.Action.getKey()
             // ci: "6392496"
         }).then(e => {
+            this.setState({ data: Object.values(e.data) })
             console.log(e);
         }).catch(e => {
             console.log(e);
@@ -33,20 +32,35 @@ export default class root extends Component {
             borderRadius: 8,
             borderWidth: 1,
             borderColor: STheme.color.card
-        }} row>
+        }} row >
             <SView width={50} height={50}>
                 <SImage src={require("../../Assets/img/noimage.jpg")} />
             </SView>
             <SView width={8} />
             <SView flex>
-                <SText fontSize={18} font='LondonBetween'>{"Nombre Completo"}</SText>
+                <SText fontSize={18} font='LondonBetween'>{item.alias}</SText>
                 <SHr />
                 <SView row flex>
-                    <SText font='LondonBetween' color={STheme.color.gray}>{"6392496"}</SText>
-                    <SView width={8} />
-                    <SText font='LondonBetween' color={STheme.color.gray}>{"59175395848"}</SText>
+                    <SText font='LondonBetween' color={STheme.color.gray}>{item.ci}</SText>
+                    {/* <SView width={8} /> */}
+                    {/* <SText font='LondonBetween' color={STheme.color.gray}>{"59175395848"}</SText> */}
                 </SView>
-                <SText font='LondonBetween' color={STheme.color.gray}>{"nombre@gmail.com"}</SText>
+                <SText font='LondonBetween' color={STheme.color.gray}>{item.codper}</SText>
+                <SHr />
+                <SText font='LondonBetween' color={STheme.color.danger} onPress={() => {
+                    SSocket.sendPromise({
+                        component: "paciente_usuario",
+                        type: "editar",
+                        data: {
+                            ...item,
+                            estado: 0,
+                        }
+                    }).then(e=>{
+                        console.error(e);
+                    }).catch(e=>{
+                        console.log(e);
+                    })
+                }}>{"BORRAR"}</SText>
             </SView>
         </SView>
     }
@@ -59,6 +73,7 @@ export default class root extends Component {
                     <SHr />
                     <FlatList
                         data={this.state.data}
+                        ItemSeparatorComponent={() => <SHr />}
                         renderItem={this.renderItem.bind(this)}
                     />
                 </SView>

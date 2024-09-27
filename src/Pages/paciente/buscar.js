@@ -77,6 +77,12 @@ export default class add extends Component {
                 }).then(e => {
                     if (e.data) {
                         console.log("EXITO", e.data)
+                        SSocket.sendPromise({
+                            component: "paciente_usuario",
+                            type: "registro2",
+                            data: e.data[0],
+                            key_usuario: Model.usuario.Action.getKey()
+                        })
                     } else {
                         SNavigation.navigate("/paciente/noencontrado", { ci: t.ci })
                         console.log("No se encontro paciente con este CI")
