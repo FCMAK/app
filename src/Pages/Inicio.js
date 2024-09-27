@@ -99,6 +99,16 @@ class Inicio extends Component {
         return <FlatList
             style={{ width: "100%" }}
             horizontal
+            ListHeaderComponent={() => {
+                return <SView width={160} height={180} padding={10} >
+                    <SView width={150} height padding={5} style={{
+                        borderRadius: 15,
+                        backgroundColor: STheme.color.card
+                    }} row center>
+                        <SText>AGREGAR</SText>
+                    </SView>
+                </SView>
+            }}
             showsHorizontalScrollIndicator={true}
             data={data}
             keyExtractor={item => item.key}
