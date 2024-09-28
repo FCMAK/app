@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
 
-import { SDate, SHr, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
+import { SDate, SHr, SIcon, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 
 
-export default ({ medico , onPress  }) => {
+
+export default ({ medico, onPress }) => {
     const { TitMed, NomMed, turnos } = medico;
     const active = turnos.length > 0;
     const especialidades = {}
     turnos.map((tur) => {
         especialidades[tur.CodEsp] = tur.NomEsp;
     })
+    const codmed = SNavigation.getParam("codmed")
     const color = STheme.color.primary
+    console.log("especialidades", codmed)
     return < SView col={"xs-12"} padding={8} row
         style={{
             opacity: active ? 1 : 0.5,
             justifyContent: "center",
             alignItems: "center",
+            backgroundColor: STheme.color.white,
+            borderBottomWidth: 1,
+            borderBottomColor: STheme.color.primary,
         }}
         onPress={onPress}
     >
@@ -36,17 +42,21 @@ export default ({ medico , onPress  }) => {
             <SHr h={4} />
             <SView row>
                 {Object.values(especialidades).map((esp) => <SView style={{
-                    // padding: ,
-                    paddingStart: 4,
-                    paddingEnd: 4,
-                    borderRadius: 16,
-                    borderWidth: 1,
-                    borderColor: color,
-                    backgroundColor: color + "44",
+                    // paddingStart: 4,
+                    // paddingEnd: 4,
+                    // borderRadius: 16,
+                    // borderWidth: 1,
+                    // borderColor: color,
+                    // backgroundColor: color + "44",
                 }}>
-                    <SText fontSize={12} bold>{esp}</SText>
+                    <SText color={STheme.color.info} font='LondonMM' fontSize={15} bold>{esp}</SText>
                 </SView>)}
             </SView>
+
         </SView>
+        {(!codmed) ? <SView row>
+            <SIcon width={11} height={16} name={"arrowR"} />
+        </SView> : null}
+
     </SView >
 }

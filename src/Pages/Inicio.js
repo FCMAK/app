@@ -105,7 +105,9 @@ class Inicio extends Component {
 
     renderItemServicios({ index, item }) {
         console.log(item);
-        return <SView width={225} height={180} padding={10} >
+        return <SView width={225} height={180} padding={10} onPress={()=>{
+            
+        }}>
             <SView width={220} height padding={5} style={{
                 borderRadius: 15,
                 // borderWidth: 1,
@@ -128,7 +130,7 @@ class Inicio extends Component {
                     top: 65,
                     overflow:"hidden"
                 }}>
-                    <SText fontSize={18} font='LondonTwo' color={STheme.color.white}>Nombre servicio</SText>
+                    <SText fontSize={18} font='LondonTwo' color={STheme.color.white}>{item?.titulo}</SText>
                 </SView>
             </SView>
         </SView>

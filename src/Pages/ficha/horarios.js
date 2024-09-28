@@ -27,40 +27,46 @@ const RenderHoraItem = ({ item, medico, nrosuc, fecha }) => {
     // Dias 1=Lunes 2=Martes 3=Miercoles 4=Jueves 5=Viernes 6=Sabado ?=Domingo
 
     // date.addDay(NroDia)
-    return <SView col={"xs-12"} card center
-        padding={8}
-        onPress={() => {
-            SNavigation.navigate("/ficha/servicios", {
-                codesp: CodEsp,
-                codmed: CodMed,
-                nrosuc: nrosuc,
-                codtur: CodTur,
-                comtur: ComTur,
-                fecha: fecha
-            })
-            // getAllServicios({
-            //     nrosuc: nrosuc,
-            //     codmed: CodMed+""
-            // }).then(e=>{
+    return <SView col={'xs-4'} padding={8} >
+        <SView col={'xs-12'} card center
+            style={{
+                alignItems: "flex-end"
+            }}
+            padding={8}
+            onPress={() => {
+                SNavigation.navigate("/ficha/servicios", {
+                    codesp: CodEsp,
+                    codmed: CodMed,
+                    nrosuc: nrosuc,
+                    codtur: CodTur,
+                    comtur: ComTur,
+                    fecha: fecha
+                })
+                // getAllServicios({
+                //     nrosuc: nrosuc,
+                //     codmed: CodMed+""
+                // }).then(e=>{
 
-            // }).catch(e=>{
+                // }).catch(e=>{
 
-            // })
-        }} row>
-        <SView style={{
-            width: 30,
-            height: 30,
-            borderRadius: 100,
-            backgroundColor: STheme.color.primary + "AA",
-            borderColor: STheme.color.primary,
-            borderWidth: 2,
-        }} center>
-            <SText bold color={STheme.color.secondary}>{CodTur}{ComTur}</SText>
+                // })
+            }} >
+            <SView style={{
+                width: 30,
+                height: 30,
+                borderRadius: 100,
+                backgroundColor: STheme.color.primary + "AA",
+                borderColor: STheme.color.primary,
+                borderWidth: 2,
+            }} center>
+                <SText bold color={STheme.color.secondary}>{CodTur}{ComTur}</SText>
+            </SView>
+            <SView width={8} />
+            <SHr height={3} />
+            <SText fontSize={12}>{NomEsp}</SText>
+            <SView flex />
+            <SText fontSize={16} bold>{HorTur}</SText>
         </SView>
-        <SView width={8} />
-        <SText fontSize={12}>{NomEsp}</SText>
-        <SView flex />
-        <SText fontSize={16} bold>{HorTur}</SText>
     </SView>
 }
 export default class horarios extends React.Component {
@@ -86,16 +92,20 @@ export default class horarios extends React.Component {
     RenderHoras = () => {
         if (!this.state.medico) return null;
         const { CodMed, NomMed, TitMed, TurMed, turnos } = this.state.medico
-        return <FlatList
-            style={{ width: "100%" }}
-            contentContainerStyle={{
-                minWidth: "100%",
-            }}
-            data={turnos}
-            // horizontal
-            ItemSeparatorComponent={() => <SView width={8} height={8} />}
-            renderItem={({ item, index }) => <RenderHoraItem item={item} medico={this.state.medico} nrosuc={this.nrosuc} fecha={this.state.fecha} />}
-        />
+        return <SView col={"xs-12"} center row>
+            <FlatList
+                style={{}}
+                contentContainerStyle={{
+                    // minWidth: "100%",
+                }}
+                data={turnos}
+                // horizontal={true} // Esto hace que los items estén en línea horizontal
+                numColumns={3} // Esto hace que los items estén en línea horizontal
+                // showsHorizontalScrollIndicator={false} // Oculta el scroll horizontal
+                // ItemSeparatorComponent={() => <SView width={8} height={8} />}
+                renderItem={({ item, index }) => <RenderHoraItem item={item} medico={this.state.medico} nrosuc={this.nrosuc} fecha={this.state.fecha} />}
+            />
+        </SView>
     }
 
     render() {
@@ -107,8 +117,12 @@ export default class horarios extends React.Component {
                     this.setState({ medico: null })
                     this.componentDidMount();
                 }} />
+                <SHr height={10} />
                 <SHr />
                 <MedicoItem medico={this.state.medico} />
+                <SHr />
+                <SHr />
+                <SText font="LondonMM" fontSize={18} bold>Horarios disponibles</SText>
                 <SHr />
                 {this.RenderHoras({ medico: this.state.medico, nrosuc: this.nrosuc })}
             </Container>

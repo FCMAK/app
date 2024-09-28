@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from '.';
-import { SNavigation, SPopup } from 'servisofts-component';
+import { SNavigation, SPopup, STheme } from 'servisofts-component';
 import Model from '../../Model';
 
 class index extends DPA.new {
@@ -17,9 +17,13 @@ class index extends DPA.new {
 
     $inputs() {
         var inp = super.$inputs();
-        inp.inputProps = {
-           customStyle: "kolping",
+        // inp.inputProps = {
+        //    customStyle: "kolping",
 
+        // }
+        inp.style = {
+            borderWith: 1,
+            borderColor: STheme.color.black,
         }
        
         inp.busqueda = {
@@ -44,6 +48,8 @@ class index extends DPA.new {
             data.tiempo_reinicio = 0;
         }
 
+        console.log("dataRegister", data)
+
         Parent.model.Action.registro({
             data: data,
             key_usuario: "",
@@ -52,6 +58,7 @@ class index extends DPA.new {
         }).catch(e => {
             console.error(e);
         })
+
     }
 }
 
