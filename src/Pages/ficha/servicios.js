@@ -6,8 +6,9 @@ import KButtom from '../../Components/Kolping/KButtom';
 import SSocket from 'servisofts-socket';
 import Container from '../../Components/Container';
 import carrito from '../../Services/Kolping/Components/carrito';
+import Model from '../../Model';
 
-class Lista extends Component {
+export default class Lista extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,10 +16,13 @@ class Lista extends Component {
             check: false,
             dataSelect: [],
         };
+        this.params = SNavigation.getAllParams();
         // this.tipo_servicio = SNavigation.getParam("servicio");
-        this.codesp = SNavigation.getParam("codesp").toString();
-        this.codmed = SNavigation.getParam("codmed").toString();
-        this.nrosuc = SNavigation.getParam("nrosuc").toString();
+        this.codesp = SNavigation.getParam("codesp");
+        this.codmed = SNavigation.getParam("codmed");
+        this.nrosuc = SNavigation.getParam("nrosuc");
+
+
 
     }
 
@@ -36,7 +40,7 @@ class Lista extends Component {
             e.data.sort((a, b) => {
                 const isConsultaA = a.NomPro.includes("CONSULTA") || a.NomPro.includes("RE-CONSULTA");
                 const isConsultaB = b.NomPro.includes("CONSULTA") || b.NomPro.includes("RE-CONSULTA");
-            
+
                 return isConsultaB - isConsultaA;
             });
             this.setState({ loading: false, data: e.data })
@@ -140,17 +144,17 @@ class Lista extends Component {
                                                     this.setState({ dataSelect: dataSelect })
                                                     console.log(dataSelect)
 
-                                                    carrito.Actions.addToCard({
-                                                        key: key,
-                                                        ...obj
-                                                    }, this.props)
+                                                    // carrito.Actions.addToCard({
+                                                    //     key: key,
+                                                    //     ...obj
+                                                    // }, this.props)
 
                                                 } else {
                                                     dataSelect = dataSelect.filter((item) => item.NomPro !== obj.NomPro)
                                                     console.log("NO check")
                                                     this.setState({ dataSelect: dataSelect })
                                                     console.log(dataSelect)
-                                                    carrito.Actions.removeItem(key, this.props);
+                                                    // carrito.Actions.removeItem(key, this.props);
                                                 }
                                             }}
                                         />
@@ -165,6 +169,30 @@ class Lista extends Component {
         </>
     }
 
+    hanldeSubmit() {
+        if (this.state?.dataSelect.length == 0) {
+            SPopup.alert("Debe seleccionar al menos un servicio")
+            return;
+        }
+
+        if (this.state.loading) return;
+        this.state.loading = true;
+        SSocket.sendPromise({
+            component: "orden_compra",
+            type: "registro",
+            key_usuario: Model.usuario.Action.getKey(),
+            data: {
+                ...this.params,
+                detalle: this.state.dataSelect
+            }
+        }).then(e => {
+            SNavigation.navigate("/ficha/orden", { key: e.data?.key });
+            this.state.loading = false;
+        }).catch(e => {
+            this.state.loading = false;
+        })
+
+    }
     getBtnFooter() {
         if (this.state.dataSelect.length == 0) return null;
         let total = 0;
@@ -197,11 +225,7 @@ class Lista extends Component {
                         borderWidth: 1,
                         borderColor: '#eeeeee',
                     }} onPress={() => {
-                        if (this.state?.dataSelect.length == 0) {
-                            SPopup.alert("Debe seleccionar al menos un servicio")
-                            return;
-                        }
-                        SNavigation.navigate("/ficha/horarios", { codesp: this.codesp, codmed: this.codmed, nrosuc: this.nrosuc });
+                        this.hanldeSubmit()
                     }} center>
                         <SText
                             center
@@ -226,25 +250,19 @@ class Lista extends Component {
 
 
     render() {
-        if (!this.state.data) return <SLoad />
+        // if (!this.state.data) return <SLoad />
         return (
             <SPage title={'Lista de servicios'}
                 footer={this.getBtnFooter()}
             >
-                <SView col={"xs-12"} center>
-                    <SHr />
-                    <SHr />
-                    <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} >
-                        {this.getContent()}
-                    </SView>
-                    <SHr />
-                    <SHr />
-                </SView>
+                <Container loading={!this.state.data}>
+                    {this.getContent()}
+                </Container>
             </SPage>
         );
     }
 }
-const initStates = (state) => {
-    return { state }
-};
-export default connect(initStates)(Lista);
+// const initStates = (state) => {
+//     return { state }
+// };
+// export default connect(initStates)(Lista);
