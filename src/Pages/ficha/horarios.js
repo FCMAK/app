@@ -22,7 +22,7 @@ const loadTurnos = async ({ nrosuc, codmed, sdate }) => {
 
 
 
-const RenderHoraItem = ({ item, medico, nrosuc }) => {
+const RenderHoraItem = ({ item, medico, nrosuc, fecha }) => {
     const { CodEsp, CodMed, CodTur, ComTur, EstTur, FecHor, FecTur, HorTur, IdeCon, NomEsp, NomEst, NomMed, NroDia } = item;
     // Dias 1=Lunes 2=Martes 3=Miercoles 4=Jueves 5=Viernes 6=Sabado ?=Domingo
 
@@ -30,10 +30,22 @@ const RenderHoraItem = ({ item, medico, nrosuc }) => {
     return <SView col={"xs-12"} card center
         padding={8}
         onPress={() => {
-            getAllServicios({
+            SNavigation.navigate("/ficha/servicios", {
+                codesp: CodEsp,
+                codmed: CodMed,
                 nrosuc: nrosuc,
-                codmed: CodMed+""
+                codtur: CodTur,
+                comtur: ComTur,
+                fecha: fecha
             })
+            // getAllServicios({
+            //     nrosuc: nrosuc,
+            //     codmed: CodMed+""
+            // }).then(e=>{
+
+            // }).catch(e=>{
+
+            // })
         }} row>
         <SView style={{
             width: 30,
@@ -43,7 +55,7 @@ const RenderHoraItem = ({ item, medico, nrosuc }) => {
             borderColor: STheme.color.primary,
             borderWidth: 2,
         }} center>
-            <SText bold color={STheme.color.secondary}>{ComTur}{CodTur}</SText>
+            <SText bold color={STheme.color.secondary}>{CodTur}{ComTur}</SText>
         </SView>
         <SView width={8} />
         <SText fontSize={12}>{NomEsp}</SText>
@@ -82,7 +94,7 @@ export default class horarios extends React.Component {
             data={turnos}
             // horizontal
             ItemSeparatorComponent={() => <SView width={8} height={8} />}
-            renderItem={({ item, index }) => <RenderHoraItem item={item} medico={this.state.medico} nrosuc={this.nrosuc} />}
+            renderItem={({ item, index }) => <RenderHoraItem item={item} medico={this.state.medico} nrosuc={this.nrosuc} fecha={this.state.fecha} />}
         />
     }
 

@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SIcon, SImage, SLoad, SNavigation, SPage, SPopup, STable2, SText, SView, SList, SHr, SDate, SInput } from 'servisofts-component';
-import Parent from '../index'
 import STheme from 'servisofts-component/Component/STheme';
-import KButtom from '../../../../../Components/Kolping/KButtom';
-import KBuscador from '../../../../../Components/Kolping/KBuscador';
+import KButtom from '../../Components/Kolping/KButtom';
 import SSocket from 'servisofts-socket';
-import { check } from 'react-native-permissions';
-import index from 'servisofts-rn-roles_permisos/Components/MenuPages';
-import Container from '../../../../../Components/Container';
-import carrito from '../../carrito';
+import Container from '../../Components/Container';
+import carrito from '../../Services/Kolping/Components/carrito';
 
 class Lista extends Component {
     constructor(props) {
