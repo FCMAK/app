@@ -127,12 +127,12 @@ class Confirmacion extends Component {
                             <SHr height={30} />
                             <Kolping.KButtom secondary width={300} onPress={() => {
                                 SSocket.sendPromise({
-                                    compoennt: "orden_compra",
+                                    component: "orden_compra",
                                     type: "confirmar",
                                     key: this.key,
                                     key_usuario: Model.usuario.Action.getKey()
                                 }).then(e => {
-                                    
+
                                 }).catch(e => {
 
                                 })
