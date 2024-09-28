@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SHr, SImage, SNavigation, SPage, SText, STheme, SView } from "servisofts-component";
+import { SHr, SImage, SLoad, SNavigation, SPage, SText, STheme, SView } from "servisofts-component";
 import SSocket from "servisofts-socket";
 import Model from "../../Model";
 import { Container } from "../../Components";
@@ -55,6 +55,10 @@ const InputPaciente = React.forwardRef((props, ref) => {
     </SView>
 })
 const InputCita = () => {
+    // if(!this.state?.data) return <SLoad />
+    let obj = this.state?.data;
+    // if(!obj) return <SLoad/>
+    console.log("obj", obj)
     return <SView col={"xs-12"} height={130} style={{
         borderRadius: 10,
         borderWidth: 2,
@@ -70,7 +74,8 @@ const InputCita = () => {
         </SView>
         <SView width={16} />
         <SView flex>
-            <SText fontSize={20} bold>{"Dr.Shah"}</SText>
+            {/* <SText fontSize={20} bold>{obj?.detalle?.NomMed} -nn</SText> */}
+            <SText fontSize={20} bold>{"Dr. Saucedo"}</SText>
             <SText color={STheme.color.info} fontSize={14}>{"Cardiología"}</SText>
         </SView>
         <SView height={"50%"} style={{
@@ -123,6 +128,8 @@ export default class index extends React.Component {
         })
     }
     render() {
+        if(!this.state.data) return <SLoad />
+        console.log("orden",this.state.data)
         return <SPage title={"Servisofts page"}>
             <Container flex>
                 <SHr h={32} />
