@@ -120,7 +120,7 @@ class Inicio extends Component {
                                 borderTopLeftRadius: 8,
                                 borderTopRightRadius: 8,
                                 maxWidth: "100%", minWidth: "100%", overflow: "hidden",
-                                resizeMode: "contain",
+                                resizeMode: "cover",
                                 height: 165
                             }} />
                 </SView>
