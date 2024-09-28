@@ -9,14 +9,14 @@ import Model from '../../Model';
 class Confirmacion extends Component {
     constructor(props) {
         super(props)
-        this.key = SNavigation.getParam("key")
+        this.pk = SNavigation.getParam("key")
     }
     componentDidMount() {
         SSocket.sendPromise({
             component: "orden_compra",
             type: "getByKey",
             key_usuario: Model.usuario.Action.getKey(),
-            key: this.key,
+            key: this.pk,
         }).then(e => {
             this.setState({ data: e.data })
         }).catch(e => {
@@ -127,12 +127,12 @@ class Confirmacion extends Component {
                             <SHr height={30} />
                             <Kolping.KButtom secondary width={300} onPress={() => {
                                 SSocket.sendPromise({
-                                    compoennt: "orden_compra",
+                                    component: "orden_compra",
                                     type: "confirmar",
-                                    key: this.key,
+                                    key: this.pk,
                                     key_usuario: Model.usuario.Action.getKey()
                                 }).then(e => {
-                                    
+
                                 }).catch(e => {
 
                                 })
