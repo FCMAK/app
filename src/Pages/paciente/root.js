@@ -15,6 +15,7 @@ export default class root extends Component {
             //     { test: "asdas" }
             // ]
         };
+        this.onSelect = SNavigation.getParam("onSelect");
     }
 
     componentDidMount() {
@@ -26,7 +27,7 @@ export default class root extends Component {
         }).then(e => {
             this.setState({ data: Object.values(e.data) })
             console.log(e);
-            this.setState({ data: e.data });
+            // this.setState({ data: e.data });
         }).catch(e => {
             console.log(e);
         })
@@ -37,7 +38,12 @@ export default class root extends Component {
             borderWidth: 1,
             borderColor: STheme.color.card,
             marginBottom: 8
-        }} row card>
+        }} row card onPress={() => {
+            if (this.onSelect) {
+                this.onSelect(item)
+                SNavigation.goBack();
+            }
+        }}>
             <SView width={50} height={50}>
                 <SImage src={require("../../Assets/img/noimage.jpg")} />
             </SView>
@@ -60,9 +66,9 @@ export default class root extends Component {
                             ...item,
                             estado: 0,
                         }
-                    }).then(e=>{
+                    }).then(e => {
                         console.error(e);
-                    }).catch(e=>{
+                    }).catch(e => {
                         console.log(e);
                     })
                 }}>{"BORRAR"}</SText>
@@ -81,7 +87,7 @@ export default class root extends Component {
     }
     render() {
         if (!this.state.data) return <SLoad />
-        let data = Object.values(this.state.data)
+        // let data = Object.values(this.state.data)
         return <SPage title={"Mis favoritos"}>
             <Container>
                 <SView col={"xs-12"}>

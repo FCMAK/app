@@ -40,7 +40,33 @@ class Test extends Component {
                         <SHr height={20} />
 
                         <SView col={"xs-12 md-6 xl-4"} style={{ padding: 8 }} center >
-                            <Kolping.KButtom primary >primary</Kolping.KButtom>
+                            <Kolping.KButtom primary onPress={()=>{
+
+                                // // CASO #1
+                                // let ricky = "Hola"
+                                // let ruddy = ricky;
+                                // ricky = "chau"
+
+                                // console.log(ruddy)
+                                // Java -> "hola";
+                                // JavaScript -> "Hola"
+
+
+                                // CASO #2
+                                // let ricky = {
+                                //     test: "Hola"
+                                // }
+
+                                // let ruddy = ricky;
+                                // ricky.test = "chau"
+                                // ricky.algo = "asdasd"
+                                // console.log(ruddy)
+                                // Java -> "{ test:"chau" }";
+                                // JavaScript -> "{ test:"chau" }"
+
+
+
+                            }}>primary</Kolping.KButtom>
                             <SHr />
                             <Kolping.KButtom primary loading>primary</Kolping.KButtom>
                             <Code >{`<Kolping.KButtom primary loading>prim-small</Kolping.KButtom>`}</Code>
