@@ -20,10 +20,9 @@ class index extends DPA.edit {
 
     $inputs() {
         var inp = super.$inputs();
-        inp.inputProps = {
-            customStyle: "kolping",
- 
-         }
+        // inp.inputProps = {
+        //     customStyle: "kolping",
+        //  }
         inp["params"]
         inp.busqueda = {
             label: "Busqueda",
