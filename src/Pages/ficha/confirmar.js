@@ -132,11 +132,10 @@ class Confirmacion extends Component {
                                     key: this.pk,
                                     key_usuario: Model.usuario.Action.getKey()
                                 }).then(e => {
-
+                                    SNavigation.navigate("ficha/pago")
                                 }).catch(e => {
-
+                                    console.error(e);
                                 })
-                                SNavigation.navigate("ficha/pago")
                             }} >CONTINUAR </Kolping.KButtom>
                         </SView>
                         <SView col={"xs-10 sm-8 md-8 lg-10 xl-10"} center>

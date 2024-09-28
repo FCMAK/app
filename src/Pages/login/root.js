@@ -114,7 +114,7 @@ class Login extends Component {
     getSocial() {
         return (
             <SView col={'xs-11'} height={100} row center>
-                <SView col={'xs-2'} height center></SView>
+                {/* <SView col={'xs-2'} height center></SView> */}
                 {/* <SView flex center height={60}>
                     <LoginApple onLogin={(usuario) => {
                         this.loginRedSocial("apple_key", usuario)
@@ -125,7 +125,7 @@ class Login extends Component {
                     </LoginApple>
                 </SView> */}
 
-                <SView flex center height={60}>
+                <SView  center height={60}>
                     <LoginGoogle onLogin={(usuario) => {
                         this.loginRedSocial("gmail_key", usuario)
                     }}>
@@ -134,7 +134,7 @@ class Login extends Component {
                         </SView>
                     </LoginGoogle>
                 </SView>
-                <SView flex center height={60}>
+                {/* <SView flex center height={60}>
                     <LoginFacebook onLogin={(usuario) => {
                         Parent.Actions.loginByKey({
                             user: usuario.id,
@@ -157,8 +157,8 @@ class Login extends Component {
                             <SIcon name={'IconFaceb'} />
                         </SView>
                     </LoginFacebook>
-                </SView>
-                <SView col={'xs-2'} height center></SView>
+                </SView> */}
+                {/* <SView col={'xs-2'} height center></SView> */}
             </SView>
         );
     }

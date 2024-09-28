@@ -37,13 +37,12 @@ export default class Lista extends Component {
             CodEsp: this.codesp,
             CodMed: this.codmed
         }).then(e => {
-            e.data.sort((a, b) => {
+            (e.data ?? []).sort((a, b) => {
                 const isConsultaA = a.NomPro.includes("CONSULTA") || a.NomPro.includes("RE-CONSULTA");
                 const isConsultaB = b.NomPro.includes("CONSULTA") || b.NomPro.includes("RE-CONSULTA");
-
                 return isConsultaB - isConsultaA;
             });
-            this.setState({ loading: false, data: e.data })
+            this.setState({ loading: false, data: e.data ?? [] })
         }).catch(e => {
             this.setState({ loading: false })
         })
@@ -96,7 +95,7 @@ export default class Lista extends Component {
                 initSpace={10}
                 flex
                 buscador
-                limit={8}
+                // limit={8}
                 data={this.state.data}
                 // order={[{ key: "prdnom", order: "asc" }]}
                 render={(obj, key) => {
