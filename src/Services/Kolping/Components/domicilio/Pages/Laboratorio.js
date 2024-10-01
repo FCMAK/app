@@ -5,6 +5,7 @@ import Kolping from '../../../../../Components/Kolping';
 import WhatsApp from '../../../../../Components/WhatsApp';
 import servicio_domicilio from '../../servicio_domicilio';
 import Params from "../params.json"
+import { Container } from '../../../../../Components';
 class Laboratorio extends Component {
     constructor(props) {
         super(props);
@@ -25,8 +26,9 @@ class Laboratorio extends Component {
             SNavigation.navigate("domicilio/request", { numero: obj.numero });
         }
         return (
-            <SPage title={'Laboratorio a Domicilio'} center>
-                <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row>
+            <SPage title={'Laboratorio a Domicilio'}  >
+                {/* <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row center> */}
+                <Container>
                     <SHr height={20} />
                     <SView col={"xs-12"} style={{ padding: 8 }} center >
                         <SView col={"xs-12"}>
@@ -201,7 +203,8 @@ class Laboratorio extends Component {
                         }}>SOLICITAR LABORATORIO</Kolping.KButtom>
                         <SHr height={30} />
                     </SView>
-                </SView>
+                    {/* </SView> */}
+                </Container>
             </SPage>
         );
     }
