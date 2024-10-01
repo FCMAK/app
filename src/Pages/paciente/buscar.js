@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SPage, SText, STheme, SView, SNavigation, SImage, SLoad, SScrollView2, SPopup, SDate, SForm } from 'servisofts-component';
+import { SHr, SIcon, SPage, SText, STheme, SView, SNavigation, SImage, SLoad, SScrollView2, SPopup, SDate, SForm, SNotification } from 'servisofts-component';
 import Kolping from '../../Components/Kolping';
 import Container from '../../Components/Container';
 import Header from '../../Services/Kolping/Components/ficha/Components/Header';
@@ -68,26 +68,57 @@ export default class add extends Component {
                 ci: { placeholder: "Número de carnet", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} /> },
             }}
             onSubmit={(t) => {
-
+                SNotification.send({
+                    key: "add_paciente",
+                    title: "Buscando paciente",
+                    body: "Estamos buscando el paciente",
+                    type: "loading"
+                })
                 SSocket.sendPromise({
                     component: "paciente",
                     type: "getByCi",
                     key_usuario: Model.usuario.Action.getKey(),
                     ci: t.ci
                 }).then(e => {
+                    SNotification.remove("add_paciente")
+
                     if (e.data) {
                         console.log("EXITO", e.data)
-                        SSocket.sendPromise({
-                            component: "paciente_usuario",
-                            type: "registro2",
-                            data: e.data[0],
-                            key_usuario: Model.usuario.Action.getKey()
-                        })
+                        if (e.data.length > 1) {
+                            SNotification.send({
+                                title: "Paciente",
+                                body: "HAY MAS DE 1, pendiente de implementar",
+                                color: STheme.color.warning
+                            })
+                            // Cuando es mas de 1
+                        } else {
+                            SNavigation.navigate("/paciente/encontrado", { ...e.data[0] })
+                            // SNotification.send({
+                            //     key: "add_paciente",
+                            //     title: "Paciente",
+                            //     body: "Añadiendo a favoritos",
+                            //     type: "loading"
+                            // })
+                            // // Cuando es solo 1 usuario
+                            // SSocket.sendPromise({
+                            //     component: "paciente_usuario",
+                            //     type: "registro2",
+                            //     data: e.data[0],
+                            //     key_usuario: Model.usuario.Action.getKey()
+                            // }).then(e => {
+                            //     SNotification.remove("add_paciente")
+                            // }).catch(e => {
+
+                            //     SNotification.remove("add_paciente")
+                            // })
+                        }
+
                     } else {
                         SNavigation.navigate("/paciente/noencontrado", { ci: t.ci })
                         console.log("No se encontro paciente con este CI")
                     }
                 }).catch(e => {
+                    SNotification.remove("add_paciente")
                     console.error(e);
                 })
                 // SNavigation.navigate("ficha/paciente/noEncontrado", { ci: values.ci, nav: 2, ...this.datosNav })

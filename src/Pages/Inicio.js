@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SGradient, SHr, SIcon, SImage, SLoad, SPage, SScrollView2, SText, STheme, SView, SNavigation } from 'servisofts-component';
+import { SGradient, SHr, SIcon, SImage, SLoad, SPage, SScrollView2, SText, STheme, SView, SNavigation, SThread } from 'servisofts-component';
 import Pages from '.';
 import Kolping from '../Components/Kolping';
 import sucursal from '../Services/Kolping/Components/sucursal';
 import Model from '../Model';
 import { FlatList, ScrollView } from 'react-native';
 import SSocket from 'servisofts-socket';
+import SVideo from '../Components/SVideo';
 
 class Inicio extends Component {
     constructor(props) {
@@ -16,17 +17,22 @@ class Inicio extends Component {
     }
 
     componentDidMount() {
-        SSocket.sendPromise({
-            component: "paciente_usuario",
-            type: "getAll",
-            key_usuario: Model.usuario.Action.getKey()
-            // ci: "6392496"
-        }).then(e => {
-            console.log(e);
-            this.setState({ data: e.data })
-        }).catch(e => {
-            console.log(e);
-        })
+        if (Model.usuario.Action.getKey()) {
+            SSocket.sendPromise({
+                component: "paciente_usuario",
+                type: "getAll",
+                key_usuario: Model.usuario.Action.getKey()
+                // ci: "6392496"
+            }).then(e => {
+                // console.log(e);
+                this.setState({ data: e.data })
+            }).catch(e => {
+                console.log(e);
+            })
+        } else {
+            this.setState({ data: {} })
+        }
+
         // if (!usuario.Actions.validateSession(this.props)) {
         //     return <SLoad />
         // }
@@ -37,7 +43,7 @@ class Inicio extends Component {
             key_usuario: Model.usuario.Action.getKey()
             // ci: "6392496"
         }).then(e => {
-            console.log(e);
+            // console.log(e);
             this.setState({ dataBanner: e.data })
         }).catch(e => {
             console.log(e);
@@ -61,9 +67,23 @@ class Inicio extends Component {
                 </SView>
                 <SView style={{
                     position: "absolute",
+                    right: -100,
+                    bottom: 30,
+                }} width={87} height={145}>
+                    <SIcon name={"Enfermera7"} />
+                </SView>
+                <SView style={{
+                    position: "absolute",
                     right: -13,
                     bottom: 30,
-                }} width={87} height={145}><SIcon name={"Enfermera7"} /></SView>
+                    transform: [{ scale: 1.5 }]
+                }} width={87} height={145}>
+                    <SVideo ref={(ref) => {
+                        new SThread(100, "asdasd").start(() => {
+                            if (ref) ref.play()
+                        })
+                    }} src={"https://drive.servisofts.com/http/videos/muneca/saludo (2).webm"} muted autoplay loop />
+                </SView>
             </SView>
         </SView>
     }
@@ -83,7 +103,7 @@ class Inicio extends Component {
     }
 
     renderItemPaciente({ index, item }) {
-        console.log(item);
+        // console.log(item);
         return <SView width={160} height={180} padding={10} >
             <SView width={150} height padding={5} style={{
                 borderRadius: 15,
@@ -104,9 +124,9 @@ class Inicio extends Component {
     }
 
     renderItemServicios({ index, item }) {
-        console.log(item);
-        return <SView width={225} height={180} padding={10} onPress={()=>{
-            
+        // console.log(item);
+        return <SView height={180} onPress={() => {
+
         }}>
             <SView width={220} height padding={5} style={{
                 borderRadius: 15,
@@ -117,18 +137,18 @@ class Inicio extends Component {
                 <SView width={214} height style={{ borderRadius: 16, overflow: "hidden" }} center>
                     {/* <SImage src={require("../Assets/img/noimage.jpg")} /> */}
                     <SImage src={SSocket.api.root + "novedades/" + item.key} style={{
-                                borderTopLeftRadius: 8,
-                                borderTopRightRadius: 8,
-                                maxWidth: "100%", minWidth: "100%", overflow: "hidden",
-                                resizeMode: "cover",
-                                height: 165
-                            }} />
+                        borderTopLeftRadius: 8,
+                        borderTopRightRadius: 8,
+                        maxWidth: "100%", minWidth: "100%", overflow: "hidden",
+                        resizeMode: "cover",
+                        height: 165
+                    }} />
                 </SView>
                 <SView center col={'xs-12'} height={25} style={{
-                    backgroundColor: STheme.color.primary+"90",
+                    backgroundColor: STheme.color.primary + "90",
                     position: "absolute",
                     top: 65,
-                    overflow:"hidden"
+                    overflow: "hidden"
                 }}>
                     <SText fontSize={18} font='LondonTwo' color={STheme.color.white}>{item?.titulo}</SText>
                 </SView>
@@ -139,6 +159,7 @@ class Inicio extends Component {
     getPacientes() {
         // var pacientes = sucursal.Actions.getAll(this.props);
         // var sucursales = null;
+
         if (!this.state.data) return <SLoad />
         let data = Object.values(this.state.data)
         return <FlatList
@@ -227,9 +248,7 @@ class Inicio extends Component {
     }
 
     getButtom({ label, url, icon }) {
-        return <SView col={"xs-4"} height={130} style={{
-            padding: 5,
-        }}>
+        return <SView width={90} height={130} center>
             <SView col={"xs-12"} height center style={{
                 overflow: "hidden",
             }} onPress={() => {
@@ -245,8 +264,9 @@ class Inicio extends Component {
         </SView>
     }
     getContent1() {
-        return <SView col={"xs-12"} row center>
-            <SHr height={10} />
+        return <SView col={"xs-12"} row center style={{
+            justifyContent: "space-between"
+        }}>
             {this.getButtom({ label: 'Farmacia', url: 'domicilio/farmacia', icon: 'SDfarmacia' })}
             {this.getButtom({ label: 'Óptica', url: 'domicilio/optica', icon: 'SDoptica' })}
             {this.getButtom({ label: 'Laboratorio', url: 'domicilio/laboratorio', icon: 'SDlaboratorio' })}
@@ -296,6 +316,7 @@ class Inicio extends Component {
             //         </SView>
             //     </SView>
             // }}
+            ItemSeparatorComponent={()=><SView width={8}/>}
             showsHorizontalScrollIndicator={true}
             data={data}
             keyExtractor={item => item.key}
@@ -327,35 +348,39 @@ class Inicio extends Component {
                             <SHr height={240} />
                             <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} center>
                                 {/* <BloqueTiempo /> */}
-                                <SView col={"xs-11"}>
+                                <SView col={"xs-12"}>
                                     <SText font={"LondonMM"} fontSize={18}>{'Servicios a domicilio:'}</SText>
                                 </SView>
+                                <SView col={"xs-12"} height={20}></SView>
                                 {this.getContent1()}
                                 <SView col={"xs-12"} height={20}></SView>
-                                <SView col={"xs-11"}>
+                                <SView col={"xs-12"}>
                                     <SText font={"LondonMM"} fontSize={18}>{'Nuestros servicios:'}</SText>
                                 </SView>
                                 {this.getServicios()}
                                 <SView col={"xs-12"} height={20}></SView>
-                                
 
-                                <SView col={"xs-11"}>
-                                    <SText font={"LondonMM"} fontSize={18}>{'Mis pacientes:'}</SText>
-                                </SView>
-                                {this.getPacientes()}
-                                <SView col={"xs-12"} height={20}></SView>
 
-                               
+                                {(!Model.usuario.Action.getKey()) ? null : <>
+                                    <SView col={"xs-12"}>
+                                        <SText font={"LondonMM"} fontSize={18}>{'Mis pacientes:'}</SText>
+                                    </SView>
+                                    {this.getPacientes()}
+                                    <SView col={"xs-12"} height={20}></SView>
+                                </>}
+
+
+
                                 {/* <SView col={"xs-11"}>
                                     <SText font={"LondonMM"} fontSize={18}>{'Nuestros servicios:'}</SText>
                                 </SView>
                                 {this.getContent2()} */}
-                                <SView col={"xs-11"}>
+                                <SView col={"xs-12"} >
                                     <SText font={"LondonMM"} fontSize={18}>{'Centros médicos:'}</SText>
-                                    <SHr height={20} />
+                                    <SHr height={10} />
                                 </SView>
-                                <SView col={"xs-11"} center style={{
-                                    minHeight: 300
+                                <SView col={"xs-12"} center style={{
+                                    minHeight: 300,
                                 }}>
                                     {this.getSucursales()}
                                 </SView>

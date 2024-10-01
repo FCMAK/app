@@ -4,6 +4,7 @@ import { SPage } from 'servisofts-component';
 import root from './root';
 import buscar from "./buscar"
 import noencontrado from './noencontrado';
+import encontrado from './encontrado';
 import registro from './registro';
 import registro2 from './registro2';
 import genero from './genero';
@@ -17,6 +18,7 @@ export default SPage.combinePages(Parent.name, {
     "": root,
     buscar,
     noencontrado,
+    encontrado,
     registro,
     registro2,
     genero,

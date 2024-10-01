@@ -35,14 +35,15 @@ class EditarUsuario extends Component {
                 "Fecha de nacimiento": { label: "Fecha de nacimiento", type: "date", defaultValue: this.usr["Fecha de nacimiento"], icon: <SIcon name={"Calendar"} width={40} height={30} /> },
                 "Telefono": { label: "Telefono", defaultValue: this.usr["Telefono"], type: "phone" },
                 Correo: { label: "Correo", type: "email", isRequired: !isApi, defaultValue: this.usr.Correo, icon: <SIcon name={"InputEmail"} width={40} height={30} /> },
-                ...(isApi ? {} : {
-                    Password: { label: "Contraseña", type: "password", isRequired: true, defaultValue: this.usr.Password, icon: <SIcon name={"InputPassword"} width={40} height={30} /> },
-                    RepPassword: { label: "Repetir contraseña", type: "password", isRequired: true, defaultValue: this.usr.Password, icon: <SIcon name={"InputRePassword"} width={40} height={30} /> }
-                }),
+                // ...(isApi ? {} : {
+                //     Password: { label: "Contraseña", type: "password", isRequired: true, defaultValue: this.usr.Password, icon: <SIcon name={"InputPassword"} width={40} height={30} /> },
+                //     RepPassword: { label: "Repetir contraseña", type: "password", isRequired: true, defaultValue: this.usr.Password, icon: <SIcon name={"InputRePassword"} width={40} height={30} /> }
+                // }),
                 "Direccion": { label: "Dirección", defaultValue: this.usr["Direccion"], type: "direccion", icon: <SIcon name={"map"} width={40} height={30} /> },
 
             }}
             onSubmit={(values) => {
+                delete values["foto_p"];
                 var finalObj = {
                     ...this.usr,
                     ...values

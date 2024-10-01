@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SGradient, SHr, SIcon, SImage, SLoad, SPage, SScrollView2, SText, STheme, SView, SNavigation, SForm, SInput } from 'servisofts-component';
 import Kolping from '../../../../../Components/Kolping';
-import { Linking, Platform } from 'react-native'
-import WhatsApp from '../../../../../Components/WhatsApp';
-import Params from "../params.json"
 class Farmacia extends Component {
     constructor(props) {
         super(props);
