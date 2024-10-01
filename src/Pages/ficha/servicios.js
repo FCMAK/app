@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SIcon, SImage, SLoad, SNavigation, SPage, SPopup, STable2, SText, SView, SList, SHr, SDate, SInput } from 'servisofts-component';
+import { SIcon, SImage, SLoad, SNavigation, SPage, SPopup, STable2, SText, SView, SList, SHr, SDate, SInput, SBuscador } from 'servisofts-component';
 import STheme from 'servisofts-component/Component/STheme';
 import KButtom from '../../Components/Kolping/KButtom';
 import SSocket from 'servisofts-socket';
@@ -8,6 +8,7 @@ import Container from '../../Components/Container';
 import carrito from '../../Services/Kolping/Components/carrito';
 import Model from '../../Model';
 import NoData from './Components/NoData';
+import Kolping from '../../Components/Kolping';
 
 export default class Lista extends Component {
     constructor(props) {
@@ -103,15 +104,19 @@ export default class Lista extends Component {
         // </SView>
         let dataSelect = []
         return <>
-            <SHr height={15} />
+            {/* <SHr height={15} /> */}
             <SList
                 initSpace={10}
                 flex
-                buscador
+                // buscador
                 // limit={8}
                 data={this.state.data}
                 // order={[{ key: "prdnom", order: "asc" }]}
+
                 render={(obj, key) => {
+                    if (!SBuscador.validate(obj, this.state.find)) {
+                        return null;
+                    }
                     return <>
                         <SView center col={"xs-12"} row style={{
                             borderLeftWidth: 3,
@@ -175,7 +180,7 @@ export default class Lista extends Component {
                                 </SView>
                             </SView>
                         </SView>
-                        
+
                     </>
                 }}
             />
@@ -269,8 +274,13 @@ export default class Lista extends Component {
                 footer={this.getBtnFooter()}
             >
                 <Container loading={!this.state.data}>
+                    <Kolping.KBuscador onChangeText={(text) => {
+                        this.setState({
+                            find: text
+                        })
+                    }} />
                     {this.getContent()}
-                    <SHr height={25}/>
+                    <SHr height={25} />
                 </Container>
             </SPage>
         );
