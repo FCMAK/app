@@ -14,7 +14,7 @@ export default ({ medico, onPress }) => {
     })
     const codmed = SNavigation.getParam("codmed")
     const color = STheme.color.primary
-    console.log("especialidades", codmed)
+    // console.log("especialidades", codmed)
     return < SView col={"xs-12"} padding={8} row
         style={{
             opacity: active ? 1 : 0.5,

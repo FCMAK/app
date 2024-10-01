@@ -165,6 +165,7 @@ import paciente, { ReactComponent as pacienteW } from './svg/paciente.svg';
 import salir, { ReactComponent as salirW } from './svg/salir.svg';
 import addUser, { ReactComponent as addUserW } from './svg/addUser.svg';
 import arrowR, { ReactComponent as arrowRW } from './svg/arrowR.svg';
+import noData, { ReactComponent as noDataW } from './svg/noData.svg';
 
 const Assets: SAssets = {
     svg: {
@@ -327,7 +328,8 @@ const Assets: SAssets = {
         "paciente": { Native: paciente, Web: pacienteW },
         "salir": { Native: salir, Web: salirW },
         "addUser": { Native: addUser, Web: addUserW },
-        "arrowR": { Native: arrowR, Web: arrowRW }
+        "arrowR": { Native: arrowR, Web: arrowRW },
+        "noData": { Native: noData, Web: noDataW },
     }
 }
 
