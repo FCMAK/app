@@ -24,6 +24,20 @@ export default class medicos extends Component {
             this.setState({ medicos: medicos })
         })
     }
+
+    handleFilter(arr) {
+        const find = this.state.find;
+        if (arr && find) {
+            const fu = find.toUpperCase()
+            return arr.filter(a => {
+                if ((JSON.stringify(a).toUpperCase().indexOf(fu) > -1)) {
+                    return true;
+                }
+                return false;
+            })
+        }
+        return arr;
+    }
     render() {
         return <SPage>
             <SelectFecha defaultValue={this.state.fecha} onChange={(e) => {
@@ -40,8 +54,7 @@ export default class medicos extends Component {
                 }} />
                 <FlatList
                     style={{ width: "100%" }}
-                    data={this.state.medicos ?? []}
-                    
+                    data={this.handleFilter((this.state.medicos ?? []))}
                     ItemSeparatorComponent={() => <SHr />}
                     renderItem={({ item }) => <MedicoItem medico={item} onPress={() => {
                         SNavigation.navigate("/ficha/horarios", { nrosuc: this.nrosuc, codmed: item.CodMed, fecha: this.state.fecha })

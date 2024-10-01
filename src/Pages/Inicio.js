@@ -52,7 +52,7 @@ class Inicio extends Component {
     getCard() {
         return <SView col={"xs-12"} center style={{
             position: 'absolute',
-            top: 70,
+            top: 60,
         }}>
             <SView width={300} height={155} center>
                 <SView col={"xs-12"} height style={{ position: "absolute", }}><SIcon name={"homeBox"} fill={"#01899233"} width={"100%"} height={"100%"} /></SView>
@@ -67,12 +67,12 @@ class Inicio extends Component {
                 </SView>
                 <SView style={{
                     position: "absolute",
-                    right: -100,
+                    right: -13,
                     bottom: 30,
                 }} width={87} height={145}>
                     <SIcon name={"Enfermera7"} />
                 </SView>
-                <SView style={{
+                {/* <SView style={{
                     position: "absolute",
                     right: -13,
                     bottom: 30,
@@ -83,7 +83,7 @@ class Inicio extends Component {
                             if (ref) ref.play()
                         })
                     }} src={"https://drive.servisofts.com/http/videos/muneca/saludo (2).webm"} muted autoplay loop />
-                </SView>
+                </SView> */}
             </SView>
         </SView>
     }

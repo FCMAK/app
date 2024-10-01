@@ -27,7 +27,7 @@ class KBarraUsuario extends Component {
         console.log("usuario", usuario);
 
         return (
-            <SView col={"xs-12"} height={100} backgroundColor={STheme.color.primary} style={{
+            <SView col={"xs-12"} height={85} backgroundColor={STheme.color.primary} style={{
                 borderBottomLeftRadius: 20,
                 borderBottomRightRadius: 20,
                 position: 'absolute',
