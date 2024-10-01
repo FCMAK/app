@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import { SView } from 'servisofts-component';
 import { GoogleSignin, statusCodes, GoogleSigninButton } from '@react-native-google-signin/google-signin';
 
-GoogleSignin.configure({
-    ClientId:
-        '1096371367501-3uj904koo65drsruapn26u00ud4bfen2.apps.googleusercontent.com',
-      
-});
+GoogleSignin.configure();
 
 class LoginGoogle extends Component {
     constructor(props) {

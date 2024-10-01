@@ -1,5 +1,5 @@
 import React from 'react';
-import { SComponentContainer, SIcon, SNavigation, SView } from 'servisofts-component';
+import { SComponentContainer, SIcon, SMapView, SNavigation, SView } from 'servisofts-component';
 
 import Pages from './Pages';
 import Assets from './Assets';
@@ -15,6 +15,10 @@ import Config from './Config';
 import Firebase from './Firebase';
 
 Firebase.init();
+
+SMapView.bootstrapURLKeys = {
+    key: "AIzaSyCfEVNoHX5PAARlPuLs6a268yUTgAAelZ0"
+}
 
 const App = (props) => {
     return (

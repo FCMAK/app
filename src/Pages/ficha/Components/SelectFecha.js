@@ -12,7 +12,7 @@ export default ({ defaultValue, onChange }) => {
             top: 5,
         }}>
             <SView width={220} height={100} center>
-                <SImage source={require("../../../assets/img/boxHeader.png")} width={220} height={106} style={{position:"absolute"}}/>
+                <SImage source={require("../../../Assets/img/boxHeader.png")} width={220} height={106} style={{position:"absolute"}}/>
                 {/* <SView col={"xs-12"} height style={{ position: "absolute", }}><SIcon name={"homeBox"} fill={"#01899233"} width={"100%"} height={"100%"} /></SView> */}
                 {/* <SHr height={5} /> */}
                 <SText font={"LondonTwo"} center color={STheme.color.white} fontSize={15}>{`Seleccione la fecha de su ficha`}</SText>
@@ -21,9 +21,13 @@ export default ({ defaultValue, onChange }) => {
                 <SHr height={5} />
                 <SView col={"xs-12"} center>
                     <SView width={90} >
-                        <SInput type='date' customStyle={"kolping"} defaultValue={defaultValue} onChangeText={onChange} style={{
+                        <SInput type='date'  customStyle={"kolping"} defaultValue={defaultValue} onChangeText={onChange} style={{
                             backgroundColor: STheme.color.white,
                             overflow: "hidden",
+                            
+                            textAlign:"center",
+                            // paddingTopt:16,
+                            justifyContent:"center",
                             height: 40,
                         }} />
                         <SHr height={10} />

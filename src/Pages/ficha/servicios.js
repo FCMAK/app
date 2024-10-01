@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SIcon, SImage, SLoad, SNavigation, SPage, SPopup, STable2, SText, SView, SList, SHr, SDate, SInput, SBuscador } from 'servisofts-component';
+import { SIcon, SImage, SLoad, SNavigation, SPage, SPopup, STable2, SText, SView, SList, SHr, SDate, SInput, SBuscador, SNotification } from 'servisofts-component';
 import STheme from 'servisofts-component/Component/STheme';
 import KButtom from '../../Components/Kolping/KButtom';
 import SSocket from 'servisofts-socket';
@@ -193,6 +193,14 @@ export default class Lista extends Component {
             return;
         }
 
+        if (!Model.usuario.Action.getKey()) {
+            SNotification.send({
+                title: "Porfavor inicia session para realizar la reserva.",
+                time: 5000,
+                color: STheme.color.warning
+            })
+            SNavigation.navigate("login");
+        }
         if (this.state.loading) return;
         this.state.loading = true;
         SSocket.sendPromise({
