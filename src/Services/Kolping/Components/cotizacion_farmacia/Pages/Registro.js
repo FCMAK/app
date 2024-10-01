@@ -101,6 +101,9 @@ class Registro extends Component {
                 <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} center>
                     <SView col={"xs-11"} height={200} style={{ overflow: 'hidden', borderRadius: 16 }}>
                         <SView col={"xs-12"} height backgroundColor={STheme.color.lightGray + "99"} center border='red'
+                        style={{
+                            overflow: 'hidden'
+                        }}
                             onPress={() => {
 
 
