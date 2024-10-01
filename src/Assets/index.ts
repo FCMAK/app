@@ -15,7 +15,7 @@ import Enfermera7, { ReactComponent as Enfermera7W } from './svg/enfermera/7.svg
 // import Enfermera11, { ReactComponent as Enfermera11W } from './svg/enfermera/11.svg';
 // import Enfermera12, { ReactComponent as Enfermera12W } from './svg/enfermera/12.svg';
 // import Enfermera13, { ReactComponent as Enfermera13W } from './svg/enfermera/13.svg';
-// import Enfermera14, { ReactComponent as Enfermera14W } from './svg/enfermera/14.svg';
+import Enfermera14, { ReactComponent as Enfermera14W } from './svg/enfermera/14.svg';
 // import Enfermera15, { ReactComponent as Enfermera15W } from './svg/enfermera/15.svg';
 // import Enfermera16, { ReactComponent as Enfermera16W } from './svg/enfermera/16.svg';
 // import Enfermera17, { ReactComponent as Enfermera17W } from './svg/enfermera/17.svg';
@@ -27,7 +27,7 @@ import Enfermera7, { ReactComponent as Enfermera7W } from './svg/enfermera/7.svg
 // import Enfermera23, { ReactComponent as Enfermera23W } from './svg/enfermera/23.svg';
 // import Enfermera24, { ReactComponent as Enfermera24W } from './svg/enfermera/24.svg';
 // import Enfermera25, { ReactComponent as Enfermera25W } from './svg/enfermera/25.svg';
-// import Enfermera26, { ReactComponent as Enfermera26W } from './svg/enfermera/26.svg';
+import Enfermera26, { ReactComponent as Enfermera26W } from './svg/enfermera/26.svg';
 // import Enfermera27, { ReactComponent as Enfermera27W } from './svg/enfermera/27.svg';
 
 import SFarmacia, { ReactComponent as SFarmaciaW } from './svg/servicios/sfarmacia.svg';
@@ -182,7 +182,7 @@ const Assets: SAssets = {
         // "Enfermera11": { Native: Enfermera11, Web: Enfermera11W },
         // "Enfermera12": { Native: Enfermera12, Web: Enfermera12W },
         // "Enfermera13": { Native: Enfermera13, Web: Enfermera13W },
-        // "Enfermera14": { Native: Enfermera14, Web: Enfermera14W },
+        "Enfermera14": { Native: Enfermera14, Web: Enfermera14W },
         // "Enfermera15": { Native: Enfermera15, Web: Enfermera15W },
         // "Enfermera16": { Native: Enfermera16, Web: Enfermera16W },
         // "Enfermera17": { Native: Enfermera17, Web: Enfermera17W },
@@ -194,7 +194,7 @@ const Assets: SAssets = {
         // "Enfermera23": { Native: Enfermera23, Web: Enfermera23W },
         // "Enfermera24": { Native: Enfermera24, Web: Enfermera24W },
         // "Enfermera25": { Native: Enfermera25, Web: Enfermera25W },
-        // "Enfermera26": { Native: Enfermera26, Web: Enfermera26W },
+        "Enfermera26": { Native: Enfermera26, Web: Enfermera26W },
         // "Enfermera27": { Native: Enfermera27, Web: Enfermera27W },
         "IconFaceb": { Native: IconFaceb, Web: IconFacebW },
         "IconGoogle": { Native: IconGoogle, Web: IconGoogleW },
