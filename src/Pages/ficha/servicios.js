@@ -7,6 +7,7 @@ import SSocket from 'servisofts-socket';
 import Container from '../../Components/Container';
 import carrito from '../../Services/Kolping/Components/carrito';
 import Model from '../../Model';
+import NoData from './Components/NoData';
 
 export default class Lista extends Component {
     constructor(props) {
@@ -88,6 +89,18 @@ export default class Lista extends Component {
         }
     }
     getContent() {
+
+        if (!this.state.data) return <SLoad />
+        let data = this.state.data ?? [];
+        if (data.length === 0) return <NoData mensaje={"No hay servicios disponibles"} />
+        // <SView col={"xs-12"} center >
+        //     <SHr height={45} />
+        //     <SIcon name={"noData"} width={150} height={174} fill={STheme.color.info} />
+        //     <SHr height={25} />
+        //     <SView col={"xs-11 sm-6"} center card padding={15}>
+        //         <SText fontSize={18} color={STheme.color.text} center font='LondonMM' >No hay servicios disponibles</SText>
+        //     </SView>
+        // </SView>
         let dataSelect = []
         return <>
             <SHr height={15} />
@@ -162,6 +175,7 @@ export default class Lista extends Component {
                                 </SView>
                             </SView>
                         </SView>
+                        
                     </>
                 }}
             />
@@ -256,6 +270,7 @@ export default class Lista extends Component {
             >
                 <Container loading={!this.state.data}>
                     {this.getContent()}
+                    <SHr height={25}/>
                 </Container>
             </SPage>
         );
