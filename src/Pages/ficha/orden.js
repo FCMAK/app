@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { SHr, SImage, SLoad, SNavigation, SPage, SText, STheme, SView } from "servisofts-component";
+import { SDate, SHr, SImage, SLoad, SNavigation, SNotification, SPage, SText, STheme, SView } from "servisofts-component";
 import SSocket from "servisofts-socket";
 import Model from "../../Model";
 import { Container } from "../../Components";
 import Kolping from "../../Components/Kolping";
+import { getMedico } from "./Actions";
+import paciente from "../paciente";
 
 const Title = ({ label }) => {
     return <SView col={"xs-12"}>
@@ -18,11 +20,12 @@ const Title = ({ label }) => {
 
 const InputPaciente = React.forwardRef((props, ref) => {
     const [paciente, setPaciente] = useState({
-        alias: "Seleccione un paciente"
+        alias: "Seleccione un paciente..."
     });
 
     React.useImperativeHandle(ref, () => ({
-        paciente
+        paciente,
+        setPaciente
     }));
 
     return <SView col={"xs-12"} height={100} style={{
@@ -54,11 +57,13 @@ const InputPaciente = React.forwardRef((props, ref) => {
         </SView>
     </SView>
 })
-const InputCita = () => {
+const InputCita = ({ data }) => {
+    const { fecha, nommed, nomesp } = data;
     // if(!this.state?.data) return <SLoad />
     let obj = this.state?.data;
     // if(!obj) return <SLoad/>
     console.log("obj", obj)
+    const sdate = new SDate(fecha, "yyyy-MM-dd")
     return <SView col={"xs-12"} height={130} style={{
         borderRadius: 10,
         borderWidth: 2,
@@ -75,8 +80,8 @@ const InputCita = () => {
         <SView width={16} />
         <SView flex>
             {/* <SText fontSize={20} bold>{obj?.detalle?.NomMed} -nn</SText> */}
-            <SText fontSize={20} bold>{"Dr. Saucedo"}</SText>
-            <SText color={STheme.color.info} fontSize={14}>{"Cardiología"}</SText>
+            <SText fontSize={20} bold>{nommed}</SText>
+            <SText color={STheme.color.info} fontSize={14}>{nomesp}</SText>
         </SView>
         <SView height={"50%"} style={{
 
@@ -85,9 +90,9 @@ const InputCita = () => {
             borderColor: STheme.color.card
         }} />
         <SView width={100} center>
-            <SText fontSize={22} bold color={STheme.color.primary}>{"14"}</SText>
-            <SText fontSize={14} color={STheme.color.primary}>{"ENERO"}</SText>
-            <SText fontSize={14} color={STheme.color.primary}>{"12:30 PM"}</SText>
+            <SText fontSize={22} bold color={STheme.color.primary}>{sdate.toString("dd")}</SText>
+            <SText fontSize={14} color={STheme.color.primary}>{sdate.toString("MONTH")}</SText>
+            <SText fontSize={14} color={STheme.color.primary}>{sdate.toString("HH")}</SText>
         </SView>
     </SView>
 }
@@ -106,40 +111,78 @@ export default class index extends React.Component {
             key: this.key,
         }).then(e => {
             this.setState({ data: e.data })
+            const { data, codpac } = e.data;
+            const { codmed, nrosuc, codesp, fecha } = data;
+            // getMedico({ nrosuc: nrosuc, codmed: codmed, codesp: codesp, fecha: fecha }).then(med => {
+            //     this.setState({ medico: med })
+            // })
+
+            if (codpac) {
+                SSocket.sendPromise({
+                    component: "paciente_usuario",
+                    type: "getByKey",
+                    key_usuario: Model.usuario.Action.getKey(),
+                    codper: codpac,
+                }).then(e => {
+                    if (this.inpPaciente) {
+                        this.inpPaciente.setPaciente(e.data)
+                    }
+                    // this.setState({ paciente: e.data })
+                    // console.log("Pacienet", e)
+                }).catch(e => {
+
+                })
+            }
+
         }).catch(e => {
+
         })
     }
 
     handlePress() {
+        if (!this.state.data.codpac) {
+            SNotification.send({
+                title: "Debe seleccionar un paciente.",
+                color: STheme.color.warning,
+                time: 5000
+            })
+            return;
+        }
         SNavigation.navigate("/ficha/confirmar", {
             key: this.key
         })
         console.log(this.state)
     }
     handleChangePaciente(e) {
+        console.log(e);
         SSocket.sendPromise({
             component: "orden_compra",
             type: "editar",
             data: {
                 key: this.key,
-                codpac: e.codper + "",
+                codpac: e.codper + ""
             }
+        }).then(e => {
+            this.state.data.codpac = e.codper + ""
+            this.setState({ paciente: e })
+        }).catch(e => {
 
         })
     }
     render() {
-        if(!this.state.data) return <SLoad />
-        console.log("orden",this.state.data)
         return <SPage title={"Servisofts page"}>
-            <Container flex>
+            <Container flex loading={!this.state.data}>
                 <SHr h={32} />
                 <Title label={"Paciente"} />
                 <SHr h={16} />
-                <InputPaciente onChage={this.handleChangePaciente.bind(this)} />
+                <InputPaciente ref={ref => {
+                    this.inpPaciente = ref
+                    console.log("entro al ref")
+                }} onChage={this.handleChangePaciente.bind(this)} />
                 <SHr h={50} />
                 <Title label={"Cita Programada"} />
                 <SHr h={16} />
-                <InputCita />
+                <InputCita data={this.state?.data?.data} />
                 <SHr h={50} />
                 <SView flex no />
                 {/* <SText col={"xs-12"} fontSize={20} font="LondonBetween">{"Cita Programada"}</SText> */}
