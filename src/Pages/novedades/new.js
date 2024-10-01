@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from '.';
 import { SNavigation, SPopup, STheme } from 'servisofts-component';
-import Model from '../../Model';
+import Model from '../../Model'; 
 
 class index extends DPA.new {
     constructor(props) {
@@ -54,6 +54,7 @@ class index extends DPA.new {
             data: data,
             key_usuario: "",
         }).then((resp) => {
+            this.$submitFile(resp.data.key);
             SNavigation.goBack();
         }).catch(e => {
             console.error(e);

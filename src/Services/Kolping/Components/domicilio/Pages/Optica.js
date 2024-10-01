@@ -5,6 +5,7 @@ import Kolping from '../../../../../Components/Kolping';
 import WhatsApp from '../../../../../Components/WhatsApp';
 import servicio_domicilio from '../../servicio_domicilio';
 import Params from "../params.json"
+import { Container } from '../../../../../Components';
 
 class Optica extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class Optica extends Component {
             reducer.estado = ""
             var obj = reducer.lastRegister;
             var usuario = this.props.state.usuarioReducer.usuarioLog;
-            
+
             var mensaje = `Hola, Mi nombre es ${usuario.Nombres} ${usuario.Apellidos} estoy interesado(a) en el servicio de Óptica a domicilio. 
                             Solicitud #${obj.numero}
                             ${Params.url}${obj.numero}/`;
@@ -28,8 +29,9 @@ class Optica extends Component {
             SNavigation.navigate("domicilio/request", { numero: obj.numero });
         }
         return (
-            <SPage title={'Óptica a Domicilio'} center>
-                <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row>
+            <SPage title={'Óptica a Domicilio'} >
+                {/* <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row> */}
+                <Container>
                     <SHr height={20} />
                     <SView col={"xs-12"} style={{ padding: 8 }} center >
                         <SView col={"xs-12"}>
@@ -67,7 +69,7 @@ class Optica extends Component {
                             </SView>
                             <SView col={"xs-11 sm-10 md-8 lg-8 xl-11"}  >
                                 <SHr height={80} />
-                                <SView col={"xs-8"}  center style={{ borderWidth: 1, borderColor: STheme.color.card, borderRadius: 8 }}>
+                                <SView col={"xs-8"} center style={{ borderWidth: 1, borderColor: STheme.color.card, borderRadius: 8 }}>
                                     <SView col={"xs-12"} height={45} backgroundColor={STheme.color.card} row center>
                                         <SView col={"xs-2"} center>
                                             <SIcon name={"aspa"} width={20} height={15} fill={"#378D00"} />
@@ -76,7 +78,7 @@ class Optica extends Component {
                                             <SText font={"LondonBetween"} fontSize={17} >Anti Réflex</SText>
                                         </SView>
                                     </SView>
-                                    <SView col={"xs-12"} height={45}  row center>
+                                    <SView col={"xs-12"} height={45} row center>
                                         <SView col={"xs-2"} center>
                                             <SIcon name={"aspa"} width={20} height={15} fill={"#378D00"} />
                                         </SView>
@@ -92,7 +94,7 @@ class Optica extends Component {
                                             <SText font={"LondonBetween"} fontSize={17} >Progresivos</SText>
                                         </SView>
                                     </SView>
-                                    <SView col={"xs-12"} height={45}  row center>
+                                    <SView col={"xs-12"} height={45} row center>
                                         <SView col={"xs-2"} center>
                                             <SIcon name={"aspa"} width={20} height={15} fill={"#378D00"} />
                                         </SView>
@@ -108,7 +110,7 @@ class Optica extends Component {
                                             <SText font={"LondonBetween"} fontSize={17} >Monturas para dama</SText>
                                         </SView>
                                     </SView>
-                                    <SView col={"xs-12"} height={45}  row center>
+                                    <SView col={"xs-12"} height={45} row center>
                                         <SView col={"xs-2"} center>
                                             <SIcon name={"aspa"} width={20} height={15} fill={"#378D00"} />
                                         </SView>
@@ -129,7 +131,7 @@ class Optica extends Component {
                         </SView>
 
                         <SHr height={150} />
-                        
+
                         <Kolping.KButtom primary onPress={() => {
                             servicio_domicilio.Actions.registro({
                                 tipo: "optica"
@@ -138,7 +140,8 @@ class Optica extends Component {
                         }} >SOLICITAR SERVICIO</Kolping.KButtom>
                         <SHr height={30} />
                     </SView>
-                </SView>
+                    {/* </SView> */}
+                </Container>
             </SPage >
         );
     }

@@ -238,11 +238,11 @@ export default class Lista extends Component {
                     <SView flex height={47}>
                         <SText
                             color={STheme.color.secondary}
-                            font={'Roboto'}
-                            fontSize={15}>{`${cantidad} items`}</SText>
+                            font={'LondonMM'}
+                            fontSize={16}>{`${cantidad} items`}</SText>
                         <SText
                             color={STheme.color.secondary}
-                            font={'Roboto'}
+                            font={'LondonMM'}
                             fontSize={22}>{`Bs. ${total.toFixed(2)}`}</SText>
                     </SView>
                     <SView flex height={40} style={{
@@ -256,8 +256,8 @@ export default class Lista extends Component {
                         <SText
                             center
                             color={STheme.color.white}
-                            font={'Roboto'}
-                            fontSize={17}>
+                            font={'LondonMM'}
+                            fontSize={17} bold>
                             SOLICITAR
                         </SText>
                     </SView>
