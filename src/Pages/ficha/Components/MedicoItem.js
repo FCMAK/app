@@ -37,7 +37,7 @@ export default ({ medico, onPress }) => {
 
         </SView>
         <SView flex>
-            <SText bold>{`${TitMed} ${NomMed}`}</SText>
+            <SText font='LondonTwo' fontSize={15} >{`${TitMed} ${NomMed}`}</SText>
             {/* <SText>Cantida de turnos: {turnos.length}</SText> */}
             <SHr h={4} />
             <SView row>
@@ -49,7 +49,7 @@ export default ({ medico, onPress }) => {
                     // borderColor: color,
                     // backgroundColor: color + "44",
                 }}>
-                    <SText color={STheme.color.info} font='LondonMM' fontSize={15} bold>{esp}</SText>
+                    <SText color={STheme.color.info} font='LondonBetween' fontSize={16} >{esp}</SText>
                 </SView>)}
             </SView>
 

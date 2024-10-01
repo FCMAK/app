@@ -50,9 +50,9 @@ const InputPaciente = React.forwardRef((props, ref) => {
         </SView>
         <SView width={16} />
         <SView flex>
-            <SText fontSize={20} >{paciente.alias}</SText>
+            <SText fontSize={20} font="LondonBetween" >{paciente.alias}</SText>
             <SView row>
-                <SText color={STheme.color.lightGray}>{paciente.ci}</SText>
+                <SText color={STheme.color.lightGray} font="LondonBetween">{paciente.ci}</SText>
             </SView>
         </SView>
     </SView>
@@ -80,8 +80,8 @@ const InputCita = ({ data }) => {
         <SView width={16} />
         <SView flex>
             {/* <SText fontSize={20} bold>{obj?.detalle?.NomMed} -nn</SText> */}
-            <SText fontSize={20} bold>{nommed}</SText>
-            <SText color={STheme.color.info} fontSize={14}>{nomesp}</SText>
+            <SText fontSize={15} font="LondonTwo" >{nommed}</SText>
+            <SText color={STheme.color.info} font="LondonBetween" fontSize={16}>{nomesp}</SText>
         </SView>
         <SView height={"50%"} style={{
 
@@ -90,9 +90,9 @@ const InputCita = ({ data }) => {
             borderColor: STheme.color.card
         }} />
         <SView width={100} center>
-            <SText fontSize={22} bold color={STheme.color.primary}>{sdate.toString("dd")}</SText>
-            <SText fontSize={14} color={STheme.color.primary}>{sdate.toString("MONTH")}</SText>
-            <SText fontSize={14} color={STheme.color.primary}>{sdate.toString("HH")}</SText>
+            <SText fontSize={25} font="LondonTwo" bold color={STheme.color.primary}>{sdate.toString("dd")}</SText>
+            <SText fontSize={14} font="LondonBetween" color={STheme.color.primary}>{sdate.toString("MONTH")}</SText>
+            <SText fontSize={14} font="LondonBetween" color={STheme.color.primary}>{sdate.toString("HH")}</SText>
         </SView>
     </SView>
 }

@@ -28,12 +28,12 @@ const RenderHoraItem = ({ item, medico, nrosuc, fecha }) => {
     // Dias 1=Lunes 2=Martes 3=Miercoles 4=Jueves 5=Viernes 6=Sabado ?=Domingo
 
     // date.addDay(NroDia)
-    return <SView col={'xs-4'} padding={8} >
+    return <SView col={'xs-4'} padding={5} >
         <SView col={'xs-12'} card center
             style={{
                 alignItems: "flex-end"
             }}
-            padding={8}
+            padding={6}
             onPress={() => {
                 SNavigation.navigate("/ficha/servicios", {
                     codesp: CodEsp,
@@ -63,13 +63,13 @@ const RenderHoraItem = ({ item, medico, nrosuc, fecha }) => {
                 borderColor: STheme.color.primary,
                 borderWidth: 2,
             }} center>
-                <SText bold color={STheme.color.secondary}>{CodTur}{ComTur}</SText>
+                <SText font="LondonTwo" fontSize={15} color={STheme.color.secondary}>{CodTur}{ComTur}</SText>
             </SView>
             <SView width={8} />
             <SHr height={3} />
-            <SText fontSize={12}>{NomEsp}</SText>
+            <SText fontSize={13} font="LondonBeteen">{NomEsp}</SText>
             <SView flex />
-            <SText fontSize={16} bold>{HorTur}</SText>
+            <SText fontSize={13} font="LondonTwo">{HorTur}</SText>
         </SView>
     </SView>
 }

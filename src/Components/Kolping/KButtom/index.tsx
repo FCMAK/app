@@ -52,7 +52,7 @@ export default class KButtom extends Component<KButtom_props> {
                     this.props.onPress(this);
                 }
             }} >
-            {loading ? <SLoad /> : <SText color={this.props.outline ? bgColor : STheme.color.white} font={"Roboto-Bold"} >{this.props.children}</SText>}
+            {loading ? <SLoad /> : <SText fontSize={16} color={this.props.outline ? bgColor : STheme.color.white} font={"LondonTwo"} >{this.props.children}</SText>}
         </SView>);
     }
 }
