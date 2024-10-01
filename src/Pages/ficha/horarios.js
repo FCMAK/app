@@ -3,7 +3,7 @@ import { SDate, SHr, SNavigation, SPage, SText, STheme, SView } from "servisofts
 import SSocket from "servisofts-socket";
 import { Container } from "../../Components";
 import { FlatList } from "react-native";
-import { getAllMedicos, getAllServicios } from "./Actions";
+import { getAllMedicos, getAllServicios, getMedico } from "./Actions";
 import MedicoItem from "./Components/MedicoItem";
 import SelectFecha from "./Components/SelectFecha";
 
@@ -40,7 +40,10 @@ const RenderHoraItem = ({ item, medico, nrosuc, fecha }) => {
                     nrosuc: nrosuc,
                     codtur: CodTur,
                     comtur: ComTur,
-                    fecha: fecha
+                    fecha: fecha,
+                    nomesp: NomEsp,
+                    nommed: NomMed,
+                    hortur:HorTur
                 })
                 // getAllServicios({
                 //     nrosuc: nrosuc,
@@ -85,8 +88,8 @@ export default class horarios extends React.Component {
         // this.loadTurnos().then(turnos => console.log(turnos))
     }
     async loadMedico() {
-        const medicos = await getAllMedicos({ fecha: this.state.fecha, nrosuc: this.nrosuc })
-        return medicos.find(a => a.CodMed == this.codmed);
+        const medicos = await getMedico({ fecha: this.state.fecha, nrosuc: this.nrosuc, codmed: this.codmed, codesp: this.codesp })
+        return medicos;
     }
 
     RenderHoras = () => {

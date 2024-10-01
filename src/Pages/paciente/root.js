@@ -58,7 +58,7 @@ export default class root extends Component {
                 </SView>
                 <SText font='LondonBetween' color={STheme.color.gray}>{item.codper}</SText>
                 <SHr />
-                <SText font='LondonBetween' color={STheme.color.danger} onPress={() => {
+                {/* <SText font='LondonBetween' color={STheme.color.danger} onPress={() => {
                     SSocket.sendPromise({
                         component: "paciente_usuario",
                         type: "editar",
@@ -71,16 +71,8 @@ export default class root extends Component {
                     }).catch(e => {
                         console.log(e);
                     })
-                }}>{"BORRAR"}</SText>
-                <SText fontSize={18} font='LondonBetween'>{item?.alias}</SText>
-                {/* <SHr /> */}
-                <SView row flex>
-                    <SText font='LondonBetween' color={STheme.color.success}>COD: {item?.codper}</SText>
-                    {/* <SView width={8} /> */}
-                    {/* <SText font='LondonBetween' color={STheme.color.success}>COD: {item?.codper}</SText> */}
-                </SView>
-                <SText font='LondonBetween' color={STheme.color.gray}>{item?.ci}</SText>
-
+                }}>{"BORRAR"}</SText> */}
+                
                 {/* <SText font='LondonBetween' color={STheme.color.gray}>{"nombre@gmail.com"}</SText> */}
             </SView>
         </SView>

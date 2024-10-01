@@ -18,6 +18,17 @@ class Confirmacion extends Component {
             key_usuario: Model.usuario.Action.getKey(),
             key: this.pk,
         }).then(e => {
+
+            if (e.data?.data?.nrosuc) {
+                SSocket.sendPromise({
+                    component: "sucursal",
+                    type: "getAll",
+                    key_usuario: Model.usuario.Action.getKey(),
+                }).then(b => {
+                    const suc = b.data.find(c => c.NroSuc == e.data?.data?.nrosuc)
+                    this.setState({ sucursal: suc })
+                })
+            }
             this.setState({ data: e.data })
         }).catch(e => {
         })
@@ -35,18 +46,20 @@ class Confirmacion extends Component {
     }
 
     render() {
+
         let dataDoctor = {
             TitMed: "Dr.",
-            NomMed: "Ricardo Paz Demiquel",
-            NomEsp: "Sistemas"
+            NomMed: this.state?.data?.data?.nommed,
+            NomEsp: this.state?.data?.data?.nomesp,
         }
         let suc = {
-            NomSuc: "Nombre de la sucursal",
-            DirSuc: "Direccion de la sucursal",
-            TelSuc: "75395848"
+            NomSuc: this.state?.sucursal?.NomSuc,
+            DirSuc: this.state?.sucursal?.DirSuc,
+            TelSuc: this.state?.sucursal?.TelSuc
         }
         // let fecha_final = this.fecha_final.toString("MONTH dd");
-        let fecha_final = "yyy-Mm-DD"
+        // let fecha_final = "yyy-Mm-DD"
+        const fecha = this.state?.data?.data?.fecha;
         return (
             <SPage title={'Confirmar'} >
                 <SHr height={20} />
@@ -81,7 +94,7 @@ class Confirmacion extends Component {
                                 <SIcon name={"ffecha"} width={25} fill={STheme.color.white} />
                             </SView>
                             <SView col={"xs-9"}>
-                                <SText font={"Roboto"} fontSize={20} color={STheme.color.white}>{this.state?.data?.data?.fecha}</SText>
+                                <SText font={"Roboto"} fontSize={20} color={STheme.color.white}>{fecha}</SText>
                             </SView>
                             <SHr height={20} />
                             <SView col={"xs-3"} height={25} >
@@ -91,7 +104,7 @@ class Confirmacion extends Component {
                                 {/* <SText font={"Roboto"} fontSize={20} color={STheme.color.white}>{this.hora}</SText> */}
                                 {/* {this.datosNav.turno.DesTur != "" ? <SText font={"LondonBetween"} fontSize={16} color={STheme.color.white} >{this.datosNav.turno.DesTur}</SText> : <SText font={"LondonBetween"} fontSize={16} color={STheme.color.white} >Atención por orden de llegada</SText>} */}
                                 <SHr height={4} />
-                                <SText font={"LondonBetween"} fontSize={18} color={STheme.color.white} >{"00:00"} - {"00:00"}</SText>
+                                <SText font={"LondonBetween"} fontSize={18} color={STheme.color.white} >{this.state?.data?.data?.hortur}</SText>
                             </SView>
                             <SHr height={20} />
                             <SView col={"xs-3"} height={55} >
@@ -125,15 +138,18 @@ class Confirmacion extends Component {
                         </SView>
                         <SView col={"xs-12"} center>
                             <SHr height={30} />
-                            <Kolping.KButtom secondary width={300} onPress={() => {
+                            <Kolping.KButtom secondary width={300} onPress={(ins) => {
+                                ins.setLoading(true)
                                 SSocket.sendPromise({
                                     component: "orden_compra",
                                     type: "confirmar",
                                     key: this.pk,
                                     key_usuario: Model.usuario.Action.getKey()
                                 }).then(e => {
+                                    ins.setLoading(false)
                                     SNavigation.navigate("ficha/pago")
                                 }).catch(e => {
+                                    ins.setLoading(false)
                                     console.error(e);
                                 })
                             }} >CONTINUAR </Kolping.KButtom>

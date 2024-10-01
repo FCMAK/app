@@ -5,20 +5,26 @@ type KButtom_props = {
     primary?: boolean,
     secondary?: boolean,
     outline?: boolean,
-    onPress?: () => void,
+    onPress?: (instance: KButtom) => void,
     loading?: boolean,
     small?: boolean,
     styleA?: any,
     width?: number
+    children?: any
 }
 
 export default class KButtom extends Component<KButtom_props> {
+    state = {
+        loading: false,
+    }
     constructor(props: any) {
         super(props);
-        this.state = {
-        };
     }
 
+    setLoading(bool) {
+        this.state.loading = bool;
+        this.setLoading({...this.state})
+    }
     render() {
         var bgColor = this.props.primary ? STheme.color.primary : this.props.secondary ? STheme.color.info : STheme.color.primary;
         var width = this.props.width ? this.props.width : 350;
@@ -30,6 +36,7 @@ export default class KButtom extends Component<KButtom_props> {
             size.width = 130;
             size.height = 30;
         }
+        const loading = this.state.loading || this.props.loading
         return (<SView height={size.height} style={{
             borderRadius: 8,
             width: "100%",
@@ -37,15 +44,15 @@ export default class KButtom extends Component<KButtom_props> {
             ...(this.props.outline ? { borderWidth: 1, borderColor: bgColor } : { backgroundColor: bgColor }),
             ...this.props.styleA
         }} center
-            activeOpacity={this.props.loading ? 1 : 0.5}
+            activeOpacity={loading ? 1 : 0.5}
             {...this.props}
             onPress={() => {
-                if (this.props.loading) return;
+                if (loading) return;
                 if (this.props.onPress) {
-                    this.props.onPress();
+                    this.props.onPress(this);
                 }
             }} >
-            {this.props.loading ? <SLoad /> : <SText color={this.props.outline ? bgColor : STheme.color.white} font={"Roboto-Bold"} >{this.props.children}</SText>}
+            {loading ? <SLoad /> : <SText color={this.props.outline ? bgColor : STheme.color.white} font={"Roboto-Bold"} >{this.props.children}</SText>}
         </SView>);
     }
 }
