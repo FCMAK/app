@@ -65,7 +65,7 @@ export default class add extends Component {
             }}
             inputs={{
                 // nombre: { label: "Nombre Completo", defaultValue: usuario.Nombres + " " + usuario.Apellidos, isRequired: true, icon: <SIcon name={"InputUser"} width={40} height={30} /> },
-                ci: { placeholder: "Número de carnet", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} /> },
+                ci: { placeholder: "Número de documento", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} /> },
             }}
             onSubmit={(t) => {
                 SNotification.send({
@@ -137,7 +137,7 @@ export default class add extends Component {
             <SPage title={'Datos Paciente'} >
                 {/* <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} row center> */}
                 <Header
-                    titulo={"POR FAVOR, INTRODUCE TU NÚMERO DE CARNET"}
+                    titulo={"POR FAVOR, INTRODUCE TU NÚMERO DE DOCUMENTO"}
                     icon={"iconp1"}
                 />
                 <Container>

@@ -72,7 +72,7 @@ export default class PacienteNoEncontrado extends Component {
                 <Header
                     // titulo={"POR FAVOR, INTRODUCE TU NÚMERO DE CARNET"}
                     icon={"iconp2"}
-                    descripcion="Por favor, verifica que hayas introducido tu información correctamente o registra un nuevo paciente."
+                    descripcion="El número de documento ingresado no existe en el sistema. Por favor, revisa la información y vuelve a intentarlo o registra un nuevo paciente."
                 />
                 <Container>
                     {/* <SHr height={20} /> */}

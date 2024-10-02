@@ -185,44 +185,50 @@ class Laboratorio extends Component {
                         </SView> */}
                         <SHr height={30} />
                         <Kolping.KButtom primary onPress={(btn) => {
-                            btn.setLoading(true)
-                            SSocket.sendPromise({
-                                component: "servicio_domicilio",
-                                type: "registro",
-                                estado: "cargando",
-                                key_usuario: Model.usuario.Action.getKey(),
-                                data: {
-                                    tipo: "laboratorio"
-                                }
-                            }).then(e => {
-                                // console.log(e);
-                                const obj = e.data;
-                                var usuario = Model.usuario.Action.getUsuarioLog();
-                                var mensaje = `Hola, Mi nombre es ${usuario.Nombres} ${usuario.Apellidos} estoy interesado(a) en el servicio de Laboratorio a domicilio. 
+                            var usuario = Model.usuario.Action.getUsuarioLog();
+                            if (!usuario) {
+                                SNavigation.navigate("login");
+                                return;
+                            } else {
+                                btn.setLoading(true)
+                                SSocket.sendPromise({
+                                    component: "servicio_domicilio",
+                                    type: "registro",
+                                    estado: "cargando",
+                                    key_usuario: Model.usuario.Action.getKey(),
+                                    data: {
+                                        tipo: "laboratorio"
+                                    }
+                                }).then(e => {
+                                    // console.log(e);
+                                    const obj = e.data;
+                                    var usuario = Model.usuario.Action.getUsuarioLog();
+                                    var mensaje = `Hola, Mi nombre es ${usuario.Nombres} ${usuario.Apellidos} estoy interesado(a) en el servicio de Laboratorio a domicilio. 
                                                     Solicitud #${obj.numero}
                                                     ${Params.url}${obj.numero}/`;
-                                WhatsApp.send({ phone: Params["laboratorio"]?.phone, menssage: mensaje })
-                                SNavigation.navigate("domicilio/request", { numero: obj.numero });
-                                btn.setLoading(false)
-                            }).catch(e => {
-                                btn.setLoading(false)
-                            })
+                                    WhatsApp.send({ phone: Params["laboratorio"]?.phone, menssage: mensaje })
+                                    SNavigation.navigate("domicilio/request", { numero: obj.numero });
+                                    btn.setLoading(false)
+                                }).catch(e => {
+                                    btn.setLoading(false)
+                                })
 
-                            //                             var mensaje = `Hola, Mi nombre es María Julia estoy interesado(a) en el servicio de Laboratorio a domicilio. 
-                            // Solicitud #88
-                            // https://app.kolping.com/domicilio/request/88/`;
+                                //                             var mensaje = `Hola, Mi nombre es María Julia estoy interesado(a) en el servicio de Laboratorio a domicilio. 
+                                // Solicitud #88
+                                // https://app.kolping.com/domicilio/request/88/`;
 
-                            //                             mensaje = encodeURIComponent(mensaje);
-                            //                             Linking.openURL("https://wa.me/59169209170?text=" + mensaje)
+                                //                             mensaje = encodeURIComponent(mensaje);
+                                //                             Linking.openURL("https://wa.me/59169209170?text=" + mensaje)
 
-                            //                             if (Platform.OS == "android" || Platform.OS == "ios") {
-                            //                                 Linking.openURL(`whatsapp://send?text=${mensaje}`);
-                            //                             } else {
-                            //                                 window.open("https://wa.me/59169209170?text=" + mensaje)
-                            //                             }
-                            // servicio_domicilio.Actions.registro({
-                            //     tipo: "laboratorio"
-                            // }, this.props)
+                                //                             if (Platform.OS == "android" || Platform.OS == "ios") {
+                                //                                 Linking.openURL(`whatsapp://send?text=${mensaje}`);
+                                //                             } else {
+                                //                                 window.open("https://wa.me/59169209170?text=" + mensaje)
+                                //                             }
+                                // servicio_domicilio.Actions.registro({
+                                //     tipo: "laboratorio"
+                                // }, this.props)
+                            }
 
                         }}>SOLICITAR LABORATORIO</Kolping.KButtom>
                         <SHr height={30} />

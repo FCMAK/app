@@ -316,7 +316,7 @@ class Inicio extends Component {
             //         </SView>
             //     </SView>
             // }}
-            ItemSeparatorComponent={()=><SView width={8}/>}
+            ItemSeparatorComponent={() => <SView width={8} />}
             showsHorizontalScrollIndicator={true}
             data={data}
             keyExtractor={item => item.key}
@@ -362,8 +362,18 @@ class Inicio extends Component {
 
 
                                 {(!Model.usuario.Action.getKey()) ? null : <>
-                                    <SView col={"xs-12"}>
-                                        <SText font={"LondonMM"} fontSize={18}>{'Mis pacientes:'}</SText>
+                                    <SView col={"xs-12"} row>
+                                        <SView col={"xs-9.5 md-10 lg-10 xl-10"}>
+                                            <SText font={"LondonMM"} fontSize={18}>{'Mis pacientes:'}</SText>
+                                        </SView>
+                                        <SView col={"xs-2.5 md-2 lg-2 xl-2"} height row style={{ alignItems: 'center', }} onPress={() => { this.setState({ categoria: obj }) }} >
+                                            <SView col={"xs-10 "}  >
+                                                <SText fontSize={12} font={"LondonMM"} style={{ fontWeight: "bold", }}>Ver todos</SText>
+                                            </SView>
+                                            <SView col={"xs-2"} height center >
+                                                <SIcon name={"Back"} width={12} height={12} fill={STheme.color.primary} style={{ transform: [{ rotate: "180deg" }] }} />
+                                            </SView>
+                                        </SView>
                                     </SView>
                                     {this.getPacientes()}
                                     <SView col={"xs-12"} height={20}></SView>
