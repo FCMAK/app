@@ -346,7 +346,7 @@ class Inicio extends Component {
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <SView col={"xs-12"} center>
                             <SHr height={240} />
-                            <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} center>
+                            <SView col={"xs-11.5 sm-10 md-8 lg-6 xl-4"} center>
                                 {/* <BloqueTiempo /> */}
                                 <SView col={"xs-12"}>
                                     <SText font={"LondonMM"} fontSize={18}>{'Servicios a domicilio:'}</SText>

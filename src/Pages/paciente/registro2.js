@@ -60,13 +60,36 @@ class PacienteRegistro2 extends Component {
                 ApellidoP: { placeholder: "Apellido Paterno", isRequired: true, icon: this.icon("InputUser") },
                 ApellidoM: { placeholder: "Apellido Materno", isRequired: true, icon: this.icon("InputUser") },
                 Fecha: { placeholder: "Fecha de Nacimiento", isRequired: true, type: "date", },
-                Telefono: { placeholder: "Celular", isRequired: true, type: "phone" },
+                Telefono: { placeholder: "Celular", isRequired: false, type: "phone" },
                 Correo: { placeholder: "Correo", type: "email", isRequired: false, icon: this.icon("InputEmail") },
 
             }}
 
             onSubmit={(v) => {
                 // dataForm = { ... this.datosNav, ...values }
+
+                const extraArr = [];
+
+                if (v.Correo) {
+                    extraArr.push({
+                        "TipMed": "1",
+                        "ValMed": v.Correo
+                    })
+                }
+                if (v.Telefono) {
+                    extraArr.push({
+                        "TipMed": "2",
+                        "ValMed": v.Telefono
+                    })
+                }
+                if (v.Direccion) {
+                    extraArr.push({
+                        "TipMed": "3",
+                        "ValMed": "av/ san roque 3312",
+                        "DatMed": ""
+                    })
+                }
+
                 const format = {
                     "TipDoc": "1",
                     "NroDoc": this.datosNav.ci,
@@ -80,27 +103,49 @@ class PacienteRegistro2 extends Component {
                     "NdoFac": "9752424",
                     "DcoFac": "",
                     "NomFac": "CARLOS GONZALES PEREZ",
-                    "MedCon": [
-                        {
-                            "TipMed": "1",
-                            "ValMed": v.Correo
-                        },
-                        {
-                            "TipMed": "2",
-                            "ValMed": v.Telefono
-                        },
-                        {
-                            "TipMed": "3",
-                            "ValMed": "av/ san roque 3312",
-                            "DatMed": ""
-                        }
-                    ]
+                    "MedCon": extraArr
+                    // "MedCon": [
+                    //     {
+                    //         "TipMed": "1",
+                    //         "ValMed": v.Correo
+                    //     },
+                    //     {
+                    //         "TipMed": "2",
+                    //         "ValMed": v.Telefono
+                    //     },
+                    //     {
+                    //         "TipMed": "3",
+                    //         "ValMed": "av/ san roque 3312",
+                    //         "DatMed": ""
+                    //     }
+                    // ]
                 }
                 SSocket.sendPromise({
                     component: "paciente_usuario",
+                    // component: "paciente",
                     type: "registro",
                     data: format,
                     key_usuario: Model.usuario.Action.getKey()
+                }).then(e => {
+                    console.log(e);
+                    // const CodCli = e.data.CodCli;
+                    // const dta = {
+                    //     CodPer: e.data.CodCli,
+
+                    // }
+                    // SSocket.sendPromise({
+                    //     component: "paciente_usuario",
+                    //     type: "registro",
+                    //     key_usuario: Model.usuario.Action.getKey(),
+                    //     data:{
+                    //         CodPer: e.data.CodCli,
+
+                    //     }
+
+                    // })
+                    SNavigation.reset("/")
+                }).catch(e => {
+                    console.error(e);
                 })
             }}
         />
