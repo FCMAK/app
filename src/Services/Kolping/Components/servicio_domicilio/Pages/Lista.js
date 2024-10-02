@@ -6,6 +6,7 @@ import STheme from 'servisofts-component/Component/STheme';
 import KButtom from '../../../../../Components/Kolping/KButtom';
 import KBuscador from '../../../../../Components/Kolping/KBuscador';
 import Model from '../../../../../Model';
+import { Container } from '../../../../../Components';
 
 class Lista extends Component {
     constructor(props) {
@@ -17,7 +18,7 @@ class Lista extends Component {
 
     }
     getFilter() {
-        return <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} height={50} row>
+        return <SView col={"xs-12"} height={50} row>
             <SView col={"xs-6"} height card>
                 <KButtom outline={this.state.filter != "Pendiente"} onPress={() => { this.setState({ filter: "Pendiente" }) }}>Pendientes</KButtom>
             </SView>
@@ -72,7 +73,7 @@ class Lista extends Component {
                 if (this.state.filter == "Historial" && estado == "Pendiente") return null;
 
                 var usuario = usuarios[obj.key_usuario];
-                return <SView col={"xs-12"} card height={70} center row  style={{
+                return <SView col={"xs-12"} card height={70} center row style={{
                     borderWidth: 1,
                     borderRadius: 8,
                     borderColor: this.getEstadoColor(estado),
@@ -104,20 +105,22 @@ class Lista extends Component {
 
     render() {
         return (
-            <SPage title={'Lista a domicilio de ' + this.tipo_servicio} center>
-                <SHr />
-                <SHr />
-                {this.getFilter()}
-                <SHr />
-                <SHr />
-                <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"}>
-                    <KBuscador />
-                </SView>
-                <SHr />
-                <SHr />
-                <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"}>
-                    {this.getContent()}
-                </SView>
+            <SPage title={'Lista a domicilio de ' + this.tipo_servicio} >
+                <Container>
+                    <SHr />
+                    <SHr />
+                    {this.getFilter()}
+                    <SHr />
+                    <SHr />
+                    {/* <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"}> */}
+                        <KBuscador />
+                    {/* </SView> */}
+                    <SHr />
+                    <SHr />
+                    {/* <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"}> */}
+                        {this.getContent()}
+                    {/* </SView> */}
+                </Container>
             </SPage>
         );
     }

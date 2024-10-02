@@ -88,7 +88,8 @@ class NavBar extends React.Component {
             }}
         >
             <SView backgroundColor={STheme.color.primary} width="100%" height={105} center
-                style={{ borderBottomRightRadius: 20, borderBottomLeftRadius: 20 }} row>
+                style={{ borderBottomRightRadius: 20, borderBottomLeftRadius: 20 }} 
+                row>
                 {(!usuario) ?
                     <>
                         <SView col={"xs-3"} center style={{ textAlign: "right" }} height>

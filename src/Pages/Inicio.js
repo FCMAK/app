@@ -358,7 +358,7 @@ class Inicio extends Component {
                                     <SText font={"LondonMM"} fontSize={18}>{'Nuestros servicios:'}</SText>
                                 </SView>
                                 {this.getServicios()}
-                                <SView col={"xs-12"} height={20}></SView>
+                                <SView col={"xs-12"} height={30}></SView>
 
 
                                 {(!Model.usuario.Action.getKey()) ? null : <>
@@ -366,7 +366,7 @@ class Inicio extends Component {
                                         <SView col={"xs-9.5 md-10 lg-10 xl-10"}>
                                             <SText font={"LondonMM"} fontSize={18}>{'Mis pacientes:'}</SText>
                                         </SView>
-                                        <SView col={"xs-2.5 md-2 lg-2 xl-2"} height row style={{ alignItems: 'center', }} onPress={() => { this.setState({ categoria: obj }) }} >
+                                        <SView col={"xs-2.5 md-2 lg-2 xl-2"} height row style={{ alignItems: 'center', }} onPress={() => { SNavigation.navigate("/paciente") }} >
                                             <SView col={"xs-10 "}  >
                                                 <SText fontSize={12} font={"LondonMM"} style={{ fontWeight: "bold", }}>Ver todos</SText>
                                             </SView>
@@ -376,7 +376,7 @@ class Inicio extends Component {
                                         </SView>
                                     </SView>
                                     {this.getPacientes()}
-                                    <SView col={"xs-12"} height={20}></SView>
+                                    <SView col={"xs-12"} height={30}></SView>
                                 </>}
 
 
