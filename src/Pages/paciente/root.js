@@ -44,19 +44,23 @@ export default class root extends Component {
                 SNavigation.goBack();
             }
         }}>
-            <SView width={50} height={50}>
-                <SImage src={require("../../Assets/img/noimage.jpg")} />
+            <SView width={60} height={60} >
+                <SImage src={require("../../Assets/img/noimage.jpg")} style={{ borderRadius: 50, borderWidth: 1, borderColor: STheme.color.primary }} />
             </SView>
             <SView width={8} />
             <SView flex>
-                <SText fontSize={18} font='LondonBetween'>{item.alias}</SText>
+                <SText fontSize={18} font='LondonBetween' color={STheme.color.black}>{item.alias}</SText>
                 <SHr />
                 <SView row flex>
-                    <SText font='LondonBetween' color={STheme.color.gray}>{item.ci}</SText>
+                    <SText font='LondonBetween' color={STheme.color.info}>Nro doc: </SText>
+                    <SText font='LondonBetween' color={STheme.color.darkGray}>{item.ci}</SText>
+                    <SText font='LondonBetween' color={STheme.color.info}>{"    "}</SText>
                     {/* <SView width={8} /> */}
                     {/* <SText font='LondonBetween' color={STheme.color.gray}>{"59175395848"}</SText> */}
+                    <SText font='LondonBetween' color={STheme.color.info}>Código: </SText>
+                    <SText font='LondonBetween' color={STheme.color.primary}>{item.codper}</SText>
                 </SView>
-                <SText font='LondonBetween' color={STheme.color.gray}>{item.codper}</SText>
+                {/* <SText font='LondonBetween' color={STheme.color.gray}>{item.codper}</SText> */}
                 <SHr />
                 {/* <SText font='LondonBetween' color={STheme.color.danger} onPress={() => {
                     SSocket.sendPromise({
@@ -72,7 +76,7 @@ export default class root extends Component {
                         console.log(e);
                     })
                 }}>{"BORRAR"}</SText> */}
-                
+
                 {/* <SText font='LondonBetween' color={STheme.color.gray}>{"nombre@gmail.com"}</SText> */}
             </SView>
         </SView>
@@ -83,9 +87,15 @@ export default class root extends Component {
         return <SPage title={"Mis favoritos"}>
             <Container>
                 <SView col={"xs-12"}>
-                    <SHr />
-                    <SText onPress={() => SNavigation.navigate("/paciente/buscar")}>{"Agregar"}</SText>
-                    <SHr />
+                    <SHr height={15} />
+                    <SView flex style={{ alignItems: "flex-end" }} onPress={() => SNavigation.navigate("/paciente/buscar", { nav: 2 })} >
+                        <SText width={80} center height={40} backgroundColor={STheme.color.primary} color={STheme.color.white}
+                            style={{
+                                borderRadius: 8,
+                            }}>{"+ Agregar"}</SText>
+
+                    </SView>
+                    <SHr height={35} />
                     <FlatList
                         data={this.state.data}
                         ItemSeparatorComponent={() => <SHr />}

@@ -43,7 +43,7 @@ class KBarraUsuario extends Component {
                                 overflow: 'hidden',
                                 backgroundColor: STheme.color.card,
                             }} center>
-                                <SIcon name="nouser" height={35} width={35} fill={STheme.color.lightGray} />
+                                <SIcon name="nouser" height={35} width={35} fill={STheme.color.white} />
                             </SView>
                             <SView height={50} flex padding={5} style={{
                                 justifyContent: 'center',

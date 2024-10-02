@@ -65,7 +65,7 @@ export default class add extends Component {
             }}
             inputs={{
                 // nombre: { label: "Nombre Completo", defaultValue: usuario.Nombres + " " + usuario.Apellidos, isRequired: true, icon: <SIcon name={"InputUser"} width={40} height={30} /> },
-                ci: { placeholder: "Número de carnet", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} /> },
+                ci: { placeholder: "Número de documento", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} /> },
             }}
             onSubmit={(t) => {
                 SNotification.send({
@@ -92,7 +92,7 @@ export default class add extends Component {
                             })
                             // Cuando es mas de 1
                         } else {
-                            SNavigation.navigate("/paciente/encontrado", { ...e.data[0] })
+                            SNavigation.navigate("/paciente/encontrado", { ...e.data[0], nav:2 })
                             // SNotification.send({
                             //     key: "add_paciente",
                             //     title: "Paciente",
@@ -114,7 +114,7 @@ export default class add extends Component {
                         }
 
                     } else {
-                        SNavigation.navigate("/paciente/noencontrado", { ci: t.ci })
+                        SNavigation.navigate("/paciente/noencontrado", { ci: t.ci , nav:2})
                         console.log("No se encontro paciente con este CI")
                     }
                 }).catch(e => {
@@ -137,7 +137,7 @@ export default class add extends Component {
             <SPage title={'Datos Paciente'} >
                 {/* <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} row center> */}
                 <Header
-                    titulo={"POR FAVOR, INTRODUCE TU NÚMERO DE CARNET"}
+                    titulo={"POR FAVOR, INTRODUCE TU NÚMERO DE DOCUMENTO"}
                     icon={"iconp1"}
                 />
                 <Container>

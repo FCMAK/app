@@ -137,7 +137,8 @@ class Catalogo extends Component {
     render() {
         return (
             <>
-                <SPage title={'Catálogo'} center backgroundColor>
+                <SPage title={'Catálogo'}  backgroundColor>
+                    <SHr height={20} />
                     <SView col={"xs-12"}>
                         <SView col={"xs-12"} center>
                             <SView col={"xs-12"} center >

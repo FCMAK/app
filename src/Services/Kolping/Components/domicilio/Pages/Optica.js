@@ -138,28 +138,34 @@ class Optica extends Component {
                             // servicio_domicilio.Actions.registro({
                             //     tipo: "optica"
                             // }, this.props)
-                            btn.setLoading(true)
-                            SSocket.sendPromise({
-                                component: "servicio_domicilio",
-                                type: "registro",
-                                estado: "cargando",
-                                key_usuario: Model.usuario.Action.getKey(),
-                                data: {
-                                    tipo: "optica"
-                                }
-                            }).then(e => {
-                                // console.log(e);
-                                const obj = e.data;
-                                var usuario = Model.usuario.Action.getUsuarioLog();
-                                var mensaje = `Hola, Mi nombre es ${usuario.Nombres} ${usuario.Apellidos} estoy interesado(a) en el servicio de Óptica a domicilio. 
+                            var usuario = Model.usuario.Action.getUsuarioLog();
+                            if (!usuario) {
+                                SNavigation.navigate("login")
+                                return;
+                            } else {
+                                btn.setLoading(true)
+                                SSocket.sendPromise({
+                                    component: "servicio_domicilio",
+                                    type: "registro",
+                                    estado: "cargando",
+                                    key_usuario: Model.usuario.Action.getKey(),
+                                    data: {
+                                        tipo: "optica"
+                                    }
+                                }).then(e => {
+                                    // console.log(e);
+                                    const obj = e.data;
+                                    var usuario = Model.usuario.Action.getUsuarioLog();
+                                    var mensaje = `Hola, Mi nombre es ${usuario.Nombres} ${usuario.Apellidos} estoy interesado(a) en el servicio de Óptica a domicilio. 
                                                     Solicitud #${obj.numero}
                                                     ${Params.url}${obj.numero}/`;
-                                WhatsApp.send({ phone: Params["optica"]?.phone, menssage: mensaje })
-                                SNavigation.navigate("domicilio/request", { numero: obj.numero });
-                                btn.setLoading(false)
-                            }).catch(e => {
-                                btn.setLoading(false)
-                            })
+                                    WhatsApp.send({ phone: Params["optica"]?.phone, menssage: mensaje })
+                                    SNavigation.navigate("domicilio/request", { numero: obj.numero });
+                                    btn.setLoading(false)
+                                }).catch(e => {
+                                    btn.setLoading(false)
+                                })
+                            }
 
                         }} >SOLICITAR SERVICIO</Kolping.KButtom>
                         <SHr height={30} />

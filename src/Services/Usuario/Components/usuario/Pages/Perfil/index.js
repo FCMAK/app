@@ -51,7 +51,7 @@ class Perfil extends Component {
                         borderRadius: 100,
                         overflow: "hidden",
                     }} >
-                        <SImage src={`${SSocket.api.root}usuario/${usuario.key}?time=${new Date().getTime()}`} style={{
+                        <SImage src={SSocket.api.root + "usuario/" + usuario?.key + "?date=" + new Date().getTime()} style={{
                             width: "100%",
                             height: "100%",
                         }} />
