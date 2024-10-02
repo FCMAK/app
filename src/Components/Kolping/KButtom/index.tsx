@@ -23,7 +23,7 @@ export default class KButtom extends Component<KButtom_props> {
 
     setLoading(bool) {
         this.state.loading = bool;
-        this.setLoading({...this.state})
+        this.setState({...this.state})
     }
     render() {
         var bgColor = this.props.primary ? STheme.color.primary : this.props.secondary ? STheme.color.info : STheme.color.primary;

@@ -5,12 +5,13 @@ export default class WhatsApp {
     static send({ phone, menssage }) {
         var msn = encodeURIComponent(menssage);
         phone = phone.replace(/\s/g, '');
-        Linking.openURL("https://wa.me/" + phone + "?text=" + msn)
+        const url = "https://wa.me/" + phone + "?text=" + msn;
+        Linking.openURL(url);
 
-        // if (Platform.OS == "android" || Platform.OS == "ios") {
-        //     Linking.openURL(`whatsapp://send?text=${mensaje}`);
+        // if (Platform.OS == "web") {
+        //     // window.open(url,)
         // } else {
-        //     window.open("https://wa.me/59175548132?text=" + msn)
+
         // }
     }
 }

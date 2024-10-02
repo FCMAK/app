@@ -60,7 +60,7 @@ class Login extends Component {
         Model.usuario.Action.loginByKey({
             usuario: usuario.id,
         }).then(e => {
-            SNavigation.reset("/");
+            SNavigation.goBack()
             console.log(e);
         }).catch(e => {
             Model.usuario.Action.registro({
@@ -75,7 +75,7 @@ class Login extends Component {
                     usuario: usuario.id,
                 }).then(resp => {
                     // Model.empresa.Action.setEmpresa(null)
-                    SNavigation.reset("/");
+                    SNavigation.goBack()
                 }).catch(e => {
                     SPopup.alert("Error al iniciar con el nuevo usuario");
                 })
@@ -95,7 +95,7 @@ class Login extends Component {
                                     usuario: usuario.id,
                                 }).then(resp => {
                                     // Model.empresa.Action.setEmpresa(null)
-                                    SNavigation.reset("/");
+                                    SNavigation.goBack()
                                 }).catch(e => {
                                     SPopup.alert("Error al iniciar con el nuevo usuario");
                                 })
@@ -249,7 +249,7 @@ class Login extends Component {
                                 Model.usuario.Action.login(data).then((resp) => {
                                     // if(resp.estado == "exito")  SNavigation.replace("/");
                                     console.log("exito");
-                                    SNavigation.replace("/")
+                                    SNavigation.goBack();
                                 }).catch(e => {
                                     if (e?.error == "error_password") {
                                         this.setState({ loading: false, error: "Usuario o contraseña incorrectos." })
