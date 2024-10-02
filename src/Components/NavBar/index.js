@@ -232,9 +232,8 @@ class NavBar extends React.Component {
                         </SView>
                         <SView col={"xs-12"} height={30}></SView>
                     </SView>
-
-                    <SView col={"xs-11"} row onPress={() => {
-                        SNavigation.navigate("ajustes")
+                    {(usuario) ? <SView col={"xs-11"} row onPress={() => {
+                        SNavigation.navigate("admin")
                         this.fadeOut();
                     }}>
                         <SView row col={"xs-10"}>
@@ -245,7 +244,9 @@ class NavBar extends React.Component {
                             <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
                         </SView>
                         <SView col={"xs-12"} height={30}></SView>
-                    </SView>
+                    </SView> : null}
+                    
+
                     <SView col={"xs-11"} row onPress={() => { }}  >
                         <SView row col={"xs-10"}>
                             <SIcon fill="#666666" name={"Ayuda"} height={20} width={20} style={{paddingTop:3}}  />
