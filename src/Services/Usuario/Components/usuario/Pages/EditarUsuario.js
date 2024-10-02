@@ -76,6 +76,7 @@ class EditarUsuario extends Component {
                 this.form.uploadFiles(SSocket.api.root + "upload/usuario/" + this.key);
             }
             SNavigation.goBack();
+            // SNavigation.replace("perfil");
             return <SView />
         }
 
@@ -87,6 +88,8 @@ class EditarUsuario extends Component {
                 this.form.uploadFiles(SSocket.api.root + "upload/usuario/" + this.key);
             }
             SNavigation.goBack();
+            // SNavigation.replace("perfil");
+
             return <SView />
         }
 
