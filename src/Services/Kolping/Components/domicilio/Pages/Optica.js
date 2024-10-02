@@ -6,6 +6,8 @@ import WhatsApp from '../../../../../Components/WhatsApp';
 import servicio_domicilio from '../../servicio_domicilio';
 import Params from "../params.json"
 import { Container } from '../../../../../Components';
+import SSocket from 'servisofts-socket';
+import Model from '../../../../../Model';
 
 class Optica extends Component {
     constructor(props) {
@@ -15,19 +17,19 @@ class Optica extends Component {
     }
 
     render() {
-        var reducer = servicio_domicilio.Actions._getReducer(this.props);
-        if (reducer.type == "registro" && reducer.estado == "exito") {
-            reducer.estado = ""
-            var obj = reducer.lastRegister;
-            var usuario = this.props.state.usuarioReducer.usuarioLog;
+        // var reducer = servicio_domicilio.Actions._getReducer(this.props);
+        // if (reducer.type == "registro" && reducer.estado == "exito") {
+        //     reducer.estado = ""
+        //     var obj = reducer.lastRegister;
+        //     var usuario = this.props.state.usuarioReducer.usuarioLog;
 
-            var mensaje = `Hola, Mi nombre es ${usuario.Nombres} ${usuario.Apellidos} estoy interesado(a) en el servicio de Óptica a domicilio. 
-                            Solicitud #${obj.numero}
-                            ${Params.url}${obj.numero}/`;
-            // WhatsApp.send({ phone: "59175548132", menssage: mensaje })
-            WhatsApp.send({ phone: Params["optica"]?.phone, menssage: mensaje })
-            SNavigation.navigate("domicilio/request", { numero: obj.numero });
-        }
+        //     var mensaje = `Hola, Mi nombre es ${usuario.Nombres} ${usuario.Apellidos} estoy interesado(a) en el servicio de Óptica a domicilio. 
+        //                     Solicitud #${obj.numero}
+        //                     ${Params.url}${obj.numero}/`;
+        //     // WhatsApp.send({ phone: "59175548132", menssage: mensaje })
+        //     WhatsApp.send({ phone: Params["optica"]?.phone, menssage: mensaje })
+        //     SNavigation.navigate("domicilio/request", { numero: obj.numero });
+        // }
         return (
             <SPage title={'Óptica a Domicilio'} >
                 {/* <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row> */}
@@ -132,10 +134,32 @@ class Optica extends Component {
 
                         <SHr height={150} />
 
-                        <Kolping.KButtom primary onPress={() => {
-                            servicio_domicilio.Actions.registro({
-                                tipo: "optica"
-                            }, this.props)
+                        <Kolping.KButtom primary onPress={(btn) => {
+                            // servicio_domicilio.Actions.registro({
+                            //     tipo: "optica"
+                            // }, this.props)
+                            btn.setLoading(true)
+                            SSocket.sendPromise({
+                                component: "servicio_domicilio",
+                                type: "registro",
+                                estado: "cargando",
+                                key_usuario: Model.usuario.Action.getKey(),
+                                data: {
+                                    tipo: "optica"
+                                }
+                            }).then(e => {
+                                // console.log(e);
+                                const obj = e.data;
+                                var usuario = Model.usuario.Action.getUsuarioLog();
+                                var mensaje = `Hola, Mi nombre es ${usuario.Nombres} ${usuario.Apellidos} estoy interesado(a) en el servicio de Óptica a domicilio. 
+                                                    Solicitud #${obj.numero}
+                                                    ${Params.url}${obj.numero}/`;
+                                WhatsApp.send({ phone: Params["optica"]?.phone, menssage: mensaje })
+                                SNavigation.navigate("domicilio/request", { numero: obj.numero });
+                                btn.setLoading(false)
+                            }).catch(e => {
+                                btn.setLoading(false)
+                            })
 
                         }} >SOLICITAR SERVICIO</Kolping.KButtom>
                         <SHr height={30} />

@@ -6,6 +6,8 @@ import WhatsApp from '../../../../../Components/WhatsApp';
 import servicio_domicilio from '../../servicio_domicilio';
 import Params from "../params.json"
 import { Container } from '../../../../../Components';
+import SSocket from 'servisofts-socket';
+import Model from '../../../../../Model';
 class Laboratorio extends Component {
     constructor(props) {
         super(props);
@@ -14,17 +16,17 @@ class Laboratorio extends Component {
     }
 
     render() {
-        var reducer = servicio_domicilio.Actions._getReducer(this.props);
-        if (reducer.type == "registro" && reducer.estado == "exito") {
-            reducer.estado = ""
-            var obj = reducer.lastRegister;
-            var usuario = this.props.state.usuarioReducer.usuarioLog;
-            var mensaje = `Hola, Mi nombre es ${usuario.Nombres} ${usuario.Apellidos} estoy interesado(a) en el servicio de Laboratorio a domicilio. 
-                            Solicitud #${obj.numero}
-                            ${Params.url}${obj.numero}/`;
-            WhatsApp.send({ phone: Params["laboratorio"]?.phone, menssage: mensaje })
-            SNavigation.navigate("domicilio/request", { numero: obj.numero });
-        }
+        // var reducer = servicio_domicilio.Actions._getReducer(this.props);
+        // if (reducer.type == "registro" && reducer.estado == "exito") {
+        //     reducer.estado = ""
+        //     var obj = reducer.lastRegister;
+        //     var usuario = this.props.state.usuarioReducer.usuarioLog;
+        //     var mensaje = `Hola, Mi nombre es ${usuario.Nombres} ${usuario.Apellidos} estoy interesado(a) en el servicio de Laboratorio a domicilio. 
+        //                     Solicitud #${obj.numero}
+        //                     ${Params.url}${obj.numero}/`;
+        //     WhatsApp.send({ phone: Params["laboratorio"]?.phone, menssage: mensaje })
+        //     SNavigation.navigate("domicilio/request", { numero: obj.numero });
+        // }
         return (
             <SPage title={'Laboratorio a Domicilio'}  >
                 {/* <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row center> */}
@@ -182,7 +184,29 @@ class Laboratorio extends Component {
                             <SText font={"LondonTwo"} fontSize={20} color={STheme.color.primary}>¡Sin recargo hasta el 4to anillo!</SText>
                         </SView> */}
                         <SHr height={30} />
-                        <Kolping.KButtom primary onPress={() => {
+                        <Kolping.KButtom primary onPress={(btn) => {
+                            btn.setLoading(true)
+                            SSocket.sendPromise({
+                                component: "servicio_domicilio",
+                                type: "registro",
+                                estado: "cargando",
+                                key_usuario: Model.usuario.Action.getKey(),
+                                data: {
+                                    tipo: "laboratorio"
+                                }
+                            }).then(e => {
+                                // console.log(e);
+                                const obj = e.data;
+                                var usuario = Model.usuario.Action.getUsuarioLog();
+                                var mensaje = `Hola, Mi nombre es ${usuario.Nombres} ${usuario.Apellidos} estoy interesado(a) en el servicio de Laboratorio a domicilio. 
+                                                    Solicitud #${obj.numero}
+                                                    ${Params.url}${obj.numero}/`;
+                                WhatsApp.send({ phone: Params["laboratorio"]?.phone, menssage: mensaje })
+                                SNavigation.navigate("domicilio/request", { numero: obj.numero });
+                                btn.setLoading(false)
+                            }).catch(e => {
+                                btn.setLoading(false)
+                            })
 
                             //                             var mensaje = `Hola, Mi nombre es María Julia estoy interesado(a) en el servicio de Laboratorio a domicilio. 
                             // Solicitud #88
@@ -196,9 +220,9 @@ class Laboratorio extends Component {
                             //                             } else {
                             //                                 window.open("https://wa.me/59169209170?text=" + mensaje)
                             //                             }
-                            servicio_domicilio.Actions.registro({
-                                tipo: "laboratorio"
-                            }, this.props)
+                            // servicio_domicilio.Actions.registro({
+                            //     tipo: "laboratorio"
+                            // }, this.props)
 
                         }}>SOLICITAR LABORATORIO</Kolping.KButtom>
                         <SHr height={30} />
