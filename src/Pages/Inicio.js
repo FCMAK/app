@@ -167,7 +167,7 @@ class Inicio extends Component {
             horizontal
             ListHeaderComponent={() => {
                 return <SView width={100} height={180} padding={10} center onPress={() => {
-                    SNavigation.navigate("/paciente/buscar")
+                    SNavigation.navigate("/paciente/buscar", {nav:2})
                 }}>
                     <SView width={100} height padding={5} style={{
                         borderRadius: 15,
