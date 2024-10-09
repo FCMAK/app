@@ -59,13 +59,10 @@ const ListaBotones = ({ fadeOut }) => {
                 <SView col={"xs-12"} height={30}></SView>
             </SView>
 
-            <SView col={"xs-11"} row onPress={() => {
-                SNavigation.navigate("notification")
-                fadeOut()
-            }}  >
+            <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("/ficha/mensajeSinFicha"); fadeOut() }}  >
                 <SView row col={"xs-10"}>
-                    <SIcon fill="#666666" name={"KNotify"} height={20} width={20} style={{ paddingTop: 3 }} />
-                    <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Mis Notificaciones</SText>
+                    <SIcon fill="#666666" name={"ficha"} height={20} width={20} style={{ paddingTop: 3 }} />
+                    <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Mis Fichas</SText>
                 </SView>
                 <SView style={{ right: 0, position: "absolute", top: 2 }} row >
                     <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
@@ -74,6 +71,7 @@ const ListaBotones = ({ fadeOut }) => {
             </SView>
 
             <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("/ficha/historico"); fadeOut() }}  >
+            {/* <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("farmacia/mensajeCarritoVacio"); fadeOut() }}  > */}
                 <SView row col={"xs-10"}>
                     <SIcon fill="#666666" name={"Compras"} height={20} width={20} style={{ paddingTop: 3 }} />
                     <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Mis Compras</SText>
@@ -94,6 +92,21 @@ const ListaBotones = ({ fadeOut }) => {
                 </SView>
                 <SView col={"xs-12"} height={30}></SView>
             </SView>
+
+            <SView col={"xs-11"} row onPress={() => {
+                SNavigation.navigate("notification")
+                fadeOut()
+            }}  >
+                <SView row col={"xs-10"}>
+                    <SIcon fill="#666666" name={"KNotify"} height={20} width={20} style={{ paddingTop: 3 }} />
+                    <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Mis Notificaciones</SText>
+                </SView>
+                <SView style={{ right: 0, position: "absolute", top: 2 }} row >
+                    <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
+                </SView>
+                <SView col={"xs-12"} height={30}></SView>
+            </SView>
+
             {(usuario) ? <SView col={"xs-11"} row onPress={() => {
                 SNavigation.navigate("admin")
                 fadeOut()

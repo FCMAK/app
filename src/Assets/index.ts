@@ -28,6 +28,7 @@ import Enfermera14, { ReactComponent as Enfermera14W } from './svg/enfermera/14.
 // import Enfermera24, { ReactComponent as Enfermera24W } from './svg/enfermera/24.svg';
 // import Enfermera25, { ReactComponent as Enfermera25W } from './svg/enfermera/25.svg';
 import Enfermera26, { ReactComponent as Enfermera26W } from './svg/enfermera/26.svg';
+import enfermeraFicha, { ReactComponent as enfermeraFichaW } from './svg/enfermera/enfermeraFicha.svg';
 // import Enfermera27, { ReactComponent as Enfermera27W } from './svg/enfermera/27.svg';
 
 import SFarmacia, { ReactComponent as SFarmaciaW } from './svg/servicios/sfarmacia.svg';
@@ -166,6 +167,7 @@ import salir, { ReactComponent as salirW } from './svg/salir.svg';
 import addUser, { ReactComponent as addUserW } from './svg/addUser.svg';
 import arrowR, { ReactComponent as arrowRW } from './svg/arrowR.svg';
 import noData, { ReactComponent as noDataW } from './svg/noData.svg';
+import ficha, { ReactComponent as fichaW } from './svg/ficha.svg';
 
 const Assets: SAssets = {
     svg: {
@@ -195,6 +197,8 @@ const Assets: SAssets = {
         // "Enfermera24": { Native: Enfermera24, Web: Enfermera24W },
         // "Enfermera25": { Native: Enfermera25, Web: Enfermera25W },
         "Enfermera26": { Native: Enfermera26, Web: Enfermera26W },
+        "enfermeraFicha": { Native: enfermeraFicha, Web: enfermeraFichaW },
+        
         // "Enfermera27": { Native: Enfermera27, Web: Enfermera27W },
         "IconFaceb": { Native: IconFaceb, Web: IconFacebW },
         "IconGoogle": { Native: IconGoogle, Web: IconGoogleW },
@@ -330,6 +334,7 @@ const Assets: SAssets = {
         "addUser": { Native: addUser, Web: addUserW },
         "arrowR": { Native: arrowR, Web: arrowRW },
         "noData": { Native: noData, Web: noDataW },
+        "ficha" : { Native: ficha, Web: fichaW },
     }
 }
 

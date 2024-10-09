@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { View, Text } from 'react-native';
-import { SDate, SHr, SInput, SNavigation, SPage, SText, SView, SBuscador } from 'servisofts-component';
+import { SDate, SHr, SInput, SNavigation, SPage, SText, SView, SBuscador, SLoad } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import { Container } from '../../Components';
 import MedicoItem from './Components/MedicoItem';
 import { getAllMedicos } from './Actions';
 import SelectFecha from './Components/SelectFecha';
 import Kolping from '../../Components/Kolping';
+import NoData from './Components/NoData';
 
 export default class medicos extends Component {
     constructor(props) {
@@ -15,13 +16,15 @@ export default class medicos extends Component {
 
         this.nrosuc = SNavigation.getParam("nrosuc")
         this.state = {
+            loading: false,
             fecha: SNavigation.getParam("fecha", new SDate().toString("yyyy-MM-dd"))
         };
     }
 
     componentDidMount() {
         getAllMedicos({ fecha: this.state.fecha, nrosuc: this.nrosuc }).then(medicos => {
-            this.setState({ medicos: medicos })
+            let filteredMedicos = medicos.filter(item => item.TurMed.length > 0 && item.turnos.length > 0);
+            this.setState({ medicos: filteredMedicos })
         })
     }
 
@@ -47,6 +50,10 @@ export default class medicos extends Component {
     }
 
     render() {
+        // if (!this.state.medicos) return <SLoad />
+        let dataMedicos = this.state.medicos;
+        let nroMedicos = 0;
+        if (dataMedicos) nroMedicos = dataMedicos.length;
         return <SPage>
             <SelectFecha defaultValue={this.state.fecha} onChange={(e) => {
                 this.state.fecha = e;

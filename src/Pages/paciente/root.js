@@ -88,8 +88,8 @@ export default class root extends Component {
             <Container>
                 <SView col={"xs-12"}>
                     <SHr height={15} />
-                    <SView flex style={{ alignItems: "flex-end" }} onPress={() => SNavigation.navigate("/paciente/buscar", { nav: 2 })} >
-                        <SText width={80} center height={40} backgroundColor={STheme.color.primary} color={STheme.color.white}
+                    <SView  flex style={{ alignItems: "flex-end" }} onPress={() => SNavigation.navigate("/paciente/buscar", { nav: 2 })} >
+                        <SText width={80} height={40}  center  backgroundColor={STheme.color.primary} color={STheme.color.white}
                             style={{
                                 borderRadius: 8,
                             }}>{"+ Agregar"}</SText>

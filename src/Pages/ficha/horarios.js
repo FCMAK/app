@@ -96,7 +96,7 @@ export default class horarios extends React.Component {
     RenderHoras = () => {
         if (!this.state.medico) return null;
         const { CodMed, NomMed, TitMed, TurMed, turnos } = this.state.medico
-        console.log("turnos", turnos)
+        // console.log("turnos", turnos)
         if (turnos.length === 0) return <NoData mensaje={"No tenemos horarios habilitados en este momento."} />
         return <SView col={"xs-12"} center row>
             <FlatList

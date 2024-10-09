@@ -1,6 +1,5 @@
 import { SPage } from 'servisofts-component';
 
-
 import root from './root';
 import horarios from './horarios';
 import medicos from './medicos';
@@ -9,6 +8,7 @@ import orden from "./orden"
 import confirmar from './confirmar';
 import historico from './historico'
 import pago from './pago';
+import mensajeSinFicha from './mensajeSinFicha';
 export const Parent = {
     name: "ficha",
     path: "/ficha",
@@ -22,7 +22,7 @@ export default SPage.combinePages(Parent.name, {
     servicios,
     orden,
     confirmar,
-    historico
-
+    historico,
+    mensajeSinFicha
 
 });
