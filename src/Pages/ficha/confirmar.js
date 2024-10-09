@@ -147,7 +147,7 @@ class Confirmacion extends Component {
                                     key_usuario: Model.usuario.Action.getKey()
                                 }).then(e => {
                                     ins.setLoading(false)
-                                    SNavigation.navigate("ficha/pago")
+                                    SNavigation.navigate("/ficha/pago", {data:e.data})
                                 }).catch(e => {
                                     ins.setLoading(false)
                                     console.error(e);

@@ -38,6 +38,14 @@ export default class medicos extends Component {
         }
         return arr;
     }
+
+    medicosList(){
+        if(this.state.medicos){
+            return <SText>Tambien belezzsa</SText>
+        }
+        return <SText>Tambien belezzsa</SText>
+    }
+
     render() {
         return <SPage>
             <SelectFecha defaultValue={this.state.fecha} onChange={(e) => {
@@ -45,7 +53,7 @@ export default class medicos extends Component {
                 this.setState({ medicos: null })
                 this.componentDidMount();
             }} />
-            <SHr height={10} />
+            <SHr height={10} /> 
             <Container loading={!this.state.medicos}>
                 <Kolping.KBuscador onChangeText={(text) => {
                     this.setState({

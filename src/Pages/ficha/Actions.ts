@@ -95,3 +95,18 @@ export const getAllServicios = ({ nrosuc, codesp = "999", codmed = "999" }) => {
     })
 
 }
+
+export const getAllHistorico = (key_usuario) => {
+    return new Promise((resolve, reject) => {
+        SSocket.sendPromise({
+            component: "orden_compra",
+            type: "getAll",
+            key_usuario
+        }).then((e: any) => {
+            resolve(e.data);
+        }).catch(e => {
+            reject(e);
+        })
+    })
+
+}

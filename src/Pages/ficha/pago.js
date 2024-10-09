@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SHr, SIcon, SPage, SText, STheme, SView, SNavigation, SImage, SForm } from 'servisofts-component';
-import Kolping from '../../../../../Components/Kolping';
+import Kolping from '../../Components/Kolping';
 import { Linking } from 'react-native';
 
 class Pago extends Component {
@@ -41,13 +41,18 @@ class Pago extends Component {
                     <SText center fontSize={60} bold>POR DEFINIR</SText>
                     <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} center>
                         <SText>NroGrl: {this.state.NroGrl}</SText>
-                        <SView onPress={()=>{
+                        <SView onPress={() => {
                             Linking.openURL(this.state.FacUrl)
-                        }}><SText style={{color:STheme.color.link}}>{this.state.FacUrl}</SText></SView>
-                        <SText width={800}>OdaPdf: {this.state.OdaPdf}</SText>
-                        
+                        }}><SText style={{ color: STheme.color.link }}>{this.state.FacUrl}</SText></SView>
+                        <SText width={800} onPress={() => {
+                            const base64Data = `data:application/pdf;base64,${this.state.OdaPdf}`
+                            const link = document.createElement("a");
+                            link.href = base64Data;
+                            link.download = "file.pdf"; // Nombre del archivo
+                            link.click();
+                        }}>OdaPdf: {this.state.OdaPdf}</SText>
                     </SView>
-                    
+
                 </SView>
                 <SView col={"xs-12"} center>
                     <SHr height={65} />

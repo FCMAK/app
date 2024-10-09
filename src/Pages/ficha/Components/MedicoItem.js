@@ -8,6 +8,10 @@ import SSocket from 'servisofts-socket';
 export default ({ medico, onPress }) => {
     const { TitMed, NomMed, turnos } = medico;
     const active = turnos.length > 0;
+
+    // Cambio Ruddy temporal
+    if(!active) return true;
+
     const especialidades = {}
     turnos.map((tur) => {
         especialidades[tur.CodEsp] = tur.NomEsp;

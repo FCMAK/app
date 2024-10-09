@@ -7,7 +7,7 @@ import ListaEspecialidad from "./Pages/ListaEspecialidad";
 import ListaDoctores from "./Pages/ListaDoctores";
 import HorarioDoctor from "./Pages/HorarioDoctor";
 import Confirmacion from "./Pages/Confirmacion";
-import Pago from "./Pages/Pago";
+// import Pago from "./Pages/Pago";
 import MensajePago from "./Pages/MensajePago";
 import Paciente from "./Pages/Paciente";
 import PacienteBuscar from "./Pages/PacienteBuscar";
@@ -44,7 +44,7 @@ export default {
         [component + "/listaDoctores"]: ListaDoctores,
         // [component + "/horarios"]: HorarioDoctor,
         [component + "/confirmacion"]: Confirmacion,
-        [component + "/pago"]: Pago,
+        // [component + "/pago"]: Pago,
         [component + "/mensaje"]: MensajePago,
         
         [component + "/paciente"]: Paciente,
