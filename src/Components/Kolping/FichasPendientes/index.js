@@ -4,6 +4,8 @@ import { SHr, SIcon, SImage, SLoad, SNavigation, SText, STheme, SView } from 'se
 import NavBar from '../../NavBar';
 import SSocket from "servisofts-socket"
 // import { getAllHistorico } from './../../Actions';
+import { getAllHistorico } from './../../../Pages/ficha/Actions';
+import Model from '../../../Model';
 import { FlatList } from 'react-native';
 
 class FichasPendientes extends Component {
@@ -20,6 +22,36 @@ class FichasPendientes extends Component {
     getHistorico = async () => {
         var historico = await getAllHistorico(Model.usuario.Action.getKey())
         this.setState({ historico: Object.values(historico) })
+    }
+
+    renderItem({ index, item }) {
+        console.log(item);
+        return <SView width={245} height={80} onPress={() => {
+
+        }}>
+            {/* <SView width={220} height padding={5} style={{
+                borderRadius: 15,
+                backgroundColor: STheme.color.card
+            }} row center>
+                <SView width={214} height style={{ borderRadius: 16, overflow: "hidden" }} center>
+                    <SImage src={SSocket.api.root + "novedades/" + item.key} style={{
+                        borderTopLeftRadius: 8,
+                        borderTopRightRadius: 8,
+                        maxWidth: "100%", minWidth: "100%", overflow: "hidden",
+                        resizeMode: "cover",
+                        height: 165
+                    }} />
+                </SView>
+                <SView center col={'xs-12'} height={25} style={{
+                    backgroundColor: STheme.color.primary + "90",
+                    position: "absolute",
+                    top: 65,
+                    overflow: "hidden"
+                }}>
+                    <SText fontSize={18} font='LondonTwo' color={STheme.color.white}>{item?.titulo}</SText>
+                </SView>
+            </SView> */}
+        </SView>
     }
 
     render() {
@@ -62,7 +94,7 @@ class FichasPendientes extends Component {
             showsHorizontalScrollIndicator={true}
             data={data}
             keyExtractor={item => item.key}
-            renderItem={this.renderItemServicios.bind(this)}
+            renderItem={this.renderItem.bind(this)}
         />
 
         );

@@ -26,7 +26,13 @@ export default class historico extends Component {
         if (Object.keys(historico).length === 0) {
             SNavigation.navigate("/ficha/mensajeSinFicha")
         } else {
-            this.setState({ historico: Object.values(historico) })
+            let dataHistorico = Object.values(historico)
+            let dataH = dataHistorico.sort((a, b) => {
+                const dateA = new Date(`${a.data.fecha}T${a.data.hortur.split(' - ')[0]}`);
+                const dateB = new Date(`${b.data.fecha}T${b.data.hortur.split(' - ')[0]}`);
+                return dateA - dateB;
+            });
+            this.setState({ historico: dataH })
         }
     }
 
