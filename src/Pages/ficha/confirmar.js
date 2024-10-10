@@ -139,20 +139,21 @@ class Confirmacion extends Component {
                         <SView col={"xs-12"} center>
                             <SHr height={30} />
                             <Kolping.KButtom secondary width={300} onPress={(ins) => {
-                                ins.setLoading(true)
-                                SSocket.sendPromise({
-                                    component: "orden_compra",
-                                    type: "confirmar",
-                                    key: this.pk,
-                                    key_usuario: Model.usuario.Action.getKey()
-                                }).then(e => {
-                                    ins.setLoading(false)
-                                    SNavigation.navigate("/ficha/pago", {data:e.data})
-                                }).catch(e => {
-                                    ins.setLoading(false)
-                                    console.error(e);
-                                })
-                            }} >CONTINUAR </Kolping.KButtom>
+                                // ins.setLoading(true)
+                                // SSocket.sendPromise({
+                                //     component: "orden_compra",
+                                //     type: "confirmar",
+                                //     key: this.pk,
+                                //     key_usuario: Model.usuario.Action.getKey()
+                                // }).then(e => {
+                                //     ins.setLoading(false)
+                                //     SNavigation.navigate("/ficha/pago", {data:e.data})
+                                // }).catch(e => {
+                                //     ins.setLoading(false)
+                                //     console.error(e);
+                                // })
+                                SNavigation.navigate("/ficha/qr", { key: this.pk })
+                            }} >PAGAR </Kolping.KButtom>
                         </SView>
                         <SView col={"xs-10 sm-8 md-8 lg-10 xl-10"} center>
                             <SHr height={30} />

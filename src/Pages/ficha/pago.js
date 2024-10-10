@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { SHr, SIcon, SPage, SText, STheme, SView, SNavigation, SImage, SForm } from 'servisofts-component';
 import Kolping from '../../Components/Kolping';
 import { Linking } from 'react-native';
+import { Container } from '../../Components';
 
 class Pago extends Component {
     constructor(props) {
@@ -37,28 +38,70 @@ class Pago extends Component {
         return (
             <SPage title={'Pago de Ficha'} center>
                 <SHr height={30} />
-                <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} center>
-                    <SText center fontSize={60} bold>POR DEFINIR</SText>
-                    <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} center>
-                        <SText>NroGrl: {this.state.NroGrl}</SText>
-                        <SView onPress={() => {
-                            Linking.openURL(this.state.FacUrl)
-                        }}><SText style={{ color: STheme.color.link }}>{this.state.FacUrl}</SText></SView>
-                        <SText width={800} onPress={() => {
-                            const base64Data = `data:application/pdf;base64,${this.state.OdaPdf}`
-                            const link = document.createElement("a");
-                            link.href = base64Data;
-                            link.download = "file.pdf"; // Nombre del archivo
-                            link.click();
-                        }}>OdaPdf: {this.state.OdaPdf}</SText>
-                    </SView>
+                <Container>
+                    <SView col={"xs-12"} center>
+                        <SView col={"xs-12"} center>
+                            <SIcon name={"ok"} width={150} height={150} />
+                            <SHr height={50} />
+                            <SText font={"LondonTwo"} center fontSize={24} color={STheme.color.text}>GRACIAS POR SU COMPRA </SText>
+                            <SHr height={30} />
+                            <SText center font={"LondonMM"} fontSize={20}>Su ficha ha sido reservada correctamente. A continuación puede descargar su recibo y acceder a la factura a través de la plataforma de impuestos SIAT</SText>
+                            <SHr height={20} />
+                            <SText>NroGrl: {this.state.NroGrl}</SText>
+                            <SHr height={20} />
+                            <SView col={"xs-12"} row center>
+                                <SView width={150} height={50} style={{
+                                    borderRadius: 8,
+                                    backgroundColor: STheme.color.primary,
+                                   
+                                }} row center
+                                    onPress={() => {
+                                        const base64Data = `data:application/pdf;base64,${this.state.OdaPdf}`
+                                        const link = document.createElement("a");
+                                        link.href = base64Data;
+                                        link.download = "file.pdf"; // Nombre del archivo
+                                        link.click();
+                                    }}>
+                                    <SIcon name={"descargar"} width={40} height={30} fill={STheme.color.white} />
+                                    <SText font='LondonTwo' fontSize={16} color={STheme.color.white} >Descargar</SText>
+                                </SView>
+                                <SView width={20} />
+                                
+                                    <SView width={150} height={50} style={{
+                                        borderRadius: 8,
+                                        backgroundColor: STheme.color.info,
+                                   
+                                    }} row center
+                                        onPress={() => {
+                                            Linking.openURL(this.state.FacUrl)
+                                        }}>
+                                        {/* <SIcon name={"descargar"} width={40} height={30} fill={STheme.color.white} /> */}
+                                        <SText font='LondonTwo' fontSize={16} color={STheme.color.white} >Factura</SText>
+                                    </SView>
+                                
+                            </SView>
 
-                </SView>
+
+                            {/* <SText>NroGrl: {this.state.NroGrl}</SText>
+                            <SView onPress={() => {
+                                Linking.openURL(this.state.FacUrl)
+                            }}><SText style={{ color: STheme.color.link }}>{this.state.FacUrl}</SText></SView>
+                            <SText width={800} onPress={() => {
+                                const base64Data = `data:application/pdf;base64,${this.state.OdaPdf}`
+                                const link = document.createElement("a");
+                                link.href = base64Data;
+                                link.download = "file.pdf"; // Nombre del archivo
+                                link.click();
+                            }}>OdaPdf: {this.state.OdaPdf}</SText> */}
+                        </SView>
+                    </SView>
+                </Container>
+
                 <SView col={"xs-12"} center>
                     <SHr height={65} />
                     <Kolping.KButtom primary onPress={() => {
-                        SNavigation.navigate("ficha/mensaje")
-                    }} >PAGAR </Kolping.KButtom>
+                        SNavigation.navigate("/")
+                    }} >ACEPTAR </Kolping.KButtom>
                     <SHr height={30} />
                 </SView>
             </SPage>

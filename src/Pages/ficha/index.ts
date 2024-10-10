@@ -8,6 +8,7 @@ import orden from "./orden"
 import confirmar from './confirmar';
 import historico from './historico'
 import pago from './pago';
+import qr from './qr';
 import mensajeSinFicha from './mensajeSinFicha';
 export const Parent = {
     name: "ficha",
@@ -17,6 +18,7 @@ export default SPage.combinePages(Parent.name, {
     // "": root,
     "": root,
     pago,
+    qr,
     medicos,
     horarios,
     servicios,

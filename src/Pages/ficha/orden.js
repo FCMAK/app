@@ -45,8 +45,9 @@ const InputPaciente = React.forwardRef((props, ref) => {
             borderRadius: 100,
             borderColor: STheme.color.card,
             borderWidth: 1,
+            overflow: "hidden"
         }}>
-
+            <SImage src={require("../../Assets/img/nofoto.jpg")} />
         </SView>
         <SView width={16} />
         <SView flex>
@@ -74,7 +75,9 @@ const InputCita = ({ data }) => {
             borderRadius: 100,
             borderColor: STheme.color.card,
             borderWidth: 1,
+            overflow: "hidden"
         }}>
+            <SImage src={require("../../Assets/img/nofoto.jpg")} />
             {/* <SImage */}
         </SView>
         <SView width={16} />
@@ -170,7 +173,7 @@ export default class index extends React.Component {
         })
     }
     render() {
-        return <SPage title={"Servisofts page"}>
+        return <SPage title={"Orden"}>
             <Container flex loading={!this.state.data}>
                 <SHr h={32} />
                 <Title label={"Paciente"} />

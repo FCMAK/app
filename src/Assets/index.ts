@@ -169,6 +169,10 @@ import arrowR, { ReactComponent as arrowRW } from './svg/arrowR.svg';
 import noData, { ReactComponent as noDataW } from './svg/noData.svg';
 import ficha, { ReactComponent as fichaW } from './svg/ficha.svg';
 
+import descargar, { ReactComponent as descargarW } from './svg/descargar.svg';
+import compartir, { ReactComponent as compartirW } from './svg/compartir.svg';
+
+
 const Assets: SAssets = {
     svg: {
         // "Enfermera1": { Native: Enfermera1, Web: Enfermera1W },
@@ -335,6 +339,9 @@ const Assets: SAssets = {
         "arrowR": { Native: arrowR, Web: arrowRW },
         "noData": { Native: noData, Web: noDataW },
         "ficha" : { Native: ficha, Web: fichaW },
+
+        "descargar": { Native: descargar, Web: descargarW },
+        "compartir": { Native: compartir, Web: compartirW },
     }
 }
 

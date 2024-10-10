@@ -115,7 +115,7 @@ export default class horarios extends React.Component {
     }
 
     render() {
-        return <SPage title={"Servisofts page"}>
+        return <SPage title={"Horarios"}>
             <Container loading={!this.state.medico}>
                 <SelectFecha defaultValue={this.state.fecha} onChange={(e) => {
                     if (this.state.fecha == e) return;
