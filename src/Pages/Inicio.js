@@ -8,6 +8,7 @@ import Model from '../Model';
 import { FlatList, ScrollView } from 'react-native';
 import SSocket from 'servisofts-socket';
 import SVideo from '../Components/SVideo';
+import { getAllHistorico } from './ficha/Actions';
 
 class Inicio extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class Inicio extends Component {
     }
 
     componentDidMount() {
+        this.getHistorico();
         if (Model.usuario.Action.getKey()) {
             SSocket.sendPromise({
                 component: "paciente_usuario",
@@ -315,8 +317,20 @@ class Inicio extends Component {
         </SView>
     }
 
-    getFichasEnCurso() {
+    getHistorico = async () => {
+        var historico = await getAllHistorico(Model.usuario.Action.getKey())
+        let dataHistorico = Object.values(historico)
+        // let fechaActual = new Date(); // La fecha actual
+        // console.log("fechaActual", fechaActual)
+        // let dataFiltrada = dataHistorico.filter(item => new Date(item?.data?.fecha) > fechaActual);
+        this.setState({ historico: dataHistorico })
+    }
 
+    getFichasEnCurso() {
+        if (!this.state.historico) return <SLoad />
+        let datahis = this.state.historico;
+        console.log("datahis", datahis)
+        if (datahis.length === 0) return null;
         return <SView col={"xs-12"} >
             <SHr height={20} />
             <SText font={"LondonMM"} fontSize={18}>{'Fichas en curso:'}</SText>
@@ -324,7 +338,7 @@ class Inicio extends Component {
             <SView col={"xs-11"} center>
                 <Kolping.FichasPendientes />
             </SView>
-
+            <SHr height={30} />
         </SView>
     }
 
@@ -343,7 +357,7 @@ class Inicio extends Component {
                             <SHr height={240} />
                             <SView col={"xs-11.5 sm-10 md-8 lg-6 xl-4"} center>
                                 {/* <BloqueTiempo /> */}
-                                {/* {this.getFichasEnCurso()} */}
+                                {this.getFichasEnCurso()}
                                 <SView col={"xs-12"}>
                                     <SText font={"LondonMM"} fontSize={18}>{'Servicios a domicilio:'}</SText>
                                 </SView>
