@@ -167,7 +167,7 @@ class Inicio extends Component {
             horizontal
             ListHeaderComponent={() => {
                 return <SView width={100} height={180} padding={10} center onPress={() => {
-                    SNavigation.navigate("/paciente/buscar", {nav:2})
+                    SNavigation.navigate("/paciente/buscar", { nav: 2 })
                 }}>
                     <SView width={100} height padding={5} style={{
                         borderRadius: 15,
@@ -298,24 +298,6 @@ class Inicio extends Component {
         return <FlatList
             style={{ width: "100%" }}
             horizontal
-            // ListHeaderComponent={() => {
-            //     return <SView width={100} height={180} padding={10} center onPress={() => {
-            //         SNavigation.navigate("/servicio/buscar")
-            //     }}>
-            //         <SView width={100} height padding={5} style={{
-            //             borderRadius: 15,
-            //             backgroundColor: STheme.color.card
-            //         }} row center>
-            //             <SHr width={10} />
-            //             <SIcon name={"addUser"} fill={STheme.color.primary} width={50} height={50} />
-            //             <SView height={30} >
-            //                 <SText>AGREGAR</SText>
-            //                 <SText>SERVICIO</SText>
-            //             </SView>
-            //             <SHr width={10} />
-            //         </SView>
-            //     </SView>
-            // }}
             ItemSeparatorComponent={() => <SView width={8} />}
             showsHorizontalScrollIndicator={true}
             data={data}
@@ -330,6 +312,19 @@ class Inicio extends Component {
             {this.getButtom({ label: 'Enfermería', url: 'inDevelop', icon: 'senfermeria' })}
             {this.getButtom({ label: 'Imagenología', url: 'servicio/lista', icon: 'simagenologia' })}
             {this.getAdministracion()} */}
+        </SView>
+    }
+
+    getFichasEnCurso() {
+
+        return <SView col={"xs-12"} >
+            <SHr height={20} />
+            <SText font={"LondonMM"} fontSize={18}>{'Fichas en curso:'}</SText>
+            <SHr height={20} />
+            <SView col={"xs-11"} center>
+                <Kolping.FichasPendientes />
+            </SView>
+
         </SView>
     }
 
@@ -348,6 +343,7 @@ class Inicio extends Component {
                             <SHr height={240} />
                             <SView col={"xs-11.5 sm-10 md-8 lg-6 xl-4"} center>
                                 {/* <BloqueTiempo /> */}
+                                {/* {this.getFichasEnCurso()} */}
                                 <SView col={"xs-12"}>
                                     <SText font={"LondonMM"} fontSize={18}>{'Servicios a domicilio:'}</SText>
                                 </SView>
