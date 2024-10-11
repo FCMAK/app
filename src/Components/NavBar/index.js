@@ -326,8 +326,9 @@ class NavBar extends React.Component {
                 position: "absolute",
                 width: "100%",
                 height: "100%",
-                //backgroundColor: "#66000066",
-                backgroundColor: STheme.color.card + "76",
+                // backgroundColor: "#66000066",
+                backgroundColor: "#ffffff66",
+                // backgroundColor: STheme.color.card + "76",
             }}
                 onLayout={(event) => { this.state.width = event.nativeEvent.layout.width }}
                 activeOpacity={1}
