@@ -1,4 +1,4 @@
-package com.kolping_app;
+package com.kolping_app2;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -69,7 +69,7 @@ public class MainActivity extends ReactActivity {
 
   @Override
   protected String getMainComponentName() {
-    return "kolping_app";
+    return "kolping_app2";
   }
 
   // Esto lo agrege por que el backgroun location tiraba cuando lo cerraba

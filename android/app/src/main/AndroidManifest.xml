@@ -1,8 +1,8 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.kolping_app">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.kolping_app2">
 
 	<queries>
-        <package android:name="com.kolping_app.store" />
-        <package android:name="com.kolping_app.services" />
+        <package android:name="com.kolping_app2.store" />
+        <package android:name="com.kolping_app2.services" />
         <!-- for example, to share via instagram -->
         <package android:name="com.whatsapp.android" />
     </queries>

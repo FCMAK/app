@@ -68,7 +68,7 @@ android {
     // }
 
     defaultConfig {
-        applicationId "com.kolping_app"
+        applicationId "com.kolping_app2"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 10009

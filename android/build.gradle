@@ -23,6 +23,14 @@ buildscript {
     }
 }
 
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+
 subprojects { subproject ->
     if (project.name in ['servisofts-background-location', 'servisofts-component', 'servisofts-socket']) {
         project.configurations { compile { } }
