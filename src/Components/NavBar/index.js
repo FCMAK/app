@@ -48,7 +48,7 @@ const ListaBotones = ({ fadeOut }) => {
                 <SView col={"xs-12"} height={30}></SView>
             </SView>
 
-            <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("/paciente"); fadeOut() }}  >
+            {(usuario) ? <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("/paciente"); fadeOut() }}  >
                 <SView row col={"xs-10"} >
                     <SIcon fill="#666666" name={"paciente"} height={20} width={20} style={{ paddingTop: 3 }} />
                     <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Mis Pacientes</SText>
@@ -57,9 +57,9 @@ const ListaBotones = ({ fadeOut }) => {
                     <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
                 </SView>
                 <SView col={"xs-12"} height={30}></SView>
-            </SView>
+            </SView> : null}
 
-            <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("/ficha/historico"); fadeOut() }}  >
+            {(usuario) ? <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("/ficha/historico"); fadeOut() }}  >
                 <SView row col={"xs-10"}>
                     <SIcon fill="#666666" name={"ficha"} height={20} width={20} style={{ paddingTop: 3 }} />
                     <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Mis Fichas</SText>
@@ -68,9 +68,10 @@ const ListaBotones = ({ fadeOut }) => {
                     <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
                 </SView>
                 <SView col={"xs-12"} height={30}></SView>
-            </SView>
+            </SView> : null}
 
-            <SView col={"xs-11"} row   >
+            {(usuario) ? <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("inDevelop"); fadeOut() }}  >
+                {/* <SView col={"xs-11"} row   > */}
                 {/* <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("/ficha/historico"); fadeOut() }}  > */}
                 {/* <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("farmacia/mensajeCarritoVacio"); fadeOut() }}  > */}
                 <SView row col={"xs-10"}>
@@ -81,9 +82,9 @@ const ListaBotones = ({ fadeOut }) => {
                     <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
                 </SView>
                 <SView col={"xs-12"} height={30}></SView>
-            </SView>
+            </SView> : null}
 
-            <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("cotizacion_farmacia/listaCotizada"); fadeOut() }}  >
+            {(usuario) ? <SView col={"xs-11"} row onPress={() => { SNavigation.navigate("cotizacion_farmacia/listaCotizada"); fadeOut() }}  >
                 <SView row col={"xs-10"}>
                     <SIcon fill="#666666" name={"cotizacion"} height={22} width={20} style={{ paddingTop: 3 }} />
                     <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Mis Cotizaciones</SText>
@@ -92,9 +93,9 @@ const ListaBotones = ({ fadeOut }) => {
                     <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
                 </SView>
                 <SView col={"xs-12"} height={30}></SView>
-            </SView>
+            </SView> : null}
 
-            <SView col={"xs-11"} row onPress={() => {
+            {(usuario) ? <SView col={"xs-11"} row onPress={() => {
                 SNavigation.navigate("notification")
                 fadeOut()
             }}  >
@@ -106,7 +107,7 @@ const ListaBotones = ({ fadeOut }) => {
                     <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
                 </SView>
                 <SView col={"xs-12"} height={30}></SView>
-            </SView>
+            </SView> : null}
 
             {(usuario) ? <SView col={"xs-11"} row onPress={() => {
                 SNavigation.navigate("admin")
@@ -138,8 +139,8 @@ const ListaBotones = ({ fadeOut }) => {
                 SNavigation.navigate("terminos")
                 fadeOut()
             }}  >
-                <SView row col={"xs-10"}>
-                    <SIcon fill="#666666" name={"Ayuda"} height={20} width={20} style={{ paddingTop: 3 }} />
+                <SView row col={"xs-10"} >
+                    <SIcon fill="#666666" name={"Ayuda"} height={20} width={20} style={{ position: "relative", right: 4, top: 4 }} />
                     <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Términos y condiciones</SText>
                 </SView>
                 <SView style={{ right: 0, position: "absolute", top: 2 }} row >
@@ -148,7 +149,7 @@ const ListaBotones = ({ fadeOut }) => {
                 <SView col={"xs-12"} height={30}></SView>
             </SView>
 
-            <SView col={"xs-11"} row onPress={() => {
+            {(usuario) ? <SView col={"xs-11"} row onPress={() => {
                 Model.usuario.Action.unlogin();
                 SNavigation.reset("login");
                 fadeOut()
@@ -161,7 +162,23 @@ const ListaBotones = ({ fadeOut }) => {
                     <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
                 </SView>
                 <SView col={"xs-12"} height={30}></SView>
-            </SView>
+            </SView> : null}
+
+            {(!usuario) ? <SView col={"xs-11"} row onPress={() => {
+                // Model.usuario.Action.unlogin();
+                SNavigation.navigate("login");
+                fadeOut()
+            }}>
+                <SView row col={"xs-10"}>
+                    <SIcon fill="#666666" name={"logueo"} height={20} width={20} style={{ paddingTop: 3 }} />
+                    <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Iniciar sesión</SText>
+                </SView>
+                <SView style={{ right: 0, position: "absolute", top: 2 }} row >
+                    <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
+                </SView>
+                <SView col={"xs-12"} height={30}></SView>
+            </SView> : null}
+
             <SView col={"xs-9.5 md-5.8 xl-3.8"} center style={{ bottom: 0, }}>
                 <SIcon name={"Logo"} height={70} />
             </SView>
@@ -190,7 +207,7 @@ const PerfilUsuario = ({ fadeOut }) => {
                         borderColor: "#fff",
                         backgroundColor: STheme.color.card,
                     }} center>
-                        <SIcon name="nouser" height={35} width={35} fill={STheme.color.lightGray} />
+                        <SIcon name="nouser" height={35} width={35} fill={STheme.color.white} />
                     </SView>
                 </SView>
                 <SView col={"xs-9"} onPress={() => {

@@ -22,14 +22,15 @@ export default class historico extends Component {
     }
 
     getHistorico = async () => {
+        // var historico = await getAllHistorico()
         var historico = await getAllHistorico(Model.usuario.Action.getKey())
         if (Object.keys(historico).length === 0) {
             SNavigation.navigate("/ficha/mensajeSinFicha")
         } else {
             let dataHistorico = Object.values(historico)
             let dataH = dataHistorico.sort((a, b) => {
-                const dateA = new Date(`${a.data.fecha}T${a.data.hortur.split(' - ')[0]}`);
-                const dateB = new Date(`${b.data.fecha}T${b.data.hortur.split(' - ')[0]}`);
+                const dateA = new Date(`${a.data.fecha}T${a.data?.hortur?.split(' - ')[0]}`);
+                const dateB = new Date(`${b.data.fecha}T${b.data?.hortur?.split(' - ')[0]}`);
                 return dateA - dateB;
             });
             this.setState({ historico: dataH })
@@ -84,6 +85,7 @@ export default class historico extends Component {
                 <FlatList
                     style={{ width: "100%" }}
                     data={this.state.historico}
+                    // keyExtractor={(item, index) => index.toString()}
                     ItemSeparatorComponent={() => <SHr />}
                     renderItem={this.historicoItem.bind(this)}
                 />

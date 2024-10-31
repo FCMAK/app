@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SPage, SText } from 'servisofts-component';
+import { Container } from '../Components';
 
 class inDevelop extends Component {
     constructor(props) {
@@ -12,9 +13,10 @@ class inDevelop extends Component {
     render() {
         return (
             <SPage title={'En construcción'} disableScroll center>
-                
-                <SText>{'Esta página se encuentra en construcción'}</SText>
-                
+                <Container>
+                    <SText center fontSize={25} font={"LondonMM"}>{'Esta página se encuentra en construcción'}</SText>
+                </Container>
+
             </SPage>
         );
     }

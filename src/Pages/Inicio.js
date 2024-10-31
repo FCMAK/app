@@ -18,8 +18,9 @@ class Inicio extends Component {
     }
 
     componentDidMount() {
-        this.getHistorico();
+
         if (Model.usuario.Action.getKey()) {
+            this.getHistorico();
             SSocket.sendPromise({
                 component: "paciente_usuario",
                 type: "getAll",
@@ -357,7 +358,7 @@ class Inicio extends Component {
                             <SHr height={240} />
                             <SView col={"xs-11.5 sm-10 md-8 lg-6 xl-4"} center>
                                 {/* <BloqueTiempo /> */}
-                                {this.getFichasEnCurso()}
+                                {(!Model.usuario.Action.getKey()) ? null : this.getFichasEnCurso()}
                                 <SView col={"xs-12"}>
                                     <SText font={"LondonMM"} fontSize={18}>{'Servicios a domicilio:'}</SText>
                                 </SView>

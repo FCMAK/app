@@ -14,7 +14,7 @@ class Detalle extends Component {
 
     render() {
         return (
-            <SPage title={'Detalle Servicio'} center>
+            <SPage title={'Detalle Servicio'} >
                 <SView col={"xs-12"} center>
                     <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row>
                         <SHr height={20} />

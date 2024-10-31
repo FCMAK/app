@@ -24,7 +24,7 @@ class KBarraUsuario extends Component {
         //     return <SView />
         // }
 
-        console.log("usuario", usuario);
+        // console.log("usuario", usuario);
 
         return (
             <SView col={"xs-12"} height={85} backgroundColor={STheme.color.primary} style={{
