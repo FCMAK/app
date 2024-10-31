@@ -74,7 +74,7 @@ class Kolping extends Component {
                             </SView>
                         </SView>
 
-                        <SHr height={30} />
+                        <SHr height={100} />
                     </SView>
                 </Container>
             </SPage >
