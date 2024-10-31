@@ -22,14 +22,14 @@ class Item extends Component<_props> {
                         backgroundColor: STheme.color.card,
                         overflow: 'hidden',
                     }}>
-                        {/* <SImage enablePreview src={SSocket.api.root + "sucursal/" + this.props.obj?.NroSuc} width={"100%"} height={"100%"}
+                        <SImage enablePreview src={SSocket.api.root + "sucursal/" + this.props.obj?.NroSuc} width={"100%"} height={"100%"}
                             style={{
-                                resizeMode: 'cover',
+                                resizeMode: 'cover', zIndex:99
                             }}
-                        /> */}
+                        />
                         <SImage enablePreview src={require('../../../../../Assets/img/noimage.jpg')} width={"100%"} height={"100%"}
                             style={{
-                                resizeMode: 'cover',
+                                resizeMode: 'cover', position: 'absolute', zIndex: 1
                             }}
                         />
                     </SView>
