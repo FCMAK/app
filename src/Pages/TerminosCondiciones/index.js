@@ -164,6 +164,21 @@ class TerminosCondiciones extends Component {
         return (
             <SPage title={'Términos y condiciones'} center disableScroll >
                 <SView col={"xs-12"} center height backgroundColor={STheme.color.background}>
+                    <SView col={"xs-12 md-8 xl-4"} center height={120} style={{
+                        position: 'absolute',
+                        bottom: 0,
+                        backgroundColor: STheme.color.background,
+                        borderTopLeftRadius: 10,
+                        borderTopRightRadius: 10,
+                        overflow: 'hidden',
+                    }} >
+                        <BackgroundImage />
+                        {/* <SView >
+                            <Kolping.KButtom primary onPress={() => {
+                                SNavigation.goBack();
+                            }}>ACEPTAR</Kolping.KButtom>
+                        </SView> */}
+                    </SView>
                     <SScrollView2 disableHorizontal >
                         <SView col={"xs-12"} center >
                             <SView col={"xs-11 md-6 xl-4"}    >
@@ -601,21 +616,7 @@ class TerminosCondiciones extends Component {
                         </SView>
                     </SScrollView2>
 
-                    <SView col={"xs-12 md-8 xl-4"} center height={120} style={{
-                        position: 'absolute',
-                        bottom: 0,
-                        backgroundColor: STheme.color.background,
-                        borderTopLeftRadius: 10,
-                        borderTopRightRadius: 10,
-                        overflow: 'hidden',
-                    }} >
-                        <BackgroundImage />
-                        {/* <SView >
-                            <Kolping.KButtom primary onPress={() => {
-                                SNavigation.goBack();
-                            }}>ACEPTAR</Kolping.KButtom>
-                        </SView> */}
-                    </SView>
+
                 </SView>
             </SPage >)
     }

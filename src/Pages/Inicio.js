@@ -353,7 +353,9 @@ class Inicio extends Component {
         return (
             <SPage title={'Inicio'} hidden disableScroll>
                 <SView col={"xs-12"} flex>
-                    <ScrollView showsVerticalScrollIndicator={false}>
+                    <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{
+                        minHeight: "100%"
+                    }}>
                         <SView col={"xs-12"} center>
                             <SHr height={240} />
                             <SView col={"xs-11.5 sm-10 md-8 lg-6 xl-4"} center>
@@ -407,8 +409,9 @@ class Inicio extends Component {
                                 </SView>
                                 <SHr height={20} />
                             </SView>
-                            <Kolping.KFooter />
                         </SView>
+                        <SView flex />
+                        <Kolping.KFooter />
                     </ScrollView>
                 </SView>
                 <SView height={250} col={"xs-12"} style={{

@@ -19,15 +19,24 @@ class qr extends Component {
             key: this.pk,
         }).then(e => {
 
+            SSocket.sendPromise({
+                component: "orden_compra",
+                type: "solicitarQr",
+                key: e?.data?.key
+            }).then(e => {
+                console.log(e);
+            }).catch(e => {
+                console.error(e);
+            })
             if (e.data?.data?.nrosuc) {
-                SSocket.sendPromise({
-                    component: "sucursal",
-                    type: "getAll",
-                    key_usuario: Model.usuario.Action.getKey(),
-                }).then(b => {
-                    const suc = b.data.find(c => c.NroSuc == e.data?.data?.nrosuc)
-                    this.setState({ sucursal: suc })
-                })
+                // SSocket.sendPromise({
+                //     component: "sucursal",
+                //     type: "getAll",
+                //     key_usuario: Model.usuario.Action.getKey(),
+                // }).then(b => {
+                //     const suc = b.data.find(c => c.NroSuc == e.data?.data?.nrosuc)
+                //     this.setState({ sucursal: suc })
+                // })
             }
             this.setState({ data: e.data })
         }).catch(e => {
@@ -47,16 +56,16 @@ class qr extends Component {
 
     render() {
 
-        let dataDoctor = {
-            TitMed: "Dr.",
-            NomMed: this.state?.data?.data?.nommed,
-            NomEsp: this.state?.data?.data?.nomesp,
-        }
-        let suc = {
-            NomSuc: this.state?.sucursal?.NomSuc,
-            DirSuc: this.state?.sucursal?.DirSuc,
-            TelSuc: this.state?.sucursal?.TelSuc
-        }
+        // let dataDoctor = {
+        //     TitMed: "Dr.",
+        //     NomMed: this.state?.data?.data?.nommed,
+        //     NomEsp: this.state?.data?.data?.nomesp,
+        // }
+        // let suc = {
+        //     NomSuc: this.state?.sucursal?.NomSuc,
+        //     DirSuc: this.state?.sucursal?.DirSuc,
+        //     TelSuc: this.state?.sucursal?.TelSuc
+        // }
         // let fecha_final = this.fecha_final.toString("MONTH dd");
         // let fecha_final = "yyy-Mm-DD"
         const fecha = this.state?.data?.data?.fecha;
@@ -78,7 +87,7 @@ class qr extends Component {
                             <SView width={60} height={60} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.primary }}>
                                 <SIcon name={"descargar"} width={40} height={30} fill={STheme.color.white} />
                             </SView>
-                            <SView width={25}/>
+                            <SView width={25} />
                             <SView width={60} height={60} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.primary }}>
                                 <SIcon name={"compartir"} width={40} height={30} fill={STheme.color.white} />
                             </SView>
@@ -92,7 +101,7 @@ class qr extends Component {
                                     key_usuario: Model.usuario.Action.getKey()
                                 }).then(e => {
                                     ins.setLoading(false)
-                                    SNavigation.navigate("/ficha/pago", {data:e.data})
+                                    SNavigation.navigate("/ficha/pago", { data: e.data })
                                 }).catch(e => {
                                     ins.setLoading(false)
                                     console.error(e);
