@@ -4,7 +4,7 @@ import { SDate, SHr, SIcon, SImage, SLoad, SNavigation, SText, STheme, SView } f
 import NavBar from '../../NavBar';
 import SSocket from "servisofts-socket"
 // import { getAllHistorico } from './../../Actions';
-import { getAllHistorico } from './../../../Pages/ficha/Actions';
+import { getActivas, getAllHistorico } from './../../../Pages/ficha/Actions';
 import Model from '../../../Model';
 import { FlatList } from 'react-native';
 
@@ -20,8 +20,13 @@ class FichasPendientes extends Component {
     }
 
     getHistorico = async () => {
-        var historico = await getAllHistorico(Model.usuario.Action.getKey())
-        this.setState({ historico: Object.values(historico) })
+        try {
+            var historico = await getActivas(Model.usuario.Action.getKey())
+            this.setState({ historico: Object.values(historico) })
+        } catch (error) {
+
+        }
+
     }
 
     renderItem({ index, item }) {
@@ -36,7 +41,8 @@ class FichasPendientes extends Component {
         let mesesAbreviados = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
         let diasDeLaSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
         return <SView width={265} height={85} onPress={() => {
-
+            console.log(item)
+            SNavigation.navigate("/ficha/qr", { key: item?.key })
         }}>
             <SView col={"xs-12"} padding={8} row style={{
                 backgroundColor: "#279AA2",

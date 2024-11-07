@@ -113,9 +113,8 @@ class Login extends Component {
     }
     getSocial() {
         return (
-            <SView col={'xs-11'} height={100} row center>
-                {/* <SView col={'xs-2'} height center></SView> */}
-                {/* <SView flex center height={60}>
+            <SView col={'xs-11'} height={60} row center>
+                <SView center >
                     <LoginApple onLogin={(usuario) => {
                         this.loginRedSocial("apple_key", usuario)
                     }}>
@@ -123,9 +122,9 @@ class Login extends Component {
                             <SIcon name={'IconApple'} />
                         </SView>
                     </LoginApple>
-                </SView> */}
-
-                <SView  center height={60}>
+                </SView>
+                <SView width={50}/>
+                <SView center >
                     <LoginGoogle onLogin={(usuario) => {
                         this.loginRedSocial("gmail_key", usuario)
                     }}>
@@ -134,31 +133,6 @@ class Login extends Component {
                         </SView>
                     </LoginGoogle>
                 </SView>
-                {/* <SView flex center height={60}>
-                    <LoginFacebook onLogin={(usuario) => {
-                        Parent.Actions.loginByKey({
-                            user: usuario.id,
-                        }).then((resp) => {
-                            this.props.dispatch(resp);
-                            SNavigation.reset("/")
-                        }).catch((e) => {
-                            SNavigation.navigate('usuario/registro', {
-                                type: "api",
-                                default_values: {
-                                    Nombres: usuario.name,
-                                    Apellidos: usuario.last_name,
-                                    Correo: usuario.email,
-                                    facebook_key: usuario.id
-                                }
-                            }); //Si existe type muestra los password
-                        })
-                    }}>
-                        <SView height={50} colSquare center style={{ backgroundColor: 'white', borderRadius: 8, borderColor: STheme.color.lightGray, borderWidth: 2, padding: 8 }}>
-                            <SIcon name={'IconFaceb'} />
-                        </SView>
-                    </LoginFacebook>
-                </SView> */}
-                {/* <SView col={'xs-2'} height center></SView> */}
             </SView>
         );
     }

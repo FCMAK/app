@@ -71,6 +71,7 @@ import lapiz, { ReactComponent as lapizW } from './svg/lapiz.svg';
 
 import IconFaceb, { ReactComponent as IconFacebW } from './svg/iconFaceb.svg';
 import IconGoogle, { ReactComponent as IconGoogleW } from './svg/iconGoogle.svg';
+import IconApple, { ReactComponent as IconAppleW } from './svg/iconApple.svg';
 import IconChecked, { ReactComponent as IconCheckedw } from './svg/iconChecked.svg';
 import IconCheckedOk, { ReactComponent as IconCheckedOkw } from './svg/iconCheckedOk.svg';
 
@@ -293,6 +294,7 @@ const Assets: SAssets = {
         "youtube": { Native: YouTube, Web: YouTubeW },
         "linkedin": { Native: LinkedIn, Web: LinkedInW },
         "whatsApp": { Native: WhatsApp, Web: whatsAppW },
+        "IconApple": { Native: IconApple, Web: IconAppleW },
 
         "InputUser": { Native: InputUser, Web: InputUserW },
         "InputEmail": { Native: Email, Web: EmailW },

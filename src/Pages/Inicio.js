@@ -319,19 +319,19 @@ class Inicio extends Component {
     }
 
     getHistorico = async () => {
-        var historico = await getAllHistorico(Model.usuario.Action.getKey())
-        let dataHistorico = Object.values(historico)
+        // var historico = await getAllHistorico(Model.usuario.Action.getKey())
+        // let dataHistorico = Object.values(historico)
         // let fechaActual = new Date(); // La fecha actual
         // console.log("fechaActual", fechaActual)
         // let dataFiltrada = dataHistorico.filter(item => new Date(item?.data?.fecha) > fechaActual);
-        this.setState({ historico: dataHistorico })
+        // this.setState({ historico: dataHistorico })
     }
 
     getFichasEnCurso() {
-        if (!this.state.historico) return <SLoad />
-        let datahis = this.state.historico;
-        console.log("datahis", datahis)
-        if (datahis.length === 0) return null;
+        // if (!this.state.historico) return <SLoad />
+        // let datahis = this.state.historico;
+        // console.log("datahis", datahis)
+        // if (datahis.length === 0) return null;
         return <SView col={"xs-12"} >
             <SHr height={20} />
             <SText font={"LondonMM"} fontSize={18}>{'Fichas en curso:'}</SText>

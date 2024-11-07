@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SPage, SText, STheme, SView, SNavigation, SImage, SLoad, SDate, SMath } from 'servisofts-component';
+import { SHr, SIcon, SPage, SText, STheme, SView, SNavigation, SImage, SLoad, SDate, SMath, SNotification } from 'servisofts-component';
 import Kolping from '../../Components/Kolping';
 import SSocket from 'servisofts-socket'
 import Container from '../../Components/Container';
@@ -23,8 +23,8 @@ class qr extends Component {
                 component: "orden_compra",
                 type: "solicitarQr",
                 key: e?.data?.key
-            }).then(e => {
-                console.log(e);
+            }, 1000 * 60).then(e => {
+                this.setState({ qr: e.data })
             }).catch(e => {
                 console.error(e);
             })
@@ -79,8 +79,10 @@ class qr extends Component {
                         <SText center fontSize={18} color={STheme.color.white}>Para completar la reserva de su ficha, por favor cancele el monto correspondiente escaneando el siguiente código QR.</SText>
                         <SHr height={35} />
                         <SView center width={250} height={250}>
-                            <SImage enablePreview src={require("../../Assets/img/qr.png")} />
+                            {!this?.state?.qr ? null : <SImage enablePreview src={`data:image/jpeg;base64,${this.state?.qr?.qr}`} />}
                         </SView>
+                        <SHr />
+                        <SText color={STheme.color.secondary}>{this?.state?.qr?.id}</SText>
                         <SHr height={30} />
 
                         <SView col={"xs-12"} center row>
@@ -96,6 +98,37 @@ class qr extends Component {
                                 ins.setLoading(true)
                                 SSocket.sendPromise({
                                     component: "orden_compra",
+                                    type: "verificarPago",
+                                    key: this.pk,
+                                    qrid: this?.state?.qr?.id,
+                                    key_usuario: Model.usuario.Action.getKey()
+                                }).then(e => {
+                                    let lbl = "";
+                                    switch (e.data.statusId) {
+                                        case 1: lbl = "Pendiente"; break;
+                                        case 2:
+                                            lbl = "Pagado";
+                                            SNavigation.navigate("/ficha/pago", {})
+                                            break;
+                                        case 3: lbl = "Expirado"; break;
+                                        case 4: lbl = "Con error"; break;
+                                    }
+                                    SNotification.send({
+                                        title: "Estado del QR",
+                                        body: lbl,
+                                        time: 5000
+                                    })
+                                    ins.setLoading(false)
+                                    // SNavigation.navigate("/ficha/pago", { data: e.data })
+                                }).catch(e => {
+                                    ins.setLoading(false)
+                                    // console.error(e);
+                                })
+                            }} >VERIFICAR </Kolping.KButtom>
+                            {/* <Kolping.KButtom secondary width={300} onPress={(ins) => {
+                                ins.setLoading(true)
+                                SSocket.sendPromise({
+                                    component: "orden_compra",
                                     type: "confirmar",
                                     key: this.pk,
                                     key_usuario: Model.usuario.Action.getKey()
@@ -106,7 +139,7 @@ class qr extends Component {
                                     ins.setLoading(false)
                                     console.error(e);
                                 })
-                            }} >ACEPTAR </Kolping.KButtom>
+                            }} >ACEPTAR </Kolping.KButtom> */}
                         </SView>
                         <SView col={"xs-10 sm-8 md-8 lg-10 xl-10"} center>
                             <SHr height={30} />

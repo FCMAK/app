@@ -14,14 +14,14 @@ class LoginApple extends Component<LoginType> {
     }
     render() {
         return <AppleLogin
-            clientId="com.servisofts.casagrande"
-            redirectURI="https://ricky.servisofts.com/"
+            clientId="com.servisofts.kolping_app2"
+            redirectURI="https://kolping.servisofts.com/"
             usePopup={true}
             callback={this.appleResponse} // Catch the response
             // scope="email name"
             // responseMode="query"
             render={renderProps => (  //Custom Apple Sign in Button
-                <SView onPress={renderProps.onClick}>
+                <SView flex onPress={renderProps.onClick}>
                     {this.props.children}
                 </SView>
             )}
