@@ -18,6 +18,11 @@ class Administracion extends Component {
             <SPage title={'Administracion'}>
                 {/* <UsuaioPage /> */}
                 <SHr />
+                <MenuPages path={"/"} permiso={"page"}>
+
+                </MenuPages>
+                <SHr/>
+                <SText>{"Antiguos"}</SText>
                 <MenuPages path={""} permiso={"ver"}>
 
                 </MenuPages>

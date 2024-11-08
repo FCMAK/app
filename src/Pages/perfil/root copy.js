@@ -11,10 +11,10 @@ import {
   SView
 } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
-// import Carrito from '../../Components/Carrito';
-// import PBarraFooter from '../../Components/PBarraFooter';
-// import SwitchTheme from '../../Components/SwitchTheme';
-// import carrito from '../../Services/Casagrandeadmin/Components/carrito';
+import Carrito from '../../Components/Carrito';
+import PBarraFooter from '../../Components/PBarraFooter';
+import SwitchTheme from '../../Components/SwitchTheme';
+import carrito from '../../Services/Casagrandeadmin/Components/carrito';
 // import Roles_permisos from '../Roles_permisos';
 import Model from '../../Model';
 

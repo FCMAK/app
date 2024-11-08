@@ -45,7 +45,6 @@ class index extends DPA.edit {
 
     getCambiarPass() {
         return <>
-
             <SView col={"xs-12"} center>
                 <PButtom fontSize={20} onPress={() => {
                     SNavigation.navigate("/perfil/changepass" , { pk: this.pk })

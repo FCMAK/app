@@ -6,6 +6,8 @@ import Assets from './Assets';
 
 import SSocket, { setProps } from 'servisofts-socket'
 
+import ErrorBoundary from './Components/ErrorBoundary';
+
 import NavBar from './Components/NavBar';
 import BackgroundImage from './Components/BackgroundImage';
 import BarraSuperior from './Components/Kolping/BarraSuperior';
@@ -16,50 +18,52 @@ import Firebase from './Firebase';
 import { Platform } from 'react-native';
 
 try {
-    if (Platform.OS == "web") {
-      if ((window.location.href + "").startsWith("https")) {
-        Firebase.init();
-      } else if ((window.location.href + "").startsWith("http://localhost")) {
-        Firebase.init();
-      } else {
-        console.log("No se activara el Fireabase Por que no contamos con SSL")
-      }
-    } else {
+  if (Platform.OS == "web") {
+    if ((window.location.href + "").startsWith("https")) {
       Firebase.init();
+    } else if ((window.location.href + "").startsWith("http://localhost")) {
+      Firebase.init();
+    } else {
+      console.log("No se activara el Fireabase Por que no contamos con SSL")
     }
-  } catch (e) {
-    console.log(e);
+  } else {
+    Firebase.init();
   }
+} catch (e) {
+  console.log(e);
+}
 
 SMapView.bootstrapURLKeys = {
-    key: "AIzaSyCfEVNoHX5PAARlPuLs6a268yUTgAAelZ0"
+  key: "AIzaSyCfEVNoHX5PAARlPuLs6a268yUTgAAelZ0"
 }
 
 const App = (props) => {
-    return (
-        <Redux>
-            <SComponentContainer
-                // debug
-                socket={SSocket}
-                assets={Assets}
-                background={<BackgroundImage />}
-                theme={{ initialTheme: "default", themes: Config.theme }}>
-                <SNavigation props={{
-                    pages: Pages,
-                    title: "App Kolping",
-                    navBar: BarraSuperior,
-                }}
-                    linking={{
-                        prefixes: ["https://kolping.servisofts.com", "http://kolping.servisofts.com"],
-                        getInitialURL: () => {
+  return (
+    <Redux>
+      <ErrorBoundary>
+        <SComponentContainer
+          // debug
+          socket={SSocket}
+          assets={Assets}
+          background={<BackgroundImage />}
+          theme={{ initialTheme: "default", themes: Config.theme }}>
+          <SNavigation props={{
+            pages: Pages,
+            title: "App Kolping",
+            navBar: BarraSuperior,
+          }}
+            linking={{
+              prefixes: ["https://kolping.servisofts.com", "http://kolping.servisofts.com"],
+              getInitialURL: () => {
 
-                        }
-                    }}
-                />
-                <Socket store={store} />
-                <NavBar />
-            </SComponentContainer>
-        </Redux>
-    )
+              }
+            }}
+          />
+          <Socket store={store} />
+          <NavBar />
+        </SComponentContainer>
+      </ErrorBoundary>
+    </Redux>
+  )
 }
 export default App;

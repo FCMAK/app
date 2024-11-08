@@ -20,7 +20,7 @@ export default ({ defaultValue, onChange }) => {
                 {/* <SText font={"LondonBetween"} color={STheme.color.white} fontSize={16} width={220}>{`Reserva tu cita con nuestros especialistas!`}</SText> */}
                 <SHr height={5} />
                 <SView col={"xs-12"} center>
-                    <SView width={100} >
+                    <SView width={90} >
                         <SInput type='date'  customStyle={"kolping"} defaultValue={defaultValue} onChangeText={onChange} style={{
                             backgroundColor: STheme.color.white,
                             overflow: "hidden",
