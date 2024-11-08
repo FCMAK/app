@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SLoad } from 'servisofts-component';
+import { SLoad, SStorage } from 'servisofts-component';
 import { SButtom, SDate, SForm, SNavigation, SPage, SPopup, SText, STheme, SView, SIcon } from 'servisofts-component';
 import Usuario from '..';
 import BackgroundImage from '../../../../../Components/BackgroundImage';
 import Kolping from '../../../../../Components/Kolping';
 import SSocket from 'servisofts-socket'
+import Model from '../../../../../Model';
 class EditarUsuario extends Component {
     constructor(props) {
         super(props);
@@ -43,12 +44,25 @@ class EditarUsuario extends Component {
 
             }}
             onSubmit={(values) => {
-                delete values["foto_p"];
+                // delete values["foto_p"];
+                // console.log("values", this.usr);
                 var finalObj = {
                     ...this.usr,
                     ...values
                 }
-                    Usuario.Actions.editar(finalObj, this.props);
+                this.form.uploadFiles(Model.usuario._get_image_upload_path(SSocket.api, Model.usuario.Action.getKey()), "foto_p");
+                // Usuario.Actions.editar(finalObj, this.props);
+                Model.usuario.Action.editar({
+                    data: finalObj,
+                    key_usuario: Model.usuario.Action.getKey()
+                }).then((resp) => {
+                    SStorage.setItem("usr_log", JSON.stringify(finalObj)) //Modificar SStorage datos session
+                    // Model.usuario.Action.CLEAR(); //Limpiar caché
+                    Model.usuario.Action.syncUserLog()
+                    SNavigation.goBack();
+                }).catch((e) => {
+                    SPopup.alert("Error en los datos");
+                })
             }}
         />
     }

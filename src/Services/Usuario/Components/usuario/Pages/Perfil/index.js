@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
-import { SDate, SImage, SNavigation, SPage, SView, SButtom, SText, SIcon, SHr,STheme } from 'servisofts-component';
+import { SDate, SImage, SNavigation, SPage, SView, SButtom, SText, SIcon, SHr, STheme } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 // import CerrarSession from './CerrarSession';
 import Kolping from '../../../../../../Components/Kolping';
@@ -115,21 +115,36 @@ class Perfil extends Component {
             return <SView />
         }
         return (
-            <SPage title="Editar Perfil" center>
-                <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} center>
-                    <SView height={80}></SView>
-                    {this.getPerfil()}
-                    <SView height={10}></SView>
-                    {this.getDatos()}
-                    <SView height={50}></SView>
+            <SPage title="Editar Perfil" >
+                <SView col={"xs-12"} center>
+                    <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} >
+                        <SView height={20}></SView>
+                        {this.getPerfil()}
+                        <SView height={10}></SView>
+                        {this.getDatos()}
+                        <SView height={50}></SView>
+                        <SView col={"xs-12"} center>
+                            <Kolping.KButtom primary onPress={() => {
+                                SNavigation.navigate("editar", {
+                                    key: usuario.key,
+                                })
+                            }}>EDITAR</Kolping.KButtom>
+                            <SHr height={15} />
+                            <SHr height={1} color={STheme.color.lightGray} />
+                            <SHr height={15} />
 
-                    <Kolping.KButtom primary onPress={() => {
-                        SNavigation.navigate("editar", {
-                            key: usuario.key,
-                        })
-                    }}>EDITAR</Kolping.KButtom>
-                    <SView height={30}></SView>
+                            <Kolping.KButtom danger onPress={() => {
+                                SNavigation.navigate("perfil/changepass")
+                            }}>CAMBIAR CONTRASEÑA</Kolping.KButtom>
+                            <SHr height={15} />
 
+                            <Kolping.KButtom secondary onPress={() => {
+                                SNavigation.navigate("perfil/eliminar")
+                            }}>ELIMINAR CUENTA</Kolping.KButtom>
+                        </SView>
+                        <SView height={30}></SView>
+
+                    </SView>
                 </SView>
             </SPage>
         );

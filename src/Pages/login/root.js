@@ -60,8 +60,12 @@ class Login extends Component {
         Model.usuario.Action.loginByKey({
             usuario: usuario.id,
         }).then(e => {
+
             SNavigation.goBack()
             console.log(e);
+
+
+
         }).catch(e => {
             Model.usuario.Action.registro({
                 data: {
@@ -75,7 +79,11 @@ class Login extends Component {
                     usuario: usuario.id,
                 }).then(resp => {
                     // Model.empresa.Action.setEmpresa(null)
+                    console.log("no valida")
+
                     SNavigation.goBack()
+                    console.log(e);
+
                 }).catch(e => {
                     SPopup.alert("Error al iniciar con el nuevo usuario");
                 })
@@ -94,8 +102,11 @@ class Login extends Component {
                                 Model.usuario.Action.loginByKey({
                                     usuario: usuario.id,
                                 }).then(resp => {
-                                    // Model.empresa.Action.setEmpresa(null)
+                                    console.log("no validaa")
+
                                     SNavigation.goBack()
+                                    console.log(e);
+
                                 }).catch(e => {
                                     SPopup.alert("Error al iniciar con el nuevo usuario");
                                 })
@@ -220,17 +231,39 @@ class Login extends Component {
                                 data["password"] = CryptoJS.MD5(data["password"]).toString();
                                 console.log(data);
 
-                                Model.usuario.Action.login(data).then((resp) => {
-                                    // if(resp.estado == "exito")  SNavigation.replace("/");
-                                    console.log("exito");
-                                    SNavigation.goBack();
-                                }).catch(e => {
-                                    if (e?.error == "error_password") {
-                                        this.setState({ loading: false, error: "Usuario o contraseña incorrectos." })
-                                    } else {
-                                        this.setState({ loading: false, error: "Ha ocurrido un error al iniciar sesión." })
-                                    }
-                                })
+                                // Model.usuario.Action.login(data).then((resp) => {
+                                //     console.log("exito");
+                                //     SNavigation.goBack();
+                                // }).catch(e => {
+                                //     if (e?.error == "error_password") {
+                                //         this.setState({ loading: false, error: "Usuario o contraseña incorrectos." })
+                                //     } else {
+                                //         this.setState({ loading: false, error: "Ha ocurrido un error al iniciar sesión." })
+                                //     }
+                                // })
+
+                                Model.usuario.Action.login(data)
+                                    .then((resp) => {
+                                        // Verificar si el estado es 0 y lanzar un error manualmente
+                                        console.log(resp?.data?.estado)
+                                        if (resp?.data?.estado === 0) {
+                                            throw { error: "error_estado", message: "El usuario no está activo." };
+                                        } else {
+                                            console.log("Éxito");
+                                            SNavigation.goBack();
+                                        }
+                                    })
+                                    .catch((e) => {
+                                        // Manejo de errores
+                                        if (e?.error === "error_password") {
+                                            this.setState({ loading: false, error: "Usuario o contraseña incorrectos." });
+                                        } else if (e?.error === "error_estado") {
+                                            this.setState({ loading: false, error: "El usuario no está activo." });
+                                        } else {
+                                            this.setState({ loading: false, error: "Ha ocurrido un error al iniciar sesión." });
+                                        }
+                                    });
+
                             }}
                         />
                         <SHr height={15} />
