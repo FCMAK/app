@@ -118,7 +118,7 @@ class NavBar extends Component {
                             </SView>
                         </SView>
                         <SView col={"xs-9"} onPress={() => {
-                            SNavigation.navigate('perfil');
+                            SNavigation.navigate('/perfil');
                             this.fadeOut();
                         }}>
                             <SText font={"Roboto-Bold"}

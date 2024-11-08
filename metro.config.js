@@ -53,6 +53,7 @@ module.exports = (async () => {
           }
         }
       )
-    }
+    },
+    maxWorkers: 10, 
   };
 })();

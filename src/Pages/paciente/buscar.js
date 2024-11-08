@@ -82,9 +82,9 @@ export default class add extends Component {
                 }).then(e => {
                     SNotification.remove("add_paciente")
 
-                    if (e.data) {
+                    if (e.data && e.data.length > 0) {
                         console.log("EXITO", e.data)
-                        if (e.data.length > 1) {
+                         if (e.data.length > 1) {
                             SNotification.send({
                                 title: "Paciente",
                                 body: "HAY MAS DE 1, pendiente de implementar",
@@ -92,7 +92,7 @@ export default class add extends Component {
                             })
                             // Cuando es mas de 1
                         } else {
-                            SNavigation.navigate("/paciente/encontrado", { ...e.data[0], nav:2 })
+                            SNavigation.navigate("/paciente/encontrado", { ...e.data[0], nav: 2 })
                             // SNotification.send({
                             //     key: "add_paciente",
                             //     title: "Paciente",
@@ -114,7 +114,7 @@ export default class add extends Component {
                         }
 
                     } else {
-                        SNavigation.navigate("/paciente/noencontrado", { ci: t.ci , nav:2})
+                        SNavigation.navigate("/paciente/noencontrado", { ci: t.ci, nav: 2 })
                         console.log("No se encontro paciente con este CI")
                     }
                 }).catch(e => {

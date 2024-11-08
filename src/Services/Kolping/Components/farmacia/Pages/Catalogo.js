@@ -137,26 +137,24 @@ class Catalogo extends Component {
     render() {
         return (
             <>
-                <SPage title={'Catálogo'}  backgroundColor>
-                    <SHr height={20} />
+                <SPage title={'Catálogo'} backgroundColor>
+                    <SHr height={8} />
                     <SView col={"xs-12"}>
                         <SView col={"xs-12"} center>
                             <SView col={"xs-12"} center >
-                                <SHr />
                                 <Kolping.KButtom secondary height={50} center onPress={() => {
                                     SNavigation.navigate('cotizacion_farmacia/registro');
                                 }}>COTIZA TU RECETA</Kolping.KButtom>
-                                <SHr />
                             </SView>
                             <SHr />
-                            <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"}>
+                            <SView col={"xs-11 sm-10"}>
                                 <Kolping.KBuscador placeholder={"100.000 medicamentos y prod.."} fill={STheme.color.info} onChangeText={(text) => {
                                     this.setState({
                                         find: text
                                     })
                                 }} />
                             </SView>
-                            <SView col={"xs-12 sm-10 md-10 lg-10 xl-10"} center>
+                            <SView col={"xs-11 sm-10 md-10 lg-10 xl-10"} center>
                                 <categoria_farmacia.Filtro
                                     value={this.state.categoria}
                                     onChange={(items) => {
@@ -171,7 +169,9 @@ class Catalogo extends Component {
                                         }
 
                                     }} />
-                                <SView height={18} />
+                                <SView height={8} />
+                            </SView>
+                            <SView col={"xs-12 sm-10 md-10 lg-10 xl-10"} center>
                                 {this.getProductosCategorias()}
                             </SView>
                         </SView>

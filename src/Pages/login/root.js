@@ -123,7 +123,7 @@ class Login extends Component {
                         </SView>
                     </LoginApple>
                 </SView>
-                <SView width={50}/>
+                <SView width={50} />
                 <SView center >
                     <LoginGoogle onLogin={(usuario) => {
                         this.loginRedSocial("gmail_key", usuario)
@@ -279,7 +279,7 @@ class Login extends Component {
                         </SView>
                         {/* <SHr height={20} /> */}
                         {this.getSocial()}
-
+                        <SHr height={25} />
                         {/* <SHr height={20} /> */}
                         {/* <SView col={"xs-12"} center >
                         <SText>¿No tienes una cuenta?</SText>

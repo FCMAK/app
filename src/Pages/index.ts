@@ -20,6 +20,9 @@ import test2 from './test2';
 import paciente from './paciente';
 import ficha from './ficha';
 import novedades from './novedades';
+import usuario from './usuario';
+import rol from "./rol"
+import perfil from './perfil';
 // const NewPages = SPage.combinePages("/", {
 //     ...notification,
 // })
@@ -28,7 +31,10 @@ const newPages = SPage.combinePages("/", {
     // "": root,
     ...ficha,
     ...paciente,
-    ...novedades
+    ...novedades,
+    ...usuario,
+    ...rol,
+    ...perfil
 });
 
 const Pages: SPageListProps = {
@@ -50,7 +56,8 @@ const Pages: SPageListProps = {
     ...notification,
     ...login,
     ...registro,
-    ...newPages
+    ...newPages,
+  
     // ...perfil
 
 }

@@ -5,7 +5,7 @@ import { WebView } from 'react-native';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
 // import { PButtom } from '../../Components';
-import PButtomDanger from '../../Components/PButtomDanger';
+// import PButtomDanger from '../../Components/PButtomDanger';
 // import usuario_dato from '../../Model/tapeke/usuario_dato';
 
 
@@ -48,7 +48,7 @@ class eliminar extends Component {
                 </SView>
                 <SView height={30} />
                 <SView center>
-                    <PButtomDanger primary fontSize={20} onPress={() => {
+                    {/* <PButtomDanger primary fontSize={20} onPress={() => {
                         SPopup.confirm({
                             title: "Eliminar cuenta", message: "¿Estás seguro de eliminar la cuenta?", onPress: () => {
                                 Model.usuario.Action.editar({
@@ -62,7 +62,7 @@ class eliminar extends Component {
                                 Model.usuario.Action.unlogin();
                             }
                         })
-                    }}>ELIMINAR CUENTA</PButtomDanger>
+                    }}>ELIMINAR CUENTA</PButtomDanger> */}
                 </SView>
                 <SView height={36} />
             </SView>

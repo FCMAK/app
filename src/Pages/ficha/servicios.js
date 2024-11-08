@@ -145,12 +145,18 @@ export default class Lista extends Component {
                                         borderColor: STheme.color.primary,
                                         borderTopRightRadius: 8,
                                         borderBottomRightRadius: 8,
-                                        backgroundColor: STheme.color.white
+                                        backgroundColor: STheme.color.white,
+                                        overflow: "hidden"
                                     }}  >
                                         {/* {this.state.check ? <SIcon name={"chek"} height={20} /> : null} */}
                                         <SInput
                                             col={""}
                                             type={"checkBox"}
+                                            style={{
+                                                width: 42,
+                                                height: 42,
+                                                borderWidth: 0,
+                                            }}
                                             defaultValue={!!this.state.check}
                                             // disabled={!allowEdit || !!this.props.disabled}
                                             onChangeText={(e) => {

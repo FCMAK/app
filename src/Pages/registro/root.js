@@ -120,6 +120,10 @@ class root extends Component {
                             } else {
                                 var password = CryptoJS.MD5(values["Password"]).toString();
                                 delete values["RepPassword"]
+                                if (this.state.loading) {
+                                    return null;
+                                }
+                                this.state.loading = true;
                                 Model.usuario.Action.registro({
                                     data: { ...values, Password: password }
                                 }).then(resp => {
@@ -128,15 +132,19 @@ class root extends Component {
                                         password: password
 
                                     }).then(resp => {
+                                        this.state.loading = false;
+
                                         // Model.empresa.Action.setEmpresa(null)
                                         SNavigation.reset("/");
                                     }).catch(e => {
+                                        this.state.loading = false;
                                         SPopup.alert("Error al iniciar con el nuevo usuario");
                                         SNavigation.reset("/");
                                     })
                                     // SNavigation.replace('/');
 
                                 }).catch(e => {
+                                    this.state.loading = false;
                                     SPopup.alert("Ya existe un usuario con este correo.")
                                 })
 

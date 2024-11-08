@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SHr, SIcon, SLoad, SPage, SScrollView2, SText, STheme, SView, SNavigation } from 'servisofts-component';
 import Parent from '../index'
+import { ScrollView } from 'react-native';
 class Filtro extends Component {
     constructor(props) {
         super(props);
@@ -68,7 +69,7 @@ class Filtro extends Component {
 
     getBtnFiltros() {
         return <>
-            <SView width={18} />
+            {/* <SView width={18} /> */}
             <SView height={28} style={{ maxWidth: '80%', width: 100, paddingLeft: 12, paddingRight: 12, backgroundColor: STheme.color.card, borderRadius: 5, overflow: 'hidden' }} center >
 
                 <SView flex row center height onPress={() => {
@@ -95,14 +96,14 @@ class Filtro extends Component {
     }
     render() {
         return (
-            <SView col={"xs-12"} height={60} center>
-                <SScrollView2 >
-                    <SHr height={16} />
+            <SView col={"xs-12"} height={35} >
+                {/* <SHr height={16} /> */}
+                <ScrollView horizontal>
                     <SView row >
                         {this.getBtnFiltros()}
                         {this.getCategorias()}
                     </SView>
-                </SScrollView2>
+                </ScrollView>
             </SView>
         );
     }

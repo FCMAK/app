@@ -32,8 +32,20 @@ class Inicio extends Component {
             }).catch(e => {
                 console.log(e);
             })
+
+            SSocket.sendPromise({
+                component: "orden_compra",
+                type: "getActivas",
+                key_usuario: Model.usuario.Action.getKey()
+            }).then((e) => {
+                this.setState({ activas: e.data })
+
+            }).catch(e => {
+                console.log(e);
+            })
         } else {
             this.setState({ data: {} })
+
         }
 
         // if (!usuario.Actions.validateSession(this.props)) {
@@ -360,7 +372,8 @@ class Inicio extends Component {
                             <SHr height={240} />
                             <SView col={"xs-11.5 sm-10 md-8 lg-6 xl-4"} center>
                                 {/* <BloqueTiempo /> */}
-                                {(!Model.usuario.Action.getKey()) ? null : this.getFichasEnCurso()}
+                                {/* {(!Model.usuario.Action.getKey()) ? null : this.getFichasEnCurso()} */}
+                                {(!Model.usuario.Action.getKey()) ? null : (this.state.activas) ? this.getFichasEnCurso(): null}
                                 <SView col={"xs-12"}>
                                     <SText font={"LondonMM"} fontSize={18}>{'Servicios a domicilio:'}</SText>
                                 </SView>

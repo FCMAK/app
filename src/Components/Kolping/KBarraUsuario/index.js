@@ -73,13 +73,13 @@ class KBarraUsuario extends Component {
                                 justifyContent: 'center',
                             }}>
                                 <SText font={"Roboto-Bold"} fontSize={20} flex color={"#fff"}> {usuario.Nombres}</SText>
-                                <SView height={22} onPress={() => {
-                                    SNavigation.navigate('perfil')
+                                <SView height={22}  width={100} onPress={() => {
+                                    SNavigation.navigate('/perfil')
                                 }} style={{
                                     paddingLeft: 6,
                                     alignItems: 'center',
                                 }} row>
-                                    <SText fontSize={12} color={"#eee"} font='LondonTwo' style={{
+                                    <SText  fontSize={12} color={"#eee"} font='LondonTwo' style={{
                                     }}>Ver perfil </SText>
                                     <SIcon name="Ver" width={9} color="#fff" />
                                 </SView>

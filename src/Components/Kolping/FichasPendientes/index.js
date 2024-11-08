@@ -30,8 +30,8 @@ class FichasPendientes extends Component {
     }
 
     renderItem({ index, item }) {
-        console.log(item);
-        console.log(item?.data?.fecha)
+        // console.log(item);
+        // console.log(item?.data?.fecha)
         let fechac = item?.data?.fecha
         // console.log(fechac.getDate())
         let partes = fechac.split("-");
@@ -41,7 +41,7 @@ class FichasPendientes extends Component {
         let mesesAbreviados = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
         let diasDeLaSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
         return <SView width={265} height={85} onPress={() => {
-            console.log(item)
+            // console.log(item)
             SNavigation.navigate("/ficha/qr", { key: item?.key })
         }}>
             <SView col={"xs-12"} padding={8} row style={{

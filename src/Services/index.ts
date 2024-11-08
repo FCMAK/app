@@ -5,14 +5,14 @@ import Roles_permisos from './Roles_permisos';
 
 const Pages = {
     ...Kolping.Pages,
-    ...Usuario.Pages,
-    ...Roles_permisos.Pages,
+    // ...Usuario.Pages,
+    // ...Roles_permisos.Pages,
 }
 
 const Reducers = {
     ...Kolping.Reducers,
     // ...Usuario.Reducers,
-    ...Roles_permisos.Reducers,
+    // ...Roles_permisos.Reducers,
 }
 
 export default {
