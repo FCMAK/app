@@ -14,6 +14,8 @@ import Lista from "./Pages/Lista";
 // import Login from "./Pages/Login";
 import Editar from "./Pages/EditarUsuario";
 import Perfil from "./Pages/Perfil";
+import Eliminar from "./Pages/Perfil/eliminar";
+import Changepass from "./Pages/Perfil/changepass";
 import RolUsr from "./Pages/RolUsr";
 //alvaro
 
@@ -21,7 +23,7 @@ import RolUsr from "./Pages/RolUsr";
 //     name: "usuario",
 //     path: `/usuario`,
 //     model
-// }
+// } 
 
 export default {
     component,
@@ -38,6 +40,8 @@ export default {
         // [component + "/nuevaContrasena"]: NuevoPass,
         [component + "/rol"]: RolUsr,
         "perfil": Perfil,
+        "perfil/eliminar": Eliminar,
+        "perfil/changepass": Changepass,
         // "login":Login,
         "editar": Editar
     }

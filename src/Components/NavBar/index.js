@@ -244,7 +244,7 @@ const PerfilUsuario = ({ fadeOut }) => {
                     </SView>
                 </SView>
                 <SView col={"xs-9"} onPress={() => {
-                    SNavigation.navigate('/perfil');
+                    SNavigation.navigate('perfil');
                     fadeOut()
                 }}>
                     <SText font={"Roboto-Bold"}

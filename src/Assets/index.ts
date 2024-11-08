@@ -172,7 +172,7 @@ import ficha, { ReactComponent as fichaW } from './svg/ficha.svg';
 
 import descargar, { ReactComponent as descargarW } from './svg/descargar.svg';
 import compartir, { ReactComponent as compartirW } from './svg/compartir.svg';
-
+import eliminarCuenta, { ReactComponent as eliminarCuentaW } from './svg/eliminarCuenta.svg';
 
 const Assets: SAssets = {
     svg: {
@@ -344,6 +344,8 @@ const Assets: SAssets = {
 
         "descargar": { Native: descargar, Web: descargarW },
         "compartir": { Native: compartir, Web: compartirW },
+        
+        "eliminarCuenta": { Native: eliminarCuenta, Web: eliminarCuentaW },
     }
 }
 
