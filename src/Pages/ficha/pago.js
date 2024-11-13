@@ -47,7 +47,7 @@ class Pago extends Component {
                             <SHr height={30} />
                             <SText center font={"LondonMM"} fontSize={20}>Su ficha ha sido reservada correctamente. A continuación puede descargar su recibo y acceder a la factura a través de la plataforma de impuestos SIAT</SText>
                             <SHr height={20} />
-                            <SText>NroGrl: {this.state.NroGrl}</SText>
+                            <SText>Nro. de transacción: {this.state.NroGrl}</SText>
                             <SHr height={20} />
                             <SView col={"xs-12"} row center>
                                 <SView width={150} height={50} style={{
@@ -82,7 +82,7 @@ class Pago extends Component {
                             </SView>
 
 
-                            {/* <SText>NroGrl: {this.state.NroGrl}</SText>
+                            {/* <SText>Nro. de transacción: {this.state.NroGrl}</SText>
                             <SView onPress={() => {
                                 Linking.openURL(this.state.FacUrl)
                             }}><SText style={{ color: STheme.color.link }}>{this.state.FacUrl}</SText></SView>

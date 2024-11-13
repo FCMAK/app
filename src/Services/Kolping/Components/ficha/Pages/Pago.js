@@ -40,7 +40,7 @@ class Pago extends Component {
                 <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} center>
                     <SText center fontSize={60} bold>POR DEFINIR</SText>
                     <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} center>
-                        <SText>NroGrl: {this.state.NroGrl}</SText>
+                        <SText>Nro. de transacción: {this.state.NroGrl}</SText>
                         <SView onPress={()=>{
                             Linking.openURL(this.state.FacUrl)
                         }}><SText style={{color:STheme.color.link}}>{this.state.FacUrl}</SText></SView>
