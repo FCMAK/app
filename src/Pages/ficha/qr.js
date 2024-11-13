@@ -104,15 +104,36 @@ class qr extends Component {
                                     key_usuario: Model.usuario.Action.getKey()
                                 }).then(e => {
                                     let lbl = "";
+
                                     switch (e.data.statusId) {
                                         case 1: lbl = "Pendiente"; break;
                                         case 2:
                                             lbl = "Pagado";
-                                            SNavigation.navigate("/ficha/pago", {})
+
+                                            SSocket.sendPromise({
+                                                component: "orden_compra",
+                                                type: "confirmar",
+                                                key: this.pk,
+                                                key_usuario: Model.usuario.Action.getKey(),
+                                                data_qr: e.data,
+                                            }).then(f => {
+                                                // ins.setLoading(false)
+                                                SNotification.send({
+                                                    title: "Exito",
+                                                    color: STheme.color.success
+                                                })
+                                                SNavigation.navigate("/ficha/pago", { data: f.data })
+                                            }).catch(e => {
+                                                // ins.setLoading(false)
+                                                console.error(e);
+                                            })
+
+                                            // SNavigation.navigate("/ficha/pago", {})
                                             break;
                                         case 3: lbl = "Expirado"; break;
                                         case 4: lbl = "Con error"; break;
                                     }
+
                                     SNotification.send({
                                         title: "Estado del QR",
                                         body: lbl,
@@ -125,21 +146,10 @@ class qr extends Component {
                                     // console.error(e);
                                 })
                             }} >VERIFICAR </Kolping.KButtom>
-                            {/* <Kolping.KButtom secondary width={300} onPress={(ins) => {
+                            {/* <Kolping.KButtom secondary width={100} onPress={(ins) => {
                                 ins.setLoading(true)
-                                SSocket.sendPromise({
-                                    component: "orden_compra",
-                                    type: "confirmar",
-                                    key: this.pk,
-                                    key_usuario: Model.usuario.Action.getKey()
-                                }).then(e => {
-                                    ins.setLoading(false)
-                                    SNavigation.navigate("/ficha/pago", { data: e.data })
-                                }).catch(e => {
-                                    ins.setLoading(false)
-                                    console.error(e);
-                                })
-                            }} >ACEPTAR </Kolping.KButtom> */}
+                              
+                            }} >CONFIRMAR</Kolping.KButtom> */}
                         </SView>
                         <SView col={"xs-10 sm-8 md-8 lg-10 xl-10"} center>
                             <SHr height={30} />
