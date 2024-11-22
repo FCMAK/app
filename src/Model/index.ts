@@ -6,12 +6,14 @@ import { STheme } from "servisofts-component";
 
 import kolping from "./kolping";
 import notification from "./notification";
+import Geolocation from "servisofts-rn-geolocation"
 
 const Model = {
     ...Usuario.Model,
     ...Roles_permisos.Model,
     ...kolping,
     ...notification,
+    ...Geolocation.Model,
 
 }
 
@@ -25,6 +27,9 @@ Usuario.init({
         "Correo": { type: "text", notNull: true, editable: true },
         "Telefono": { type: "text", editable: true },
         "Password": { type: "text", notNull: true, editable: true },
+        "direccion": { type: "text", notNull: true, editable: true },
+        "latitude": { type: "text", notNull: true, editable: true },
+        "longitude": { type: "text", notNull: true, editable: true },
     },
 });
 Roles_permisos.init({

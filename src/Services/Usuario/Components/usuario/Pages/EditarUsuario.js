@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SLoad, SStorage } from 'servisofts-component';
+import { SLoad, SStorage, SThread } from 'servisofts-component';
 import { SButtom, SDate, SForm, SNavigation, SPage, SPopup, SText, STheme, SView, SIcon } from 'servisofts-component';
 import Usuario from '..';
 import BackgroundImage from '../../../../../Components/BackgroundImage';
@@ -18,7 +18,14 @@ class EditarUsuario extends Component {
 
         var isApi = this.usr.gmail_key || this.usr.facebook_key
         return <SForm
-            ref={(ref) => { this.form = ref; }}
+            // ref={(ref) => { this.form = ref; }}
+            ref={(formInstance: SForm) => {
+                this.form = formInstance;
+
+                new SThread(100, "asd").start(() => {
+                    if (formInstance) formInstance.focus("Nombres")
+                })
+            }}
             // row
             style={{
                 alignItems: "center",
@@ -59,6 +66,11 @@ class EditarUsuario extends Component {
             onSubmit={(values) => {
                 // delete values["foto_p"];
                 // console.log("values", this.usr);
+                if (this.direccion) {
+                    values.latitude = this.direccion.latitude
+                    values.longitude = this.direccion.longitude
+                }
+
                 var finalObj = {
                     ...this.usr,
                     ...values

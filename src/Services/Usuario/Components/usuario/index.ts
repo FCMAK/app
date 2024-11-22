@@ -17,6 +17,7 @@ import Perfil from "./Pages/Perfil";
 import Eliminar from "./Pages/Perfil/eliminar";
 import Changepass from "./Pages/Perfil/changepass";
 import RolUsr from "./Pages/RolUsr";
+import select from "./Pages/select";
 //alvaro
 
 // export const Parent = {
@@ -43,6 +44,8 @@ export default {
         "perfil/eliminar": Eliminar,
         "perfil/changepass": Changepass,
         // "login":Login,
-        "editar": Editar
+        "editar": Editar,
+
+        [component + "/select"]: select,
     }
 }

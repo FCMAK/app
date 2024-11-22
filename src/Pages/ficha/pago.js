@@ -174,7 +174,7 @@ class Pago extends Component {
                             </SView>
 
 
-                            {/* <SText>NroGrl: {this.state.NroGrl}</SText>
+                            {/* <SText>Nro. de transacción: {this.state.NroGrl}</SText>
                             <SView onPress={() => {
                                 Linking.openURL(this.state.FacUrl)
                             }}><SText style={{ color: STheme.color.link }}>{this.state.FacUrl}</SText></SView>

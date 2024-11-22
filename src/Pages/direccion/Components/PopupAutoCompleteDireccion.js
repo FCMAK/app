@@ -13,7 +13,7 @@ class PopupAutoCompleteDireccion extends Component {
 
     render_data() {
         if (this.state.loading) return <SLoad />
-        if (!this.state.locations) return <SText col={"xs-12"} center>No results</SText>
+        if (!this.state.locations) return <SText col={"xs-12"} fontSize={16} font='LondonMM' center>Sin resultados</SText>
 
         return <SList
             col={"xs-12"}
@@ -43,6 +43,7 @@ class PopupAutoCompleteDireccion extends Component {
                             // var aux = this.setState({ place_id: obj.place_id, direccion: obj.direccion });
                         }} >
                         <SText fontSize={12} color={STheme.color.text} >{obj.direccion}</SText>
+                        <SText fontSize={12} color={STheme.color.text} font='LondonBetween' >{obj.direccion}</SText>
                     </SView>
                 </SView>
             }} />
@@ -55,7 +56,7 @@ class PopupAutoCompleteDireccion extends Component {
                 padding: 8,
             }} withoutFeedback>
             <SHr />
-            <SInput col={"xs-12"} placeholder={"Write address..."} style={{ borderWidth: 0, height: "100%" }}
+            <SInput customStyle={"kolping"} col={"xs-12"} placeholder={"Mi dirección..."} style={{  height: "100%" }}
                 color={STheme.color.text} placeholderTextColor={STheme.color.gray} height={40} fontSize={12}
                 onChangeText={(text) => {
                     // this.setState({ find: text })
