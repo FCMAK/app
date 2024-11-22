@@ -27,17 +27,17 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.41727723156-i12tp6vpihv40g6vdog7pesfql8tsc68</string>
+				<string>com.googleusercontent.apps.19641581677-4i09btte8m3dog4ao1f7hvlo48rpipk7</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>Casa Grande</string>
+			<string>Kolping</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>casagrande-app</string>
+				<string>kolping-app</string>
 			</array>
 		</dict>
 		<dict>

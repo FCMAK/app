@@ -17,7 +17,7 @@ class MensajePago extends Component {
                     <SHr height={20} />
                     <SView col={"xs-12"} style={{ padding: 8 }} center >
                         <SView col={"xs-12"} center>
-                            <SIcon name={"ok"} width={150} height={150} />
+                            <SIcon name={"ok"} fill={STheme.color.info} width={150} height={150} />
                             <SHr height={50} />
                             <SText font={"LondonTwo"} center fontSize={24} color={STheme.color.text}>GRACIAS POR SU COMPRA </SText>
                             <SHr height={30} />

@@ -21,7 +21,7 @@ class MensajeProceso extends Component {
                     <SHr height={20} />
                     <SView col={"xs-12"} style={{ padding: 8 }} center >
                         <SView col={"xs-12"} center>
-                            <SIcon name={"ok"} width={124} height={124} />
+                            <SIcon name={"ok"} fill={STheme.color.info} width={124} height={124} />
                             <SHr height={20} />
                             <SText font={"LondonTwo"} center fontSize={24} color={STheme.color.black}>SOLICITUD A DOMICILIO EN PROCESO </SText>
                             <SHr height={30} />

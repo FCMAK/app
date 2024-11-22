@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SDate, SHr, SImage, SLoad, SNavigation, SNotification, SPage, SText, STheme, SView } from "servisofts-component";
+import { SDate, SHr, SImage, SInput, SLoad, SNavigation, SNotification, SPage, SStorage, SText, STheme, SView } from "servisofts-component";
 import SSocket from "servisofts-socket";
 import Model from "../../Model";
 import { Container } from "../../Components";
@@ -59,7 +59,7 @@ const InputPaciente = React.forwardRef((props, ref) => {
     </SView>
 })
 const InputCita = ({ data }) => {
-    const { fecha, nommed, nomesp } = data;
+    const { fecha, nommed, nomesp, hortur } = data;
     // if(!this.state?.data) return <SLoad />
     let obj = this.state?.data;
     // if(!obj) return <SLoad/>
@@ -92,21 +92,36 @@ const InputCita = ({ data }) => {
             borderLeftWidth: 2,
             borderColor: STheme.color.card
         }} />
-        <SView width={100} center>
+        <SView width={120} center>
             <SText fontSize={25} font="LondonTwo" bold color={STheme.color.primary}>{sdate.toString("dd")}</SText>
             <SText fontSize={14} font="LondonBetween" color={STheme.color.primary}>{sdate.toString("MONTH")}</SText>
-            <SText fontSize={14} font="LondonBetween" color={STheme.color.primary}>{sdate.toString("HH")}</SText>
+            <SText fontSize={14} font="LondonBetween" color={STheme.color.primary}>{hortur}</SText>
         </SView>
     </SView>
 }
 export default class index extends React.Component {
-    state = {}
+    state = {
+        default_values: {
+            nit: "",
+            razon_social: "",
+            email_factura: Model.usuario.Action.getUsuarioLog()?.Correo
+
+        }
+    }
 
     constructor(props) {
         super(props)
         this.key = SNavigation.getParam("key")
     }
     componentDidMount() {
+
+
+
+        SStorage.getItem("last_nit", (e) => {
+            if (!e) return;
+            const obj = JSON.parse(e);
+            this.setState({ default_values: { ...this.state.default_values, ...obj } })
+        })
         SSocket.sendPromise({
             component: "orden_compra",
             type: "getByKey",
@@ -151,10 +166,31 @@ export default class index extends React.Component {
             })
             return;
         }
-        SNavigation.navigate("/ficha/confirmar", {
-            key: this.key
+
+        let nit = this.input_nit.getValue();
+        let razon_social = this.input_razon_social.getValue();
+        let email = this.input_email.getValue();
+        SStorage.setItem("last_nit", JSON.stringify({
+            nit: nit,
+            razon_social: razon_social,
+            email_factura: email
+        }))
+        SSocket.sendPromise({
+            component: "orden_compra",
+            type: "editar",
+            data: {
+                key: this.key,
+                nit: nit,
+                razon_social: razon_social,
+                email_factura: email
+            }
+        }).then(e => {
+            SNavigation.navigate("/ficha/confirmar", {
+                key: this.key
+            })
+        }).catch(e => {
+
         })
-        console.log(this.state)
     }
     handleChangePaciente(e) {
         console.log(e);
@@ -174,7 +210,7 @@ export default class index extends React.Component {
     }
     render() {
         return <SPage title={"Orden"}>
-            <Container flex loading={!this.state.data}>
+            <Container loading={!this.state.data}>
                 <SHr h={32} />
                 <Title label={"Paciente"} />
                 <SHr h={16} />
@@ -183,9 +219,15 @@ export default class index extends React.Component {
                     console.log("entro al ref")
                 }} onChage={this.handleChangePaciente.bind(this)} />
                 <SHr h={50} />
-                <Title label={"Cita Programada"} />
+                <Title label={"Cita Programada"}/>
                 <SHr h={16} />
                 <InputCita data={this.state?.data?.data} />
+                <SHr h={50} />
+                <Title label={"Datos de facturación"} />
+                <SHr h={16} />
+                <SInput ref={ref => this.input_nit = ref} defaultValue={this.state.default_values.nit} customStyle={"kolping"} label={"NIT"} placeholder={"Escriba el número de Nit..."} />
+                <SInput ref={ref => this.input_razon_social = ref} defaultValue={this.state.default_values.razon_social} customStyle={"kolping"} label={"RAZON SOCIAL"} placeholder={"Escriba la Razón Social..."} />
+                <SInput ref={ref => this.input_email = ref} defaultValue={this.state.default_values.email_factura} customStyle={"kolping"} label={"CORREO"} placeholder={"Escriba el correo electrónico"} />
                 <SHr h={50} />
                 <SView flex no />
                 {/* <SText col={"xs-12"} fontSize={20} font="LondonBetween">{"Cita Programada"}</SText> */}

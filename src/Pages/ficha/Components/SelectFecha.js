@@ -6,31 +6,54 @@ import SSocket from 'servisofts-socket';
 
 
 export default ({ defaultValue, onChange }) => {
+    const date = new SDate(defaultValue, "yyyy-MM-dd");
+    const isCurrentDate = date.equalDay(new SDate())
     return <>
         <SView col={"xs-12"} center style={{
             position: 'relative',
             top: 5,
         }}>
             <SView width={220} height={100} center>
-                <SImage source={require("../../../Assets/img/boxHeader.png")} width={220} height={106} style={{position:"absolute"}}/>
+                <SImage source={require("../../../Assets/img/boxHeader.png")} width={220} height={100} style={{ position: "absolute" }} />
                 {/* <SView col={"xs-12"} height style={{ position: "absolute", }}><SIcon name={"homeBox"} fill={"#01899233"} width={"100%"} height={"100%"} /></SView> */}
                 {/* <SHr height={5} /> */}
                 <SText font={"LondonTwo"} center color={STheme.color.white} fontSize={15}>{`Seleccione la fecha de su ficha`}</SText>
                 {/* <SHr height={14} /> */}
                 {/* <SText font={"LondonBetween"} color={STheme.color.white} fontSize={16} width={220}>{`Reserva tu cita con nuestros especialistas!`}</SText> */}
                 <SHr height={5} />
-                <SView col={"xs-12"} center>
+                <SView col={"xs-12"} center row>
+                    <SView height flex onPress={() => {
+                        if (isCurrentDate) {
+                            return;
+                        }
+                        date.addDay(-1);
+                        if (onChange) onChange(date.toString("yyyy-MM-dd"))
+                    }} center>
+                        <SView width={30} height={30}>
+                            {isCurrentDate ? null : <SIcon fill={"#fff"} name='Arrow' />}
+                        </SView>
+                    </SView>
                     <SView width={100} >
-                        <SInput type='date'  customStyle={"kolping"} defaultValue={defaultValue} onChangeText={onChange} style={{
+                        <SInput disabled customStyle={"kolping"} value={date.toString("yyyy-MM-dd")} onChangeText={onChange} style={{
                             backgroundColor: STheme.color.white,
                             overflow: "hidden",
-                            
-                            textAlign:"center",
+
+                            textAlign: "center",
                             // paddingTopt:16,
-                            justifyContent:"center",
+                            justifyContent: "center",
                             height: 40,
                         }} />
                         <SHr height={10} />
+                    </SView>
+                    <SView height flex onPress={() => {
+                        date.addDay(+1);
+                        if (onChange) onChange(date.toString("yyyy-MM-dd"))
+                    }} center>
+                        <SView width={30} height={30} style={{
+                            transform: [{ rotate: "180deg" }]
+                        }}>
+                            <SIcon name='Arrow' fill={"#fff"} />
+                        </SView>
                     </SView>
                 </SView>
                 {/* <SView style={{

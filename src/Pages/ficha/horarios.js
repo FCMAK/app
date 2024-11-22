@@ -67,7 +67,7 @@ const RenderHoraItem = ({ item, medico, nrosuc, fecha }) => {
             </SView>
             <SView width={8} />
             <SHr height={3} />
-            <SText fontSize={13} font="LondonBeteen">{NomEsp}</SText>
+            <SText fontSize={13} font="LondonBetween">{NomEsp}</SText>
             <SView flex />
             <SText fontSize={13} font="LondonTwo">{HorTur}</SText>
         </SView>

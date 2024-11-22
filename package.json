@@ -1,6 +1,6 @@
 {
   "name": "kolping_app2",
-  "version": "1.0.11",
+  "version": "1.0.17",
   "description": "kolping_app",
   "scripts": {
     "start": "react-native start",
@@ -17,6 +17,7 @@
     "@mapbox/geo-viewport": "^0.4.0",
     "@notifee/react-native": "^7.8.2",
     "@react-native-async-storage/async-storage": "1.19.1",
+    "@react-native-camera-roll/camera-roll": "^7.8.3",
     "@react-native-community/geolocation": "3.1.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-firebase/app": "^14.8.0",

@@ -7,28 +7,35 @@ import Model from '../../Model';
 import FloatButtomCart from '../../Components/Kolping/FloatButtomCart';
 
 export default class root extends Component {
+    static INSTANCE: root;
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: [],
+            loading: true
             // data: [
             //     { test: "asdas" }
             // ]
         };
+        root.INSTANCE = this;
         this.onSelect = SNavigation.getParam("onSelect");
     }
 
     componentDidMount() {
+        // this.state.loading = true;
+        this.setState({ loading: true })
         SSocket.sendPromise({
             component: "paciente_usuario",
             type: "getAll",
             key_usuario: Model.usuario.Action.getKey()
             // ci: "6392496"
         }).then(e => {
+            this.state.loading = false;
             this.setState({ data: Object.values(e.data) })
             console.log(e);
             // this.setState({ data: e.data });
         }).catch(e => {
+            this.state.loading = false;
             console.log(e);
         })
     }
@@ -82,20 +89,28 @@ export default class root extends Component {
         </SView>
     }
     render() {
-        if (!this.state.data) return <SLoad />
+        // if (!this.state.data) return <SLoad />
         // let data = Object.values(this.state.data)
-        return <SPage title={"Mis favoritos"}>
+        return <SPage title={"Mis favoritos"} onRefresh={(e) => {
+            this.componentDidMount();
+        }}>
             <Container>
                 <SView col={"xs-12"}>
-                    <SHr height={15} />
-                    <SView  flex style={{ alignItems: "flex-end" }} onPress={() => SNavigation.navigate("/paciente/buscar", { nav: 2 })} >
-                        <SText width={80} height={40}  center  backgroundColor={STheme.color.primary} color={STheme.color.white}
+                    <SHr height={8} />
+                    <SView style={{ alignItems: "flex-end" }} height={40} onPress={() => SNavigation.navigate("/paciente/buscar", { nav: 2 })} >
+                        <SText width={80} height={40} center backgroundColor={STheme.color.primary} color={STheme.color.white}
                             style={{
                                 borderRadius: 8,
                             }}>{"+ Agregar"}</SText>
-
                     </SView>
-                    <SHr height={35} />
+                    <SHr height={8} />
+                    {!this.state.loading ? null : <SLoad />}
+                    {(Object.keys(this.state.data).length === 0) ? <><SHr height={30} />
+                        <SView center col={"xs-12"} card padding={25}>
+                            <SText center font='LondonMM' fontSize={20}>Aún no tienes pacientes registrados.</SText>
+                            <SText center font='LondonMM' fontSize={20}>Agrega tu primer paciente para comenzar.</SText>
+                        </SView>
+                    </> : null}
                     <FlatList
                         data={this.state.data}
                         ItemSeparatorComponent={() => <SHr />}

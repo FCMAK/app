@@ -10,6 +10,8 @@ import historico from './historico'
 import pago from './pago';
 import qr from './qr';
 import mensajeSinFicha from './mensajeSinFicha';
+import opciones from "./opciones";
+import especialidades from './especialidades';
 export const Parent = {
     name: "ficha",
     path: "/ficha",
@@ -25,6 +27,8 @@ export default SPage.combinePages(Parent.name, {
     orden,
     confirmar,
     historico,
-    mensajeSinFicha
+    mensajeSinFicha,
+    opciones,
+    especialidades
 
 });

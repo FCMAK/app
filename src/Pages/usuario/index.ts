@@ -8,7 +8,7 @@ import edit from "./edit";
 import _delete from "./delete";
 import restore from "./restore";
 import eliminados from "./eliminados";
-
+import changepass from "./changepass";
 const model = Model.usuario;
 
 export const Parent = {
@@ -25,5 +25,6 @@ export default SPage.combinePages(Parent.name, {
     "profile": profile,
     "edit": edit,
     "delete": _delete,
-    "restore": restore
+    "restore": restore,
+    changepass
 })

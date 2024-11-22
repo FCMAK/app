@@ -22,8 +22,8 @@ class ListaCentros extends Component {
             }
             return <>
                 <sucursal.Item obj={sucursales[key]} onPress={() => {
-                    // SNavigation.navigate("ficha/opciones", { keysuc: key })
-                    SNavigation.navigate("/ficha/medicos", { nrosuc: key })
+                    SNavigation.navigate("/ficha/opciones", { nrosuc: key })
+                    // SNavigation.navigate("/ficha/medicos", { nrosuc: key })
                 }} />
                 <SHr height={16} />
             </>

@@ -18,7 +18,7 @@ class MensajeCotizacionVacio extends Component {
                 <SHr height={20} />
                 <SView col={"xs-12"} style={{ padding: 8 }} center  >
                     <SView col={"xs-12"} center  >
-                        <SText font={"LondonMM"} bold center fontSize={24} color={STheme.color.text}>No hay cotizacion</SText>
+                        <SText font={"LondonMM"} bold center fontSize={24} color={STheme.color.text}>No hay cotización</SText>
                         <SHr height={30} />
                         <SText center fontSize={18} color={'#666666'}>Añada una cotización:</SText>
                         <SText center fontSize={18} color={'#666666'}>¡El Centro Médico está siempre a mano!</SText>

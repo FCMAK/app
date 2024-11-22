@@ -37,14 +37,14 @@ export const getMedico = ({ nrosuc, codesp = "999", codmed, fecha = new SDate().
     })
 }
 
-export const getAllMedicos = ({ nrosuc, fecha }) => {
+export const getAllMedicos = ({ nrosuc, fecha, codesp="999" }) => {
     return new Promise((resolve, reject) => {
         SSocket.sendPromise({
             component: "medico",
             type: "getAll",
             estado: "cargando",
             nrosuc: nrosuc,
-            codesp: "999",
+            codesp: codesp,
         }).then((e: any) => {
             if (!e.data) return;
             const medicos = e.data;

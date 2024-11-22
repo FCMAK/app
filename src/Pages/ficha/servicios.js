@@ -102,7 +102,6 @@ export default class Lista extends Component {
         //         <SText fontSize={18} color={STheme.color.text} center font='LondonMM' >No hay servicios disponibles</SText>
         //     </SView>
         // </SView>
-        let dataSelect = []
         return <>
             {/* <SHr height={15} /> */}
             <SList
@@ -117,25 +116,37 @@ export default class Lista extends Component {
                     if (!SBuscador.validate(obj, this.state.find)) {
                         return null;
                     }
+                    const dataSelect = this.state.dataSelect.find((item) => item.NomPro === obj.NomPro)
+
                     return <>
                         <SView center col={"xs-12"} row style={{
                             borderLeftWidth: 3,
                             borderLeftColor: STheme.color.info,
                         }}
-                        // onPress={() => {
-                        //     this.setState({ check: !this.state.check })
-                        // }}
+                            onPress={() => {
+                                if (dataSelect) {
+                                    const index = this.state.dataSelect.findIndex((item) => item.NomPro === obj.NomPro);
+                                    if (index !== -1) {
+                                        this.state.dataSelect.splice(index, 1); // Elimina un elemento en la posición encontrada
+                                        this.setState({ ...this.state });
+                                    }
+                                } else {
+                                    this.state.dataSelect.push(obj);
+                                    this.setState({ ...this.state })
+                                }
+
+                            }}
                         >
-                            <SView col={"xs-9"} style={{
+                            <SView col={"xs-8.5"} style={{
                                 alignItems: "flex-start",
                                 padding: 15,
                                 backgroundColor: STheme.color.card,
                             }} >
                                 <SText font={"LondonTwo"} fontSize={15} color={STheme.color.text} >{obj.NomPro}</SText>
                             </SView>
-                            <SView col={"xs-3"} row height>
+                            <SView col={"xs-3.5"} row height>
                                 <SView col={"xs-8"} center height backgroundColor={STheme.color.primary} padding={5}>
-                                    <SText font={"LondonTwo"} fontSize={14} color={STheme.color.white} >Bs. {obj.PreV01}</SText>
+                                    <SText font={"LondonTwo"} fontSize={14} color={STheme.color.white} >Bs.{obj.PreV01}</SText>
                                 </SView>
                                 <SView col={"xs-4"} center height >
                                     {/* <SHr height={2}/> */}
@@ -148,8 +159,8 @@ export default class Lista extends Component {
                                         backgroundColor: STheme.color.white,
                                         overflow: "hidden"
                                     }}  >
-                                        {/* {this.state.check ? <SIcon name={"chek"} height={20} /> : null} */}
-                                        <SInput
+                                        {!!dataSelect ? <SIcon name={"Check"} height={40} fill={STheme.color.blue} /> : null}
+                                        {/* <SInput
                                             col={""}
                                             type={"checkBox"}
                                             style={{
@@ -158,13 +169,14 @@ export default class Lista extends Component {
                                                 borderWidth: 0,
                                             }}
                                             defaultValue={!!this.state.check}
+                                            // value={!!this.state.check}
                                             // disabled={!allowEdit || !!this.props.disabled}
                                             onChangeText={(e) => {
                                                 console.log(obj)
                                                 if (e) {
                                                     dataSelect.push(obj)
                                                     console.log("check")
-                                                    this.setState({ dataSelect: dataSelect })
+                                                    // this.setState({ dataSelect: dataSelect })
                                                     console.log(dataSelect)
 
                                                     // carrito.Actions.addToCard({
@@ -175,12 +187,12 @@ export default class Lista extends Component {
                                                 } else {
                                                     dataSelect = dataSelect.filter((item) => item.NomPro !== obj.NomPro)
                                                     console.log("NO check")
-                                                    this.setState({ dataSelect: dataSelect })
+                                                    // this.setState({ dataSelect: dataSelect })
                                                     console.log(dataSelect)
                                                     // carrito.Actions.removeItem(key, this.props);
                                                 }
                                             }}
-                                        />
+                                        /> */}
                                     </SView>
                                     {/* <SHr height={2}/> */}
                                 </SView>

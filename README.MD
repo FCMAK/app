@@ -1,0 +1,2 @@
+- Para el google login agrege la app en firebase configure el firebase y 
+- luego agrege un Id de cliente OAuth 2.0 https://console.cloud.google.com/apis/credentials?authuser=0&hl=es&project=kolping-67170

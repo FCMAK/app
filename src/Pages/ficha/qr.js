@@ -5,6 +5,7 @@ import Kolping from '../../Components/Kolping';
 import SSocket from 'servisofts-socket'
 import Container from '../../Components/Container';
 import Model from '../../Model';
+import SShared from '../../Components/SShared';
 
 class qr extends Component {
     constructor(props) {
@@ -54,6 +55,12 @@ class qr extends Component {
         return total;
     }
 
+    handleShare() {
+        SShared.sharedB64(`data:image/jpeg;base64,${this.state?.qr?.qr}`, { titulo: "Kolping", message: "Kolping" })
+    }
+    handleDownload() {
+        SShared.saveB64(`data:image/jpeg;base64,${this.state?.qr?.qr}`)
+    }
     render() {
 
         // let dataDoctor = {
@@ -79,18 +86,29 @@ class qr extends Component {
                         <SText center fontSize={18} color={STheme.color.white}>Para completar la reserva de su ficha, por favor cancele el monto correspondiente escaneando el siguiente código QR.</SText>
                         <SHr height={35} />
                         <SView center width={250} height={250}>
-                            {!this?.state?.qr ? null : <SImage enablePreview src={`data:image/jpeg;base64,${this.state?.qr?.qr}`} />}
+                            {!this?.state?.qr ? <SLoad /> : <SImage enablePreview src={`data:image/jpeg;base64,${this.state?.qr?.qr}`} />}
                         </SView>
                         <SHr />
                         <SText color={STheme.color.secondary}>{this?.state?.qr?.id}</SText>
                         <SHr height={30} />
 
                         <SView col={"xs-12"} center row>
-                            <SView width={60} height={60} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.primary }}>
+                            <SView width={85} height={75} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.white }}
+                                onPress={this.handleDownload.bind(this)}>
+                                <SText color={STheme.color.white} font='LondonBetween' fontSize={11}>DESCARGAR</SText>
+                                <SHr height={6} />
                                 <SIcon name={"descargar"} width={40} height={30} fill={STheme.color.white} />
+                                {/* <SHr height={6}/>
+                                <SHr height={1} color={STheme.color.white} />
+                                <SHr height={6}/> */}
+
+
                             </SView>
                             <SView width={25} />
-                            <SView width={60} height={60} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.primary }}>
+                            <SView width={85} height={75} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.white }}
+                                onPress={this.handleShare.bind(this)}>
+                                    <SText color={STheme.color.white} font='LondonBetween' fontSize={11}>COMPARTIR</SText>
+                                    <SHr height={6} />
                                 <SIcon name={"compartir"} width={40} height={30} fill={STheme.color.white} />
                             </SView>
                             <SHr height={30} />
@@ -100,46 +118,50 @@ class qr extends Component {
                                     component: "orden_compra",
                                     type: "verificarPago",
                                     key: this.pk,
-                                    qrid: this?.state?.qr?.id,
+                                    // qrid: this?.state?.qr?.id,
                                     key_usuario: Model.usuario.Action.getKey()
                                 }).then(e => {
-                                    let lbl = "";
-
-                                    switch (e.data.statusId) {
-                                        case 1: lbl = "Pendiente"; break;
-                                        case 2:
-                                            lbl = "Pagado";
-
-                                            SSocket.sendPromise({
-                                                component: "orden_compra",
-                                                type: "confirmar",
-                                                key: this.pk,
-                                                key_usuario: Model.usuario.Action.getKey(),
-                                                data_qr: e.data,
-                                            }).then(f => {
-                                                // ins.setLoading(false)
-                                                SNotification.send({
-                                                    title: "Exito",
-                                                    color: STheme.color.success
-                                                })
-                                                SNavigation.navigate("/ficha/pago", { data: f.data })
-                                            }).catch(e => {
-                                                // ins.setLoading(false)
-                                                console.error(e);
-                                            })
-
-                                            // SNavigation.navigate("/ficha/pago", {})
-                                            break;
-                                        case 3: lbl = "Expirado"; break;
-                                        case 4: lbl = "Con error"; break;
+                                    ins.setLoading(false)
+                                    if (e.data.estado_pago == "pagado") {
+                                        SNavigation.navigate("/ficha/pago", { key: this.pk })
                                     }
 
-                                    SNotification.send({
-                                        title: "Estado del QR",
-                                        body: lbl,
-                                        time: 5000
-                                    })
-                                    ins.setLoading(false)
+                                    // let lbl = "";
+                                    // switch (e.data.statusId) {
+                                    //     case 1: lbl = "Pendiente"; break;
+                                    //     case 2:
+                                    //         lbl = "Pagado";
+
+                                    //         SSocket.sendPromise({
+                                    //             component: "orden_compra",
+                                    //             type: "confirmar",
+                                    //             key: this.pk,
+                                    //             key_usuario: Model.usuario.Action.getKey(),
+                                    //             data_qr: e.data,
+                                    //         }).then(f => {
+                                    //             // ins.setLoading(false)
+                                    //             SNotification.send({
+                                    //                 title: "Exito",
+                                    //                 color: STheme.color.success
+                                    //             })
+                                    //             SNavigation.navigate("/ficha/pago", { data: f.data })
+                                    //         }).catch(e => {
+                                    //             // ins.setLoading(false)
+                                    //             console.error(e);
+                                    //         })
+
+                                    //         // SNavigation.navigate("/ficha/pago", {})
+                                    //         break;
+                                    //     case 3: lbl = "Expirado"; break;
+                                    //     case 4: lbl = "Con error"; break;
+                                    // }
+
+                                    // SNotification.send({
+                                    //     title: "Estado del QR",
+                                    //     body: lbl,
+                                    //     time: 5000
+                                    // })
+                                    // ins.setLoading(false)
                                     // SNavigation.navigate("/ficha/pago", { data: e.data })
                                 }).catch(e => {
                                     ins.setLoading(false)

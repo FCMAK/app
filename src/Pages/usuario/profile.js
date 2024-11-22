@@ -37,10 +37,10 @@ class index extends DPA.profile {
 
         return <SView col={"xs-12"}>
             <SHr height={16} />
-            <SText fontSize={20} bold onPress={() => {
+            {/* <SText fontSize={20} bold onPress={() => {
                 SNavigation.navigate("/gpx", { key_usuario: this.pk })
             }}>VER RUTAS</SText>
-            <SHr height={16} />
+            <SHr height={16} /> */}
             <EditarUsuarioRol key_usuario={this.pk} url={"/usuario"} permiso={"edit_rol"} />
         </SView>
 

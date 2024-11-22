@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { SView } from 'servisofts-component';
 import { GoogleSignin, statusCodes, GoogleSigninButton } from '@react-native-google-signin/google-signin';
 
-GoogleSignin.configure();
+GoogleSignin.configure({
+    offlineAccess: false
+});
 
 class LoginGoogle extends Component {
     constructor(props) {
@@ -24,7 +26,7 @@ class LoginGoogle extends Component {
                 }
             }
         } catch (error) {
-            
+
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                 console.log("Error: User cancelled the login process");
             } else if (error.code === statusCodes.IN_PROGRESS) {

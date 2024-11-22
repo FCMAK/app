@@ -31,15 +31,50 @@ export default class historico extends Component {
             let dataH = dataHistorico.sort((a, b) => {
                 const dateA = new Date(`${a.data.fecha}T${a.data?.hortur?.split(' - ')[0]}`);
                 const dateB = new Date(`${b.data.fecha}T${b.data?.hortur?.split(' - ')[0]}`);
-                return dateA - dateB;
+                return dateB - dateA;
+                // return dateA - dateB;
             });
+
             this.setState({ historico: dataH })
         }
     }
 
     historicoItem({ item, index }) {
+        let estado = "";
+        let colorTexto = STheme.color.warning;
+
+        switch (item.estado_pago) {
+            case "pagado":
+                estado = "PAGADO";
+                colorTexto = STheme.color.success;
+                break;
+            case "esperando_pago":
+                estado = "PENDIENTE PAGO";
+                colorTexto = STheme.color.warning;
+                break;
+            case "esperando_confirmacion":
+                estado = "ESPERANDO CONFIRMACIÓN";
+                colorTexto = STheme.color.warning;
+                break;
+            case "pendiente":
+                estado = "PENDIENTE";
+                colorTexto = STheme.color.warning;
+                break;
+            default:
+                estado = "--";
+                colorTexto = STheme.color.danger;
+        }
+
         console.log("item", item)
-        return <SView col={"xs-12"} card padding={8} row>
+        return <SView col={"xs-12"} card padding={8} row onPress={() => {
+            if (item.estado_pago == "pagado") {
+                SNavigation.navigate("/ficha/pago", { key: item?.key })
+            } else {
+                SNavigation.navigate("/ficha/qr", { key: item?.key })
+            }
+
+
+        }}>
             <SView col={"xs-7"} row>
                 <SView width={40} height={40} >
                     <SImage source={require("../../Assets/img/nofoto.jpg")} width={40} height={40} style={{
@@ -55,7 +90,12 @@ export default class historico extends Component {
                     <SText font='LondonTwo' fontSize={12}>{item.data?.nommed}</SText>
                     <SText font='LondonBetween' color={STheme.color.info}>{item.data?.nomesp}</SText>
 
+
                 </SView>
+                <SHr height={3} />
+                <SHr height={1} color={STheme.color.lightGray} />
+                <SHr height={5} />
+                <SText font='LondonBetween' center fontSize={10.5} color={colorTexto}>{estado}</SText>
             </SView>
             <SView col={"xs-2"} center style={{
                 padding: 5,
@@ -64,6 +104,7 @@ export default class historico extends Component {
             }}>
                 <SText font='LondonTwo' fontSize={10}>FICHA</SText>
                 <SText font='LondonTwo' fontSize={20}>{item.data?.codtur}{item.data?.comtur}</SText>
+
             </SView>
             <SView col={"xs-3"} center style={{
                 padding: 5,
@@ -79,7 +120,7 @@ export default class historico extends Component {
     }
 
     render() {
-        return <SPage>
+        return <SPage title={"Mis fichas"}>
             <SHr height={25} />
             <Container loading={!this.state?.historico}>
                 <FlatList
@@ -90,6 +131,7 @@ export default class historico extends Component {
                     renderItem={this.historicoItem.bind(this)}
                 />
             </Container>
+            <SHr height={30} />
         </SPage>
     }
 }

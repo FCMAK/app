@@ -29,7 +29,7 @@ class Header extends Component<_props> {
                         top: 15,
                         overflow: "hidden"
                     }}>
-                        <SIcon name='fondo1' height={"100%"} width={"100%"}/>
+                        <SIcon name='fondo1' height={"100%"} width={"100%"} />
                         {/* <SIcon name='fondo1' height={100} width={100}/> */}
                     </SView>
                     <Container>
@@ -57,9 +57,11 @@ class Header extends Component<_props> {
                         borderRadius: 100,
                         borderColor: STheme.color.primary,
                         borderWidth: 3,
-                        backgroundColor: STheme.color.white
+                        backgroundColor: STheme.color.white,
                     }} center>
-                        <SIcon name='logoLista' height={50} width={50} />
+                        {/* <SView width={50} height={50} > */}
+                            <SIcon name='logoLista' height={50} width={26.5} />
+                        {/* </SView> */}
                     </SView>
                 </SView>
             </>

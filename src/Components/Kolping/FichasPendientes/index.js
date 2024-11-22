@@ -35,21 +35,52 @@ class FichasPendientes extends Component {
         let fechac = item?.data?.fecha
         // console.log(fechac.getDate())
         let partes = fechac.split("-");
-        let date = new Date(Date.UTC(partes[0], partes[1] - 1, partes[2])); // Restar 1 al mes
+        let date = new Date(Date.UTC(partes[0], partes[1] - 1, partes[2])); // Restar 1 al mes 
 
 
         let mesesAbreviados = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
         let diasDeLaSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+
+        let estado = "";
+        let colorTexto = STheme.color.warning;
+
+        switch (item.estado_pago) {
+            case "pagado":
+                estado = "PAGADO";
+                colorTexto = STheme.color.success;
+                break;
+            case "esperando_pago":
+                estado = "PENDIENTE PAGO";
+                colorTexto = STheme.color.warning;
+                break;
+            case "esperando_confirmacion":
+                estado = "ESPERANDO CONFIRMACIÓN";
+                colorTexto = STheme.color.warning;
+                break;
+            case "pendiente":
+                estado = "PENDIENTE";
+                colorTexto = STheme.color.warning;
+                break;
+            default:
+                estado = "--";
+                colorTexto = STheme.color.danger;
+        }
+
         return <SView width={265} height={85} onPress={() => {
             // console.log(item)
-            SNavigation.navigate("/ficha/qr", { key: item?.key })
+            if (item.estado_pago == "pagado") {
+                SNavigation.navigate("/ficha/pago", { key: item?.key })
+            } else {
+                SNavigation.navigate("/ficha/qr", { key: item?.key })
+            }
+
         }}>
             <SView col={"xs-12"} padding={8} row style={{
                 backgroundColor: "#279AA2",
                 borderRadius: 16
             }}>
                 <SView col={"xs-3"} height padding={10} style={{
-                    borderRadius: 10,
+                    borderRadius: 8,
                     backgroundColor: STheme.color.info
                 }} center>
                     {/* <SText fontSize={20} font='LondonTwo' color={STheme.color.white}>{new SDate(item?.data?.fecha).toString("dd")}</SText> */}
@@ -61,7 +92,14 @@ class FichasPendientes extends Component {
                 <SView col={"xs-8.5"}>
                     <SText fontSize={13} font='LondonMM' color={STheme.color.white}>{diasDeLaSemana[new Date(item?.data?.fecha).getDay()]}, {item?.data?.hortur}</SText>
                     <SText fontSize={13} font='LondonTwo' color={STheme.color.white}>{item?.data?.nommed}</SText>
-                    <SText fontSize={13} font='LondonMM' color={STheme.color.white}>{item?.data?.nomesp}</SText>
+                    <SView row>
+                        <SText fontSize={13} font='LondonMM' color={STheme.color.white}>{item?.data?.nomesp} | </SText>
+                        <SText font='LondonTwo'  center fontSize={10} color={STheme.color.white} style={{
+                            backgroundColor: colorTexto  ,
+                            borderRadius: 3,
+                            padding: 1.5
+                        }}>{estado}</SText>
+                    </SView>
 
 
                 </SView>
@@ -130,7 +168,7 @@ class FichasPendientes extends Component {
             // }}
             ItemSeparatorComponent={() => <SView width={8} />}
             showsHorizontalScrollIndicator={true}
-            data={data}
+            data={data.sort((a, b) => a.fecha_on > b.fecha_on ? 1 : -1)}
             keyExtractor={item => item.key}
             renderItem={this.renderItem.bind(this)}
         />

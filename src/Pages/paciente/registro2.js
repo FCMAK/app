@@ -5,6 +5,7 @@ import Container from '../../Components/Container';
 import Header2 from '../../Services/Kolping/Components/ficha/Components/Header2';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
+import { Parent } from '.';
 
 class PacienteRegistro2 extends Component {
     constructor(props) {
@@ -128,6 +129,10 @@ class PacienteRegistro2 extends Component {
                     key_usuario: Model.usuario.Action.getKey()
                 }).then(e => {
                     console.log(e);
+                    Parent.notifyChange(e.data)
+                    SNavigation.goBack()
+                    SNavigation.goBack()
+                    SNavigation.goBack()
                     // const CodCli = e.data.CodCli;
                     // const dta = {
                     //     CodPer: e.data.CodCli,
@@ -143,7 +148,7 @@ class PacienteRegistro2 extends Component {
                     //     }
 
                     // })
-                    SNavigation.reset("/")
+                    // SNavigation.reset("/")
                 }).catch(e => {
                     console.error(e);
                 })

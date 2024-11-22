@@ -65,7 +65,11 @@ export default class add extends Component {
             }}
             inputs={{
                 // nombre: { label: "Nombre Completo", defaultValue: usuario.Nombres + " " + usuario.Apellidos, isRequired: true, icon: <SIcon name={"InputUser"} width={40} height={30} /> },
-                ci: { placeholder: "Número de documento", isRequired: true, icon: <SIcon name={"carnet"} width={40} height={30} /> },
+                ci: {
+                    placeholder: "Número de documento", isRequired: true,
+                    // defaultValue: "8669568",
+                    icon: <SIcon name={"carnet"} width={40} height={30} />
+                },
             }}
             onSubmit={(t) => {
                 SNotification.send({
@@ -84,12 +88,13 @@ export default class add extends Component {
 
                     if (e.data && e.data.length > 0) {
                         console.log("EXITO", e.data)
-                         if (e.data.length > 1) {
-                            SNotification.send({
-                                title: "Paciente",
-                                body: "HAY MAS DE 1, pendiente de implementar",
-                                color: STheme.color.warning
-                            })
+                        if (e.data.length > 1) {
+                            SNavigation.navigate("/paciente/encontrado_multiples", { ci: t.ci, arr: JSON.stringify(e.data), nav: 2 })
+                            // SNotification.send({
+                            //     title: "Paciente",
+                            //     body: "HAY MAS DE 1, pendiente de implementar",
+                            //     color: STheme.color.warning
+                            // })
                             // Cuando es mas de 1
                         } else {
                             SNavigation.navigate("/paciente/encontrado", { ...e.data[0], nav: 2 })

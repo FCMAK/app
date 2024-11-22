@@ -39,8 +39,8 @@ export default {
         //el component cuando paso un dato
         // [component]: Lista,
         // [component]: Centros,
-        [component + "/opciones"]: Inicio,
-        [component + "/listaEspecialidad"]: ListaEspecialidad,
+        // [component + "/opciones"]: Inicio,
+        // [component + "/listaEspecialidad"]: ListaEspecialidad,
         [component + "/listaDoctores"]: ListaDoctores,
         // [component + "/horarios"]: HorarioDoctor,
         [component + "/confirmacion"]: Confirmacion,

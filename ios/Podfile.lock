@@ -450,6 +450,9 @@ PODS:
     - glog
   - react-native-blob-util (0.19.9):
     - React-Core
+  - react-native-cameraroll (7.8.3):
+    - RCT-Folly (= 2021.07.22.00)
+    - React-Core
   - react-native-compressor (1.6.1):
     - NextLevelSessionExporter
     - React-Core
@@ -624,9 +627,9 @@ PODS:
     - React-Core
   - RNSVG (15.2.0):
     - React-Core
-  - servisofts-component (3.0.50-beta):
+  - servisofts-component (3.0.51-beta):
     - React-Core
-  - servisofts-socket (4.0.4):
+  - servisofts-socket (4.0.5):
     - CocoaAsyncSocket
     - React-Core
   - SocketRocket (0.6.1)
@@ -685,6 +688,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-blob-util (from `../node_modules/react-native-blob-util`)
+  - "react-native-cameraroll (from `../node_modules/@react-native-camera-roll/camera-roll`)"
   - react-native-compressor (from `../node_modules/react-native-compressor`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
@@ -814,6 +818,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-blob-util:
     :path: "../node_modules/react-native-blob-util"
+  react-native-cameraroll:
+    :path: "../node_modules/@react-native-camera-roll/camera-roll"
   react-native-compressor:
     :path: "../node_modules/react-native-compressor"
   react-native-document-picker:
@@ -961,6 +967,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 1f51e775819199d3fe9410e69ee8d4c4161c7b06
   React-logger: 0d58569ec51d30d1792c5e86a8e3b78d24b582c6
   react-native-blob-util: 18b510205c080a453574a7d2344d64673d0ad9af
+  react-native-cameraroll: 6d252600d122f6bc10d99d6ab82cdfd2c8bef70a
   react-native-compressor: ebcf8bc36f8e44581a8f831583caee8a27e55a01
   react-native-document-picker: ec07866a30707f23660c0f3ae591d669d3e89096
   react-native-fbsdk: 8e92c7a334fd8d9c2b5d8b8fcd7ae2c314161099
@@ -1003,12 +1010,12 @@ SPEC CHECKSUMS:
   RNShare: a5dc3b9c53ddc73e155b8cd9a94c70c91913c43c
   RNSound: 6c156f925295bdc83e8e422e7d8b38d33bc71852
   RNSVG: 43b64ed39c14ce830d840903774154ca0c1f27ec
-  servisofts-component: b778c4e078ac1dc66d070f6eaf56894c15fbfe1e
-  servisofts-socket: 78f4e16a21755981804751f11fd771ed59d5fb29
+  servisofts-component: ac3224fb1836fae718368bd3e26ed315d1b95cd8
+  servisofts-socket: d45daa88e5d48041d07c2d75eaba3b5c1cc65640
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 79dd7410de6f8ad73a77c868d3d368843f0c93e0
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
 PODFILE CHECKSUM: ac9acb5b79d6a3e97ff6919a0429dc697e728438
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

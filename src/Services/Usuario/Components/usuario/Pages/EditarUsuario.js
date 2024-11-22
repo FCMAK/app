@@ -40,7 +40,20 @@ class EditarUsuario extends Component {
                 //     Password: { label: "Contraseña", type: "password", isRequired: true, defaultValue: this.usr.Password, icon: <SIcon name={"InputPassword"} width={40} height={30} /> },
                 //     RepPassword: { label: "Repetir contraseña", type: "password", isRequired: true, defaultValue: this.usr.Password, icon: <SIcon name={"InputRePassword"} width={40} height={30} /> }
                 // }),
-                "Direccion": { label: "Dirección", defaultValue: this.usr["Direccion"], type: "direccion", icon: <SIcon name={"map"} width={40} height={30} /> },
+                "Direccion": {
+                    label: "Dirección",
+                    defaultValue: this.usr["Direccion"],
+                    icon: <SIcon name={"map"} width={40} height={30} />,
+                    onPress: () => {
+                        SNavigation.navigate("/direccion/mapa", {
+                            callback: (dir) => {
+                                console.log(dir);
+                                this.form.setValues({ "Direccion": dir.direccion })
+                                SNavigation.goBack();
+                            }
+                        })
+                    }
+                },
 
             }}
             onSubmit={(values) => {
@@ -52,6 +65,7 @@ class EditarUsuario extends Component {
                 }
                 this.form.uploadFiles(Model.usuario._get_image_upload_path(SSocket.api, Model.usuario.Action.getKey()), "foto_p");
                 // Usuario.Actions.editar(finalObj, this.props);
+                
                 Model.usuario.Action.editar({
                     data: finalObj,
                     key_usuario: Model.usuario.Action.getKey()
@@ -82,9 +96,9 @@ class EditarUsuario extends Component {
             reducer.estado = "";
             reducer.type = "";
             var txtError = reducer.error.find(d => d.error != "")
-            if (reducer.error.length > 0) {
-                SPopup.alert(txtError.error.toUpperCase() + ", Dato: " + txtError.nombre);
-            }
+            // if (reducer.error.length > 0) {
+                // SPopup.alert(txtError.error.toUpperCase() + ", Dato: " + txtError.nombre);
+            // }
 
             if (this.form) {
                 this.form.uploadFiles(SSocket.api.root + "upload/usuario/" + this.key);

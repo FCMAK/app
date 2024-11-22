@@ -2,7 +2,7 @@ import { SPage } from 'servisofts-component';
 
 import root from './root';
 // import editar from './editar';
-// import changepass from './changepass';
+import changepass from './changepass';
 // import eliminar from './eliminar';
 
 export const Parent = {
@@ -10,9 +10,9 @@ export const Parent = {
     path: "/perfil"
 }
 export default SPage.combinePages(Parent.name, {
-    "": root,
+    // "": root,
     // "editar":editar,
-    // changepass,
+    changepass,
     // eliminar
 
 });

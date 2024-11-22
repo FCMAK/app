@@ -9,9 +9,16 @@ import registro from './registro';
 import registro2 from './registro2';
 import genero from './genero';
 import direccion from './direccion';
+import encontrado_multiples from "./encontrado_multiples"
+import Inicio, { PacientesInicio } from '../Inicio';
 export const Parent = {
     name: "paciente",
     path: "/paciente",
+    notifyChange: (change) => {
+        console.log("Notificando el cambioo")
+        if (root.INSTANCE) root.INSTANCE.componentDidMount()
+        if (PacientesInicio.INSTANCE) PacientesInicio.INSTANCE.componentDidMount()
+    }
 }
 export default SPage.combinePages(Parent.name, {
     // "": root,
@@ -22,5 +29,7 @@ export default SPage.combinePages(Parent.name, {
     registro,
     registro2,
     genero,
-    direccion
+    direccion,
+    encontrado_multiples
 });
+

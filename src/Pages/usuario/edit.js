@@ -3,7 +3,6 @@ import DPA, { connect } from 'servisofts-page';
 import { Parent } from '.';
 import { SHr, SNavigation, SPopup, SView } from 'servisofts-component';
 import Model from '../../Model';
-import CryptoJS from 'crypto-js';
 import { PButtom } from '../../Components';
 
 class index extends DPA.edit {
@@ -47,7 +46,7 @@ class index extends DPA.edit {
         return <>
             <SView col={"xs-12"} center>
                 <PButtom fontSize={20} onPress={() => {
-                    SNavigation.navigate("/perfil/changepass" , { pk: this.pk })
+                    SNavigation.navigate("/usuario/changepass" , { pk: this.pk })
                 }}>CAMBIAR CONTRASEÑA</PButtom>
             </SView>
         </>

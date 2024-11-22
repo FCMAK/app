@@ -45,6 +45,7 @@ const App = (props) => {
           // debug
           socket={SSocket}
           assets={Assets}
+          inputs={Config.inputs}
           background={<BackgroundImage />}
           theme={{ initialTheme: "default", themes: Config.theme }}>
           <SNavigation props={{

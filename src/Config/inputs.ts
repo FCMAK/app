@@ -21,24 +21,24 @@ const inputs = (): SInputsCofig => {
                 borderRadius: 4,
                 marginTop: 30,
                 paddingStart: 4,
-                backgroundColor: STheme.color.card,
-                // backgroundColor: '#E0E0E0' + '35'
-                borderWidth: 1,
-                borderColor: STheme.color.gray,
+                // backgroundColor: STheme.color.white,
+                backgroundColor: '#E0E0E0' + '35'
+                // borderWidth: 1,
+                // borderColor: STheme.color.gray,
             },
             InputText: {
                 // fontSize: 16,
 
                 paddingStart: 8,
                 color: "#000000",
-                backgroundColor: STheme.color.white,
+                // backgroundColor: STheme.color.white,
                 // backgroundColor: "#E0E0E0" + "55",
                 // height: 55,
                 // borderRadius: 16,
                 // backgroundColor: STheme.color.card,
-                borderRadius: 16,
-                borderWidth: 1,
-                borderColor: STheme.color.gray,
+                // borderRadius: 16,
+                // borderWidth: 1,
+                // borderColor: STheme.color.gray,
             },
             error: {
                 // borderRadius: 16,

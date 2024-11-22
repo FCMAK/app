@@ -6,6 +6,7 @@ import SSocket from 'servisofts-socket'
 import Container from '../../Components/Container';
 import Header from '../../Services/Kolping/Components/ficha/Components/Header';
 import Model from '../../Model';
+import { Parent } from '.';
 
 
 export default class encontrado extends Component {
@@ -83,7 +84,10 @@ export default class encontrado extends Component {
                                 data: this.params,
                                 key_usuario: Model.usuario.Action.getKey()
                             }).then(e => {
+                                Parent.notifyChange(e.data);
                                 SNavigation.goBack()
+                                SNavigation.goBack()
+
                                 SNotification.remove("add_paciente")
                             }).catch(e => {
                                 SNotification.send({
@@ -95,12 +99,12 @@ export default class encontrado extends Component {
                                 SNotification.remove("add_paciente")
                             })
                             // SNavigation.navigate("/paciente/registro2", { ...this.datosNav })
-                        }}  >SÍ, ES MI CUENTA</Kolping.KButtom>
+                        }}  >SÍ, LOS DATOS SON CORRECTOS</Kolping.KButtom>
                         <SHr height={15} />
                         <Kolping.KButtom secondary onPress={() => {
                             // SNavigation.navigate("ficha/paciente/buscar")
                             SNavigation.goBack();
-                        }}  >NO, NO ES MI CUENTA</Kolping.KButtom>
+                        }}  >NO, NO SON LOS DATOS CORRECTOS</Kolping.KButtom>
 
                         <SHr height={30} />
                     </SView>

@@ -15,6 +15,7 @@ export default class medicos extends Component {
         super(props);
 
         this.nrosuc = SNavigation.getParam("nrosuc")
+        this.codesp = SNavigation.getParam("codesp", "999");
         this.state = {
             loading: false,
             fecha: SNavigation.getParam("fecha", new SDate().toString("yyyy-MM-dd"))
@@ -22,7 +23,7 @@ export default class medicos extends Component {
     }
 
     componentDidMount() {
-        getAllMedicos({ fecha: this.state.fecha, nrosuc: this.nrosuc }).then(medicos => {
+        getAllMedicos({ fecha: this.state.fecha, nrosuc: this.nrosuc, codesp: this.codesp }).then(medicos => {
             let filteredMedicos = medicos.filter(item => item.TurMed.length > 0 && item.turnos.length > 0);
             this.setState({ medicos: filteredMedicos })
         })
@@ -42,8 +43,8 @@ export default class medicos extends Component {
         return arr;
     }
 
-    medicosList(){
-        if(this.state.medicos){
+    medicosList() {
+        if (this.state.medicos) {
             return <SText>Tambien belezzsa</SText>
         }
         return <SText>Tambien belezzsa</SText>
@@ -60,7 +61,7 @@ export default class medicos extends Component {
                 this.setState({ medicos: null })
                 this.componentDidMount();
             }} />
-            <SHr height={10} /> 
+            <SHr height={10} />
             <Container loading={!this.state.medicos}>
                 <Kolping.KBuscador onChangeText={(text) => {
                     this.setState({

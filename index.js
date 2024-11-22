@@ -83,4 +83,4 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
 LogBox.ignoreAllLogs(true);
 LogBox.ignoreLogs(['AsyncStorage', 'Animated:', 'VirtualizedList:', 'VirtualizedLists', "Animated.event", "Warning: Each child in a list ", "Invalid", "Require cycle"])
 console.disableYellowBox = true;
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent(Platform.select({ android: appName, ios: "kolping_app" }), () => App);

@@ -18,7 +18,7 @@ import Enfermera7, { ReactComponent as Enfermera7W } from './svg/enfermera/7.svg
 import Enfermera14, { ReactComponent as Enfermera14W } from './svg/enfermera/14.svg';
 // import Enfermera15, { ReactComponent as Enfermera15W } from './svg/enfermera/15.svg';
 // import Enfermera16, { ReactComponent as Enfermera16W } from './svg/enfermera/16.svg';
-// import Enfermera17, { ReactComponent as Enfermera17W } from './svg/enfermera/17.svg';
+import Enfermera17, { ReactComponent as Enfermera17W } from './svg/enfermera/17.svg';
 // import Enfermera18, { ReactComponent as Enfermera18W } from './svg/enfermera/18.svg';
 // import Enfermera19, { ReactComponent as Enfermera19W } from './svg/enfermera/19.svg';
 // import Enfermera20, { ReactComponent as Enfermera20W } from './svg/enfermera/20.svg';
@@ -173,6 +173,7 @@ import ficha, { ReactComponent as fichaW } from './svg/ficha.svg';
 import descargar, { ReactComponent as descargarW } from './svg/descargar.svg';
 import compartir, { ReactComponent as compartirW } from './svg/compartir.svg';
 import eliminarCuenta, { ReactComponent as eliminarCuentaW } from './svg/eliminarCuenta.svg';
+import factura, { ReactComponent as facturaW } from './svg/factura.svg';
 
 const Assets: SAssets = {
     svg: {
@@ -192,7 +193,7 @@ const Assets: SAssets = {
         "Enfermera14": { Native: Enfermera14, Web: Enfermera14W },
         // "Enfermera15": { Native: Enfermera15, Web: Enfermera15W },
         // "Enfermera16": { Native: Enfermera16, Web: Enfermera16W },
-        // "Enfermera17": { Native: Enfermera17, Web: Enfermera17W },
+        "Enfermera17": { Native: Enfermera17, Web: Enfermera17W },
         // "Enfermera18": { Native: Enfermera18, Web: Enfermera18W },
         // "Enfermera19": { Native: Enfermera19, Web: Enfermera19W },
         // "Enfermera20": { Native: Enfermera20, Web: Enfermera20W },
@@ -346,6 +347,7 @@ const Assets: SAssets = {
         "compartir": { Native: compartir, Web: compartirW },
         
         "eliminarCuenta": { Native: eliminarCuenta, Web: eliminarCuentaW },
+        "factura": { Native: factura, Web: facturaW },
     }
 }
 
