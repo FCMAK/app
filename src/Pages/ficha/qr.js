@@ -11,6 +11,8 @@ class qr extends Component {
     constructor(props) {
         super(props)
         this.pk = SNavigation.getParam("key")
+
+        this.state = {}
     }
     componentDidMount() {
         SSocket.sendPromise({
@@ -107,12 +109,19 @@ class qr extends Component {
                             <SView width={25} />
                             <SView width={85} height={75} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.white }}
                                 onPress={this.handleShare.bind(this)}>
-                                    <SText color={STheme.color.white} font='LondonBetween' fontSize={11}>COMPARTIR</SText>
-                                    <SHr height={6} />
+                                <SText color={STheme.color.white} font='LondonBetween' fontSize={11}>COMPARTIR</SText>
+                                <SHr height={6} />
                                 <SIcon name={"compartir"} width={40} height={30} fill={STheme.color.white} />
                             </SView>
                             <SHr height={30} />
                             <Kolping.KButtom secondary width={300} onPress={(ins) => {
+                                if (!this.state.qr) {
+                                    SNotification.send({
+                                        title: "Esperando el QR",
+                                        time: 5000
+                                    })
+                                    return;
+                                }
                                 ins.setLoading(true)
                                 SSocket.sendPromise({
                                     component: "orden_compra",
@@ -124,8 +133,9 @@ class qr extends Component {
                                     ins.setLoading(false)
                                     if (e.data.estado_pago == "pagado") {
                                         SNavigation.navigate("/ficha/pago", { key: this.pk })
+                                        return;
                                     }
-
+                                    throw { error: "Pendiente de pago" }
                                     // let lbl = "";
                                     // switch (e.data.statusId) {
                                     //     case 1: lbl = "Pendiente"; break;
@@ -164,6 +174,12 @@ class qr extends Component {
                                     // ins.setLoading(false)
                                     // SNavigation.navigate("/ficha/pago", { data: e.data })
                                 }).catch(e => {
+                                    console.log(e);
+                                    SNotification.send({
+                                        title: "Verificar",
+                                        body: e?.error?.Message ?? (e?.error ?? "Error desconocido"),
+                                        time: 5000,
+                                    })
                                     ins.setLoading(false)
                                     // console.error(e);
                                 })

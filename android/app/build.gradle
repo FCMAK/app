@@ -68,11 +68,11 @@ android {
     // }
 
     defaultConfig {
-        applicationId "com.kolping_app2"
+        applicationId "com.kolping_app3"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10017
-        versionName "1.0.17"
+        versionCode 10029
+        versionName "1.0.29"
     }
     splits {
         abi {

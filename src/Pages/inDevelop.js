@@ -14,16 +14,13 @@ class inDevelop extends Component {
         return (
             <SPage title={'En construcción'}  center>
                 <Container >
-
-                 
-
-                        <SView col={"xs-12 sm-12 md-12 lg-12 xl-12"} row>
+                        <SView col={"xs-12 sm-12 md-12 lg-12 xl-12"} row flex>
                             {/* <SHr height={20} /> */}
                             <SView col={"xs-4"}></SView>
                             <SText col={"xs-8"} center fontSize={25} bold color={STheme.color.info} font={"LondonBetween"}>{'¡PRÓXIMAMENTE!'}</SText>
                             <SHr height={15} />
                             <SView col={"xs-4"}></SView>
-                            <SText col={"xs-8"} fontSize={20} bold color={STheme.color.text} font={"LondonMM"}>{'Estamos trabajando en la construcción de ésta sección'}</SText>
+                            <SText col={"xs-8"} fontSize={20} bold color={STheme.color.text} font={"LondonBetween"}>{'Estamos trabajando en la construcción de ésta sección'}</SText>
                             <SHr height={15} />
                             <SView col={"xs-4"}></SView>
                             <SView col={"xs-8"} center>

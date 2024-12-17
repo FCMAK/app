@@ -22,7 +22,7 @@ export const getMedico = ({ nrosuc, codesp = "999", codmed, fecha = new SDate().
             }).then((resp: any) => {
                 const turnos = resp.data ?? [];
                 medicos.map(med => {
-                    med.turnos = turnos.filter(tur => tur.CodMed == med.CodMed);
+                    med.turnos = turnos.filter(t => !!t).filter(tur => tur.CodMed == med.CodMed);
                 })
                 medicos.sort((a, b) => a.turnos.length < b.turnos.length ? 1 : -1)
                 // this.setState({ medicos: medicos })
@@ -37,7 +37,7 @@ export const getMedico = ({ nrosuc, codesp = "999", codmed, fecha = new SDate().
     })
 }
 
-export const getAllMedicos = ({ nrosuc, fecha, codesp="999" }) => {
+export const getAllMedicos = ({ nrosuc, fecha, codesp = "999" }) => {
     return new Promise((resolve, reject) => {
         SSocket.sendPromise({
             component: "medico",
@@ -56,7 +56,7 @@ export const getAllMedicos = ({ nrosuc, fecha, codesp="999" }) => {
             }).then((resp: any) => {
                 const turnos = resp.data ?? [];
                 medicos.map(med => {
-                    med.turnos = turnos.filter(tur => tur.CodMed == med.CodMed);
+                    med.turnos = turnos.filter(tur => tur?.CodMed == med?.CodMed);
                 })
                 medicos.sort((a, b) => a.turnos.length < b.turnos.length ? 1 : -1)
                 // this.setState({ medicos: medicos })

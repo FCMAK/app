@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SPage, SText, STheme, SView, SNavigation, SImage, SLoad, SDate, SMath } from 'servisofts-component';
+import { SHr, SIcon, SPage, SText, STheme, SView, SNavigation, SImage, SLoad, SDate, SMath, SNotification } from 'servisofts-component';
 import Kolping from '../../Components/Kolping';
 import SSocket from 'servisofts-socket'
 import Container from '../../Components/Container';
@@ -51,16 +51,21 @@ class Confirmacion extends Component {
             TitMed: "Dr.",
             NomMed: this.state?.data?.data?.nommed,
             NomEsp: this.state?.data?.data?.nomesp,
+            CodMed: this.state?.data?.data?.codmed,
         }
         let suc = {
             NomSuc: this.state?.sucursal?.NomSuc,
             DirSuc: this.state?.sucursal?.DirSuc,
-            TelSuc: this.state?.sucursal?.TelSuc
+            TelSuc: this.state?.sucursal?.TelSuc,
+            NroSuc: this.state?.sucursal?.NroSuc,
         }
         // let fecha_final = this.fecha_final.toString("MONTH dd");
         // let fecha_final = "yyy-Mm-DD"
         const fecha = this.state?.data?.data?.fecha;
+        console.log("this.state.sucursal")
+        console.log(this.state?.sucursal)
         return (
+        
             <SPage title={'Confirmar'} >
                 <SHr height={20} />
                 <Container >
@@ -139,20 +144,49 @@ class Confirmacion extends Component {
                         <SView col={"xs-12"} center>
                             <SHr height={30} />
                             <Kolping.KButtom secondary width={300} onPress={(ins) => {
-                                // ins.setLoading(true)
-                                // SSocket.sendPromise({
-                                //     component: "orden_compra",
-                                //     type: "confirmar",
-                                //     key: this.pk,
-                                //     key_usuario: Model.usuario.Action.getKey()
-                                // }).then(e => {
-                                //     ins.setLoading(false)
-                                //     SNavigation.navigate("/ficha/pago", {data:e.data})
-                                // }).catch(e => {
-                                //     ins.setLoading(false)
-                                //     console.error(e);
-                                // })
-                                SNavigation.navigate("/ficha/qr", { key: this.pk })
+                                ins.setLoading(true)
+                                SSocket.sendPromise({
+                                    component: "orden_compra",
+                                    type: "dispensar",
+                                    key: this.pk,
+                                    key_usuario: Model.usuario.Action.getKey()
+                                }).then(e => {
+                                    if (e.estado != "exito") throw { error: "El servidor no respondio con exito." }
+                                    if (!e?.data?.status) {
+                                        throw { error: e?.data?.message ?? "Error desconocido." }
+                                    }
+                                    ins.setLoading(false)
+                                    SNavigation.navigate("/ficha/qr", { key: this.pk })
+                                    // SNavigation.navigate("/ficha/pago", {data:e.data})
+                                }).catch(e => {
+                                    ins.setLoading(false)
+                                    switch (e?.error) {
+                                        case "Existen turnos no disponibles para la venta":
+                                            SNotification.send({
+                                                title: "Error",
+                                                body: e?.error ?? "Error desconocido.",
+                                                color: STheme.color.danger,
+                                                time: 5000,
+                                            })
+                                            SNavigation.navigate("/ficha/horarios", { codmed: dataDoctor.CodMed, fecha: fecha , nrosuc: suc.NroSuc})
+                                          break;
+                                      
+                                        default:
+                                            SNotification.send({
+                                                title: "Error",
+                                                body: e?.error ?? "Error desconocido.",
+                                                color: STheme.color.danger,
+                                                time: 5000,
+                                            })
+                                      }
+                                    // SNotification.send({
+                                    //     title: "Error",
+                                    //     body: e?.error ?? "Error desconocido.",
+                                    //     color: STheme.color.danger,
+                                    //     time: 5000,
+                                    // })
+                                    console.error(e);
+                                })
                             }} >PAGAR </Kolping.KButtom>
                         </SView>
                         <SView col={"xs-10 sm-8 md-8 lg-10 xl-10"} center>

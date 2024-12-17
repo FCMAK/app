@@ -4,6 +4,7 @@ import { SButtom, SView, SImage, SDate, SNavigation, STheme, SIcon, SText, SScro
 import { connect } from 'react-redux';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
+import PackageJson from "../../../package.json"
 // import CerrarSession from '../../Pages/Usuario/Page/Perfil/CerrarSession';
 
 
@@ -94,47 +95,6 @@ const ListaBotones = ({ fadeOut }) => {
                 </SView>
                 <SView col={"xs-12"} height={30}></SView>
             </SView> : null}
-
-            {(usuario) ? <SView col={"xs-11"} row onPress={() => {
-                SNavigation.navigate("notification")
-                fadeOut()
-            }}  >
-                <SView row col={"xs-10"}>
-                    <SIcon fill="#666666" name={"KNotify"} height={20} width={20} style={{ paddingTop: 3 }} />
-                    <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Mis Notificaciones</SText>
-                </SView>
-                <SView style={{ right: 0, position: "absolute", top: 2 }} row >
-                    <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
-                </SView>
-                <SView col={"xs-12"} height={30}></SView>
-            </SView> : null}
-
-            {(usuario) ? <SView col={"xs-11"} row onPress={() => {
-                SNavigation.navigate("admin")
-                fadeOut()
-            }}>
-                <SView row col={"xs-10"}>
-                    <SIcon fill="#666666" name={"Configuracion"} height={20} width={20} style={{ paddingTop: 3 }} />
-                    <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Configuración</SText>
-                </SView>
-                <SView style={{ right: 0, position: "absolute", top: 2 }} row >
-                    <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
-                </SView>
-                <SView col={"xs-12"} height={30}></SView>
-            </SView> : null}
-
-
-            {/* <SView col={"xs-11"} row onPress={() => { }}  >
-                <SView row col={"xs-10"}>
-                    <SIcon fill="#666666" name={"Ayuda"} height={20} width={20} style={{ paddingTop: 3 }} />
-                    <SText center style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonBetween"}>Ayuda</SText>
-                </SView>
-                <SView style={{ right: 0, position: "absolute", top: 2 }} row >
-                    <SIcon style={{ textAlign: "right" }} fill={STheme.color.secondary} name={"Icon1"} width={20} height={20} />
-                </SView>
-                <SView col={"xs-12"} height={30}></SView>
-            </SView> */}
-
             <SView col={"xs-11"} row onPress={() => {
                 SNavigation.navigate("terminos")
                 fadeOut()
@@ -148,7 +108,6 @@ const ListaBotones = ({ fadeOut }) => {
                 </SView>
                 <SView col={"xs-12"} height={30}></SView>
             </SView>
-
             {(usuario) ? <SView col={"xs-11"} row onPress={() => {
                 Model.usuario.Action.unlogin();
                 SNavigation.reset("login");
@@ -163,7 +122,6 @@ const ListaBotones = ({ fadeOut }) => {
                 </SView>
                 <SView col={"xs-12"} height={30}></SView>
             </SView> : null}
-
             {(!usuario) ? <SView col={"xs-11"} row onPress={() => {
                 // Model.usuario.Action.unlogin();
                 SNavigation.navigate("login");
@@ -178,12 +136,11 @@ const ListaBotones = ({ fadeOut }) => {
                 </SView>
                 <SView col={"xs-12"} height={30}></SView>
             </SView> : null}
-
             <SView col={"xs-9.5 md-5.8 xl-3.8"} center style={{ bottom: 0, }}>
                 <SIcon name={"Logo"} height={70} />
             </SView>
             <SView row center>
-                <SText style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonMM"}>Version 1.0.6</SText>
+                <SText style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonMM"}>Version {PackageJson.version}</SText>
                 <SHr height={15} />
             </SView>
         </SView>

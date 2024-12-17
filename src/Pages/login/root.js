@@ -4,10 +4,10 @@ import { SButtom, SForm, SHr, SIcon, SInput, SNavigation, SPage, SPopup, SText, 
 import Model from '../../Model';
 import CryptoJS from 'crypto-js';
 import PButtom from '../../Components/PButtom';
-import LoginFacebook from '../../LoginApis/LoginFacebook';
 import LoginGoogle from '../../LoginApis/LoginGoogle';
 import LoginApple from '../../LoginApis/LoginApple';
 import Container from '../../Components/Container';
+import { Platform } from 'react-native';
 
 class Login extends Component {
     constructor(props) {
@@ -57,6 +57,7 @@ class Login extends Component {
     }
 
     loginRedSocial(key_red_social: "gmail_key" | "apple_key" | "facebook_key", usuario) {
+        console.log("ENtrando al login con exito", key_red_social, usuario)
         Model.usuario.Action.loginByKey({
             usuario: usuario.id,
         }).then(e => {
@@ -123,19 +124,23 @@ class Login extends Component {
         })
     }
     getSocial() {
+        var isApple = Platform.select({ android: false, web: false, ios: true })
+        var isGoogle = Platform.select({ android: true, web: true, ios: true })
         return (
             <SView col={'xs-11'} height={60} row center>
-                <SView center >
-                    <LoginApple onLogin={(usuario) => {
-                        this.loginRedSocial("apple_key", usuario)
-                    }}>
-                        <SView height={50} colSquare center style={{ backgroundColor: 'white', borderRadius: 8, borderColor: STheme.color.lightGray, borderWidth: 2, padding: 8 }}>
-                            <SIcon name={'IconApple'} />
-                        </SView>
-                    </LoginApple>
-                </SView>
-                <SView width={50} />
-                <SView center >
+                {!isApple ? null :
+                    <SView center >
+                        <LoginApple onLogin={(usuario) => {
+                            this.loginRedSocial("apple_key", usuario)
+                        }}>
+                            <SView height={50} colSquare center style={{ backgroundColor: 'white', borderRadius: 8, borderColor: STheme.color.lightGray, borderWidth: 2, padding: 8 }}>
+                                <SIcon name={'IconApple'} />
+                            </SView>
+                        </LoginApple>
+                    </SView>
+                }
+                {!(isApple && isGoogle) ? null : <SView width={50} />}
+                {!isGoogle ? null : <SView center >
                     <LoginGoogle onLogin={(usuario) => {
                         this.loginRedSocial("gmail_key", usuario)
                     }}>
@@ -144,6 +149,7 @@ class Login extends Component {
                         </SView>
                     </LoginGoogle>
                 </SView>
+                }
             </SView>
         );
     }

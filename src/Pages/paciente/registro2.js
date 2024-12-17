@@ -63,6 +63,21 @@ class PacienteRegistro2 extends Component {
                 Fecha: { placeholder: "Fecha de Nacimiento", isRequired: true, type: "date", },
                 Telefono: { placeholder: "Celular", isRequired: false, type: "phone" },
                 Correo: { placeholder: "Correo", type: "email", isRequired: false, icon: this.icon("InputEmail") },
+                "Direccion": {
+                    placeholder: "Dirección",
+                    // defaultValue: this.usr["Direccion"],
+                    icon: <SIcon name={"map"} width={40} height={30} />,
+                    onPress: () => {
+                        SNavigation.navigate("/direccion/mapa", {
+                            callback: (dir) => {
+                                console.log(dir);
+                                this.direccionTem=dir;
+                                this.form.setValues({ "Direccion": dir.direccion })
+                                SNavigation.goBack();
+                            }
+                        })
+                    }
+                },
 
             }}
 
@@ -70,6 +85,15 @@ class PacienteRegistro2 extends Component {
                 // dataForm = { ... this.datosNav, ...values }
 
                 const extraArr = [];
+
+                // if (this.direccion) {
+                //     v.latitude = this.direccion.latitude
+                //     v.longitude = this.direccion.longitude
+                // }
+                // let latitude 
+                // let longitude
+                // console.log("Direccion");
+                // console.log(v.Direccion);
 
                 if (v.Correo) {
                     extraArr.push({
@@ -83,11 +107,12 @@ class PacienteRegistro2 extends Component {
                         "ValMed": v.Telefono
                     })
                 }
-                if (v.Direccion) {
+                if (this.direccionTem) {
                     extraArr.push({
                         "TipMed": "3",
-                        "ValMed": "av/ san roque 3312",
-                        "DatMed": ""
+                        "ValMed": this.direccionTem.direccion,
+                        "DatMed": this.direccionTem.latitude + "," + this.direccionTem.longitude
+                        
                     })
                 }
 

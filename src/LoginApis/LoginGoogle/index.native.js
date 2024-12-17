@@ -20,9 +20,9 @@ class LoginGoogle extends Component {
             this.setState({ userInfo });
             GoogleSignin.signOut();
             console.log(userInfo);
-            if (userInfo.user) {
+            if (userInfo.user || userInfo?.data?.user) {
                 if (this.props.onLogin) {
-                    this.props.onLogin(userInfo.user);
+                    this.props.onLogin(userInfo.user ?? userInfo?.data?.user);
                 }
             }
         } catch (error) {

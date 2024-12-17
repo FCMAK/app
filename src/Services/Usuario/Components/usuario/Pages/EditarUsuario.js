@@ -47,43 +47,41 @@ class EditarUsuario extends Component {
                 //     Password: { label: "Contraseña", type: "password", isRequired: true, defaultValue: this.usr.Password, icon: <SIcon name={"InputPassword"} width={40} height={30} /> },
                 //     RepPassword: { label: "Repetir contraseña", type: "password", isRequired: true, defaultValue: this.usr.Password, icon: <SIcon name={"InputRePassword"} width={40} height={30} /> }
                 // }),
-                "Direccion": {
-                    label: "Dirección",
-                    defaultValue: this.usr["Direccion"],
-                    icon: <SIcon name={"map"} width={40} height={30} />,
-                    onPress: () => {
-                        SNavigation.navigate("/direccion/mapa", {
-                            callback: (dir) => {
-                                console.log(dir);
-                                this.form.setValues({ "Direccion": dir.direccion })
-                                SNavigation.goBack();
-                            }
-                        })
-                    }
-                },
+
+                // "Direccion": {
+                //     label: "Dirección",
+                //     defaultValue: this.usr["Direccion"],
+                //     icon: <SIcon name={"map"} width={40} height={30} />,
+                //     onPress: () => {
+                //         SNavigation.navigate("/direccion/mapa", {
+                //             callback: (dir) => {
+                //                 console.log(dir);
+                //                 this.form.setValues({ "Direccion": dir.direccion })
+                //                 SNavigation.goBack();
+                //             }
+                //         })
+                //     }
+                // },
 
             }}
             onSubmit={(values) => {
-                // delete values["foto_p"];
-                // console.log("values", this.usr);
-                if (this.direccion) {
-                    values.latitude = this.direccion.latitude
-                    values.longitude = this.direccion.longitude
-                }
+               
+                // if (this.direccion) {
+                //     values.latitude = this.direccion.latitude
+                //     values.longitude = this.direccion.longitude
+                // }
 
                 var finalObj = {
                     ...this.usr,
                     ...values
                 }
                 this.form.uploadFiles(Model.usuario._get_image_upload_path(SSocket.api, Model.usuario.Action.getKey()), "foto_p");
-                // Usuario.Actions.editar(finalObj, this.props);
                 
                 Model.usuario.Action.editar({
                     data: finalObj,
                     key_usuario: Model.usuario.Action.getKey()
                 }).then((resp) => {
                     SStorage.setItem("usr_log", JSON.stringify(finalObj)) //Modificar SStorage datos session
-                    // Model.usuario.Action.CLEAR(); //Limpiar caché
                     Model.usuario.Action.syncUserLog()
                     SNavigation.goBack();
                 }).catch((e) => {

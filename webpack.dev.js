@@ -16,9 +16,9 @@ module.exports = merge(common, {
         liveReload: false,
         watchFiles: {
             paths: ['src/**/*'],  // Observa sólo archivos en `src`
-            options: {
-                ignored: /node_modules/, // Ignorar cambios en node_modules
-            },
+            // options: {
+            //     ignored: /node_modules/, // Ignorar cambios en node_modules
+            // },
         },
     },
     plugins: [
