@@ -93,7 +93,9 @@ export default class Lista extends Component {
 
         if (!this.state.data) return <SLoad />
         let data = this.state.data ?? [];
-        if (data.length === 0) return <NoData mensaje={"No hay servicios disponibles"} />
+        console.log("dataaaaa")
+        console.log(data)
+        if ((data.length === 0) || (data[0] === null) ) return <NoData mensaje={"No hay servicios disponibles"} />
         // <SView col={"xs-12"} center >
         //     <SHr height={45} />
         //     <SIcon name={"noData"} width={150} height={174} fill={STheme.color.info} />

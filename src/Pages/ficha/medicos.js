@@ -49,6 +49,17 @@ export default class medicos extends Component {
         }
         return <SText>Tambien belezzsa</SText>
     }
+    renderMedicos(data){
+        if (data.length === 0) return <NoData mensaje={"No tenemos médicos disponibles en esta fecha."} />
+        return  <FlatList
+        style={{ width: "100%" }}
+        data={this.handleFilter((data))}
+        ItemSeparatorComponent={() => <SHr />}
+        renderItem={({ item }) => <MedicoItem medico={item} onPress={() => {
+            SNavigation.navigate("/ficha/horarios", { nrosuc: this.nrosuc, codmed: item.CodMed, fecha: this.state.fecha })
+        }} />}
+    />
+    }
 
     render() {
         // if (!this.state.medicos) return <SLoad />
@@ -68,15 +79,17 @@ export default class medicos extends Component {
                         find: text
                     })
                 }} />
-                <FlatList
+                {this.renderMedicos(this.state.medicos ?? [])}
+                {/* <FlatList
                     style={{ width: "100%" }}
                     data={this.handleFilter((this.state.medicos ?? []))}
                     ItemSeparatorComponent={() => <SHr />}
                     renderItem={({ item }) => <MedicoItem medico={item} onPress={() => {
                         SNavigation.navigate("/ficha/horarios", { nrosuc: this.nrosuc, codmed: item.CodMed, fecha: this.state.fecha })
                     }} />}
-                />
+                /> */}
             </Container>
+            <SHr height={30} />
         </SPage>
     }
 }
