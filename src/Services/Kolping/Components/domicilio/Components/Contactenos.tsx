@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { SIcon, SLoad, SText, STheme, SView } from 'servisofts-component';
+import { SLoad, SText, STheme, SView } from 'servisofts-component';
 
-type KButtom_props = {
+type Contactenos_props = {
     primary?: boolean,
     secondary?: boolean,
     outline?: boolean,
-    onPress?: (instance: KButtom) => void,
+    onPress?: (instance: Contactenos) => void,
     loading?: boolean,
     small?: boolean,
     styleA?: any,
@@ -13,7 +13,7 @@ type KButtom_props = {
     children?: any
 }
 
-export default class KButtom extends Component<KButtom_props> {
+export default class Contactenos extends Component<Contactenos_props> {
     state = {
         loading: false,
     }
@@ -37,7 +37,7 @@ export default class KButtom extends Component<KButtom_props> {
             size.height = 30;
         }
         const loading = this.state.loading || this.props.loading
-        return (<SView height={size.height} style={{
+        return (<SView row height={size.height} style={{
             borderRadius: 8,
             width: "100%",
             maxWidth: size.width,
@@ -52,7 +52,7 @@ export default class KButtom extends Component<KButtom_props> {
                     this.props.onPress(this);
                 }
             }} >
-            {loading ? <SLoad /> :<SText center fontSize={16} color={this.props.outline ? bgColor : STheme.color.white} font={"LondonTwo"} >{this.props.children}</SText>}
+            {loading ? <SLoad /> : <SText center fontSize={14} color={this.props.outline ? bgColor : STheme.color.white} font={"LondonTwo"} >{this.props.children}</SText>}
         </SView>);
     }
 }

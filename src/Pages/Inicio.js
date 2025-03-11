@@ -306,8 +306,8 @@ class Inicio extends Component {
         return <SView col={"xs-12"} row center style={{
             justifyContent: "space-between"
         }}>
-            {/* {this.getButtom({ label: 'Farmacia', url: 'domicilio/farmacia', icon: 'SDfarmacia' })} */}
-            {this.getButtom({ label: 'Farmacia', url: 'inDevelop', icon: 'SDfarmacia' })}
+            {this.getButtom({ label: 'Farmacia', url: 'domicilio/farmacia', icon: 'SDfarmacia' })}
+            {/* {this.getButtom({ label: 'Farmacia', url: 'inDevelop', icon: 'SDfarmacia' })} */}
             
             {this.getButtom({ label: 'Óptica', url: 'domicilio/optica', icon: 'SDoptica' })}
             {this.getButtom({ label: 'Laboratorio', url: 'domicilio/laboratorio', icon: 'SDlaboratorio' })}

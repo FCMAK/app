@@ -8,11 +8,27 @@ import Params from "../params.json"
 import { Container } from '../../../../../Components';
 import SSocket from 'servisofts-socket';
 import Model from '../../../../../Model';
+import DomicilioTitulo from '../Components/Titulo';
+import DomicilioDescripcion from '../Components/Descripcion';
+import DomicilioHorario from '../Components/Horario';
+import DomicilioPromociones from '../Components/Promociones';
+
+import DomicilioBanner from '../Components/Banner';
+
+import DomicilioWhatsApp from '../Components/WhatsApp';
+import Contactenos from '../Components/Contactenos';
 
 class Optica extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            data: {
+                titulo: "Óptica Kolping",
+                descripcion: "Con más de 22 años al servicio de la población, brindando salud visual a todos nuestros clientes, con un servicio personalizado y con una gran variedad de productos de distintas marcas de excelente calidad para toda la familia.",
+                horarios: "Lunes a Viernes 07:00 am a 18:00 pm \nSábados 08:00 am a 12:00 pm",
+                telefono: "73138212"
+
+            }
         };
     }
 
@@ -31,110 +47,34 @@ class Optica extends Component {
         //     SNavigation.navigate("domicilio/request", { numero: obj.numero });
         // }
         return (
-            <SPage title={'Óptica a Domicilio'} >
+            <SPage title={'A domicilio'} >
                 {/* <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row> */}
                 <Container>
                     <SHr height={20} />
                     <SView col={"xs-12"} style={{ padding: 8 }} center >
                         <SView col={"xs-12"}>
-                            <SText font={"LondonTwo"} fontSize={20} color={STheme.color.info}>Óptica Kolping</SText>
+                            <DomicilioTitulo dato={this.state?.data?.titulo} />
                             <SView col={"xs-12"} height={5} style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }}></SView>
                             <SHr height={10} />
-                            <SText font={"LondonBetween"} fontSize={15}>Con más de 22 años al servicio de la población, brindando salud visual a todos nuestros clientes, con un servicio personalizado y con una gran variedad de productos de distintas marcas de excelente calidad para toda la familia.</SText>
+                            <DomicilioDescripcion dato={this.state?.data?.descripcion} />
                         </SView>
                         <SHr height={20} />
                         <SView col={"xs-12"}>
                             <SText color={STheme.color.text} font={"LondonTwo"} fontSize={16} >Horario de atención:   </SText>
                             <SHr height={8} />
-                            <SText font={"LondonBetween"} fontSize={15}>Lunes a Viernes 07:00 am a 18:00 pm</SText>
-                            <SText font={"LondonBetween"} fontSize={15}>Sábados 08:00 am a 12:00 pm</SText>
+                            <DomicilioHorario dato={this.state?.data?.horarios} />
                         </SView>
 
-                        <SHr height={30} />
-                        <SView col={"xs-12"}>
-                            <SText font={"LondonTwo"} fontSize={20} color={STheme.color.info}>Productos</SText>
-                            <SView col={"xs-12"} height={5} style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }}></SView>
+                        <SHr height={100} />
+                        <SView col={"xs-12"} center>
+                            {/* <DomicilioWhatsApp dato={this.state?.data?.telefono} /> */}
+
                             <SHr height={25} />
                         </SView>
-                        <SView col={"xs-12"}>
-                            <SView col={"xs-12"} style={{
-                                right: "-30%",
-                                top: "5%",
-                                position: "absolute",
-                            }} center>
-                                <SView style={{
-                                    width: 300,
-                                    height: 500,
-                                }}>
-                                    <SIcon name={`Enfermera14`} width={"100%"} fill={"#f0f"} />
-                                </SView>
-                            </SView>
-                            <SView col={"xs-11 sm-10 md-8 lg-8 xl-11"}  >
-                                <SHr height={80} />
-                                <SView col={"xs-8"} center style={{ borderWidth: 1, borderColor: STheme.color.card, borderRadius: 8 }}>
-                                    <SView col={"xs-12"} height={45} backgroundColor={STheme.color.card} row center>
-                                        <SView col={"xs-2"} center>
-                                            <SIcon name={"aspa"} width={20} height={15} fill={"#378D00"} />
-                                        </SView>
-                                        <SView col={"xs-10"}>
-                                            <SText font={"LondonBetween"} fontSize={17} >Anti Réflex</SText>
-                                        </SView>
-                                    </SView>
-                                    <SView col={"xs-12"} height={45} row center>
-                                        <SView col={"xs-2"} center>
-                                            <SIcon name={"aspa"} width={20} height={15} fill={"#378D00"} />
-                                        </SView>
-                                        <SView col={"xs-10"}>
-                                            <SText font={"LondonBetween"} color={STheme.color.text} fontSize={17} >Bifocales</SText>
-                                        </SView>
-                                    </SView>
-                                    <SView col={"xs-12"} height={45} backgroundColor={STheme.color.card} row center>
-                                        <SView col={"xs-2"} center>
-                                            <SIcon name={"aspa"} width={20} height={15} fill={"#378D00"} />
-                                        </SView>
-                                        <SView col={"xs-10"}>
-                                            <SText font={"LondonBetween"} fontSize={17} >Progresivos</SText>
-                                        </SView>
-                                    </SView>
-                                    <SView col={"xs-12"} height={45} row center>
-                                        <SView col={"xs-2"} center>
-                                            <SIcon name={"aspa"} width={20} height={15} fill={"#378D00"} />
-                                        </SView>
-                                        <SView col={"xs-10"}>
-                                            <SText font={"LondonBetween"} color={STheme.color.text} fontSize={17} >Gafas</SText>
-                                        </SView>
-                                    </SView>
-                                    <SView col={"xs-12"} height={45} backgroundColor={STheme.color.card} row center>
-                                        <SView col={"xs-2"} center>
-                                            <SIcon name={"aspa"} width={20} height={15} fill={"#378D00"} />
-                                        </SView>
-                                        <SView col={"xs-10"}>
-                                            <SText font={"LondonBetween"} fontSize={17} >Monturas para dama</SText>
-                                        </SView>
-                                    </SView>
-                                    <SView col={"xs-12"} height={45} row center>
-                                        <SView col={"xs-2"} center>
-                                            <SIcon name={"aspa"} width={20} height={15} fill={"#378D00"} />
-                                        </SView>
-                                        <SView col={"xs-10"}>
-                                            <SText font={"LondonBetween"} color={STheme.color.text} fontSize={17} >Monturas para niños y niñas</SText>
-                                        </SView>
-                                    </SView>
-                                    <SView col={"xs-12"} height={45} backgroundColor={STheme.color.card} row center>
-                                        <SView col={"xs-2"} center>
-                                            <SIcon name={"aspa"} width={20} height={15} fill={"#378D00"} />
-                                        </SView>
-                                        <SView col={"xs-10"}>
-                                            <SText font={"LondonBetween"} fontSize={17} >Monturas para varón</SText>
-                                        </SView>
-                                    </SView>
-                                </SView>
-                            </SView>
-                        </SView>
 
-                        <SHr height={150} />
 
-                        <Kolping.KButtom primary onPress={(btn) => {
+
+                        <Contactenos primary onPress={(btn) => {
                             // servicio_domicilio.Actions.registro({
                             //     tipo: "optica"
                             // }, this.props)
@@ -167,8 +107,11 @@ class Optica extends Component {
                                 })
                             }
 
-                        }} >SOLICITAR SERVICIO</Kolping.KButtom>
+                        }} ><SView col={"xs-12"} row center> <SIcon name='iWhatsApp' height={35} width={35} /> <SView width={10} />CONTÁCTENOS POR WHATSAPP</SView></Contactenos>
                         <SHr height={30} />
+                        <DomicilioPromociones />
+                        <SHr height={20} />
+                        <DomicilioBanner />
                     </SView>
                     {/* </SView> */}
                 </Container>

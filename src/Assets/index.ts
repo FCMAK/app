@@ -47,6 +47,7 @@ import SDoptica, { ReactComponent as SDopticaW } from './svg/servicios/Doptica.s
 import SDlaboratorio, { ReactComponent as SDlaboratorioW } from './svg/servicios/Dlaboratorio.svg';
 import Dpendiente, { ReactComponent as DpendienteW } from './svg/servicios/Dpendiente.svg';
 import Drechazado, { ReactComponent as DrechazadoW } from './svg/servicios/Drechazado.svg';
+import iWhatsApp, { ReactComponent as iWhatsAppW } from './svg/servicios/iWhatsApp.svg';
 
 // import Diciembre, { ReactComponent as DiciembreW } from './svg/sucursales/diciembre.svg';
 import ArrowRight, { ReactComponent as ArrowRightW } from './svg/sucursales/arrowRight.svg';
@@ -264,6 +265,8 @@ const Assets: SAssets = {
         "SDoptica": { Native: SDoptica, Web: SDopticaW },
         "Dpendiente": { Native: Dpendiente, Web: DpendienteW },
         "Drechazado": { Native: Drechazado, Web: DrechazadoW },
+        "iWhatsApp": { Native: iWhatsApp, Web: iWhatsAppW },
+
 
         // "diciembre": { Native: Diciembre, Web: DiciembreW },
         // "chacos": { Native: Chacos, Web: ChacosW },
