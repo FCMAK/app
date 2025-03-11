@@ -88,16 +88,16 @@ class Farmacia extends Component {
                                     estado: "cargando",
                                     key_usuario: Model.usuario.Action.getKey(),
                                     data: {
-                                        tipo: "laboratorio"
+                                        tipo: "farmacia"
                                     }
                                 }).then(e => {
                                     // console.log(e);
                                     const obj = e.data;
                                     var usuario = Model.usuario.Action.getUsuarioLog();
-                                    var mensaje = `Hola, Mi nombre es ${usuario.Nombres} ${usuario.Apellidos} estoy interesado(a) en el servicio de Laboratorio a domicilio. 
+                                    var mensaje = `Hola, Mi nombre es ${usuario.Nombres} ${usuario.Apellidos} estoy interesado(a) en el servicio de Farmacia a domicilio. 
                                                     Solicitud #${obj.numero}
                                                     ${Params.url}${obj.numero}/`;
-                                    WhatsApp.send({ phone: Params["laboratorio"]?.phone, menssage: mensaje })
+                                    WhatsApp.send({ phone: Params["farmacia"]?.phone, menssage: mensaje })
                                     SNavigation.navigate("domicilio/request", { numero: obj.numero });
                                     btn.setLoading(false)
                                 }).catch(e => {
