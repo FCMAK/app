@@ -12,9 +12,7 @@ import DomicilioTitulo from '../Components/Titulo';
 import DomicilioDescripcion from '../Components/Descripcion';
 import DomicilioHorario from '../Components/Horario';
 import DomicilioPromociones from '../Components/Promociones';
-
 import DomicilioBanner from '../Components/Banner';
-
 import DomicilioWhatsApp from '../Components/WhatsApp';
 import Contactenos from '../Components/Contactenos';
 
