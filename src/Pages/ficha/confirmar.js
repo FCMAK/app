@@ -5,6 +5,7 @@ import Kolping from '../../Components/Kolping';
 import SSocket from 'servisofts-socket'
 import Container from '../../Components/Container';
 import Model from '../../Model';
+import horarios from './horarios';
 
 class Confirmacion extends Component {
     constructor(props) {
@@ -168,6 +169,7 @@ class Confirmacion extends Component {
                                                 color: STheme.color.danger,
                                                 time: 5000,
                                             })
+                                            if(horarios.INSTANCE) horarios.INSTANCE.componentDidMount()
                                             SNavigation.navigate("/ficha/horarios", { codmed: dataDoctor.CodMed, fecha: fecha , nrosuc: suc.NroSuc})
                                           break;
                                       

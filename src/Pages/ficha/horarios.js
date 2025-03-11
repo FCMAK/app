@@ -84,7 +84,11 @@ export default class horarios extends React.Component {
         this.codmed = SNavigation.getParam("codmed"); //key por navegador
     }
 
+    static INSTANCE;
+
+
     componentDidMount() {
+        horarios.INSTANCE = this;
         this.loadMedico().then(medico => this.setState({ medico }))
         // this.loadTurnos().then(turnos => console.log(turnos))
     }

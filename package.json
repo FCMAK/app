@@ -1,6 +1,6 @@
 {
   "name": "kolping_app3",
-  "version": "1.0.29",
+  "version": "1.0.33",
   "description": "kolping_app",
   "scripts": {
     "start": "react-native start",

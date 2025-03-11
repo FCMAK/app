@@ -71,8 +71,8 @@ android {
         applicationId "com.kolping_app3"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10029
-        versionName "1.0.29"
+        versionCode 10033
+        versionName "1.0.33"
     }
     splits {
         abi {

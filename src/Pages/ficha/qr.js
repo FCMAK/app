@@ -95,24 +95,21 @@ class qr extends Component {
                         <SHr height={30} />
 
                         <SView col={"xs-12"} center row>
-                            <SView width={85} height={75} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.white }}
+                        {!this?.state?.qr ? null :  <SView width={85} height={75} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.white }}
                                 onPress={this.handleDownload.bind(this)}>
                                 <SText color={STheme.color.white} font='LondonBetween' fontSize={11}>DESCARGAR</SText>
                                 <SHr height={6} />
                                 <SIcon name={"descargar"} width={40} height={30} fill={STheme.color.white} />
-                                {/* <SHr height={6}/>
-                                <SHr height={1} color={STheme.color.white} />
-                                <SHr height={6}/> */}
-
-
-                            </SView>
+                            </SView>}
+                           
                             <SView width={25} />
-                            <SView width={85} height={75} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.white }}
+                            {!this?.state?.qr ? null :  <SView width={85} height={75} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.white }}
                                 onPress={this.handleShare.bind(this)}>
                                 <SText color={STheme.color.white} font='LondonBetween' fontSize={11}>COMPARTIR</SText>
                                 <SHr height={6} />
                                 <SIcon name={"compartir"} width={40} height={30} fill={STheme.color.white} />
-                            </SView>
+                            </SView>}
+                            
                             <SHr height={30} />
                             <Kolping.KButtom secondary width={300} onPress={(ins) => {
                                 if (!this.state.qr) {

@@ -28,6 +28,9 @@ export default class historico extends Component {
             SNavigation.navigate("/ficha/mensajeSinFicha")
         } else {
             let dataHistorico = Object.values(historico)
+            dataHistorico = dataHistorico.filter(a=>{
+                return a.estado_pago != "pendiente"
+            })
             let dataH = dataHistorico.sort((a, b) => {
                 const dateA = new Date(`${this.formatDateToYYYYMMDD(a.data.fecha)}T${a.data?.hortur?.split(' - ')[0]}`);
                 const dateB = new Date(`${this.formatDateToYYYYMMDD(b.data.fecha)}T${b.data?.hortur?.split(' - ')[0]}`);
