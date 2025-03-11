@@ -1,8 +1,8 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.kolping_app3">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.cipto_app">
 
 	<queries>
-        <package android:name="com.kolping_app3.store" />
-        <package android:name="com.kolping_app3.services" />
+        <package android:name="com.cipto_app.store" />
+        <package android:name="com.cipto_app.services" />
         <!-- for example, to share via instagram -->
         <package android:name="com.whatsapp.android" />
     </queries>
