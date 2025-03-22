@@ -37,7 +37,6 @@ class Especialidad extends Component {
         var dataMedicos = {}
         // var dataMedicos = Medicos.Actions.getAll(this.props);
        
-
         // if (!dataMedicos) return <SLoad />;
         var data = datas.sort((a, b) => Number(a.CodEsp) - Number(b.CodEsp));
 
