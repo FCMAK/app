@@ -215,7 +215,7 @@ export default class Lista extends Component {
 
         if (!Model.usuario.Action.getKey()) {
             SNotification.send({
-                title: "Porfavor inicia session para realizar la reserva.",
+                title: "Por favor, inicia sesión para realizar la reserva.",
                 time: 5000,
                 color: STheme.color.warning
             })

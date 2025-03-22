@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SDate, SHr, SImage, SInput, SLoad, SNavigation, SNotification, SPage, SStorage, SText, STheme, SView } from "servisofts-component";
+import { SDate, SHr, SIcon, SImage, SInput, SLoad, SNavigation, SNotification, SPage, SStorage, SText, STheme, SView } from "servisofts-component";
 import SSocket from "servisofts-socket";
 import Model from "../../Model";
 import { Container } from "../../Components";
@@ -62,6 +62,9 @@ const InputCita = ({ data }) => {
     const { fecha, nommed, nomesp, hortur } = data;
     // if(!this.state?.data) return <SLoad />
     let obj = this.state?.data;
+
+    let horarios = hortur?.split("-");
+    let horaInicio = horarios[0];
     // if(!obj) return <SLoad/>
     console.log("obj", obj)
     const sdate = new SDate(fecha, "yyyy-MM-dd")
@@ -95,7 +98,13 @@ const InputCita = ({ data }) => {
         <SView width={120} center>
             <SText fontSize={25} font="LondonTwo" bold color={STheme.color.primary}>{sdate.toString("dd")}</SText>
             <SText fontSize={14} font="LondonBetween" color={STheme.color.primary}>{sdate.toString("MONTH")}</SText>
-            <SText fontSize={14} font="LondonBetween" color={STheme.color.primary}>{hortur}</SText>
+            
+            <SView row center>
+                <SIcon name={"fhora"} width={14} height={14} fill={STheme.color.info} />
+                <SView width={4} />
+                <SText fontSize={14} font="LondonBetween" color={STheme.color.primary}>{horaInicio}</SText>
+
+            </SView>
         </SView>
     </SView>
 }
@@ -266,7 +275,7 @@ export default class index extends React.Component {
                 <SHr h={50} />
                 <Title label={"Datos de facturación"} />
                 <SHr h={16} />
-                <SInput ref={ref => this.input_nit = ref} isRequired={true}  defaultValue={this.state.default_values.nit} customStyle={"kolping"} label={"NIT"} placeholder={"Escriba el número de Nit..."} />
+                <SInput ref={ref => this.input_nit = ref} isRequired={true} defaultValue={this.state.default_values.nit} customStyle={"kolping"} label={"NIT"} placeholder={"Escriba el número de Nit..."} />
                 <SInput ref={ref => this.input_razon_social = ref} isRequired={true} defaultValue={this.state.default_values.razon_social} customStyle={"kolping"} label={"RAZON SOCIAL"} placeholder={"Escriba la Razón Social..."} />
                 <SInput ref={ref => this.input_email = ref} isRequired={true} defaultValue={this.state.default_values.email_factura} customStyle={"kolping"} label={"CORREO"} placeholder={"Escriba el correo electrónico"} />
                 <SHr h={50} />

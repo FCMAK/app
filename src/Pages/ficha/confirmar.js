@@ -62,9 +62,9 @@ class Confirmacion extends Component {
         }
         // let fecha_final = this.fecha_final.toString("MONTH dd");
         // let fecha_final = "yyy-Mm-DD"
+        const datas = { ...this.state?.data?.data }
+        const hora = (datas?.hortur) ? datas?.hortur.split("-")[0] : ""; 
         const fecha = this.state?.data?.data?.fecha;
-        console.log("this.state.sucursal")
-        console.log(this.state?.sucursal)
         return (
         
             <SPage title={'Confirmar'} >
@@ -110,7 +110,7 @@ class Confirmacion extends Component {
                                 {/* <SText font={"Roboto"} fontSize={20} color={STheme.color.white}>{this.hora}</SText> */}
                                 {/* {this.datosNav.turno.DesTur != "" ? <SText font={"LondonBetween"} fontSize={16} color={STheme.color.white} >{this.datosNav.turno.DesTur}</SText> : <SText font={"LondonBetween"} fontSize={16} color={STheme.color.white} >Atención por orden de llegada</SText>} */}
                                 <SHr height={4} />
-                                <SText font={"LondonBetween"} fontSize={18} color={STheme.color.white} >{this.state?.data?.data?.hortur}</SText>
+                                <SText font={"LondonBetween"} fontSize={18} color={STheme.color.white} >{hora}</SText>
                             </SView>
                             <SHr height={20} />
                             <SView col={"xs-3"} height={55} >
@@ -152,7 +152,7 @@ class Confirmacion extends Component {
                                     key: this.pk,
                                     key_usuario: Model.usuario.Action.getKey()
                                 }).then(e => {
-                                    if (e.estado != "exito") throw { error: "El servidor no respondio con exito." }
+                                    if (e.estado != "exito") throw { error: "El servidor no respondió con éxito." }
                                     if (!e?.data?.status) {
                                         throw { error: e?.data?.message ?? "Error desconocido." }
                                     }

@@ -39,7 +39,7 @@ class Mapa extends Component {
                     padding: 5,
                 }} row center
                 onPress={() => {
-                    SNavigation.navigate("/ficha/medicos", { nrosuc: this.key })
+                    SNavigation.navigate("/info/especialidades", { nrosuc: this.key })
                 }}
             >
                 <SView flex width={35} height={35} center style={{
