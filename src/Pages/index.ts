@@ -25,6 +25,7 @@ import rol from "./rol"
 import direccion from './direccion';
 import perfil from './perfil';
 import version_required from './version_required';
+import info from './info';
 // const NewPages = SPage.combinePages("/", {
 //     ...notification,
 // })
@@ -37,7 +38,8 @@ const newPages = SPage.combinePages("/", {
     ...usuario,
     ...rol,
     ...direccion,
-    version_required
+    version_required,
+    ...info,
     // ...perfil
 });
 

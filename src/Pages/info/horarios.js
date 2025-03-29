@@ -1,11 +1,10 @@
 import React from "react";
-import { SDate, SHr, SIcon, SNavigation, SPage, SText, STheme, SView } from "servisofts-component";
+import { SDate, SHr, SNavigation, SPage, SText, STheme, SView } from "servisofts-component";
 import SSocket from "servisofts-socket";
 import { Container } from "../../Components";
 import { FlatList } from "react-native";
 import { getAllMedicos, getAllServicios, getMedico } from "./Actions";
 import MedicoItem from "./Components/MedicoItem";
-import SelectFecha from "./Components/SelectFecha";
 import NoData from "./Components/NoData";
 
 
@@ -28,35 +27,26 @@ const RenderHoraItem = ({ item, medico, nrosuc, fecha }) => {
     // Dias 1=Lunes 2=Martes 3=Miercoles 4=Jueves 5=Viernes 6=Sabado ?=Domingo
 
     // date.addDay(NroDia)
-    let horarios = HorTur.split("-");
-    let horaInicio = horarios[0];
     return <SView col={'xs-4'} padding={5} >
         <SView col={'xs-12'} card center
             style={{
                 alignItems: "flex-end"
             }}
             padding={6}
-            onPress={() => {
-                SNavigation.navigate("/ficha/servicios", {
-                    codesp: CodEsp,
-                    codmed: CodMed,
-                    nrosuc: nrosuc,
-                    codtur: CodTur,
-                    comtur: ComTur,
-                    fecha: fecha,
-                    nomesp: NomEsp,
-                    nommed: NomMed,
-                    hortur: HorTur
-                })
-                // getAllServicios({
-                //     nrosuc: nrosuc,
-                //     codmed: CodMed+""
-                // }).then(e=>{
-
-                // }).catch(e=>{
-
-                // })
-            }} >
+        // onPress={() => {
+        //     SNavigation.navigate("/ficha/servicios", {
+        //         codesp: CodEsp,
+        //         codmed: CodMed,
+        //         nrosuc: nrosuc,
+        //         codtur: CodTur,
+        //         comtur: ComTur,
+        //         fecha: fecha,
+        //         nomesp: NomEsp,
+        //         nommed: NomMed,
+        //         hortur:HorTur
+        //     })
+        // }} 
+        >
             <SView style={{
                 width: 30,
                 height: 30,
@@ -71,17 +61,11 @@ const RenderHoraItem = ({ item, medico, nrosuc, fecha }) => {
             <SHr height={3} />
             <SText fontSize={13} font="LondonBetween">{NomEsp}</SText>
             <SView flex />
-            <SView row center>
-                <SIcon name={"fhora"} width={14} height={14} fill={STheme.color.primary} />
-                <SView width={4} />
-                <SText fontSize={13} font="LondonTwo">{horaInicio}</SText>
-
-            </SView>
-
+            <SText fontSize={13} font="LondonTwo">{HorTur}</SText>
         </SView>
     </SView>
 }
-export default class horarios extends React.Component {
+export default class ListaHorarios extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -96,7 +80,7 @@ export default class horarios extends React.Component {
 
 
     componentDidMount() {
-        horarios.INSTANCE = this;
+        ListaHorarios.INSTANCE = this;
         this.loadMedico().then(medico => this.setState({ medico }))
         // this.loadTurnos().then(turnos => console.log(turnos))
     }
@@ -129,12 +113,6 @@ export default class horarios extends React.Component {
     render() {
         return <SPage title={"Horarios"}>
             <Container loading={!this.state.medico}>
-                <SelectFecha defaultValue={this.state.fecha} onChange={(e) => {
-                    if (this.state.fecha == e) return;
-                    this.state.fecha = e;
-                    this.setState({ medico: null })
-                    this.componentDidMount();
-                }} />
                 <SHr height={10} />
                 <SHr />
                 <MedicoItem medico={this.state.medico} />
