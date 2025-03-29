@@ -1,7 +1,7 @@
 {
-  "name": "cipto_app",
-  "version": "1.0.30",
-  "description": "cipto_app",
+  "name": "kolping_app",
+  "version": "1.0.34",
+  "description": "kolping_app",
   "scripts": {
     "start": "react-native start",
     "build-old": "react-scripts build",

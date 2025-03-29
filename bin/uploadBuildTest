@@ -1,0 +1,4 @@
+ #!/bin/bash
+#  SSH="2.2"
+ SSH="servisofts@192.168.2.5"
+ scp -r build $SSH:/home/servisofts/test_servicios/kolping/entornos/kolping_test/

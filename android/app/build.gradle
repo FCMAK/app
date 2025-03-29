@@ -68,7 +68,7 @@ android {
     // }
 
     defaultConfig {
-        applicationId "com.cipto_app"
+        applicationId "com.kolping_app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 10033

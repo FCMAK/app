@@ -147,7 +147,7 @@ export default class Lista extends Component {
                                 <SText font={"LondonTwo"} fontSize={15} color={STheme.color.text} >{obj.NomPro}</SText>
                             </SView>
                             <SView col={"xs-3.5"} row height>
-                                <SView col={"xs-8"} center height backgroundColor={STheme.color.primary} padding={5}>
+                                <SView col={"xs-8"} center flex backgroundColor={STheme.color.primary} padding={5}>
                                     <SText font={"LondonTwo"} fontSize={14} color={STheme.color.white} >Bs.{obj.PreV01}</SText>
                                 </SView>
                                 <SView col={"xs-4"} center height >

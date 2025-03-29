@@ -41,7 +41,7 @@ end
 
 
 
-target 'cipto_app' do
+target 'kolping_app' do
   config = use_native_modules!
   flags = get_default_flags()
   use_react_native!(:path => config[:reactNativePath],

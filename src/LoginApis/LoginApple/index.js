@@ -14,7 +14,7 @@ class LoginApple extends Component<LoginType> {
     }
     render() {
         return <AppleLogin
-            clientId="com.servisofts.cipto_app2"
+            clientId="com.servisofts.kolping_app2"
             redirectURI="https://kolping.servisofts.com/"
             usePopup={true}
             callback={this.appleResponse} // Catch the response

@@ -1,4 +1,4 @@
-package com.cipto_app;
+package com.kolping_app;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -69,7 +69,7 @@ public class MainActivity extends ReactActivity {
 
   @Override
   protected String getMainComponentName() {
-    return "cipto_app";
+    return "kolping_app";
   }
 
   // Esto lo agrege por que el backgroun location tiraba cuando lo cerraba

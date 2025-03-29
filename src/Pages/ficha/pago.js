@@ -19,7 +19,7 @@ class Pago extends Component {
     componentDidMount() {
         SSocket.sendPromise({
             component: "orden_compra",
-            type: "verificarPago",
+            type: "verificarPagoV2",
             key: this.key,
             key_usuario: Model.usuario.Action.getKey()
         }).then(e => {
@@ -106,7 +106,7 @@ class Pago extends Component {
                                 <SView col={"xs-6"} flex style={{ alignItems: 'flex-end' }}>
                                     <SView row >
                                         <SText color={STheme.color.darkGray} font='LondonBetween'>Fecha: </SText>
-                                        <SText font='LondonBetween' bold>{new SDate(fecha_on,"yyyy-MM-ddThh:mm:ss").toString("dd-MM-yyyy hh:mm")}</SText>
+                                        <SText font='LondonBetween' bold>{new SDate(fecha_on, "yyyy-MM-ddThh:mm:ss").toString("dd-MM-yyyy hh:mm")}</SText>
                                     </SView>
                                 </SView>
                                 <SView col={"xs-12"} />
@@ -121,7 +121,7 @@ class Pago extends Component {
                                 <SHr height={10} />
                                 <SText color={STheme.color.darkGray} font='LondonBetween'>Turno: </SText>
                                 {/* <SText style={{textTransform:"uppercase"}} bold font='LondonBetween'>{data?.codtur}{data?.comtur} | {data?.hortur} | {(new SDate(data?.fecha).toString("dd-MM-yyyy"))}</SText> */}
-                                <SText style={{ textTransform: "uppercase" }} bold font='LondonBetween'>{data?.codtur}{data?.comtur} | {data?.hortur} | { new SDate(data?.fecha,"yyyy-MM-ddThh:mm:ss").toString("DAY dd MONTH del yyyy")}</SText>
+                                <SText style={{ textTransform: "uppercase" }} bold font='LondonBetween'>{data?.codtur}{data?.comtur} | {data?.hortur} | {new SDate(data?.fecha, "yyyy-MM-ddThh:mm:ss").toString("DAY dd MONTH del yyyy")}</SText>
                                 <SHr />
                                 <SText color={STheme.color.darkGray} font='LondonBetween'>Sucursal: </SText>
                                 <SText style={{ textTransform: "uppercase" }} bold font='LondonBetween'>{this.state?.sucursal?.NomSuc}</SText>
@@ -164,6 +164,16 @@ class Pago extends Component {
                                     backgroundColor: STheme.color.primary,
                                 }} row center
                                     onPress={() => {
+                                        if (!this.state?.data?.confirmacion?.OdaPdf) return;
+                                        if (this.state?.data?.confirmacion?.version == 2) {
+                                            // Esta viene en png
+                                            SShared.sharedB64(`data:image/png;base64,${this.state?.data?.confirmacion?.OdaPdf}`, {
+                                                titulo: "OrdenDeAtencion", message: "OrdenDeAtencion",
+                                                name: "OrdenDeAtencion.png"
+
+                                            });
+                                            return;
+                                        }
                                         SShared.sharedB64(`data:application/pdf;base64,${this.state?.data?.confirmacion?.OdaPdf}`,
                                             {
                                                 titulo: "OrdenDeAtencion", message: "OrdenDeAtencion",

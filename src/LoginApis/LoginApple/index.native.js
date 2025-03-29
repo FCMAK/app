@@ -35,7 +35,7 @@ class LoginApple extends Component<LoginType> {
             //     return null;
             // }
             appleAuthAndroid.configure({
-                clientId: 'com.servisofts.cipto_app2',
+                clientId: 'com.servisofts.kolping_app2',
                 redirectUri: 'https://example.com/auth/callback',
                 responseType: appleAuthAndroid.ResponseType.ALL,
                 scope: appleAuthAndroid.Scope.ALL,

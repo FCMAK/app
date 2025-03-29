@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SComponentContainer, SIcon, SMapView, SNavigation, SView } from 'servisofts-component';
 
 import Pages from './Pages';
@@ -16,6 +16,7 @@ import Socket from './Socket';
 import Config from './Config';
 import Firebase from './Firebase';
 import { Platform } from 'react-native';
+import * as MDL from './MDL';
 
 try {
   if (Platform.OS == "web") {
@@ -38,6 +39,9 @@ SMapView.bootstrapURLKeys = {
 }
 
 const App = (props) => {
+  useEffect(() => {
+    MDL.componentDidMount();
+  }, [])
   return (
     <Redux>
       <ErrorBoundary>
