@@ -58,7 +58,7 @@ export const getAllMedicos = ({ nrosuc, fecha, codesp = "999" }) => {
                 medicos.map(med => {
                     med.turnos = turnos.filter(tur => tur?.CodMed == med?.CodMed);
                 })
-                medicos.sort((a, b) => a.turnos.length < b.turnos.length ? 1 : -1)
+                medicos.sort((a, b) => (a?.turnos ?? []).length < (b.turnos ?? []).length ? 1 : -1)
                 // this.setState({ medicos: medicos })
                 resolve(medicos);
             }).catch(e => {

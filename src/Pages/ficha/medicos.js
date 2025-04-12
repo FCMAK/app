@@ -24,8 +24,8 @@ export default class medicos extends Component {
 
     componentDidMount() {
         getAllMedicos({ fecha: this.state.fecha, nrosuc: this.nrosuc, codesp: this.codesp }).then(medicos => {
-            let filteredMedicos = medicos.filter(item => item.TurMed.length > 0 && item.turnos.length > 0);
-            this.setState({ medicos: filteredMedicos })
+            // let filteredMedicos = medicos.filter(item => item.TurMed.length > 0 && item.turnos.length > 0);
+            this.setState({ medicos: medicos })
         })
     }
 
@@ -67,11 +67,11 @@ export default class medicos extends Component {
         let nroMedicos = 0;
         if (dataMedicos) nroMedicos = dataMedicos.length;
         return <SPage>
-            <SelectFecha defaultValue={this.state.fecha} onChange={(e) => {
+            {/* <SelectFecha defaultValue={this.state.fecha} onChange={(e) => {
                 this.state.fecha = e;
                 this.setState({ medicos: null })
                 this.componentDidMount();
-            }} />
+            }} /> */}
             <SHr height={10} />
             <Container loading={!this.state.medicos}>
                 <Kolping.KBuscador onChangeText={(text) => {
