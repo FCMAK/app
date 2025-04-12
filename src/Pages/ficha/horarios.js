@@ -27,7 +27,7 @@ const RenderHoraItem = ({ item, medico, nrosuc, fecha }) => {
                 backgroundColor: STheme.color.card,
                 alignItems: "flex-end",
                 borderWidth: 1,
-                borderColor: STheme.color.primary + "15",
+                borderColor: STheme.color.primary + "30",
             }}
             padding={6}
             onPress={() => {
@@ -148,15 +148,16 @@ export default class horarios extends React.Component {
                 style={{
                     borderRadius: 13,
                     backgroundColor: active ? STheme.color.primary : STheme.color.card,
-                    borderWidth: 1,
-                    borderColor: STheme.color.primary + "15",
+                    borderWidth: disponible ?1:0,
+                    borderColor: STheme.color.primary + "50",
                 }}
             >
                 <SHr height={8} />
-                <SText height={25} font="LondonBetween" fontSize={15} color={colorText} style={{ textTransform: "uppercase", }} >{fecha.toString("DAY")}</SText>
+                <SText height={25} font="LondonBetween" fontSize={15} color={colorText} style={{ textTransform: "uppercase", }} >{fecha.toString("DAY").substring(0, 3)}</SText>
+                <SHr height={3} />
                 <SView col={"xs-7"} style={{
                     borderBottomWidth: 1,
-                    borderBottomColor: STheme.color.lightGray,
+                    borderBottomColor: active ?STheme.color.white: STheme.color.lightGray,
                 }} />
                 <SHr height={8} />
                 <SText height={25} font="LondonTwo" fontSize={26} color={colorText} >{fecha.toString("dd")}</SText>
