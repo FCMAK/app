@@ -31,13 +31,9 @@ const RenderHoraItem = ({ item, medico, nrosuc, fecha }) => {
     let horarios = HorTur.split("-");
     let horaInicio = horarios[0];
     return <SView col={'xs-4'} padding={5} >
-        <SView col={'xs-12'}  center
+        <SView col={'xs-12'} card center
             style={{
-                borderRadius: 10,
-                backgroundColor: STheme.color.card,
-                alignItems: "flex-end",
-                borderWidth: 1,
-                borderColor: STheme.color.primary+"15",
+                alignItems: "flex-end"
             }}
             padding={6}
             onPress={() => {
@@ -61,32 +57,24 @@ const RenderHoraItem = ({ item, medico, nrosuc, fecha }) => {
 
                 // })
             }} >
-            <SView col={"xs-12"} row center>
-                <SText fontSize={15} flex={1} font="LondonTwo" color={STheme.color.text} style={{ alignItems: "flex-end"}}>Ficha</SText>
-                <SView width={8} />
-                <SIcon flex={1} name={"flecha"} width={14} height={11} fill={STheme.color.primary} />
-                <SView flex={1} style={{ alignItems: "flex-end"}}>
-                    <SView  style={{
-                        width: 30,
-                        height: 30,
-                        borderRadius: 100,
-                        backgroundColor: STheme.color.primary + "AA",
-                        borderColor: STheme.color.primary,
-                        borderWidth: 2,
-                       
-                    }} center >
-                        <SText font="LondonTwo" fontSize={15} color={STheme.color.secondary}>{CodTur}{ComTur}</SText>
-                    </SView>
-                </SView>
+            <SView style={{
+                width: 30,
+                height: 30,
+                borderRadius: 100,
+                backgroundColor: STheme.color.primary + "AA",
+                borderColor: STheme.color.primary,
+                borderWidth: 2,
+            }} center>
+                <SText font="LondonTwo" fontSize={15} color={STheme.color.secondary}>{CodTur}{ComTur}</SText>
             </SView>
             <SView width={8} />
             <SHr height={3} />
             <SText fontSize={13} font="LondonBetween">{NomEsp}</SText>
             <SView flex />
             <SView row center>
-                <SIcon name={"fhora"} width={15} height={15} fill={STheme.color.primary} />
+                <SIcon name={"fhora"} width={14} height={14} fill={STheme.color.primary} />
                 <SView width={4} />
-                <SText fontSize={18} font="LondonTwo">{horaInicio}</SText>
+                <SText fontSize={13} font="LondonTwo">{horaInicio}</SText>
 
             </SView>
 
@@ -241,7 +229,7 @@ export default class horarios extends React.Component {
                 <SHr height={10} />
 
                 <SHr />
-                <SText col={"xs-12"} justify font="LondonMM" fontSize={18} bold>Seleccione turno</SText>
+                <SText col={"xs-12"}  justify font="LondonMM" fontSize={18} bold>Seleccione turno</SText>
                 <SHr />
                 {this.RenderHoras({ medico: this.state.medico, nrosuc: this.nrosuc })}
                 <SHr height={25} />
