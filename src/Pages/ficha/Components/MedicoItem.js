@@ -25,8 +25,8 @@ export default ({ medico, onPress }) => {
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: STheme.color.white,
-            borderBottomWidth: 1,
-            borderBottomColor: STheme.color.primary,
+            // borderBottomWidth: 1,
+            // borderBottomColor: STheme.color.primary,
         }}
         onPress={onPress}
     >

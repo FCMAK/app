@@ -67,15 +67,15 @@ const RenderHoraItem = ({ item, medico, nrosuc, fecha }) => {
                 <SIcon flex={1} name={"flecha"} width={14} height={11} fill={STheme.color.primary} />
                 <SView flex={1} style={{ alignItems: "flex-end"}}>
                     <SView  style={{
-                        width: 30,
-                        height: 30,
+                        width: 32,
+                        height: 32,
                         borderRadius: 100,
                         backgroundColor: STheme.color.primary + "AA",
                         borderColor: STheme.color.primary,
                         borderWidth: 2,
                        
                     }} center >
-                        <SText font="LondonTwo" fontSize={15} color={STheme.color.secondary}>{CodTur}{ComTur}</SText>
+                        <SText font="LondonTwo" fontSize={13} color={STheme.color.secondary}>{CodTur}{ComTur}</SText>
                     </SView>
                 </SView>
             </SView>
@@ -86,8 +86,7 @@ const RenderHoraItem = ({ item, medico, nrosuc, fecha }) => {
             <SView row center>
                 <SIcon name={"fhora"} width={15} height={15} fill={STheme.color.primary} />
                 <SView width={4} />
-                <SText fontSize={18} font="LondonTwo">{horaInicio}</SText>
-
+                <SText fontSize={15} font="LondonTwo">{horaInicio}</SText>
             </SView>
 
         </SView>
