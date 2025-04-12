@@ -36,6 +36,46 @@ export const getMedico = ({ nrosuc, codesp = "999", codmed, fecha = new SDate().
         })
     })
 }
+export const getMedicoSinTurno = ({ nrosuc, codesp = "999", codmed }) => {
+    return new Promise((resolve, reject) => {
+        SSocket.sendPromise({
+            component: "medico",
+            type: "getAll",
+            estado: "cargando",
+            nrosuc: nrosuc,
+            codesp: codesp,
+        }).then((e: any) => {
+            if (!e.data) return;
+            const medicos = e.data;
+            const md = medicos.find(a => a.CodMed == codmed)
+            // this.setState({ medicos: medicos })
+            resolve(md);
+        }).catch(e => {
+            reject(e)
+            console.error(e)
+        })
+    })
+}
+
+
+export const getTurnos = ({ nrosuc, codmed, fecha = new SDate().toString("yyyy-MM-dd") }) => {
+    return new Promise((resolve, reject) => {
+        SSocket.sendPromise({
+            component: "turno",
+            type: "getAll",
+            nrosuc: nrosuc,
+            codmed: codmed,
+            fectur: new SDate(fecha, 'yyyy-MM-dd').toString("yyyy-MM-ddThh:mm:ss")
+        }).then((resp: any) => {
+            const turnos = resp.data ?? [];
+            resolve(turnos);
+        }).catch(e => {
+            reject(e)
+        })
+    })
+}
+
+
 
 export const getAllMedicos = ({ nrosuc, fecha, codesp = "999" }) => {
     return new Promise((resolve, reject) => {

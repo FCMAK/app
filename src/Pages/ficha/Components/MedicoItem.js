@@ -14,12 +14,15 @@ export default ({ medico, onPress }) => {
     // if(!active) return true;
 
     const especialidades = {}
-    if(CodEsp && NomEsp){
+    if (CodEsp && NomEsp) {
         especialidades[CodEsp] = NomEsp;
     }
-    turnos.map((tur) => {
-        especialidades[tur.CodEsp] = tur.NomEsp;
-    })
+    if (turnos) {
+        turnos.map((tur) => {
+            especialidades[tur.CodEsp] = tur.NomEsp;
+        })
+    }
+
     const codmed = SNavigation.getParam("codmed")
     const color = STheme.color.primary
     // console.log("especialidades", codmed)
