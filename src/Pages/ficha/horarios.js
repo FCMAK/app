@@ -27,7 +27,7 @@ const RenderHoraItem = ({ item, medico, nrosuc, fecha }) => {
                 backgroundColor: STheme.color.card,
                 alignItems: "flex-end",
                 borderWidth: 1,
-                borderColor: STheme.color.primary + "15",
+                borderColor: STheme.color.primary + "30",
             }}
             padding={6}
             onPress={() => {
@@ -148,15 +148,16 @@ export default class horarios extends React.Component {
                 style={{
                     borderRadius: 13,
                     backgroundColor: active ? STheme.color.primary : STheme.color.card,
-                    borderWidth: 1,
-                    borderColor: STheme.color.primary + "15",
+                    borderWidth: disponible ? 1 : 0,
+                    borderColor: STheme.color.primary + "50",
                 }}
             >
                 <SHr height={8} />
-                <SText height={25} font="LondonBetween" fontSize={15} color={colorText} style={{ textTransform: "uppercase", }} >{fecha.toString("DAY")}</SText>
+                <SText height={25} font="LondonBetween" fontSize={15} color={colorText} style={{ textTransform: "uppercase", }} >{fecha.toString("DAY").substring(0, 3)}</SText>
+                <SHr height={3} />
                 <SView col={"xs-7"} style={{
                     borderBottomWidth: 1,
-                    borderBottomColor: STheme.color.lightGray,
+                    borderBottomColor: active ? STheme.color.white : STheme.color.lightGray,
                 }} />
                 <SHr height={8} />
                 <SText height={25} font="LondonTwo" fontSize={26} color={colorText} >{fecha.toString("dd")}</SText>
@@ -237,9 +238,45 @@ export default class horarios extends React.Component {
             <SHr height={15} />
         </SView>
     }
+    allHorario = () => {
+        let dataAllHorario = this.state.medico?.TurMed;
+        if (!dataAllHorario) return null;
+        if (dataAllHorario.length <= 0) return null;
+        let diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+        return <>
+            <SView col={"xs-12"} center row>
+                <SText col={"xs-12"} fontSize={15} font="LondonBetween" >Horarios normales de atención</SText>
+                <SHr height={5} />
+                <FlatList
+                    data={dataAllHorario.sort((a, b) => {
+                        return new Date(a) - new Date(b);
+                    })}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={({ item }) => {
+                        // return this.renderDiasItem({ key: item, obj: this.state.turnos[item] })
+                        return <SView col={"xs-12"} padding={8}
+                            style={{
+                                borderRightWidth: 1,
+                                borderRightColor: STheme.color.darkGray + "30",
+                            }} >
+                            <SText fontSize={13} font="LondonBetween" color={STheme.color.primary} >{diasSemana[item?.NroDia]}</SText>
+                            <SView col={"xs-12"} style={{
+                                alignItems: "flex-end",
+                            }} >
+                                <SText fontSize={14} font="LondonBetween" color={STheme.color.text} >De {item?.TurIni}</SText>
+                                <SText fontSize={14} font="LondonBetween" color={STheme.color.text} >a {item?.TurFin}</SText>
+                            </SView>
+                        </SView>
+                    }}
+                />
+            </SView>
+        </>
+    }
 
     render() {
-
+        console.log("medico")
+        console.log(this.state.medico)
         return <SPage title={"Horarios"}>
             <Container loading={!this.state.medico}>
                 {/* <SelectFecha defaultValue={this.state.fecha} onChange={(e) => {
@@ -251,6 +288,8 @@ export default class horarios extends React.Component {
                 <SHr height={10} />
                 <SHr />
                 <MedicoItem medico={this.state.medico} />
+                <SHr />
+                {this.allHorario()}
                 <SHr />
                 <SHr />
                 {this.renderFechas()}

@@ -8,7 +8,7 @@ import SSocket from 'servisofts-socket';
 export default ({ mensaje }) => {
     return <>
         <SView col={"xs-12"} center >
-            <SHr height={45} />
+            <SHr height={30} />
             <SIcon name={"noData"} width={150} height={174} fill={STheme.color.info} />
             <SHr height={25} />
             <SView col={"xs-11 sm-6"} center card padding={15}>
