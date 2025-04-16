@@ -24,8 +24,8 @@ export default class medicos extends Component {
 
     componentDidMount() {
         getAllMedicos({ fecha: this.state.fecha, nrosuc: this.nrosuc, codesp: this.codesp }).then(medicos => {
-            // let filteredMedicos = medicos.filter(item => item.TurMed.length > 0 && item.turnos.length > 0);
-            this.setState({ medicos: medicos })
+            let filteredMedicos = medicos.filter(item => item.TurMed.length > 0 && item.turnos.length > 0);
+            this.setState({ medicos: filteredMedicos })
         })
     }
 

@@ -1,6 +1,6 @@
 {
   "name": "kolping_app",
-  "version": "1.0.34",
+  "version": "1.0.37",
   "description": "kolping_app",
   "scripts": {
     "start": "react-native start",
@@ -108,6 +108,8 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.96.1",
     "webpack-cli": "5.1.4",
+    "patch-package": "^8.0.0",
+    "postinstall-postinstall": "^2.1.0",
     "webpack-dev-server": "5.0.4",
     "webpack-merge": "5.10.0"
   },

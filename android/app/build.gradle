@@ -71,8 +71,8 @@ android {
         applicationId "com.kolping_app3"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10033
-        versionName "1.0.33"
+        versionCode 10037
+        versionName "1.0.37"
     }
     splits {
         abi {
@@ -171,5 +171,6 @@ dependencies {
         implementation jscFlavor
     }
 }
+
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

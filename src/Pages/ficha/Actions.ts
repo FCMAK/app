@@ -1,5 +1,6 @@
 import { SDate } from "servisofts-component";
 import SSocket from "servisofts-socket";
+import Config from "../../Config";
 
 export const getMedico = ({ nrosuc, codesp = "999", codmed, fecha = new SDate().toString("yyyy-MM-dd") }) => {
     return new Promise((resolve, reject) => {
@@ -85,30 +86,39 @@ export const getAllMedicos = ({ nrosuc, fecha, codesp = "999" }) => {
             estado: "cargando",
             nrosuc: nrosuc,
             codesp: codesp,
-        }).then((e: any) => {
+        }).then(async (e: any) => {
             if (!e.data) return;
-            const medicos = e.data;
-            SSocket.sendPromise({
-                component: "turno",
-                type: "getAll",
-                nrosuc: nrosuc,
-                fectur: new SDate(fecha, 'yyyy-MM-dd').toString("yyyy-MM-ddThh:mm:ss")
-            }).then((resp: any) => {
-                const turnos = resp.data ?? [];
-                medicos.map(med => {
-                    med.turnos = turnos.filter(tur => tur?.CodMed == med?.CodMed);
-                })
-                medicos.sort((a, b) => (a?.turnos ?? []).length < (b.turnos ?? []).length ? 1 : -1)
-                // this.setState({ medicos: medicos })
-                resolve(medicos);
-            }).catch(e => {
-                reject(e)
-            })
+            const medicos = await buildTurnos({ medicos: e.data, nrosuc: nrosuc, fecha: fecha });
+            resolve(medicos);
         }).catch(e => {
             reject(e)
             console.error(e)
         })
     })
+}
+
+const buildTurnos = async (p: { medicos: any, nrosuc: any, fecha: any }) => {
+    const cdias = Config.rango_dias;
+
+    // Crear arreglo de promesas
+    const promesas = Array.from({ length: cdias }, (_, i) => {
+        const fecha = new SDate(p.fecha, "yyyy-MM-dd").addDay(i);
+        return SSocket.sendPromise({
+            component: "turno",
+            type: "getAll",
+            nrosuc: p.nrosuc,
+            fectur: fecha.toString("yyyy-MM-ddThh:mm:ss")
+        });
+    });
+    const respuestas = await Promise.all(promesas);
+    // Unir todos los turnos
+    const turnosFinal = respuestas.flatMap((resp:any) => resp?.data ?? []);
+    p.medicos.map(med => {
+        med.turnos = turnosFinal.filter(tur => tur?.CodMed == med?.CodMed);
+    })
+    p.medicos.sort((a, b) => (a?.turnos ?? []).length < (b.turnos ?? []).length ? 1 : -1)
+    // this.setState({ medicos: medicos })
+    return p.medicos;
 }
 export const getAllServicios = ({ nrosuc, codesp = "999", codmed = "999" }) => {
     return new Promise((resolve, reject) => {

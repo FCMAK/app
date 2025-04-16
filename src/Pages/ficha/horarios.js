@@ -7,10 +7,11 @@ import { getAllMedicos, getAllServicios, getMedico, getMedicoSinTurno, getTurnos
 import MedicoItem from "./Components/MedicoItem";
 import SelectFecha from "./Components/SelectFecha";
 import NoData from "./Components/NoData";
+import Config from "../../Config";
 
 
 
-const MAXIMO_DIAS = 7;
+const MAXIMO_DIAS = Config.rango_dias;
 
 
 const RenderHoraItem = ({ item, medico, nrosuc, fecha }) => {
