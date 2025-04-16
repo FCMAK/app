@@ -101,7 +101,11 @@ export default class horarios extends React.Component {
         if (!this.codmed || !this.nrosuc) return;
         horarios.INSTANCE = this;
         this.loadMedico().then(medico => this.setState({ medico }))
-        this.loadTurnos().then(turnos => {
+        this.loadTurnos().then(turnos_ => {
+            // turnos = Object.entries(turnos).filter(([turnos]) => turnos.length > 0);
+            let turnos = Object.fromEntries(
+                Object.entries(turnos_).filter(([key, value]) => value.length > 0)
+            );
             this.setState({ turnos })
             console.log("turnos", turnos)
         })
@@ -190,7 +194,7 @@ export default class horarios extends React.Component {
         // console.log("turnos", turnos)
         if (!this.state.turnos) return <SLoad />
         const turnos = this.state.turnos[this.state.fecha];
-        if (turnos.length === 0) return <NoData mensaje={"No tenemos horarios habilitados en este momento."} />
+        if (turnos?.length === 0) return <NoData mensaje={"No tenemos horarios habilitados en este momento."} />
         console.log(turnos)
 
         return <SView col={"xs-12"} center row>
@@ -254,11 +258,14 @@ export default class horarios extends React.Component {
                     })}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
-                    renderItem={({ item }) => {
+                    renderItem={({ item, index }) => {
+                        (index == dataAllHorario.length - 1) ? esUltimo = true : esUltimo = false;
                         // return this.renderDiasItem({ key: item, obj: this.state.turnos[item] })
+                        console.log("index", index)
+                        console.log("esUltimo", esUltimo)
                         return <SView col={"xs-12"} padding={8}
                             style={{
-                                borderRightWidth: 1,
+                                borderRightWidth: esUltimo ? 0 : 1,
                                 borderRightColor: STheme.color.darkGray + "30",
                             }} >
                             <SText fontSize={13} font="LondonBetween" color={STheme.color.primary} >{diasSemana[item?.NroDia]}</SText>
