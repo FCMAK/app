@@ -35,7 +35,7 @@ try {
 }
 
 SMapView.bootstrapURLKeys = {
-  key: "AIzaSyCfEVNoHX5PAARlPuLs6a268yUTgAAelZ0"
+  key: "AIzaSyDEkmakdfkoCulTruC2vVRuUzmZ89k-XLw"
 }
 
 const App = (props) => {
