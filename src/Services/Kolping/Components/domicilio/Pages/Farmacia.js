@@ -106,13 +106,15 @@ class Farmacia extends Component {
                             }
 
                         }} ><SView col={"xs-12"} row center> <SIcon name='iWhatsApp' height={35} width={35} /> <SView width={10} />CONTÁCTENOS POR WHATSAPP</SView></Contactenos>
-                        <SHr height={30} />
+                        <SHr height={30} /> 
                         <DomicilioPromociones />
                         <SHr height={20} />
                         <DomicilioBanner />
+                        <SHr height={20} />
                     </SView>
                     {/* </SView> */}
                 </Container>
+          
             </SPage >
         );
     }

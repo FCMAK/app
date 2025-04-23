@@ -110,6 +110,7 @@ class Laboratorio extends Component {
                         <DomicilioPromociones />
                         <SHr height={20} />
                         <DomicilioBanner />
+                          <SHr height={20} />
                     </SView>
                     {/* </SView> */}
                 </Container>
