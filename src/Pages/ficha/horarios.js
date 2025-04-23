@@ -11,7 +11,6 @@ import Config from "../../Config";
 
 
 
-const MAXIMO_DIAS = Config.rango_dias;
 
 
 const RenderHoraItem = ({ item, medico, nrosuc, fecha }) => {
@@ -103,11 +102,10 @@ export default class horarios extends React.Component {
         this.loadMedico().then(medico => this.setState({ medico }))
         this.loadTurnos().then(turnos_ => {
             // turnos = Object.entries(turnos).filter(([turnos]) => turnos.length > 0);
-            let turnos = Object.fromEntries(
-                Object.entries(turnos_).filter(([key, value]) => value.length > 0)
-            );
-            this.setState({ turnos })
-            console.log("turnos", turnos)
+            // let turnos = Object.fromEntries(
+            //     Object.entries(turnos_).filter((value) => value.length > 0)
+            // );
+            this.setState({ turnos: turnos_ })
         })
     }
     async loadMedico() {
@@ -116,24 +114,68 @@ export default class horarios extends React.Component {
     }
     async loadTurnos() {
 
-        const array_fechas = new Array(MAXIMO_DIAS).fill(0).map((e, index) => {
+        const cdias = Config.rango_dias;
+
+        // Crear arreglo de promesas
+        const fecha = new SDate().addDay(cdias);
+        const turnosFinal = await SSocket.sendPromise({
+            component: "turno",
+            type: "getAllV2",
+            nrosuc: this.nrosuc,
+            codmed: this.codmed,
+            fecturIni: new SDate().toString("yyyy-MM-ddThh:mm:ss.000Z"),
+            fecturFin: fecha.toString("yyyy-MM-ddT23:59:59.000Z")
+        });
+
+        const data = turnosFinal.data;
+        let turnos = {};
+
+        for (let i = 0; i <= cdias; i++) {
+
             let date = new SDate(this.state.fecha, "yyyy-MM-dd");
-            date.addDay(index);
-            return date.toString("yyyy-MM-dd");
-        })
+            date.addDay(i);
+            let fecha = date.toString("yyyy-MM-dd");
+            if (!turnos[fecha]) {
+                turnos[fecha] = [];
+            }
 
-        const fechas = {};
-        await Promise.all(array_fechas.map(async (fecha) => {
-            let resp = await getTurnos({ nrosuc: this.nrosuc, codmed: this.codmed, fecha: fecha })
-            // resp._fecha = fecha;
-            const limpio = resp.filter(item => item !== null);
-            // if(limpio.length <= 0)  return;
-            fechas[fecha] = limpio;
-            return resp;
-        }))
+        }
 
-        return fechas
+
+        data.forEach((item) => {
+            let fecha = item.FecTur.split("T")[0];
+            if (!turnos[fecha]) {
+                turnos[fecha] = [];
+            }
+            turnos[fecha].push(item);
+        }
+        );
+        return turnos
+        // this.setState({ medicos: medicos })
     }
+    // async loadTurnos() {
+
+    //     const array_fechas = new Array(MAXIMO_DIAS).fill(0).map((e, index) => {
+    //         let date = new SDate(this.state.fecha, "yyyy-MM-dd");
+    //         date.addDay(index);
+    //         return date.toString("yyyy-MM-dd");
+    //     })
+
+    //     const fechas = {};
+
+    //     const pares = await Promise.all(array_fechas.map(async (fecha) => {
+    //         try {
+    //             const resp = await getTurnos({ nrosuc: this.nrosuc, codmed: this.codmed, fecha });
+    //             const limpio = resp.filter(item => item !== null);
+    //             return [fecha, limpio];
+    //         } catch (err) {
+    //             console.error("Error cargando turnos para", fecha, err);
+    //             return [fecha, []];
+    //         }
+    //     }));
+
+    //     return Object.fromEntries(pares);
+    // }
 
 
 
@@ -249,10 +291,13 @@ export default class horarios extends React.Component {
         if (dataAllHorario.length <= 0) return null;
         let diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
         return <>
-            <SView col={"xs-12"} center row>
+            <SView col={"xs-12"} >
                 <SText col={"xs-12"} fontSize={15} font="LondonBetween" >Horarios normales de atención</SText>
                 <SHr height={5} />
                 <FlatList
+                    style={{
+                        // width: "100%",
+                    }}
                     data={dataAllHorario.sort((a, b) => {
                         return new Date(a) - new Date(b);
                     })}
@@ -263,7 +308,7 @@ export default class horarios extends React.Component {
                         // return this.renderDiasItem({ key: item, obj: this.state.turnos[item] })
                         console.log("index", index)
                         console.log("esUltimo", esUltimo)
-                        return <SView col={"xs-12"} padding={8}
+                        return <SView padding={8}
                             style={{
                                 borderRightWidth: esUltimo ? 0 : 1,
                                 borderRightColor: STheme.color.darkGray + "30",

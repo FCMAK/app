@@ -5,5 +5,5 @@ export default {
     theme,
     socket,
     inputs,
-    rango_dias: 5,
+    rango_dias: 4,
 }

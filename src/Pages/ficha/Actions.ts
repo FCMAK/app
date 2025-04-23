@@ -88,7 +88,8 @@ export const getAllMedicos = ({ nrosuc, fecha, codesp = "999" }) => {
             codesp: codesp,
         }).then(async (e: any) => {
             if (!e.data) return;
-            const medicos = await buildTurnos({ medicos: e.data, nrosuc: nrosuc, fecha: fecha });
+            // const medicos = await buildTurnos({ medicos: e.data, nrosuc: nrosuc, fecha: fecha });
+            const medicos = await buildTurnosV2({ medicos: e.data, nrosuc: nrosuc, fecha: fecha });
             resolve(medicos);
         }).catch(e => {
             reject(e)
@@ -97,6 +98,26 @@ export const getAllMedicos = ({ nrosuc, fecha, codesp = "999" }) => {
     })
 }
 
+const buildTurnosV2 = async (p: { medicos: any, nrosuc: any, fecha: any }) => {
+    const cdias = Config.rango_dias;
+
+    // Crear arreglo de promesas
+    const fecha = new SDate(p.fecha, "yyyy-MM-dd").addDay(cdias);
+    const turnosFinal: any = await SSocket.sendPromise({
+        component: "turno",
+        type: "getAllV2",
+        nrosuc: p.nrosuc,
+        fecturIni: new SDate().toString("yyyy-MM-ddThh:mm:ss.000Z"),
+        fecturFin: fecha.toString("yyyy-MM-ddThh:mm:ss.000Z")
+    });
+    // Unir todos los turnos
+    p.medicos.map(med => {
+        med.turnos = turnosFinal.data.filter(tur => tur?.CodMed == med?.CodMed);
+    })
+    p.medicos.sort((a, b) => (a?.turnos ?? []).length < (b.turnos ?? []).length ? 1 : -1)
+    // this.setState({ medicos: medicos })
+    return p.medicos;
+}
 const buildTurnos = async (p: { medicos: any, nrosuc: any, fecha: any }) => {
     const cdias = Config.rango_dias;
 
@@ -112,7 +133,7 @@ const buildTurnos = async (p: { medicos: any, nrosuc: any, fecha: any }) => {
     });
     const respuestas = await Promise.all(promesas);
     // Unir todos los turnos
-    const turnosFinal = respuestas.flatMap((resp:any) => resp?.data ?? []);
+    const turnosFinal = respuestas.flatMap((resp: any) => resp?.data ?? []);
     p.medicos.map(med => {
         med.turnos = turnosFinal.filter(tur => tur?.CodMed == med?.CodMed);
     })
