@@ -80,44 +80,74 @@ export const getTurnos = ({ nrosuc, codmed, fecha = new SDate().toString("yyyy-M
 
 export const getAllMedicos = ({ nrosuc, fecha, codesp = "999" }) => {
     return new Promise((resolve, reject) => {
-        SSocket.sendPromise({
-            component: "medico",
-            type: "getAll",
-            estado: "cargando",
-            nrosuc: nrosuc,
-            codesp: codesp,
-        }).then(async (e: any) => {
-            if (!e.data) return;
-            // const medicos = await buildTurnos({ medicos: e.data, nrosuc: nrosuc, fecha: fecha });
-            const medicos = await buildTurnosV2({ medicos: e.data, nrosuc: nrosuc, fecha: fecha });
-            resolve(medicos);
+        const cdias = Config.rango_dias;
+
+        Promise.all([
+            SSocket.sendPromise({
+                component: "medico",
+                type: "getAll",
+                estado: "cargando",
+                nrosuc: nrosuc,
+                codesp: codesp,
+            }),
+            SSocket.sendHttpAsync(SSocket.api.root + "api", {
+                component: "turno",
+                type: "getAllV2",
+                nrosuc: nrosuc,
+                fecturIni: new SDate().toString("yyyy-MM-ddThh:mm:ss.000Z"),
+                fecturFin: new SDate(fecha, "yyyy-MM-dd").addDay(cdias).toString("yyyy-MM-ddThh:mm:ss.000Z")
+            })
+        ]).then(async ([medicosResp, turnosResp]: any) => {
+            medicosResp.data.map((med: any) => {
+                med.turnos = turnosResp.data.filter(tur => tur?.CodMed == med?.CodMed);
+            })
+            resolve(medicosResp.data);
         }).catch(e => {
             reject(e)
             console.error(e)
         })
+
+        // SSocket.sendPromise({
+        //     component: "medico",
+        //     type: "getAll",
+        //     estado: "cargando",
+        //     nrosuc: nrosuc,
+        //     codesp: codesp,
+        // }).then(async (e: any) => {
+        //     if (!e.data) return;
+        //     // const medicos = await buildTurnos({ medicos: e.data, nrosuc: nrosuc, fecha: fecha });
+        //     const medicos = await buildTurnosV2({ medicos: e.data, nrosuc: nrosuc, fecha: fecha });
+        //     resolve(medicos);
+        // }).catch(e => {
+        //     reject(e)
+        //     console.error(e)
+        // })
+
+        // SSocket.sendPromise({
+        //     component: "turno",
+        //     type: "getAllV2",
+        //     nrosuc: nrosuc,
+        //     fecturIni: new SDate().toString("yyyy-MM-ddThh:mm:ss.000Z"),
+        //     fecturFin: new SDate(fecha, "yyyy-MM-dd").addDay(cdias).toString("yyyy-MM-ddThh:mm:ss.000Z")
+        // }).then((e => {
+
+        // }))
     })
 }
 
-const buildTurnosV2 = async (p: { medicos: any, nrosuc: any, fecha: any }) => {
-    const cdias = Config.rango_dias;
+// const buildTurnosV2 = async (p: { medicos: any, nrosuc: any, fecha: any }) => {
+//     const cdias = Config.rango_dias;
 
-    // Crear arreglo de promesas
-    const fecha = new SDate(p.fecha, "yyyy-MM-dd").addDay(cdias);
-    const turnosFinal: any = await SSocket.sendPromise({
-        component: "turno",
-        type: "getAllV2",
-        nrosuc: p.nrosuc,
-        fecturIni: new SDate().toString("yyyy-MM-ddThh:mm:ss.000Z"),
-        fecturFin: fecha.toString("yyyy-MM-ddThh:mm:ss.000Z")
-    });
-    // Unir todos los turnos
-    p.medicos.map(med => {
-        med.turnos = turnosFinal.data.filter(tur => tur?.CodMed == med?.CodMed);
-    })
-    p.medicos.sort((a, b) => (a?.turnos ?? []).length < (b.turnos ?? []).length ? 1 : -1)
-    // this.setState({ medicos: medicos })
-    return p.medicos;
-}
+//     // Crear arreglo de promesas
+
+//     // Unir todos los turnos
+//     p.medicos.map(med => {
+//         med.turnos = turnosFinal.data.filter(tur => tur?.CodMed == med?.CodMed);
+//     })
+//     //p.medicos.sort((a, b) => (a?.turnos ?? []).length < (b.turnos ?? []).length ? 1 : -1)
+//     // this.setState({ medicos: medicos })
+//     return p.medicos;
+// }
 const buildTurnos = async (p: { medicos: any, nrosuc: any, fecha: any }) => {
     const cdias = Config.rango_dias;
 

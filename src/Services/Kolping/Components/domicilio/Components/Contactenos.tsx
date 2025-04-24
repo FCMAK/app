@@ -37,10 +37,16 @@ export default class Contactenos extends Component<Contactenos_props> {
             size.height = 30;
         }
         const loading = this.state.loading || this.props.loading
-        return (<SView row height={size.height} style={{
+        let child = this.props.children;
+        if(typeof this.props.children == "string"){
+            child= <SText fontSize={this.props.small ? 12 : 14} color={this.props.outline ? bgColor : STheme.color.white} font={"LondonTwo"} >{this.props.children}</SText>
+        }
+        return (<SView height={size.height} style={{
             borderRadius: 8,
             width: "100%",
             maxWidth: size.width,
+            justifyContent: "center",
+            alignItems: "center",
             ...(this.props.outline ? { borderWidth: 1, borderColor: bgColor } : { backgroundColor: bgColor }),
             ...this.props.styleA
         }} center
@@ -52,7 +58,7 @@ export default class Contactenos extends Component<Contactenos_props> {
                     this.props.onPress(this);
                 }
             }} >
-            {loading ? <SLoad /> : <SText center fontSize={14} color={this.props.outline ? bgColor : STheme.color.white} font={"LondonTwo"} >{this.props.children}</SText>}
+            {loading ? <SLoad /> : child}
         </SView>);
     }
 }

@@ -62,7 +62,9 @@ class ListaEspecialidad extends Component {
 
                 }} col={"xs-12"} row backgroundColor={STheme.color.card} height={52} center style={{ borderRadius: 8 }}>
                     <SView col={"xs-1"}  ><SIcon name={isActive ? "logoLista" : "logoListaGray"} width={26} fill={"#018992"} /></SView>
-                    <SView col={"xs-10"} ><SText font={"LondonTwo"} color={isActive ? STheme.color.text : STheme.color.gray} fontSize={17} style={{ paddingLeft: 10, textTransform: "uppercase", }}>{data[key]?.NomEsp}</SText></SView>
+                    <SView flex style={{
+                        justifyContent: "center",
+                    }} ><SText font={"LondonTwo"} color={isActive ? STheme.color.text : STheme.color.gray} fontSize={17} style={{ paddingLeft: 10, textTransform: "uppercase", }}>{data[key]?.NomEsp}</SText></SView>
                     <SView col={"xs-1"} style={{ textAlign: "right" }} ><SIcon name={"flecha1"} width={33} fill={isActive ? STheme.color.info : STheme.color.gray} style={{ right: 10 }} /></SView>
                 </SView>
                 <SHr height={15} />

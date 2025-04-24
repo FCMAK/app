@@ -27,7 +27,7 @@ class DomicilioBanner extends Component {
 
     renderItem({ index, item }) {
 
-        return <SView col={"xs-12"} height center style={{
+        return <SView width={220} height center style={{
             backgroundColor: STheme.color.card,
             borderRadius: 8,
             margin: 4,

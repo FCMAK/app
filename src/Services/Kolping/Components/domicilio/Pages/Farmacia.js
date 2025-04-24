@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SHr, SIcon, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
-import Kolping from '../../../../../Components/Kolping';
 import WhatsApp from '../../../../../Components/WhatsApp';
-import servicio_domicilio from '../../servicio_domicilio';
 import Params from "../params.json"
 import { Container } from '../../../../../Components';
 import SSocket from 'servisofts-socket';
@@ -105,8 +103,18 @@ class Farmacia extends Component {
                                 })
                             }
 
-                        }} ><SView col={"xs-12"} row center> <SIcon name='iWhatsApp' height={35} width={35} /> <SView width={10} />CONTÁCTENOS POR WHATSAPP</SView></Contactenos>
-                        <SHr height={30} /> 
+                        }} >
+                            <SView col={"xs-12"} row center>
+                                <SIcon name='iWhatsApp' height={35} width={35} />
+                                <SView width={10} />
+                                <SText style={{
+                                    color: STheme.color.white,
+                                }}>
+                                    {"contactenos por whatsapp"}
+                                </SText>
+                            </SView>
+                        </Contactenos>
+                        <SHr height={30} />
                         <DomicilioPromociones />
                         <SHr height={20} />
                         <DomicilioBanner />
@@ -114,7 +122,7 @@ class Farmacia extends Component {
                     </SView>
                     {/* </SView> */}
                 </Container>
-          
+
             </SPage >
         );
     }

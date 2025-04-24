@@ -105,7 +105,15 @@ class Laboratorio extends Component {
                                 })
                             }
 
-                        }} ><SView col={"xs-12"} row center> <SIcon name='iWhatsApp' height={35} width={35} /> <SView width={10} />CONTÁCTENOS POR WHATSAPP</SView></Contactenos>
+                        }} ><SView col={"xs-12"} row center><SIcon name='iWhatsApp' height={35} width={35} />
+                        <SView width={10}/>
+                        <SText style={{
+                            color: STheme.color.white,
+                        }}>
+                        {"CONTÁCTENOS POR WHATSAPP"}
+                        </SText>
+                        </SView>
+                        </Contactenos>
                         <SHr height={30} />
                         <DomicilioPromociones />
                         <SHr height={20} />

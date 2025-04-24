@@ -52,7 +52,8 @@ class Optica extends Component {
                     <SView col={"xs-12"} style={{ padding: 8 }} center >
                         <SView col={"xs-12"}>
                             <DomicilioTitulo dato={this.state?.data?.titulo} />
-                            <SView col={"xs-12"} height={5} style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }}></SView>
+                            <SView col={"xs-12"} height={5} style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }}>
+                            </SView>
                             <SHr height={10} />
                             <DomicilioDescripcion dato={this.state?.data?.descripcion} />
                         </SView>
@@ -105,13 +106,25 @@ class Optica extends Component {
                                 })
                             }
 
-                        }} ><SView col={"xs-12"} row center> <SIcon name='iWhatsApp' height={35} width={35} /> <SView width={10} />CONTÁCTENOS POR WHATSAPP</SView></Contactenos>
-                        <SHr height={30} />
-                        <DomicilioPromociones />
-                        <SHr height={20} />
-                        <DomicilioBanner />
-                        <SHr height={20} />
+                        }} >
+                            <SView col={"xs-12"} row center>
+                                <SView height={35} width={35}>
+                                    <SIcon name='iWhatsApp' />
+                                </SView>
+                                <SView width={10} />
+                                <SText height={20} center style={{
+                                    color: STheme.color.white,
+                                }}>{"CONTÁCTENOS POR WHATSAPP"}</SText>
+                            </SView>
+                        </Contactenos>
+
+
                     </SView>
+                    <SHr height={30} />
+                    <DomicilioPromociones />
+                    <SHr height={20} />
+                    <DomicilioBanner />
+                    <SHr height={20} />
                     {/* </SView> */}
                 </Container>
             </SPage >

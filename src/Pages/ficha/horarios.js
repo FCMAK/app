@@ -1,5 +1,5 @@
 import React from "react";
-import { SDate, SHr, SIcon, SLoad, SNavigation, SPage, SText, STheme, SView } from "servisofts-component";
+import { SDate, SHr, SIcon, SLoad, SNavigation, SNotification, SPage, SText, STheme, SView } from "servisofts-component";
 import SSocket from "servisofts-socket";
 import { Container } from "../../Components";
 import { FlatList } from "react-native";
@@ -99,13 +99,30 @@ export default class horarios extends React.Component {
     componentDidMount() {
         if (!this.codmed || !this.nrosuc) return;
         horarios.INSTANCE = this;
-        this.loadMedico().then(medico => this.setState({ medico }))
+        this.loadMedico().then(medico => this.setState({ medico })).catch(e => {
+            SNotification.send({
+                title: "No se pudo cargar el médico",
+                body: "Intente nuevamente",
+                color: STheme.color.danger,
+                time: 5000
+            })
+            SNavigation.goBack();
+        })
         this.loadTurnos().then(turnos_ => {
             // turnos = Object.entries(turnos).filter(([turnos]) => turnos.length > 0);
             // let turnos = Object.fromEntries(
             //     Object.entries(turnos_).filter((value) => value.length > 0)
-            // );
+
             this.setState({ turnos: turnos_ })
+        }).catch(e => {
+            // );
+            SNotification.send({
+                title: "No se pudo cargar los turnos",
+                body: "Intente nuevamente",
+                color: STheme.color.danger,
+                time: 5000
+            })
+            SNavigation.goBack();
         })
     }
     async loadMedico() {
