@@ -165,6 +165,7 @@ import bnext, { ReactComponent as bnextW } from './svg/bnext.svg';
 import marcadorMapa, { ReactComponent as marcadorMapaW } from './svg/marcadorMapa.svg';
 
 import paciente, { ReactComponent as pacienteW } from './svg/paciente.svg';
+import paciente2, { ReactComponent as paciente2W } from './svg/paciente2.svg';
 import salir, { ReactComponent as salirW } from './svg/salir.svg';
 import addUser, { ReactComponent as addUserW } from './svg/addUser.svg';
 import arrowR, { ReactComponent as arrowRW } from './svg/arrowR.svg';
@@ -176,6 +177,9 @@ import compartir, { ReactComponent as compartirW } from './svg/compartir.svg';
 import eliminarCuenta, { ReactComponent as eliminarCuentaW } from './svg/eliminarCuenta.svg';
 import factura, { ReactComponent as facturaW } from './svg/factura.svg';
 import flecha, { ReactComponent as flechaW } from './svg/flecha.svg';
+
+import bhome, { ReactComponent as bhomeW } from './svg/bhome.svg';
+
 
 const Assets: SAssets = {
     svg: {
@@ -341,6 +345,7 @@ const Assets: SAssets = {
         "marcadorMapa": { Native: marcadorMapa, Web: marcadorMapaW },
 
         "paciente": { Native: paciente, Web: pacienteW },
+        "paciente2": { Native: paciente2, Web: paciente2W },
         "salir": { Native: salir, Web: salirW },
         "addUser": { Native: addUser, Web: addUserW },
         "arrowR": { Native: arrowR, Web: arrowRW },
@@ -353,6 +358,8 @@ const Assets: SAssets = {
         "eliminarCuenta": { Native: eliminarCuenta, Web: eliminarCuentaW },
         "factura": { Native: factura, Web: facturaW },
         "flecha": { Native: flecha, Web: flechaW },
+
+        "bhome": { Native: bhome, Web: bhomeW },
     }
 }
 
