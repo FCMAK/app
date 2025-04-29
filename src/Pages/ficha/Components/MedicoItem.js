@@ -6,16 +6,23 @@ import SSocket from 'servisofts-socket';
 
 
 export default ({ medico, onPress }) => {
-    const { TitMed, NomMed, turnos } = medico;
-    const active = turnos.length > 0;
+    const { TitMed, NomMed, turnos, NomEsp, CodEsp } = medico;
+    // const active = turnos.length > 0;
+    const active = true;
 
     // Cambio Ruddy temporal
-    if(!active) return true;
+    // if(!active) return true;
 
     const especialidades = {}
-    turnos.map((tur) => {
-        especialidades[tur.CodEsp] = tur.NomEsp;
-    })
+    if (CodEsp && NomEsp) {
+        especialidades[CodEsp] = NomEsp;
+    }
+    if (turnos) {
+        turnos.map((tur) => {
+            especialidades[tur.CodEsp] = tur.NomEsp;
+        })
+    }
+
     const codmed = SNavigation.getParam("codmed")
     const color = STheme.color.primary
     // console.log("especialidades", codmed)
@@ -25,8 +32,8 @@ export default ({ medico, onPress }) => {
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: STheme.color.white,
-            borderBottomWidth: 1,
-            borderBottomColor: STheme.color.primary,
+            // borderBottomWidth: 1,
+            // borderBottomColor: STheme.color.primary,
         }}
         onPress={onPress}
     >

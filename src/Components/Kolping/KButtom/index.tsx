@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SLoad, SText, STheme, SView } from 'servisofts-component';
+import { SIcon, SLoad, SText, STheme, SView } from 'servisofts-component';
 
 type KButtom_props = {
     primary?: boolean,
@@ -52,7 +52,7 @@ export default class KButtom extends Component<KButtom_props> {
                     this.props.onPress(this);
                 }
             }} >
-            {loading ? <SLoad /> : <SText center fontSize={16} color={this.props.outline ? bgColor : STheme.color.white} font={"LondonTwo"} >{this.props.children}</SText>}
+            {loading ? <SLoad /> :<SText center fontSize={16} color={this.props.outline ? bgColor : STheme.color.white} font={"LondonTwo"} >{this.props.children}</SText>}
         </SView>);
     }
 }

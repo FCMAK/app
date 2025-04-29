@@ -86,7 +86,7 @@ export default class add extends Component {
                 }).then(e => {
                     SNotification.remove("add_paciente")
 
-                    if (e.data && e.data.length > 0) {
+                    if (e.data[0] != null ) {
                         console.log("EXITO", e.data)
                         if (e.data.length > 1) {
                             SNavigation.navigate("/paciente/encontrado_multiples", { ci: t.ci, arr: JSON.stringify(e.data), nav: 2 })

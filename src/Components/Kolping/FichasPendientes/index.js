@@ -33,13 +33,15 @@ class FichasPendientes extends Component {
         // console.log(item);
         // console.log(item?.data?.fecha)
         let fechac = item?.data?.fecha
+        const sdate= new SDate(fechac, "yyyy-MM-ddThh:mm:ss");
+        // console.log(fechac)
         // console.log(fechac.getDate())
-        let partes = fechac.split("-");
-        let date = new Date(Date.UTC(partes[0], partes[1] - 1, partes[2])); // Restar 1 al mes 
+        // let partes = fechac.split("-");
+        // let date = new Date(Date.UTC(partes[0], partes[1] - 1, partes[2])); // Restar 1 al mes 
 
 
-        let mesesAbreviados = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-        let diasDeLaSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+        // let mesesAbreviados = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+        // let diasDeLaSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
         let estado = "";
         let colorTexto = STheme.color.warning;
@@ -65,8 +67,10 @@ class FichasPendientes extends Component {
                 estado = "--";
                 colorTexto = STheme.color.danger;
         }
-
-        return <SView width={265} height={85} onPress={() => {
+            console.log(item)
+        return <SView width={275} style={{
+            height:110
+        }} onPress={() => {
             // console.log(item)
             if (item.estado_pago == "pagado") {
                 SNavigation.navigate("/ficha/pago", { key: item?.key })
@@ -75,7 +79,7 @@ class FichasPendientes extends Component {
             }
 
         }}>
-            <SView col={"xs-12"} padding={8} row style={{
+            <SView col={"xs-12"} padding={8} height row style={{
                 backgroundColor: "#279AA2",
                 borderRadius: 16
             }}>
@@ -84,22 +88,20 @@ class FichasPendientes extends Component {
                     backgroundColor: STheme.color.info
                 }} center>
                     {/* <SText fontSize={20} font='LondonTwo' color={STheme.color.white}>{new SDate(item?.data?.fecha).toString("dd")}</SText> */}
-                    <SText fontSize={20} font='LondonTwo' color={STheme.color.white}>{date.getUTCDate()}</SText>
-                    <SText fontSize={15} font='LondonTwo' color={STheme.color.white}>{mesesAbreviados[new Date(item?.data?.fecha).getMonth()]}</SText>
-
+                    <SText fontSize={20} font='LondonTwo' color={STheme.color.white}>{item?.data?.codtur} {item?.data?.comtur}</SText>
+                    <SText fontSize={12} font='LondonTwo' color={STheme.color.white}>{sdate.toString("dd MON")}</SText>
                 </SView>
                 <SView col={"xs-0.5"} />
                 <SView col={"xs-8.5"}>
-                    <SText fontSize={13} font='LondonMM' color={STheme.color.white}>{diasDeLaSemana[new Date(item?.data?.fecha).getDay()]}, {item?.data?.hortur}</SText>
+                    <SText fontSize={13} font='LondonMM' color={STheme.color.white}>{sdate.toString("DAY")} {item?.data?.hortur}</SText>
                     <SText fontSize={13} font='LondonTwo' color={STheme.color.white}>{item?.data?.nommed}</SText>
-                    <SView row>
-                        <SText fontSize={13} font='LondonMM' color={STheme.color.white}>{item?.data?.nomesp} | </SText>
+                    <SView flex/>
+                        <SText fontSize={13} font='LondonMM' color={STheme.color.white}>{item?.data?.nomesp}</SText>
                         <SText font='LondonTwo'  center fontSize={10} color={STheme.color.white} style={{
-                            backgroundColor: colorTexto  ,
+                            backgroundColor: colorTexto ,
                             borderRadius: 3,
                             padding: 1.5
                         }}>{estado}</SText>
-                    </SView>
 
 
                 </SView>

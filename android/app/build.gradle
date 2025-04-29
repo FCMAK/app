@@ -68,11 +68,11 @@ android {
     // }
 
     defaultConfig {
-        applicationId "com.kolping_app2"
+        applicationId "com.kolping_app3"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10017
-        versionName "1.0.17"
+        versionCode 10041
+        versionName "1.0.41"
     }
     splits {
         abi {
@@ -171,5 +171,6 @@ dependencies {
         implementation jscFlavor
     }
 }
+
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

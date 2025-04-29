@@ -28,15 +28,36 @@ export default class historico extends Component {
             SNavigation.navigate("/ficha/mensajeSinFicha")
         } else {
             let dataHistorico = Object.values(historico)
+            dataHistorico = dataHistorico.filter(a=>{
+                return a.estado_pago != "pendiente"
+            })
             let dataH = dataHistorico.sort((a, b) => {
-                const dateA = new Date(`${a.data.fecha}T${a.data?.hortur?.split(' - ')[0]}`);
-                const dateB = new Date(`${b.data.fecha}T${b.data?.hortur?.split(' - ')[0]}`);
+                const dateA = new Date(`${this.formatDateToYYYYMMDD(a.data.fecha)}T${a.data?.hortur?.split(' - ')[0]}`);
+                const dateB = new Date(`${this.formatDateToYYYYMMDD(b.data.fecha)}T${b.data?.hortur?.split(' - ')[0]}`);
                 return dateB - dateA;
                 // return dateA - dateB;
             });
 
             this.setState({ historico: dataH })
         }
+    }
+
+    formatDateToYYYYMMDD(fecha) {
+        // Crear un objeto de fecha a partir del input
+        const date = new Date(fecha);
+
+        // Validar si la fecha es válida
+        if (isNaN(date)) {
+            throw new Error("Formato de fecha inválido");
+        }
+
+        // Obtener los componentes de la fecha en UTC
+        const year = date.getUTCFullYear();
+        const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Mes (0-11) -> (1-12)
+        const day = String(date.getUTCDate()).padStart(2, '0'); // Día del mes
+
+        // Retornar en el formato deseado
+        return `${year}-${month}-${day}`;
     }
 
     historicoItem({ item, index }) {
@@ -65,7 +86,7 @@ export default class historico extends Component {
                 colorTexto = STheme.color.danger;
         }
 
-        console.log("item", item)
+        // console.log("item", item)
         return <SView col={"xs-12"} card padding={8} row onPress={() => {
             if (item.estado_pago == "pagado") {
                 SNavigation.navigate("/ficha/pago", { key: item?.key })
@@ -111,7 +132,8 @@ export default class historico extends Component {
                 borderLeftWidth: 1,
                 borderColor: STheme.color.lightGray
             }}>
-                <SText font='LondonBetween' fontSize={12}>{item.data?.fecha}</SText>
+                <SText font='LondonBetween' fontSize={12}>{this.formatDateToYYYYMMDD(item.data?.fecha)}</SText>
+                {/* <SText font='LondonBetween' fontSize={12}>{(item.data?.fecha)}</SText> */}
                 <SText font='LondonBetween' fontSize={16}>{item.data?.hortur}</SText>
             </SView>
             {/* <SText>{item.key}</SText> */}
@@ -126,6 +148,7 @@ export default class historico extends Component {
                 <FlatList
                     style={{ width: "100%" }}
                     data={this.state.historico}
+
                     // keyExtractor={(item, index) => index.toString()}
                     ItemSeparatorComponent={() => <SHr />}
                     renderItem={this.historicoItem.bind(this)}

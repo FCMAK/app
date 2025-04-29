@@ -139,7 +139,7 @@ class index extends Component {
                     // this.map.getMap().ce
                     // console.log("TODO: center map")
                 }}>
-                    <SText fontSize={14} center underLine bold>Use current location</SText>
+                    <SText fontSize={14} center underLine bold>Usar la ubicación actual</SText>
                 </SView>
             </SView>
             <SHr />

@@ -47,6 +47,7 @@ import SDoptica, { ReactComponent as SDopticaW } from './svg/servicios/Doptica.s
 import SDlaboratorio, { ReactComponent as SDlaboratorioW } from './svg/servicios/Dlaboratorio.svg';
 import Dpendiente, { ReactComponent as DpendienteW } from './svg/servicios/Dpendiente.svg';
 import Drechazado, { ReactComponent as DrechazadoW } from './svg/servicios/Drechazado.svg';
+import iWhatsApp, { ReactComponent as iWhatsAppW } from './svg/servicios/iWhatsApp.svg';
 
 // import Diciembre, { ReactComponent as DiciembreW } from './svg/sucursales/diciembre.svg';
 import ArrowRight, { ReactComponent as ArrowRightW } from './svg/sucursales/arrowRight.svg';
@@ -164,6 +165,7 @@ import bnext, { ReactComponent as bnextW } from './svg/bnext.svg';
 import marcadorMapa, { ReactComponent as marcadorMapaW } from './svg/marcadorMapa.svg';
 
 import paciente, { ReactComponent as pacienteW } from './svg/paciente.svg';
+import paciente2, { ReactComponent as paciente2W } from './svg/paciente2.svg';
 import salir, { ReactComponent as salirW } from './svg/salir.svg';
 import addUser, { ReactComponent as addUserW } from './svg/addUser.svg';
 import arrowR, { ReactComponent as arrowRW } from './svg/arrowR.svg';
@@ -174,6 +176,10 @@ import descargar, { ReactComponent as descargarW } from './svg/descargar.svg';
 import compartir, { ReactComponent as compartirW } from './svg/compartir.svg';
 import eliminarCuenta, { ReactComponent as eliminarCuentaW } from './svg/eliminarCuenta.svg';
 import factura, { ReactComponent as facturaW } from './svg/factura.svg';
+import flecha, { ReactComponent as flechaW } from './svg/flecha.svg';
+
+import bhome, { ReactComponent as bhomeW } from './svg/bhome.svg';
+
 
 const Assets: SAssets = {
     svg: {
@@ -264,6 +270,8 @@ const Assets: SAssets = {
         "SDoptica": { Native: SDoptica, Web: SDopticaW },
         "Dpendiente": { Native: Dpendiente, Web: DpendienteW },
         "Drechazado": { Native: Drechazado, Web: DrechazadoW },
+        "iWhatsApp": { Native: iWhatsApp, Web: iWhatsAppW },
+
 
         // "diciembre": { Native: Diciembre, Web: DiciembreW },
         // "chacos": { Native: Chacos, Web: ChacosW },
@@ -337,6 +345,7 @@ const Assets: SAssets = {
         "marcadorMapa": { Native: marcadorMapa, Web: marcadorMapaW },
 
         "paciente": { Native: paciente, Web: pacienteW },
+        "paciente2": { Native: paciente2, Web: paciente2W },
         "salir": { Native: salir, Web: salirW },
         "addUser": { Native: addUser, Web: addUserW },
         "arrowR": { Native: arrowR, Web: arrowRW },
@@ -348,6 +357,9 @@ const Assets: SAssets = {
         
         "eliminarCuenta": { Native: eliminarCuenta, Web: eliminarCuentaW },
         "factura": { Native: factura, Web: facturaW },
+        "flecha": { Native: flecha, Web: flechaW },
+
+        "bhome": { Native: bhome, Web: bhomeW },
     }
 }
 

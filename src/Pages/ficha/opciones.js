@@ -39,12 +39,12 @@ export default class index extends Component {
                             <SView col={"xs-2.2"} style={{ textAlign: "right" }} ><SIcon name={"flecha1"} width={33} fill={"#018992"}  /></SView>
                         </SView>
                         <SHr height={20} /> */}
-                            <SView onPress={() => {
+                            {/* <SView onPress={() => {
                                 SNavigation.navigate("/ficha/medicos", { codesp: "1", nrosuc: this.nrosuc })
                             }} col={"xs-11"} row backgroundColor={STheme.color.card} style={{ borderRadius: 8, borderLeftWidth: 10, borderColor: STheme.color.info }} height={80} center>
                                 <SView col={"xs-9.8"} row><SView width={5} /><SText font={"LondonTwo"} fontSize={15}>MEDICINA GENERAL</SText></SView>
                                 <SView col={"xs-2.2"} style={{ textAlign: "right" }} ><SIcon name={"flecha1"} width={33} fill={"#018992"} /></SView>
-                            </SView>
+                            </SView> */}
                             <SHr height={20} />
                             <SView onPress={() => {
                                 SNavigation.navigate("/ficha/especialidades", { nrosuc: this.nrosuc })

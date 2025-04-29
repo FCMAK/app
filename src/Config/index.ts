@@ -4,5 +4,6 @@ import inputs from "./inputs"
 export default {
     theme,
     socket,
-    inputs
+    inputs,
+    rango_dias: 4,
 }

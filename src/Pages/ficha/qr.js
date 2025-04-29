@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SPage, SText, STheme, SView, SNavigation, SImage, SLoad, SDate, SMath, SNotification } from 'servisofts-component';
+import { SHr, SIcon, SPage, SText, STheme, SView, SNavigation, SImage, SLoad, SDate, SMath, SNotification, SThread } from 'servisofts-component';
 import Kolping from '../../Components/Kolping';
 import SSocket from 'servisofts-socket'
 import Container from '../../Components/Container';
@@ -11,8 +11,12 @@ class qr extends Component {
     constructor(props) {
         super(props)
         this.pk = SNavigation.getParam("key")
+
+        this.state = {}
     }
     componentDidMount() {
+        this.isrun = true;
+        this.hilo();
         SSocket.sendPromise({
             component: "orden_compra",
             type: "getByKey",
@@ -44,6 +48,19 @@ class qr extends Component {
         })
     }
 
+
+    componentWillUnmount() {
+        this.isrun = false;
+
+    }
+
+
+    hilo() {
+        new SThread(10000, "refreshSession", false).start(() => {
+            if (!this.isrun) return;
+            this.handleRealizar();
+        })
+    }
     getTotal() {
         let total = 0;
         const detalle = this.state?.data?.data?.detalle;
@@ -60,6 +77,40 @@ class qr extends Component {
     }
     handleDownload() {
         SShared.saveB64(`data:image/jpeg;base64,${this.state?.qr?.qr}`)
+    }
+
+    handleRealizar(ins) {
+        if (!this.state.qr) {
+            SNotification.send({
+                title: "Esperando el QR",
+                time: 5000
+            })
+            return;
+        }
+        if (ins) ins.setLoading(true)
+        SSocket.sendPromise({
+            component: "orden_compra",
+            type: "verificarPagoV2",
+            key: this.pk,
+            // qrid: this?.state?.qr?.id,
+            key_usuario: Model.usuario.Action.getKey()
+        }).then(e => {
+            if (ins) ins.setLoading(false)
+            if (e.data.estado_pago == "pagado") {
+                SNavigation.navigate("/ficha/pago", { key: this.pk })
+                return;
+            }
+            throw { error: "Pendiente de pago" }
+        }).catch(e => {
+            console.log(e);
+            SNotification.send({
+                title: "Verificar",
+                body: e?.error?.Message ?? (e?.error ?? "Error desconocido"),
+                time: 5000,
+            })
+            if (ins) ins.setLoading(false)
+            // console.error(e);
+        })
     }
     render() {
 
@@ -93,81 +144,25 @@ class qr extends Component {
                         <SHr height={30} />
 
                         <SView col={"xs-12"} center row>
-                            <SView width={85} height={75} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.white }}
+                            {!this?.state?.qr ? null : <SView width={85} height={75} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.white }}
                                 onPress={this.handleDownload.bind(this)}>
                                 <SText color={STheme.color.white} font='LondonBetween' fontSize={11}>DESCARGAR</SText>
                                 <SHr height={6} />
                                 <SIcon name={"descargar"} width={40} height={30} fill={STheme.color.white} />
-                                {/* <SHr height={6}/>
-                                <SHr height={1} color={STheme.color.white} />
-                                <SHr height={6}/> */}
+                            </SView>}
 
-
-                            </SView>
                             <SView width={25} />
-                            <SView width={85} height={75} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.white }}
+                            {!this?.state?.qr ? null : <SView width={85} height={75} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.white }}
                                 onPress={this.handleShare.bind(this)}>
-                                    <SText color={STheme.color.white} font='LondonBetween' fontSize={11}>COMPARTIR</SText>
-                                    <SHr height={6} />
+                                <SText color={STheme.color.white} font='LondonBetween' fontSize={11}>COMPARTIR</SText>
+                                <SHr height={6} />
                                 <SIcon name={"compartir"} width={40} height={30} fill={STheme.color.white} />
-                            </SView>
+                            </SView>}
+
                             <SHr height={30} />
                             <Kolping.KButtom secondary width={300} onPress={(ins) => {
-                                ins.setLoading(true)
-                                SSocket.sendPromise({
-                                    component: "orden_compra",
-                                    type: "verificarPago",
-                                    key: this.pk,
-                                    // qrid: this?.state?.qr?.id,
-                                    key_usuario: Model.usuario.Action.getKey()
-                                }).then(e => {
-                                    ins.setLoading(false)
-                                    if (e.data.estado_pago == "pagado") {
-                                        SNavigation.navigate("/ficha/pago", { key: this.pk })
-                                    }
-
-                                    // let lbl = "";
-                                    // switch (e.data.statusId) {
-                                    //     case 1: lbl = "Pendiente"; break;
-                                    //     case 2:
-                                    //         lbl = "Pagado";
-
-                                    //         SSocket.sendPromise({
-                                    //             component: "orden_compra",
-                                    //             type: "confirmar",
-                                    //             key: this.pk,
-                                    //             key_usuario: Model.usuario.Action.getKey(),
-                                    //             data_qr: e.data,
-                                    //         }).then(f => {
-                                    //             // ins.setLoading(false)
-                                    //             SNotification.send({
-                                    //                 title: "Exito",
-                                    //                 color: STheme.color.success
-                                    //             })
-                                    //             SNavigation.navigate("/ficha/pago", { data: f.data })
-                                    //         }).catch(e => {
-                                    //             // ins.setLoading(false)
-                                    //             console.error(e);
-                                    //         })
-
-                                    //         // SNavigation.navigate("/ficha/pago", {})
-                                    //         break;
-                                    //     case 3: lbl = "Expirado"; break;
-                                    //     case 4: lbl = "Con error"; break;
-                                    // }
-
-                                    // SNotification.send({
-                                    //     title: "Estado del QR",
-                                    //     body: lbl,
-                                    //     time: 5000
-                                    // })
-                                    // ins.setLoading(false)
-                                    // SNavigation.navigate("/ficha/pago", { data: e.data })
-                                }).catch(e => {
-                                    ins.setLoading(false)
-                                    // console.error(e);
-                                })
-                            }} >VERIFICAR </Kolping.KButtom>
+                                this.handleRealizar(ins);
+                            }} >{"YA REALICÉ EL PAGO"}</Kolping.KButtom>
                             {/* <Kolping.KButtom secondary width={100} onPress={(ins) => {
                                 ins.setLoading(true)
                               

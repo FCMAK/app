@@ -92,7 +92,7 @@ class BarraSuperior extends Component {
                         {this.getBack()}
                     </SView>
                     <View style={{
-                        flex: 1,
+                        flex: 2,
 
                         justifyContent: "center",
                         // alignItems: "center"
@@ -100,6 +100,20 @@ class BarraSuperior extends Component {
                         {this.getTitle()}
 
                     </View>
+                    <SView  style={{
+                        flex: 1,
+                        justifyContent: "center",
+                        alignItems: "flex-end",
+                        marginRight: 15,
+                        // zIndex:999,
+                        // position: "absolute",
+                        // right: 0,
+                    }} onPress={() => {
+                        SNavigation.navigate("/");
+                    }}>
+                        <SIcon name={"bhome"} fill={STheme.color.secondary} width={35} height={35} />
+                        <SView width={5} />
+                    </SView>
                 </View>
             </Animated.View>
         );

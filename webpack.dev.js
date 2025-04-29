@@ -10,15 +10,15 @@ module.exports = merge(common, {
         type: 'filesystem', // Activa la caché en disco
     },
     devServer: {
-        port: 3000,
+        port: 3001,
         // hot: true,
         historyApiFallback: true,
         liveReload: false,
         watchFiles: {
             paths: ['src/**/*'],  // Observa sólo archivos en `src`
-            options: {
-                ignored: /node_modules/, // Ignorar cambios en node_modules
-            },
+            // options: {
+            //     ignored: /node_modules/, // Ignorar cambios en node_modules
+            // },
         },
     },
     plugins: [

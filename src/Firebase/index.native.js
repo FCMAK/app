@@ -1,8 +1,6 @@
 // Import the functions you need from the SDKs you need
-//import messaging from '@react-native-firebase/messaging';
 //
 
-import { Notifications } from 'react-native-notifications';
 import { Alert, AppState, Linking, Platform } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import { PERMISSIONS, request, requestNotifications } from 'react-native-permissions'

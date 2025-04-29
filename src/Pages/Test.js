@@ -140,7 +140,6 @@ class Test extends Component {
                             <SText fontSize={20} color={STheme.color.black} height={50} center font={"LondonMM"}>LondonMM</SText>
                             <SHr />
                         </SView>
-
                         <SView col={"xs-12"}>
                             <SIcon name={"Logo"} />
                             <Code >{`<SIcon name={"Logo"} />`}</Code>

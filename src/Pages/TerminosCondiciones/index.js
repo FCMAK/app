@@ -139,8 +139,8 @@ class TerminosCondiciones extends Component {
 
         const contacto = [
             { title: 'Correo electrónico: soporte@kolping.com.bo' },
-            { title: 'Teléfono: +591 76688030' },
-            { title: 'Horario de atención: Lunes a Viernes, 9:00 AM - 4:00 PM' },
+            { title: 'Teléfono (provisional): +591 76688030' },
+            { title: 'Horario de atención (provisional): Lunes a Viernes, 9:00 AM - 4:00 PM' },
             { title: 'Al aceptar estos términos y condiciones, el usuario confirma haber leído y comprendido las políticas de uso de la aplicación y los derechos y responsabilidades que estas conllevan.' },
         ];
 

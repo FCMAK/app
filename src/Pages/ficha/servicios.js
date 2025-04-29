@@ -93,7 +93,9 @@ export default class Lista extends Component {
 
         if (!this.state.data) return <SLoad />
         let data = this.state.data ?? [];
-        if (data.length === 0) return <NoData mensaje={"No hay servicios disponibles"} />
+        console.log("dataaaaa")
+        console.log(data)
+        if ((data.length === 0) || (data[0] === null) ) return <NoData mensaje={"No hay servicios disponibles"} />
         // <SView col={"xs-12"} center >
         //     <SHr height={45} />
         //     <SIcon name={"noData"} width={150} height={174} fill={STheme.color.info} />
@@ -145,7 +147,7 @@ export default class Lista extends Component {
                                 <SText font={"LondonTwo"} fontSize={15} color={STheme.color.text} >{obj.NomPro}</SText>
                             </SView>
                             <SView col={"xs-3.5"} row height>
-                                <SView col={"xs-8"} center height backgroundColor={STheme.color.primary} padding={5}>
+                                <SView col={"xs-8"} center flex backgroundColor={STheme.color.primary} padding={5}>
                                     <SText font={"LondonTwo"} fontSize={14} color={STheme.color.white} >Bs.{obj.PreV01}</SText>
                                 </SView>
                                 <SView col={"xs-4"} center height >
@@ -213,7 +215,7 @@ export default class Lista extends Component {
 
         if (!Model.usuario.Action.getKey()) {
             SNotification.send({
-                title: "Porfavor inicia session para realizar la reserva.",
+                title: "Por favor, inicia sesión para realizar la reserva.",
                 time: 5000,
                 color: STheme.color.warning
             })

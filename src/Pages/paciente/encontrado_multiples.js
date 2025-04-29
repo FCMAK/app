@@ -107,7 +107,8 @@ export default class encontrado extends Component {
                         <SHr height={45} />
                         <Kolping.KButtom primary onPress={() => {
                             SNavigation.goBack();
-                            // SNavigation.navigate("/paciente/registro2", { ci: this.params.ci })
+                            // SNavigation.navigate("/paciente/buscar", { nav: 2 })
+                            // SNavigation.navigate("/paciente/registro2", { ci: this.params.ci, nav: 2 })
                             // SNavigation.navigate("/paciente/registro2", { ...this.datosNav })
                         }}  >REGISTRAR NUEVO PACIENTE</Kolping.KButtom>
                         {/* <SHr height={15} / > */}
