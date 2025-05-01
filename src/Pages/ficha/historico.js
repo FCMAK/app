@@ -23,12 +23,13 @@ export default class historico extends Component {
 
     getHistorico = async () => {
         // var historico = await getAllHistorico()
-        var historico = await getAllHistorico(Model.usuario.Action.getKey())
+        // var historico = await getAllHistorico(Model.usuario.Action.getKey())
+        var historico = await getAllHistorico("d51b11f5-005c-42d8-b1a5-6a7c4f128e7b")
         if (Object.keys(historico).length === 0) {
             SNavigation.navigate("/ficha/mensajeSinFicha")
         } else {
             let dataHistorico = Object.values(historico)
-            dataHistorico = dataHistorico.filter(a=>{
+            dataHistorico = dataHistorico.filter(a => {
                 return a.estado_pago != "pendiente"
             })
             let dataH = dataHistorico.sort((a, b) => {
@@ -132,6 +133,20 @@ export default class historico extends Component {
                 borderLeftWidth: 1,
                 borderColor: STheme.color.lightGray
             }}>
+                {item.estado == 0 ? <SView height={18} width={80} style={{
+                    borderTopRightRadius: 4,
+                    borderBottomLeftRadius: 4,
+                    overflow: "hidden",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: STheme.color.danger + "40",
+                    position: "absolute",
+                    top: -8,
+                    right: -7
+                }}>
+                    <SText font='LondonBetween' fontSize={10}>ANULADO</SText>
+                </SView> : null}
+
                 <SText font='LondonBetween' fontSize={12}>{this.formatDateToYYYYMMDD(item.data?.fecha)}</SText>
                 {/* <SText font='LondonBetween' fontSize={12}>{(item.data?.fecha)}</SText> */}
                 <SText font='LondonBetween' fontSize={16}>{item.data?.hortur}</SText>
