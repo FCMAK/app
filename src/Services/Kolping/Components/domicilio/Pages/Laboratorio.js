@@ -111,7 +111,7 @@ class Laboratorio extends Component {
               </SView>
             </Contactenos>
             <SHr height={30} />
-            <DomicilioPromociones />
+            <DomicilioPromociones key_servicio={"laboratorio"} />
             <SHr height={20} />
             <DomicilioBanner />
             <SHr height={20} />

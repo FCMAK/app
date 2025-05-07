@@ -112,7 +112,7 @@ class Farmacia extends Component {
               </SView>
             </Contactenos>
             <SHr height={30} />
-            <DomicilioPromociones />
+            <DomicilioPromociones key_servicio={"farmacia"} />
             <SHr height={20} />
             <DomicilioBanner />
             <SHr height={20} />

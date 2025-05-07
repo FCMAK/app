@@ -179,6 +179,8 @@ import factura, { ReactComponent as facturaW } from './svg/factura.svg';
 import flecha, { ReactComponent as flechaW } from './svg/flecha.svg';
 
 import bhome, { ReactComponent as bhomeW } from './svg/bhome.svg';
+import promos, { ReactComponent as promosW } from './svg/promos.svg';
+import promos2, { ReactComponent as promos2W } from './svg/promos2.svg';
 
 
 const Assets: SAssets = {
@@ -360,6 +362,8 @@ const Assets: SAssets = {
         "flecha": { Native: flecha, Web: flechaW },
 
         "bhome": { Native: bhome, Web: bhomeW },
+        "promos": { Native: promos, Web: promosW },
+        "promos2": { Native: promos2, Web: promos2W },
     }
 }
 

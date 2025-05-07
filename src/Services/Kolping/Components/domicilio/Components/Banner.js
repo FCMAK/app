@@ -30,7 +30,8 @@ class DomicilioBanner extends Component {
         return <SView width={220} height center style={{
             backgroundColor: STheme.color.card,
             borderRadius: 8,
-            margin: 4,
+            // margin: 4,
+            marginRight: 8,
             padding: 8,
             justifyContent: "center",
             alignItems: "center",

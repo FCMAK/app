@@ -113,7 +113,7 @@ class Optica extends Component {
 
                     </SView>
                     <SHr height={30} />
-                    <DomicilioPromociones />
+                    <DomicilioPromociones key_servicio={"optica"} />
                     <SHr height={20} />
                     <DomicilioBanner />
                     <SHr height={20} />
