@@ -23,8 +23,8 @@ export default class historico extends Component {
 
     getHistorico = async () => {
         // var historico = await getAllHistorico()
-        // var historico = await getAllHistorico(Model.usuario.Action.getKey())
-        var historico = await getAllHistorico("d51b11f5-005c-42d8-b1a5-6a7c4f128e7b")
+        var historico = await getAllHistorico(Model.usuario.Action.getKey())
+        // var historico = await getAllHistorico("d51b11f5-005c-42d8-b1a5-6a7c4f128e7b")
         if (Object.keys(historico).length === 0) {
             SNavigation.navigate("/ficha/mensajeSinFicha")
         } else {
