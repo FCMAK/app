@@ -59,7 +59,7 @@ class DomicilioBanner extends Component {
                 style={{ width: "100%" }}
                 data={this.state.data}
                 horizontal={true}
-                showsHorizontalScrollIndicator={false}
+                showsHorizontalScrollIndicator={true}
                 renderItem={this.renderItem.bind(this)}
             />
         </>;
