@@ -28,12 +28,13 @@ class Laboratorio extends Component {
 
   load_data() {
     SSocket.sendPromise({
+      // service: Service.ServiceName,
       component: "servicio_informacion",
       type: "getByKey",
-      key_usuario: Model.usuario.Action.getKey(),
-      key: "890",
+      estado: "cargando",
+      key: "laboratorio"
     }).then(e => {
-      this.setState({ informacion: e.data })
+      this.setState({ data: e.data })
     }).catch(e => {
       console.log(e);
     })
@@ -41,7 +42,7 @@ class Laboratorio extends Component {
 
   render() {
 
-    var data_informacion = servicio_informacion.Actions.getByKey("laboratorio", this.props);
+    var data_informacion = this.state.data
     if (!data_informacion) return <SView col={"xs-12"} flex center> <SLoad /></SView>;
 
 
@@ -113,8 +114,8 @@ class Laboratorio extends Component {
             <SHr height={30} />
             <DomicilioPromociones key_servicio={"laboratorio"} />
             <SHr height={20} />
-            <DomicilioBanner />
-            <SHr height={20} />
+            {/* <DomicilioBanner /> */}
+            {/* <SHr height={20} /> */}
           </SView>
           {/* </SView> */}
         </Container>

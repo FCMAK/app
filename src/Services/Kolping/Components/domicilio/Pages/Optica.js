@@ -8,7 +8,6 @@ import Params from "../params.json"
 import { Container } from '../../../../../Components';
 import SSocket from 'servisofts-socket';
 import Model from '../../../../../Model';
-import DomicilioTitulo from '../Components/Titulo';
 import DomicilioDescripcion from '../Components/Descripcion';
 import DomicilioHorario from '../Components/Horario';
 import DomicilioPromociones from '../Components/Promociones';
@@ -22,9 +21,19 @@ class Optica extends Component {
         super(props);
         this.state = {};
     }
-    // componentDidMount() {
-    //  this.load_data();
-    // }
+    componentDidMount() {
+        SSocket.sendPromise({
+            // service: Service.ServiceName,
+            component: "servicio_informacion",
+            type: "getByKey",
+            estado: "cargando",
+            key: "optica"
+        }).then(e => {
+            this.setState({ data: e.data })
+        }).catch(e => {
+            console.log(e);
+        })
+    }
 
     // load_data() {
     //  SSocket.sendPromise({
@@ -39,25 +48,26 @@ class Optica extends Component {
     //  })
     // }
     render() {
-        var data_informacion = servicio_informacion.Actions.getByKey("optica", this.props);
-        if (!data_informacion) return <SView col={"xs-12"} flex center> <SLoad /></SView>;
+        var data_informacion = this.state.data
+        // var data_informacion = servicio_informacion.Actions.getByKey("optica", this.props);
+        // if (!data_informacion) return <SView col={"xs-12"} flex center> <SLoad /></SView>;
         return (
             <SPage title={'A domicilio'} >
-                <Container>
+                <Container loading={!this.state.data}>
                     <SHr height={20} />
                     <SView col={"xs-12"} style={{ padding: 8 }} center >
                         <SView col={"xs-12"}>
-                            <SText font={"LondonTwo"} fontSize={20} color={STheme.color.info}>{data_informacion.titulo}</SText>
+                            <SText font={"LondonTwo"} fontSize={20} color={STheme.color.info}>{data_informacion?.titulo}</SText>
                             <SView col={"xs-12"} height={5} style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }}>
                             </SView>
                             <SHr height={10} />
-                            <SText font={"LondonBetween"} fontSize={15}>{data_informacion.descripcion}</SText>
+                            <SText font={"LondonBetween"} fontSize={15}>{data_informacion?.descripcion}</SText>
                         </SView>
                         <SHr height={20} />
                         <SView col={"xs-12"}>
                             <SText color={STheme.color.text} font={"LondonTwo"} fontSize={16} >Horario de atención:   </SText>
                             <SHr height={8} />
-                            <SText font={"LondonBetween"} fontSize={15}>{data_informacion.horarios}</SText>
+                            <SText font={"LondonBetween"} fontSize={15}>{data_informacion?.horarios}</SText>
                         </SView>
                         <SHr height={20} />
                         <SView col={"xs-12"} center>
@@ -115,8 +125,8 @@ class Optica extends Component {
                     <SHr height={30} />
                     <DomicilioPromociones key_servicio={"optica"} />
                     <SHr height={20} />
-                    <DomicilioBanner />
-                    <SHr height={20} />
+                    {/* <DomicilioBanner />
+                    <SHr height={20} /> */}
                 </Container>
             </SPage >
         );

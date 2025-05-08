@@ -21,26 +21,27 @@ class Farmacia extends Component {
     this.state = {};
   }
 
-  // componentDidMount() {
-  //  this.load_data();
-  // }
+  componentDidMount() {
+    this.load_data();
+  }
 
-  // load_data() {
-  //  SSocket.sendPromise({
-  //   component: "servicio_informacion",
-  //   type: "getByKey",
-  //   key_usuario: Model.usuario.Action.getKey(),
-  //   key: "1234",
-  //  }).then(e => {
-  //   this.setState({ informacion: e.data })
-  //  }).catch(e => {
-  //   console.log(e);
-  //  })
-  // }
+  load_data() {
+    SSocket.sendPromise({
+      // service: Service.ServiceName,
+      component: "servicio_informacion",
+      type: "getByKey",
+      estado: "cargando",
+      key: "farmacia"
+    }).then(e => {
+      this.setState({ data: e.data })
+    }).catch(e => {
+      console.log(e);
+    })
+  }
 
   render() {
 
-    var data_informacion = servicio_informacion.Actions.getByKey("farmacia", this.props);
+    var data_informacion = this.state.data
     if (!data_informacion) return <SView col={"xs-12"} flex center> <SLoad /></SView>;
     return (
       <SPage title={'A domicilio'} >
@@ -114,8 +115,8 @@ class Farmacia extends Component {
             <SHr height={30} />
             <DomicilioPromociones key_servicio={"farmacia"} />
             <SHr height={20} />
-            <DomicilioBanner />
-            <SHr height={20} />
+            {/* <DomicilioBanner /> */}
+            {/* <SHr height={20} /> */}
           </SView>
         </Container>
 
