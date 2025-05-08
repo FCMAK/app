@@ -11,6 +11,7 @@ import categoria_farmacia from './Components/categoria_farmacia';
 import turno from './Components/turno';
 import farmacia_categoria_farmacia from './Components/farmacia_categoria_farmacia';
 import servicio_domicilio from './Components/servicio_domicilio';
+import servicio_informacion from './Components/servicio_informacion';
 import cotizacion_farmacia from './Components/cotizacion_farmacia';
 import carrito from './Components/carrito';
 
@@ -29,6 +30,7 @@ const Pages: SPageListProps = {
     ...farmacia_categoria_farmacia.Pages,
     ...turno.Pages,
     ...servicio_domicilio.Pages,
+ ...servicio_informacion.Pages,
     ...cotizacion_farmacia.Pages,
     ...servicio.Pages,
     ...carrito.Pages
@@ -45,6 +47,7 @@ const Reducers = {
     ...farmacia_categoria_farmacia.Reducers,
     ...turno.Reducers,
     ...servicio_domicilio.Reducers,
+ ...servicio_informacion.Reducers,
     ...cotizacion_farmacia.Reducers,
     ...servicio.Reducers,
     ...carrito.Reducers
@@ -56,4 +59,3 @@ export default {
     Reducers
 
 };
-
