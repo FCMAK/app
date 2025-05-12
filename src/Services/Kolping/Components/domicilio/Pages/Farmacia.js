@@ -42,23 +42,23 @@ class Farmacia extends Component {
   render() {
 
     var data_informacion = this.state.data
-    if (!data_informacion) return <SView col={"xs-12"} flex center> <SLoad /></SView>;
+    if (!data_informacion) return <SView col={"xs-12"} flex center><SLoad /></SView>;
     return (
       <SPage title={'A domicilio'} >
         <Container>
           <SHr height={20} />
           <SView col={"xs-12"} style={{ padding: 8 }} center >
             <SView col={"xs-12"}>
-              <SText font={"LondonTwo"} fontSize={20} color={STheme.color.info}>{data_informacion.titulo}</SText>
+              <SText font={"LondonTwo"} fontSize={20} color={STheme.color.info}>{data_informacion?.titulo}</SText>
               <SView col={"xs-12"} height={5} style={{ borderBottomWidth: 1, borderColor: STheme.color.primary }}></SView>
               <SHr height={10} />
-              <SText font={"LondonBetween"} fontSize={15}>{data_informacion.descripcion}</SText>
+              <SText font={"LondonBetween"} fontSize={15}>{data_informacion?.descripcion}</SText>
             </SView>
             <SHr height={20} />
             <SView col={"xs-12"}>
               <SText color={STheme.color.text} font={"LondonTwo"} fontSize={16} >Horario de atención:   </SText>
               <SHr height={8} />
-              <SText font={"LondonBetween"} fontSize={15}>{data_informacion.horarios}</SText>
+              <SText font={"LondonBetween"} fontSize={15}>{data_informacion?.horarios}</SText>
             </SView>
             <SHr height={20} />
             <SView col={"xs-12"} center>

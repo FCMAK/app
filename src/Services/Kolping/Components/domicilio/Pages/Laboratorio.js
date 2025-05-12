@@ -43,9 +43,7 @@ class Laboratorio extends Component {
   render() {
 
     var data_informacion = this.state.data
-    if (!data_informacion) return <SView col={"xs-12"} flex center> <SLoad /></SView>;
-
-
+    if (!data_informacion) return <SView col={"xs-12"} flex center><SLoad /></SView>;
     return (
       <SPage title={'A domicilio'} >
         <Container>
@@ -67,8 +65,6 @@ class Laboratorio extends Component {
             <SView col={"xs-12"} center>
               <SHr height={25} />
             </SView>
-
-
             <Contactenos primary onPress={(btn) => {
               var usuario = Model.usuario.Action.getUsuarioLog();
               if (!usuario) {
@@ -114,8 +110,6 @@ class Laboratorio extends Component {
             <SHr height={30} />
             <DomicilioPromociones key_servicio={"laboratorio"} />
             <SHr height={20} />
-            {/* <DomicilioBanner /> */}
-            {/* <SHr height={20} /> */}
           </SView>
           {/* </SView> */}
         </Container>
