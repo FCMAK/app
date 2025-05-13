@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { View, Text } from 'react-native';
-import { SDate, SHr, SInput, SNavigation, SPage, SText, SView, SBuscador, SImage, STheme } from 'servisofts-component';
+import { SDate, SHr, SInput, SNavigation, SPage, SText, SView, SBuscador, SImage, STheme, SIcon } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import { Container } from '../../Components';
 import { getAllHistorico } from './Actions';
@@ -118,6 +118,14 @@ export default class historico extends Component {
                 <SHr height={1} color={STheme.color.lightGray} />
                 <SHr height={5} />
                 <SText font='LondonBetween' center fontSize={10.5} color={colorTexto}>{estado}</SText>
+                {/* <SHr height={5} /> */}
+
+                {item.qrid != null ? <SView col={"xs-12"} row style={{alignItems: "center"}}>
+                    <SIcon name={"iconqr"} width={10} height={10} fill={STheme.color.gray} />
+                    <SView width={5} />
+                    <SText font='LondonBetween' fontSize={11} color={STheme.color.gray}>ID: {item.qrid}</SText>
+                </SView> : null}
+
             </SView>
             <SView col={"xs-2"} center style={{
                 padding: 5,

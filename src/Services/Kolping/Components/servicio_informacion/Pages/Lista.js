@@ -27,7 +27,7 @@ class Lista extends Component {
                 { key: "descripcion", label: "Descripcion", width: 450 },
                 { key: "horarios", label: "horarios", width: 200 },
                 { key: "telefono", label: "telefono", width: 120 },
-                { key: "observacion", label: "observacion", width: 90 },
+                // { key: "observacion", label: "observacion", width: 90 },
                 {
                     key: "key-editar", label: "Editar", width: 50, center: true,
                     component: (item) => {
@@ -36,14 +36,14 @@ class Lista extends Component {
                         </SView>
                     }
                 },
-                // {
-                //     key: "key-eliminar", label: "Eliminar", width: 70, center: true,
-                //     component: (key) => {
-                //         return <SView width={35} height={35} onPress={() => { SPopup.confirm({ title: "Eliminar", message: "¿Esta seguro de eliminar?", onPress: () => { Parent.Actions.eliminar(data_informacion[key], this.props) } }) }}>
-                //             <SIcon name={'Delete'} />
-                //         </SView>
-                //     }
-                // },
+                {
+                    key: "key-eliminar", label: "Eliminar", width: 70, center: true,
+                    component: (key) => {
+                        return <SView width={35} height={35} onPress={() => { SPopup.confirm({ title: "Eliminar", message: "¿Esta seguro de eliminar?", onPress: () => { Parent.Actions.eliminar(data_informacion[key], this.props) } }) }}>
+                            <SIcon name={'Delete'} />
+                        </SView>
+                    }
+                },
                 {
                     key: "key-editar", label: "Promos", width: 50, center: true,
                     component: (item) => {

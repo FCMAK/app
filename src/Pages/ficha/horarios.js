@@ -199,6 +199,7 @@ export default class horarios extends React.Component {
     renderDiasItem({ key, obj }) {
         // if(!obj) return null;
         let fecha = new SDate(key, "yyyy-MM-dd");
+   
         const active = key == this.state.fecha;
         const disponible = obj.length > 0;
         const colorText = active ? STheme.color.secondary : STheme.color.text;
@@ -306,7 +307,7 @@ export default class horarios extends React.Component {
         let dataAllHorario = this.state.medico?.TurMed;
         if (!dataAllHorario) return null;
         if (dataAllHorario.length <= 0) return null;
-        let diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+        let diasSemana = ["", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
         return <>
             <SView col={"xs-12"} >
                 <SText col={"xs-12"} fontSize={15} font="LondonBetween" >Horarios normales de atención</SText>

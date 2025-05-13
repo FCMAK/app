@@ -34,9 +34,9 @@ class Registro extends Component {
             inputs={{
                 titulo: { label: "Titulo", isRequired: true, defaultValue: this.data["titulo"] },
                 descripcion: { label: "Descripción", isRequired: true, defaultValue: this.data["descripcion"], height: 80, type: "textArea" },
-                horarios: { label: "Horarios", isRequired: true, defaultValue: this.data["horarios"], height: 60, type: "textArea", },
-                telefono: { label: "Teléfono", type: "phone", isRequired: true, defaultValue: this.data["telefono"] },
-                observacion: { label: "Observación", isRequired: true, defaultValue: this.data["observacion"], height: 60, type: "textArea", },
+                horarios: { label: "Horarios",  defaultValue: this.data["horarios"], height: 60, type: "textArea", },
+                telefono: { label: "Teléfono", type: "phone",  defaultValue: this.data["telefono"] },
+                observacion: { label: "Observación",  defaultValue: this.data["observacion"], height: 120, type: "textArea", },
             }}
             onSubmitName={"Guardar"}
             onSubmit={(values) => {
