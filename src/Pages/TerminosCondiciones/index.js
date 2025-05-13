@@ -27,7 +27,7 @@ class TerminosCondiciones extends Component {
             estado: "cargando",
             //   key: "laboratorio"
         }).then(e => {
-            this.setState({ data: e.data })
+            this.setState({ data: e.data["9105adc7-beba-437e-b32a-4cf6bcf27b28"] })
         }).catch(e => {
             console.log(e);
         })
@@ -40,9 +40,9 @@ class TerminosCondiciones extends Component {
        
 
         return (
-            <SPage title={'Términos y condiciones'} center disableScroll >
+            <SPage title={'Términos y condiciones'} center  >
                 <SView col={"xs-12"} center height backgroundColor={STheme.color.background}>
-                    <SView col={"xs-12 md-8 xl-4"} center height={120} style={{
+                    {/* <SView col={"xs-12 md-8 xl-4"} center height={120} style={{
                         position: 'absolute',
                         bottom: 0,
                         backgroundColor: STheme.color.background,
@@ -51,12 +51,8 @@ class TerminosCondiciones extends Component {
                         overflow: 'hidden',
                     }} >
                         <BackgroundImage />
-                        {/* <SView >
-                            <Kolping.KButtom primary onPress={() => {
-                                SNavigation.goBack();
-                            }}>ACEPTAR</Kolping.KButtom>
-                        </SView> */}
-                    </SView>
+                        
+                    </SView> */}
                     <SScrollView2 disableHorizontal >
                         <SView col={"xs-12"} center >
                             <SView col={"xs-11 md-6 xl-4"}    >
@@ -68,17 +64,17 @@ class TerminosCondiciones extends Component {
                                 </SText> */}
                                 <SText center color={STheme.color.text} fontSize={16} style={{
                                 }} font={"LondonTwo"}>
-                                    {this.state.data?.["9105adc7-beba-437e-b32a-4cf6bcf27b28"]?.titulo}
+                                    {this.state.data?.titulo}
                                 </SText>
 
 
                                 <SHr height={20} />
                                 <SText justify color={STheme.color.text} fontSize={14} style={{
                                 }} font={"LondonMM"}>
-                                    {this.state.data?.["9105adc7-beba-437e-b32a-4cf6bcf27b28"]?.descripcion}
+                                    {this.state.data?.descripcion}
                                 </SText>
 
-                                <SMD>{this.state.data?.["9105adc7-beba-437e-b32a-4cf6bcf27b28"]?.observacion}</SMD>
+                                <SMD>{this.state.data?.observacion}</SMD>
 
                                 <SHr height={200} />
                             </SView>
