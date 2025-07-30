@@ -192,14 +192,18 @@ class Confirmacion extends Component {
                                         throw { error: e?.data?.message ?? "Error desconocido." }
                                     }
                                     ins.setLoading(false)
-                                    SNavigation.navigate("/ficha/qr", { key: this.pk })
+                                    // SNavigation.navigate("/ficha/qr", { key: this.pk })
+                                    SNavigation.reset("/ficha/qr", { key: this.pk })
+                                    // SNavigation.replace("/ficha/qr", { key: this.pk })
                                     // SNavigation.navigate("/ficha/pago", {data:e.data})
                                 }).catch(e => {
                                     ins.setLoading(false)
                                     switch (e?.error) {
                                         case "Existen turnos no disponibles para la venta":
+                                        case "turno no disponible":
+                                        case "Uno de los Turnos no se encuantra disponible":
                                             SNotification.send({
-                                                title: "Error",
+                                                title: "Error, elegir otro turno",
                                                 body: e?.error ?? "Error desconocido.",
                                                 color: STheme.color.danger,
                                                 time: 5000,
@@ -207,7 +211,6 @@ class Confirmacion extends Component {
                                             if (horarios.INSTANCE) horarios.INSTANCE.componentDidMount()
                                             SNavigation.navigate("/ficha/horarios", { codmed: dataDoctor.CodMed, fecha: fecha, nrosuc: suc.NroSuc })
                                             break;
-
                                         default:
                                             SNotification.send({
                                                 title: "Error",
@@ -223,6 +226,7 @@ class Confirmacion extends Component {
                                     //     time: 5000,
                                     // })
                                     console.error(e);
+                                    // SNavigation.navigate("/ficha/horarios", { codmed: dataDoctor.CodMed, fecha: fecha, nrosuc: suc.NroSuc })
                                 })
                             }} >PAGAR </Kolping.KButtom>
                         </SView>
