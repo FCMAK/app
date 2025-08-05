@@ -6,6 +6,7 @@ import SSocket from 'servisofts-socket'
 import Container from '../../Components/Container';
 import Model from '../../Model';
 import SShared from '../../Components/SShared';
+import { BackHandler } from 'react-native';
 
 class qr extends Component {
     constructor(props) {
@@ -15,6 +16,11 @@ class qr extends Component {
         this.state = {}
     }
     componentDidMount() {
+
+        this.backhandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            () => true // Prevent back button from working
+        )
         this.isrun = true;
         this.hilo();
         SSocket.sendPromise({
@@ -51,6 +57,7 @@ class qr extends Component {
 
     componentWillUnmount() {
         this.isrun = false;
+        this.backhandler.remove(); // Limpia el listener
 
     }
 
@@ -129,7 +136,7 @@ class qr extends Component {
         // let fecha_final = "yyy-Mm-DD"
         const fecha = this.state?.data?.data?.fecha;
         return (
-            <SPage title={'Pago Qr'} >
+            <SPage title={'Pago Qr'} preventBack >
                 <SHr height={10} />
                 <Container >
                     {/* <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row center> */}
