@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList } from 'react-native';
-import { SForm, SHr, SImage, SLoad, SNavigation, SPage, SText, STheme, SThread, SView } from 'servisofts-component';
+import { SForm, SHr, SIcon, SImage, SLoad, SNavigation, SNotification, SPage, SPopup, SText, STheme, SThread, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import { Container } from '../../Components';
 import Model from '../../Model';
@@ -51,6 +51,45 @@ export default class root extends Component {
                 SNavigation.goBack();
             }
         }}>
+            <SView width={30} height={30} center
+                style={{ borderRadius: 50, overflow: "hidden", position: "absolute", right: 0, top: 0, backgroundColor: STheme.color.danger, borderRadius: 50 }}
+                onPress={() => {
+                    SPopup.confirm({
+                        title: "Eliminar",
+                        message: "¿Estás seguro de eliminar el paciente?",
+                        onPress: () => {
+                            SSocket.sendPromise({
+                                component: "paciente_usuario",
+                                type: "editar",
+                                data: {
+                                    ...item,
+                                    estado: 0,
+                                }
+                            }).then(e => {
+                                SNotification.send({
+                                    title: "Paciente eliminado",
+                                    body: "El paciente ha sido eliminado correctamente.",
+                                    color: STheme.color.success,
+                                    time: 5000
+                                })
+                                this.componentDidMount();
+                            }).catch(e => {
+                                console.error(e);
+                                SNotification.send({
+                                    title: "No se pudo eliminar el paciente",
+                                    body: "Intente nuevamente",
+                                    color: STheme.color.danger,
+                                    time: 5000
+                                })
+                            })
+                        },
+                    })
+
+
+                }}
+            >
+                <SIcon name={"deleteIcon"} fill={STheme.color.white} width={15} height={15} />
+            </SView>
             <SView width={60} height={60} >
                 <SImage src={require("../../Assets/img/noimage.jpg")} style={{ borderRadius: 50, borderWidth: 1, borderColor: STheme.color.primary }} />
             </SView>

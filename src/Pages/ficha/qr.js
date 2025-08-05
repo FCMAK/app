@@ -90,7 +90,8 @@ class qr extends Component {
         if (ins) ins.setLoading(true)
         SSocket.sendPromise({
             component: "orden_compra",
-            type: "verificarPagoV2",
+            // type: "verificarPagoV2",
+            type: "verificarPreOrden",
             key: this.pk,
             // qrid: this?.state?.qr?.id,
             key_usuario: Model.usuario.Action.getKey()

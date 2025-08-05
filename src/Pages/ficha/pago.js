@@ -19,7 +19,8 @@ class Pago extends Component {
     componentDidMount() {
         SSocket.sendPromise({
             component: "orden_compra",
-            type: "verificarPagoV2",
+            // type: "verificarPagoV2",
+            type: "verificarPreOrden",
             key: this.key,
             key_usuario: Model.usuario.Action.getKey()
         }).then(e => {

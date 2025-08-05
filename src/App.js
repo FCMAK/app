@@ -46,7 +46,7 @@ const App = (props) => {
     <Redux>
       <ErrorBoundary>
         <SComponentContainer
-          // debug
+          debug
           socket={SSocket}
           assets={Assets}
           inputs={Config.inputs}
