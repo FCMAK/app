@@ -7,6 +7,7 @@ import servicios from './servicios';
 import orden from "./orden"
 import confirmar from './confirmar';
 import historico from './historico'
+import historico_kolping from './historico_kolping'
 import pago from './pago';
 import qr from './qr';
 import mensajeSinFicha from './mensajeSinFicha';
@@ -27,6 +28,7 @@ export default SPage.combinePages(Parent.name, {
     orden,
     confirmar,
     historico,
+    historico_kolping,
     mensajeSinFicha,
     opciones,
     especialidades

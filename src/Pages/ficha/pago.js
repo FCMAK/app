@@ -225,7 +225,7 @@ class Pago extends Component {
                 <SView col={"xs-12"} center>
                     <SHr height={65} />
                     <Kolping.KButtom primary onPress={() => {
-                        SNavigation.navigate("/")
+                        SNavigation.reset("/")
                     }} >ACEPTAR </Kolping.KButtom>
                     <SHr height={30} />
                 </SView>

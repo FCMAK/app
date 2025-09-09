@@ -241,10 +241,11 @@ class Confirmacion extends Component {
                                     // SNavigation.navigate("/ficha/pago", {data:e.data})
                                 }).catch(e => {
                                     ins.setLoading(false)
-                                    switch (e?.error) {
+                                    switch ((e?.error ?? "").toLowerCase()) {
                                         case "Existen turnos no disponibles para la venta":
-                                        case "turno no disponible":
-                                        case "Uno de los Turnos no se encuentra disponible":
+                                        case "turno no disponible".toLowerCase():
+                                        case "Uno de los Turnos no se encuantra disponible".toLowerCase():
+                                        case "Uno de los Turnos no se encuentra disponible".toLowerCase():
                                             SNotification.send({
                                                 title: "Error",
                                                 body: e?.error ?? "Error desconocido.",

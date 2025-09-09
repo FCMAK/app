@@ -18,12 +18,18 @@ export default class historico extends Component {
     }
 
     componentDidMount() {
+
         this.getHistorico();
     }
 
     getHistorico = async () => {
         // var historico = await getAllHistorico()
-        var historico = await getAllHistorico(Model.usuario.Action.getKey())
+        var resp = await SSocket.sendPromise({
+            component: "orden_compra",
+            type: "historyPreOrden",
+            key_usuario: Model.usuario.Action.getKey()
+        })
+        var historico = resp.data;
         // var historico = await getAllHistorico("d51b11f5-005c-42d8-b1a5-6a7c4f128e7b")
         if (Object.keys(historico).length === 0) {
             SNavigation.navigate("/ficha/mensajeSinFicha")
@@ -33,8 +39,10 @@ export default class historico extends Component {
                 return a.estado_pago != "pendiente"
             })
             let dataH = dataHistorico.sort((a, b) => {
-                const dateA = new Date(`${this.formatDateToYYYYMMDD(a.data.fecha)}T${a.data?.hortur?.split(' - ')[0]}`);
-                const dateB = new Date(`${this.formatDateToYYYYMMDD(b.data.fecha)}T${b.data?.hortur?.split(' - ')[0]}`);
+                // const dateA = new SDate(a.fecReg, "yyyy-MM-ddThh:mm:ss").date
+                const dateA = new SDate(a?.solApp?.solSer?.[0]?.fecSol, "yyyy-MM-ddThh:mm:ss").date
+                // const dateB = new SDate(b.fecReg, "yyyy-MM-ddThh:mm:ss").date
+                const dateB = new SDate(b?.solApp?.solSer?.[0]?.fecSol, "yyyy-MM-ddThh:mm:ss").date
                 return dateB - dateA;
                 // return dateA - dateB;
             });
@@ -65,22 +73,18 @@ export default class historico extends Component {
         let estado = "";
         let colorTexto = STheme.color.warning;
 
-        switch (item.estado_pago) {
-            case "pagado":
+        switch (item.codEst) {
+            case "PAG":
                 estado = "PAGADO";
                 colorTexto = STheme.color.success;
                 break;
-            case "esperando_pago":
+            case "PEN":
                 estado = "PENDIENTE PAGO";
                 colorTexto = STheme.color.warning;
                 break;
-            case "esperando_confirmacion":
-                estado = "ESPERANDO CONFIRMACIÓN";
-                colorTexto = STheme.color.warning;
-                break;
-            case "pendiente":
-                estado = "PENDIENTE";
-                colorTexto = STheme.color.warning;
+            case "ANU":
+                estado = "ANULADO";
+                colorTexto = STheme.color.danger;
                 break;
             default:
                 estado = "--";
@@ -89,11 +93,11 @@ export default class historico extends Component {
 
         // console.log("item", item)
         return <SView col={"xs-12"} card padding={8} row onPress={() => {
-            if (item.estado_pago == "pagado") {
-                SNavigation.navigate("/ficha/pago", { key: item?.key })
-            } else {
-                SNavigation.navigate("/ficha/qr", { key: item?.key })
-            }
+            // if (item.codEst == "PAG") {
+            //     SNavigation.navigate("/ficha/pago", { key: item?.key })
+            // } else {
+            //     SNavigation.navigate("/ficha/qr", { key: item?.key })
+            // }
 
 
         }}>
@@ -109,8 +113,8 @@ export default class historico extends Component {
                 </SView>
                 <SView width={8} />
                 <SView col={"xs-9"}>
-                    <SText font='LondonTwo' fontSize={12}>{item.data?.nommed}</SText>
-                    <SText font='LondonBetween' color={STheme.color.info}>{item.data?.nomesp}</SText>
+                    <SText font='LondonTwo' fontSize={12}>{item?.solApp?.solSer?.[0]?.nomMed}</SText>
+                    <SText font='LondonBetween' color={STheme.color.info}>{item?.solApp?.solSer?.[0]?.nomEsp}</SText>
 
 
                 </SView>
@@ -120,10 +124,10 @@ export default class historico extends Component {
                 <SText font='LondonBetween' center fontSize={10.5} color={colorTexto}>{estado}</SText>
                 {/* <SHr height={5} /> */}
 
-                {item.qrid != null ? <SView col={"xs-12"} row style={{ alignItems: "center" }}>
+                {item.idePag != null ? <SView col={"xs-12"} row style={{ alignItems: "center" }}>
                     <SIcon name={"iconqr"} width={10} height={10} fill={STheme.color.gray} />
                     <SView width={5} />
-                    <SText font='LondonBetween' fontSize={11} color={STheme.color.gray}>ID: {item.qrid}</SText>
+                    <SText font='LondonBetween' fontSize={11} color={STheme.color.gray}>ID: {item.idePag}</SText>
                 </SView> : null}
 
             </SView>
@@ -133,7 +137,7 @@ export default class historico extends Component {
                 borderColor: STheme.color.lightGray
             }}>
                 <SText font='LondonTwo' fontSize={10}>FICHA</SText>
-                <SText font='LondonTwo' fontSize={20}>{item.data?.codtur}{item.data?.comtur}</SText>
+                <SText font='LondonTwo' fontSize={20}>{item?.solApp?.solSer?.[0]?.codTur}</SText>
 
             </SView>
             <SView col={"xs-3"} center style={{
@@ -155,8 +159,8 @@ export default class historico extends Component {
                     <SText font='LondonBetween' fontSize={10}>ANULADO</SText>
                 </SView> : null}
 
-                <SText font='LondonBetween' fontSize={12}>{this.formatDateToYYYYMMDD(item.data?.fecha)}</SText>
-                {/* <SText font='LondonBetween' fontSize={12}>{(item.data?.fecha)}</SText> */}
+                {/* <SText font='LondonBetween' fontSize={12}>{this.formatDateToYYYYMMDD(item.data?.fecha)}</SText> */}
+                <SText font='LondonBetween' fontSize={12}>{(item?.solApp?.solSer?.[0]?.fecSol || "").substring(0, 10)}</SText>
                 <SText font='LondonBetween' fontSize={16}>{item.data?.hortur}</SText>
             </SView>
             {/* <SText>{item.key}</SText> */}
