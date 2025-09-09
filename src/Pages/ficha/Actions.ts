@@ -210,12 +210,28 @@ export const getAllHistorico = (key_usuario) => {
         })
     })
 
-}
+} 
 export const getActivas = (key_usuario) => {
     return new Promise((resolve, reject) => {
         SSocket.sendPromise({
             component: "orden_compra",
             type: "getActivas",
+            key_usuario
+        }).then((e: any) => {
+            if (!e.data) return reject(e);
+            resolve(e.data);
+        }).catch(e => {
+            reject(e);
+        })
+    })
+
+}
+
+export const getActivasKolping = (key_usuario) => {
+    return new Promise((resolve, reject) => {
+        SSocket.sendPromise({
+            component: "orden_compra",
+            type: "getActivasKolping",
             key_usuario
         }).then((e: any) => {
             if (!e.data) return reject(e);

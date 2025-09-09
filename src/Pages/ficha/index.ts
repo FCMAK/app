@@ -9,7 +9,11 @@ import confirmar from './confirmar';
 import historico from './historico'
 import historico_kolping from './historico_kolping'
 import pago from './pago';
+import pago_kolping from './pago_kolping';
+import pago_nulo from './pago_nulo';
+
 import qr from './qr';
+import qr_kolping from './qr_kolping';
 import mensajeSinFicha from './mensajeSinFicha';
 import opciones from "./opciones";
 import especialidades from './especialidades';
@@ -21,7 +25,10 @@ export default SPage.combinePages(Parent.name, {
     // "": root,
     "": root,
     pago,
+    pago_kolping,
+    pago_nulo,
     qr,
+    qr_kolping,
     medicos,
     horarios,
     servicios,

@@ -1,0 +1,201 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { SHr, SIcon, SPage, SText, STheme, SView, SNavigation, SImage, SLoad, SDate, SMath, SNotification, SThread } from 'servisofts-component';
+import Kolping from '../../Components/Kolping';
+import SSocket from 'servisofts-socket'
+import Container from '../../Components/Container';
+import Model from '../../Model';
+import SShared from '../../Components/SShared';
+import { BackHandler } from 'react-native';
+
+class qr_kolping extends Component {
+    constructor(props) {
+        super(props)
+        this.pk = SNavigation.getParam("key")
+
+        this.state = {}
+    }
+    componentDidMount() {
+
+        this.backhandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            () => true // Prevent back button from working
+        )
+        this.isrun = true;
+        this.hilo();
+        SSocket.sendPromise({
+            component: "orden_compra",
+            // type: "getByKey",
+            type: "getPreOrden",
+            key_usuario: Model.usuario.Action.getKey(),
+            key: this.pk,
+        }).then(e => {
+
+            // SSocket.sendPromise({
+            //     component: "orden_compra",
+            //     type: "solicitarQr",
+            //     // key: e?.data?.key
+            //     key: e.data?.nroOrd
+            // }, 1000 * 60).then(e => {
+            //     this.setState({ qr: e?.data })
+            // }).catch(e => {
+            //     console.error(e);
+            // })
+            if (e.data?.data?.nrosuc) {
+                // SSocket.sendPromise({
+                //     component: "sucursal",
+                //     type: "getAll",
+                //     key_usuario: Model.usuario.Action.getKey(),
+                // }).then(b => {
+                //     const suc = b.data.find(c => c.NroSuc == e.data?.data?.nrosuc)
+                //     this.setState({ sucursal: suc })
+                // })
+            }
+            this.setState({ data: e.data  })
+        }).catch(e => {
+        })
+    }
+
+
+    componentWillUnmount() {
+        this.isrun = false;
+        this.backhandler.remove(); // Limpia el listener
+
+    }
+
+
+    hilo() {
+        new SThread(10000, "refreshSession", false).start(() => {
+            if (!this.isrun) return;
+            this.handleRealizar();
+        })
+    }
+    getTotal() {
+        let total = 0;
+        const detalle = this.state?.data?.data?.detalle;
+        if (detalle) {
+            detalle.map((a) => {
+                total += a.PreV01
+            })
+        }
+        return total;
+    }
+
+    handleShare() {
+        SShared.sharedB64(`data:image/jpeg;base64,${this.state?.data?.datPag}`, { titulo: "Kolping", message: "Kolping" })
+    }
+    handleDownload() {
+        SShared.saveB64(`data:image/jpeg;base64,${this.state?.data?.datPag}`)
+    }
+
+    handleRealizar(ins) {
+        if (!this.state.data) {
+            SNotification.send({
+                title: "Esperando el QR",
+                time: 5000
+            })
+            return;
+        }
+        if (ins) ins.setLoading(true)
+        SSocket.sendPromise({
+            component: "orden_compra",
+            // type: "verificarPagoV2",
+            type: "getPreOrden",
+            key: this.pk,
+            // qrid: this?.state?.qr?.id,
+            key_usuario: Model.usuario.Action.getKey()
+        }).then(e => {
+            if (ins) ins.setLoading(false)
+            if (e.data.codEst == "PAG") {
+                SNavigation.navigate("/ficha/pago_kolping", { key: this.pk })
+                return;
+            }
+            if (e.data.codEst == "ANU") {
+                SNavigation.navigate("/ficha/pago_anulado", { key: this.pk })
+                return;
+            }
+            throw { error: "Pendiente de pago" }
+        }).catch(e => {
+            console.log(e);
+            SNotification.send({
+                title: "Verificar",
+                body: e?.error?.Message ?? (e?.error ?? "Error desconocido"),
+                time: 5000,
+            })
+            if (ins) ins.setLoading(false)
+            // console.error(e);
+        })
+    }
+    render() {
+
+        // let dataDoctor = {
+        //     TitMed: "Dr.",
+        //     NomMed: this.state?.data?.data?.nommed,
+        //     NomEsp: this.state?.data?.data?.nomesp,
+        // }
+        // let suc = {
+        //     NomSuc: this.state?.sucursal?.NomSuc,
+        //     DirSuc: this.state?.sucursal?.DirSuc,
+        //     TelSuc: this.state?.sucursal?.TelSuc
+        // }
+        // let fecha_final = this.fecha_final.toString("MONTH dd");
+        // let fecha_final = "yyy-Mm-DD"
+        const fecha = this.state?.data?.data?.fecha;
+        return (
+            <SPage title={'Pago Qr Kolping'} preventBack >
+                <SHr height={10} />
+                <Container >
+                    {/* <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} row center> */}
+                    <SView col={"xs-12"} center style={{ backgroundColor: STheme.color.primary, borderRadius: 15, padding: 20 }}>
+                        <SHr height={15} />
+                        <SText center fontSize={18} color={STheme.color.white}>Para completar la reserva de su ficha, por favor cancele el monto correspondiente escaneando el siguiente código QR.</SText>
+                        <SHr height={35} />
+                        <SView center width={250} height={250}>
+                            {!this?.state?.data ? <SLoad /> : <SImage enablePreview src={`data:image/jpeg;base64,${this.state?.data?.datPag}`} />}
+                        </SView>
+                        <SHr />
+                        <SText color={STheme.color.secondary}>{this?.state?.data?.idePag}</SText>
+                        <SHr height={30} />
+
+                        <SView col={"xs-12"} center row>
+                            {!this?.state?.data ? null : <SView width={85} height={75} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.white }}
+                                onPress={this.handleDownload.bind(this)}>
+                                <SText color={STheme.color.white} font='LondonBetween' fontSize={11}>DESCARGAR</SText>
+                                <SHr height={6} />
+                                <SIcon name={"descargar"} width={40} height={30} fill={STheme.color.white} />
+                            </SView>}
+
+                            <SView width={25} />
+                            {!this?.state?.data ? null : <SView width={85} height={75} center style={{ borderRadius: 15, backgroundColor: STheme.color.info, borderWidth: 1, borderColor: STheme.color.white }}
+                                onPress={this.handleShare.bind(this)}>
+                                <SText color={STheme.color.white} font='LondonBetween' fontSize={11}>COMPARTIR</SText>
+                                <SHr height={6} />
+                                <SIcon name={"compartir"} width={40} height={30} fill={STheme.color.white} />
+                            </SView>}
+
+                            <SHr height={30} />
+                            <Kolping.KButtom secondary width={300} onPress={(ins) => {
+                                this.handleRealizar(ins);
+                            }} >{"YA REALICÉ EL PAGO"}</Kolping.KButtom>
+                            {/* <Kolping.KButtom secondary width={100} onPress={(ins) => {
+                                ins.setLoading(true)
+                              
+                            }} >CONFIRMAR</Kolping.KButtom> */}
+                        </SView>
+                        <SView col={"xs-10 sm-8 md-8 lg-10 xl-10"} center>
+                            <SHr height={30} />
+                            <SText fontSize={11} center font={"Roboto-Bold"} color={STheme.color.white}>IMPORTANTE: Por favor tome en cuenta que no se aceptan cambios ni devoluciones una vez realizada la compra.</SText>
+                            <SHr height={10} />
+                        </SView>
+                    </SView>
+                    {/* </SView> */}
+                </Container>
+                <SHr height={10} />
+            </SPage>
+        );
+    }
+}
+const initStates = (state) => {
+    return { state }
+};
+export default connect(initStates)(qr_kolping);

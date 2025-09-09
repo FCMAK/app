@@ -161,7 +161,7 @@ export default class historico extends Component {
 
                 {/* <SText font='LondonBetween' fontSize={12}>{this.formatDateToYYYYMMDD(item.data?.fecha)}</SText> */}
                 <SText font='LondonBetween' fontSize={12}>{(item?.solApp?.solSer?.[0]?.fecSol || "").substring(0, 10)}</SText>
-                <SText font='LondonBetween' fontSize={16}>{item.data?.hortur}</SText>
+                <SText font='LondonBetween' fontSize={16}>{item?.solApp?.solSer?.[0]?.horTur}</SText>
             </SView>
             {/* <SText>{item.key}</SText> */}
         </SView>

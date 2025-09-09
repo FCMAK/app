@@ -237,7 +237,9 @@ class Confirmacion extends Component {
                                         throw { error: e?.data?.message ?? "Error desconocido." }
                                     }
                                     ins.setLoading(false)
-                                    SNavigation.navigate("/ficha/qr", { key: this.pk })
+                                    console.log("qqq", e?.data);
+                                    SNavigation.navigate("/ficha/qr_kolping", { key: e.data?.result?.nroOrd })
+                                    // SNavigation.navigate("/ficha/qr", { key: this.pk })
                                     // SNavigation.navigate("/ficha/pago", {data:e.data})
                                 }).catch(e => {
                                     ins.setLoading(false)
