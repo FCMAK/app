@@ -210,7 +210,7 @@ export const getAllHistorico = (key_usuario) => {
         })
     })
 
-} 
+}
 export const getActivas = (key_usuario) => {
     return new Promise((resolve, reject) => {
         SSocket.sendPromise({
@@ -235,7 +235,19 @@ export const getActivasKolping = (key_usuario) => {
             key_usuario
         }).then((e: any) => {
             if (!e.data) return reject(e);
-            resolve(e.data);
+            const curdate = new SDate().setHours(0,0,0,0)
+            const data =e.data.filter(a=>{
+                const fec=a?.solApp?.solSer?.[0]?.fecSol
+                if(curdate.isAfter(new SDate(fec,"yyyy-MM-ddThh:mm:ss"))){
+                    return false
+                }
+                return true
+            }).sort((a, b) => {
+                const dateA = new SDate(a?.solApp?.solSer?.[0]?.fecSol, "yyyy-MM-ddThh:mm:ss").getTime()
+                const dateB = new SDate(b?.solApp?.solSer?.[0]?.fecSol, "yyyy-MM-ddThh:mm:ss").getTime()
+                return dateB - dateA;
+            }); 
+            resolve(data);
         }).catch(e => {
             reject(e);
         })

@@ -93,11 +93,11 @@ export default class historico extends Component {
 
         // console.log("item", item)
         return <SView col={"xs-12"} card padding={8} row onPress={() => {
-            // if (item.codEst == "PAG") {
-            //     SNavigation.navigate("/ficha/pago", { key: item?.key })
-            // } else {
-            //     SNavigation.navigate("/ficha/qr", { key: item?.key })
-            // }
+            if (item.codEst == "PAG") {
+                SNavigation.navigate("/ficha/pago_kolping", { key: item?.nroOrd })
+            } else {
+                SNavigation.navigate("/ficha/qr_kolping", { key: item?.nroOrd })
+            }
 
 
         }}>

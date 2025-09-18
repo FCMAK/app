@@ -77,13 +77,12 @@ class Pago_kolping extends Component {
     }
 
     render() {
-        if (!this.state.data) return
-        const { confirmacion, fecReg, paciente, data, nroGrl, solApp } = this.state?.data;
-        console.log("DATA", this.state?.data)
+        // if (!this.state.data) return
+        const { confirmacion, fecReg, paciente, data, nroGrl, solApp } = this.state?.data ?? {};
         return (
             <SPage title={'Pago de Ficha Kolping'} >
                 <SHr height={30} />
-                <Container>
+                <Container loading={!this.state.data}>
                     <SView col={"xs-12"} center>
                         <SView col={"xs-12"} center >
                             <SView width={180} height={180} center style={{
@@ -216,14 +215,15 @@ class Pago_kolping extends Component {
                             }}>OdaPdf: {this.state.OdaPdf}</SText> */}
                         </SView>
                     </SView>
+                    <SView col={"xs-12"} center>
+                        <SHr height={65} />
+                        <Kolping.KButtom primary onPress={() => {
+                            SNavigation.reset("/")
+                        }} >ACEPTAR </Kolping.KButtom>
+                        <SHr height={30} />
+                    </SView>
                 </Container>
-                <SView col={"xs-12"} center>
-                    <SHr height={65} />
-                    <Kolping.KButtom primary onPress={() => {
-                        SNavigation.reset("/")
-                    }} >ACEPTAR </Kolping.KButtom>
-                    <SHr height={30} />
-                </SView>
+
             </SPage>
         );
     }
