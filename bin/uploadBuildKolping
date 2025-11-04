@@ -1,0 +1,4 @@
+ #!/bin/bash
+#  SSH="2.2"
+ SSH="appk@186.121.243.52"
+ scp -r build $SSH:/home/appk/servicios/nginx/
