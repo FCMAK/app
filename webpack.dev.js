@@ -10,7 +10,7 @@ module.exports = merge(common, {
         type: 'filesystem', // Activa la caché en disco
     },
     devServer: {
-        port: 3001,
+        port: 3002,
         // hot: true,
         historyApiFallback: true,
         liveReload: false,

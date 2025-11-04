@@ -1,4 +1,4 @@
  #!/bin/bash
 #  SSH="2.2"
- SSH="servisofts@servisofts.com"
+ SSH="servisofts@192.168.2.5"
  scp -r build $SSH:/home/servisofts/servicios/kolping/entornos/kolping/

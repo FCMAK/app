@@ -1,6 +1,6 @@
 {
   "name": "kolping_app",
-  "version": "1.0.41",
+  "version": "1.0.47",
   "description": "kolping_app",
   "scripts": {
     "start": "react-native start",
@@ -25,7 +25,6 @@
     "@react-native-google-signin/google-signin": "^13.1.0",
     "@react-navigation/native": "^5.9.6",
     "@react-navigation/stack": "^5.14.7",
-    "@shopify/flash-list": "^1.4.3",
     "@svgr/webpack": "^8.1.0",
     "crypto-js": "^4.1.1",
     "firebase": "9.23.0",

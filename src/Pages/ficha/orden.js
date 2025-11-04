@@ -98,7 +98,7 @@ const InputCita = ({ data }) => {
         <SView width={120} center>
             <SText fontSize={25} font="LondonTwo" bold color={STheme.color.primary}>{sdate.toString("dd")}</SText>
             <SText fontSize={14} font="LondonBetween" color={STheme.color.primary}>{sdate.toString("MONTH")}</SText>
-            
+
             <SView row center>
                 <SIcon name={"fhora"} width={14} height={14} fill={STheme.color.info} />
                 <SView width={4} />
@@ -219,44 +219,60 @@ export default class index extends React.Component {
 
         })
     }
-    handleChangePaciente(e) {
-        console.log(e);
+    async handleChangePaciente(e) {
+        try {
 
-        SSocket.sendPromise({
-            component: "paciente",
-            type: "getFacturacion",
-            codper: e.codper
-        }).then(e => {
 
-            if (e.data && e.data[0]) {
-                if (e.data[0].nomFac) this.input_razon_social.setValue(e.data[0].nomFac);
-                if (e.data[0].ndoFac) this.input_nit.setValue(e.data[0].ndoFac);
+            console.log(e, this.state?.data);
+            const resp_validation = await SSocket.sendPromise({
+                component: "paciente",
+                type: "validarMedicoPaciente",
+                codpac: e.codper,
+                codmed: this.state?.data?.data?.codmed
+            })
+
+            if (!resp_validation?.data?.status) {
+                throw resp_validation?.data?.message
             }
 
-            SSocket.sendPromise({
+            const resp_get_factura = await SSocket.sendPromise({
+                component: "paciente",
+                type: "getFacturacion",
+                codper: e.codper
+            })
+
+            if (resp_get_factura.data && resp_get_factura.data[0]) {
+                if (resp_get_factura.data[0].nomFac) this.input_razon_social.setValue(resp_get_factura.data[0].nomFac);
+                if (resp_get_factura.data[0].ndoFac) this.input_nit.setValue(resp_get_factura.data[0].ndoFac);
+            }
+
+
+
+            const resp_editar = await SSocket.sendPromise({
                 component: "orden_compra",
                 type: "editar",
                 data: {
                     key: this.key,
-                    codpac: e.codper + ""
+                    codpac: resp_get_factura.codper + ""
                 }
-            }).then(e => {
-                this.state.data.codpac = e.codper + ""
-                this.setState({ paciente: e })
-            }).catch(e => {
-
             })
+            this.state.data.codpac = resp_get_factura.codper + ""
+            this.setState({ paciente: e })
             console.log(e);
-        }).catch(e => {
+
+        } catch (error) {
+            this.inpPaciente.setPaciente({ alias: "Seleccione un paciente..." })
+            this.state.data.codpac = null;
+            this.setState({ paciente: null })
+
             SNotification.send({
                 title: "error",
-                body: e.error ?? "Error desconocido",
+                body: JSON.stringify(error),
                 color: STheme.color.danger,
                 time: 5000
             })
             console.error(e);
-        })
-
+        }
     }
     render() {
         return <SPage title={"Orden"}>

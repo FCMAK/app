@@ -53,7 +53,7 @@ class DetalleDomicilio extends Component {
                     <SView center>
                         <SText style={{
                             fontSize: 16,
-                        }} font={"LondonBetween"} color={STheme.color.gray} font={"LondonMM"}>{usuario["CI"] ?? "--"} </SText>
+                        }} font={"LondonBetween"} color={STheme.color.gray} >{usuario["CI"] ?? "--"} </SText>
                     </SView>
                     <SView center row>
                         <SView>
@@ -62,7 +62,7 @@ class DetalleDomicilio extends Component {
                         <SView>
                             <SText style={{
                                 fontSize: 16,
-                            }} font={"LondonBetween"} color={STheme.color.gray} font={"LondonMM"}>
+                            }} font={"LondonBetween"} color={STheme.color.gray} >
                             </SText>
                         </SView>
                         {this.whatsApp ?? "--"}
@@ -170,7 +170,7 @@ class DetalleDomicilio extends Component {
                         <SView col={"xs-12"} center>
                             {this.getContentForm()}
                             <SView col={"xs-12"} center row>
-                                <SView center width={60} height={50} center backgroundColor={STheme.color.primary} style={{ borderBottomLeftRadius: 8, borderTopLeftRadius: 8 }}
+                                <SView center width={60} height={50}  backgroundColor={STheme.color.primary} style={{ borderBottomLeftRadius: 8, borderTopLeftRadius: 8 }}
                                     onPress={() => { }}>
                                     <SText fontSize={18} font={"Roboto-Bold"} color={STheme.color.white}>AM</SText>
                                 </SView>

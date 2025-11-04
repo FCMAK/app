@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { View, Text } from 'react-native';
-import { SDate, SHr, SInput, SNavigation, SPage, SText, SView, SBuscador, SImage, STheme } from 'servisofts-component';
+import { SDate, SHr, SInput, SNavigation, SPage, SText, SView, SBuscador, SImage, STheme, SIcon } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import { Container } from '../../Components';
 import { getAllHistorico } from './Actions';
@@ -24,11 +24,12 @@ export default class historico extends Component {
     getHistorico = async () => {
         // var historico = await getAllHistorico()
         var historico = await getAllHistorico(Model.usuario.Action.getKey())
+        // var historico = await getAllHistorico("d51b11f5-005c-42d8-b1a5-6a7c4f128e7b")
         if (Object.keys(historico).length === 0) {
             SNavigation.navigate("/ficha/mensajeSinFicha")
         } else {
             let dataHistorico = Object.values(historico)
-            dataHistorico = dataHistorico.filter(a=>{
+            dataHistorico = dataHistorico.filter(a => {
                 return a.estado_pago != "pendiente"
             })
             let dataH = dataHistorico.sort((a, b) => {
@@ -117,6 +118,14 @@ export default class historico extends Component {
                 <SHr height={1} color={STheme.color.lightGray} />
                 <SHr height={5} />
                 <SText font='LondonBetween' center fontSize={10.5} color={colorTexto}>{estado}</SText>
+                {/* <SHr height={5} /> */}
+
+                {item.qrid != null ? <SView col={"xs-12"} row style={{ alignItems: "center" }}>
+                    <SIcon name={"iconqr"} width={10} height={10} fill={STheme.color.gray} />
+                    <SView width={5} />
+                    <SText font='LondonBetween' fontSize={11} color={STheme.color.gray}>ID: {item.qrid}</SText>
+                </SView> : null}
+
             </SView>
             <SView col={"xs-2"} center style={{
                 padding: 5,
@@ -132,6 +141,20 @@ export default class historico extends Component {
                 borderLeftWidth: 1,
                 borderColor: STheme.color.lightGray
             }}>
+                {item.estado == 0 ? <SView height={18} width={80} style={{
+                    borderTopRightRadius: 4,
+                    borderBottomLeftRadius: 4,
+                    overflow: "hidden",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: STheme.color.danger + "40",
+                    position: "absolute",
+                    top: -8,
+                    right: -7
+                }}>
+                    <SText font='LondonBetween' fontSize={10}>ANULADO</SText>
+                </SView> : null}
+
                 <SText font='LondonBetween' fontSize={12}>{this.formatDateToYYYYMMDD(item.data?.fecha)}</SText>
                 {/* <SText font='LondonBetween' fontSize={12}>{(item.data?.fecha)}</SText> */}
                 <SText font='LondonBetween' fontSize={16}>{item.data?.hortur}</SText>

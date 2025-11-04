@@ -179,7 +179,7 @@ class Confirmacion extends Component {
                         </SView>
                         <SView col={"xs-12"} center>
                             <SHr height={20} />
-                            <Kolping.KButtom secondary width={300} onPress={(ins) => {
+                            {/* <Kolping.KButtom secondary width={300} onPress={(ins) => {
                                 ins.setLoading(true)
                                 SSocket.sendPromise({
                                     component: "orden_compra",
@@ -192,12 +192,62 @@ class Confirmacion extends Component {
                                         throw { error: e?.data?.message ?? "Error desconocido." }
                                     }
                                     ins.setLoading(false)
-                                    SNavigation.navigate("/ficha/qr", { key: this.pk })
+                                    // SNavigation.navigate("/ficha/qr", { key: this.pk })
+                                    SNavigation.reset("/ficha/qr", { key: this.pk })
+                                    // SNavigation.replace("/ficha/qr", { key: this.pk })
                                     // SNavigation.navigate("/ficha/pago", {data:e.data})
                                 }).catch(e => {
                                     ins.setLoading(false)
                                     switch (e?.error) {
                                         case "Existen turnos no disponibles para la venta":
+                                        case "turno no disponible":
+                                        case "Uno de los Turnos no se encuantra disponible":
+                                            SNotification.send({
+                                                title: "Error, elegir otro turno",
+                                                body: e?.error ?? "Error desconocido.",
+                                                color: STheme.color.danger,
+                                                time: 5000,
+                                            })
+                                            if (horarios.INSTANCE) horarios.INSTANCE.componentDidMount()
+                                            SNavigation.navigate("/ficha/horarios", { codmed: dataDoctor.CodMed, fecha: fecha, nrosuc: suc.NroSuc })
+                                            break;
+                                        default:
+                                            SNotification.send({
+                                                title: "Error",
+                                                body: e?.error ?? "Error desconocido.",
+                                                color: STheme.color.danger,
+                                                time: 5000,
+                                            })
+                                    }
+                                   
+                                    console.error(e);
+                                })
+                            }} >PAGAR </Kolping.KButtom>
+                            <SHr height={20} /> */}
+                            <Kolping.KButtom secondary width={300} onPress={(ins) => {
+                                ins.setLoading(true)
+                                SSocket.sendPromise({
+                                    component: "orden_compra",
+                                    type: "registrarPreOrden",
+                                    key: this.pk,
+                                    key_usuario: Model.usuario.Action.getKey()
+                                }, 1000 * 60 * 5).then(e => {
+                                    if (e.estado != "exito") throw { error: "El servidor no respondió con éxito." }
+                                    if (!e?.data?.status) {
+                                        throw { error: e?.data?.message ?? "Error desconocido." }
+                                    }
+                                    ins.setLoading(false)
+                                    console.log("qqq", e?.data);
+                                    SNavigation.navigate("/ficha/qr_kolping", { key: e.data?.result?.nroOrd })
+                                    // SNavigation.navigate("/ficha/qr", { key: this.pk })
+                                    // SNavigation.navigate("/ficha/pago", {data:e.data})
+                                }).catch(e => {
+                                    ins.setLoading(false)
+                                    switch ((e?.error ?? "").toLowerCase()) {
+                                        case "Existen turnos no disponibles para la venta":
+                                        case "turno no disponible".toLowerCase():
+                                        case "Uno de los Turnos no se encuantra disponible".toLowerCase():
+                                        case "Uno de los Turnos no se encuentra disponible".toLowerCase():
                                             SNotification.send({
                                                 title: "Error",
                                                 body: e?.error ?? "Error desconocido.",
@@ -215,6 +265,7 @@ class Confirmacion extends Component {
                                                 color: STheme.color.danger,
                                                 time: 5000,
                                             })
+                                            SNavigation.goBack();
                                     }
                                     // SNotification.send({
                                     //     title: "Error",
@@ -223,8 +274,9 @@ class Confirmacion extends Component {
                                     //     time: 5000,
                                     // })
                                     console.error(e);
+                                    // SNavigation.navigate("/ficha/horarios", { codmed: dataDoctor.CodMed, fecha: fecha, nrosuc: suc.NroSuc })
                                 })
-                            }} >PAGAR </Kolping.KButtom>
+                            }} >PAGAR</Kolping.KButtom>
                         </SView>
                         <SHr height={30} />
                     </SView>

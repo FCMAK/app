@@ -170,7 +170,7 @@ class HorarioDoctor extends Component {
 
     getTurnosDias(TurMed) {
         if (!TurMed) return null;
-        var dias = ["DO", "LU", "MA", "MI", "JU", "VI", "SA"]
+        var dias = ["", "LU", "MA", "MI", "JU", "VI", "SA", "DO"]
         // console.log("TurMed", TurMed)
         var minDiff = new Date();
         var fechaCercana;

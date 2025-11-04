@@ -4,7 +4,7 @@ import { SDate, SHr, SIcon, SImage, SLoad, SNavigation, SText, STheme, SView } f
 import NavBar from '../../NavBar';
 import SSocket from "servisofts-socket"
 // import { getAllHistorico } from './../../Actions';
-import { getActivas, getAllHistorico } from './../../../Pages/ficha/Actions';
+import { getActivas, getAllHistorico, getActivasKolping } from './../../../Pages/ficha/Actions';
 import Model from '../../../Model';
 import { FlatList } from 'react-native';
 
@@ -21,7 +21,8 @@ class FichasPendientes extends Component {
 
     getHistorico = async () => {
         try {
-            var historico = await getActivas(Model.usuario.Action.getKey())
+            // var historico = await getActivas(Model.usuario.Action.getKey())
+            var historico = await getActivasKolping(Model.usuario.Action.getKey())
             this.setState({ historico: Object.values(historico) })
         } catch (error) {
 
@@ -29,20 +30,10 @@ class FichasPendientes extends Component {
 
     }
 
-    renderItem({ index, item }) {
-        // console.log(item);
-        // console.log(item?.data?.fecha)
+    renderItem_({ index, item }) {
+
         let fechac = item?.data?.fecha
-        const sdate= new SDate(fechac, "yyyy-MM-ddThh:mm:ss");
-        // console.log(fechac)
-        // console.log(fechac.getDate())
-        // let partes = fechac.split("-");
-        // let date = new Date(Date.UTC(partes[0], partes[1] - 1, partes[2])); // Restar 1 al mes 
-
-
-        // let mesesAbreviados = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-        // let diasDeLaSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
-
+        const sdate = new SDate(fechac, "yyyy-MM-ddThh:mm:ss");
         let estado = "";
         let colorTexto = STheme.color.warning;
 
@@ -67,11 +58,10 @@ class FichasPendientes extends Component {
                 estado = "--";
                 colorTexto = STheme.color.danger;
         }
-            console.log(item)
+        console.log(item)
         return <SView width={275} style={{
-            height:110
+            height: 110
         }} onPress={() => {
-            // console.log(item)
             if (item.estado_pago == "pagado") {
                 SNavigation.navigate("/ficha/pago", { key: item?.key })
             } else {
@@ -95,40 +85,78 @@ class FichasPendientes extends Component {
                 <SView col={"xs-8.5"}>
                     <SText fontSize={13} font='LondonMM' color={STheme.color.white}>{sdate.toString("DAY")} {item?.data?.hortur}</SText>
                     <SText fontSize={13} font='LondonTwo' color={STheme.color.white}>{item?.data?.nommed}</SText>
-                    <SView flex/>
-                        <SText fontSize={13} font='LondonMM' color={STheme.color.white}>{item?.data?.nomesp}</SText>
-                        <SText font='LondonTwo'  center fontSize={10} color={STheme.color.white} style={{
-                            backgroundColor: colorTexto ,
-                            borderRadius: 3,
-                            padding: 1.5
-                        }}>{estado}</SText>
-
-
+                    <SView flex />
+                    <SText fontSize={13} font='LondonMM' color={STheme.color.white}>{item?.data?.nomesp}</SText>
+                    <SText font='LondonTwo' center fontSize={10} color={STheme.color.white} style={{
+                        backgroundColor: colorTexto,
+                        borderRadius: 3,
+                        padding: 1.5
+                    }}>{estado}</SText>
                 </SView>
             </SView>
+        </SView>
+    }
 
-            {/* <SView width={220} height padding={5} style={{
-                borderRadius: 15,
-                backgroundColor: STheme.color.card
-            }} row center>
-                <SView width={214} height style={{ borderRadius: 16, overflow: "hidden" }} center>
-                    <SImage src={SSocket.api.root + "novedades/" + item.key} style={{
-                        borderTopLeftRadius: 8,
-                        borderTopRightRadius: 8,
-                        maxWidth: "100%", minWidth: "100%", overflow: "hidden",
-                        resizeMode: "cover",
-                        height: 165
-                    }} />
+
+    renderItem({ index, item }) {
+
+        let fechac = item?.solApp?.solSer?.[0]?.fecSol
+        const sdate = new SDate(fechac, "yyyy-MM-ddThh:mm:ss");
+        let estado = "";
+        let colorTexto = STheme.color.warning;
+        console.log("aquiii", item)
+        switch (item.codEst) {
+            case "PAG":
+                estado = "PAGADO";
+                colorTexto = STheme.color.success;
+                break;
+            case "PEN":
+                estado = "PENDIENTE PAGO";
+                colorTexto = STheme.color.warning;
+                break;
+            case "ANU":
+                estado = "ANULADO";
+                colorTexto = STheme.color.danger;
+                break;
+            default:
+                estado = "--";
+                colorTexto = STheme.color.danger;
+        }
+        return <SView width={275} style={{
+            height: 110
+        }} onPress={() => {
+            if (item.codEst == "PAG") {
+                SNavigation.navigate("/ficha/pago_kolping", { key: item?.nroOrd })
+            } else {
+                SNavigation.navigate("/ficha/qr_kolping", { key: item?.nroOrd })
+            }
+
+        }}>
+            <SView col={"xs-12"} padding={8} height row style={{
+                backgroundColor: "#279AA2",
+                borderRadius: 16
+            }}>
+                <SView col={"xs-3"} height padding={10} style={{
+                    borderRadius: 8,
+                    backgroundColor: STheme.color.info
+                }} center>
+                    {/* <SText fontSize={20} font='LondonTwo' color={STheme.color.white}>{new SDate(item?.data?.fecha).toString("dd")}</SText> */}
+                    <SText fontSize={20} font='LondonTwo' color={STheme.color.white}>{item?.solApp?.solSer?.[0]?.codTur}</SText>
+                    <SText fontSize={12} font='LondonTwo' color={STheme.color.white}>{sdate.toString("dd MON")}</SText>
                 </SView>
-                <SView center col={'xs-12'} height={25} style={{
-                    backgroundColor: STheme.color.primary + "90",
-                    position: "absolute",
-                    top: 65,
-                    overflow: "hidden"
-                }}>
-                    <SText fontSize={18} font='LondonTwo' color={STheme.color.white}>{item?.titulo}</SText>
+                <SView col={"xs-0.5"} />
+                <SView col={"xs-8.5"}>
+                    <SText fontSize={13} font='LondonMM' color={STheme.color.white}>{sdate.toString("DAY")} {item?.solApp?.solSer?.[0]?.horTur}</SText>
+                    <SText fontSize={13} font='LondonTwo' color={STheme.color.white}>{item?.solApp?.solSer?.[0]?.nomMed}</SText>
+                    <SView flex />
+                    <SText fontSize={13} font='LondonMM' color={STheme.color.white}>{item?.solApp?.solSer?.[0]?.nomEsp}</SText>
+                    <SText font='LondonTwo' center fontSize={10} color={STheme.color.white} style={{
+                        backgroundColor: colorTexto,
+                        borderRadius: 3,
+                        padding: 1.5
+                    }}>{estado}</SText>
                 </SView>
-            </SView> */}
+            </SView>
         </SView>
     }
 

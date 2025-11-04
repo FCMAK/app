@@ -26,6 +26,8 @@ import direccion from './direccion';
 import perfil from './perfil';
 import version_required from './version_required';
 import info from './info';
+import servicio_informacion_promo from './servicio_informacion_promo';
+
 // const NewPages = SPage.combinePages("/", {
 //     ...notification,
 // })
@@ -40,6 +42,7 @@ const newPages = SPage.combinePages("/", {
     ...direccion,
     version_required,
     ...info,
+    ...servicio_informacion_promo,
     // ...perfil
 });
 
